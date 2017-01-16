@@ -1,0 +1,14 @@
+<style>
+{{#each thead.childHeaderList as |th|}}
+  #{{elementId}} .{{th.columnClass}} {
+    width: {{th.columnWidth}}px;
+  }
+{{/each}}
+</style>
+{{yield
+  (hash
+    head=(component "ui-table/thead" table=this)
+    body=(component "ui-table/tbody" table=this)
+    foot=(component "ui-table/tfoot" table=this)
+  )
+}}
