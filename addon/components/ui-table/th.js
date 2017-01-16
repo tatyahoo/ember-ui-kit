@@ -19,8 +19,19 @@ export default Ember.Component.extend(Pluggable, {
   // attrs }
 
   columnClass: Ember.computed.oneWay('elementId'),
-  columnWidth: Ember.computed('width', 'span', 'thead', function() {
-    return 150;
+  columnWidth: Ember.computed('width', 'span', 'thead.{availableSpan,availableWidth}', function() {
+    let width = this.get('width');
+
+    if (typeof width === 'number') {
+      return width;
+    }
+
+    let availableSpan = this.get('thead.availableSpan');
+    let availableWidth = this.get('thead.availableWidth');
+
+    let span = this.get('span');
+
+    return availableWidth * span / availableSpan;
   }).readOnly(),
 
   childHeaderList: Ember.computed(function() {
