@@ -25,6 +25,10 @@ export default Ember.Component.extend(Pluggable, {
     register: {
       afterRender() {
         this.$().trigger('register.td', this);
+      },
+
+      destroy() {
+        this.$().trigger('unregister.td', this);
       }
     }
   }

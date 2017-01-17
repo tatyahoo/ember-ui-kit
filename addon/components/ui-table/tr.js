@@ -25,13 +25,24 @@ export default Ember.Component.extend(Pluggable, {
 
         this.$().on('register.td', (evt, td) => {
           Ember.run.join(childCellList, childCellList.pushObject, td);
+
+          return false;
         });
       },
 
       afterRender() {
         this.$().trigger('register.tr', this);
+      },
 
-        let headers = this.get('table.thead.childHeaderList');
+      destroy() {
+        this.$().trigger('unregister.tr', this);
+        this.$().off('register.td');
+      }
+    },
+
+    column: {
+      afterRender() {
+        let headers = this.get('table.thead.childHeaderLeafList');
         let cells = this.get('childCellList');
 
         Ember.assert('The number of headers and number cells per row does not match', headers.get('length') === cells.get('length'));
@@ -39,6 +50,22 @@ export default Ember.Component.extend(Pluggable, {
         for (let index = 0, len = cells.get('length'); index < len; index++) {
           cells.objectAt(index).set('th', headers.objectAt(index));
         }
+      }
+    },
+
+    sortable: {
+      afterRender() {
+        let cells = this.get('childCellList');
+
+        this.get('table.thead').$().on('sortupdate', evt => {
+          let columns = this.get('table.thead.childHeaderLeafList');
+          let elements = cells
+            .sort((left, right) => columns.indexOf(left.get('th')) - columns.indexOf(right.get('th')))
+            .map(cell => cell.element);
+
+          // TODO optimize repaint by moving just the elements that needs to change order
+          this.$().append(elements);
+        });
       }
     },
 

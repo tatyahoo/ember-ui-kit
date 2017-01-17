@@ -17,6 +17,10 @@ export default Ember.Component.extend(Pluggable, {
         this.$().on('register.thead register.tbody register.tfoot', (evt, component) => {
           Ember.run.join(this, this.set, evt.namespace, component);
         });
+      },
+
+      destroy() {
+        this.$().off();
       }
     }
   }

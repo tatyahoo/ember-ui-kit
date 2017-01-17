@@ -16,15 +16,36 @@ export default Ember.Component.extend(Pluggable, ResizeAware, {
     return Ember.A();
   }).readOnly(),
 
-  availableSpan: Ember.computed('childHeaderList.@each.span', function() {
-    return this.get('childHeaderList').reduce((accum, header) => {
+  childHeaderLeafList: Ember.computed('childHeaderList.[]', function() {
+    let collect = [];
+
+    (function recur(list) {
+      list.forEach(item => {
+        if (item.get('isLeafHeader')) {
+          collect.push(item);
+        }
+        else {
+          recur(item.get('childHeaderList'));
+        }
+      });
+    })(this.get('childHeaderList'));
+
+    return Ember.A(collect);
+  }).readOnly(),
+
+  availableSpan: Ember.computed('childHeaderLeafList.@each.span', function() {
+    return this.get('childHeaderLeafList').reduce((accum, header) => {
       return accum + header.get('span');
     }, 0);
   }).readOnly(),
-  availableWidth: Ember.computed('childHeaderList.@each.width', function() {
-    return this.$().width() - this.get('childHeaderList').reduce((accum, header) => {
+  availableWidth: Ember.computed('childHeaderLeafList.@each.width', function() {
+    return this.$().width() - this.get('childHeaderLeafList').reduce((accum, header) => {
       return accum + header.get('width');
     }, 0);
+  }).readOnly(),
+
+  sheet: Ember.computed(function() {
+    return this.$('style');
   }).readOnly(),
 
   resize() {
@@ -51,6 +72,32 @@ export default Ember.Component.extend(Pluggable, ResizeAware, {
 
       destroy() {
         this.$().off();
+      }
+    },
+
+    sortable: {
+      render() {
+        this.$().on('sortupdate', evt => {
+          let order = [];
+          let nodes = Ember.$(evt.target).parentsUntil('.ui-table', '.ui-table__th, .ui-table__thead');
+          let junction = nodes.first();
+          let headers = junction.data('$E').get('childHeaderList');
+
+          junction.children().each(function recur() {
+            let element = Ember.$(this);
+
+            if (element.is('.ui-table__th')) {
+              order.push(element.data('$E'));
+            }
+            else {
+              element.children().each(recur);
+            }
+          });
+
+          headers.replace(0, headers.get('length'), order);
+
+          this.notifyPropertyChange('childHeaderLeafList');
+        });
       }
     },
 

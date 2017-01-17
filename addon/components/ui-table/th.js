@@ -42,6 +42,16 @@ export default Ember.Component.extend(Pluggable, {
 
   plugins: {
     register: {
+      render() {
+        let headers = this.get('childHeaderList');
+
+        this.$().on('register.th', '.ui-table__th', (evt, th) => {
+          Ember.run.join(headers, headers.pushObject, th);
+
+          return false;
+        });
+      },
+
       afterRender() {
         this.$().trigger('register.th', this);
       },

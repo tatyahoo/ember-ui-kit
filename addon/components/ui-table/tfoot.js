@@ -3,7 +3,7 @@ import layout from '../../templates/components/ui-table/tfoot';
 
 import Pluggable from '../../mixins/pluggable';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(Pluggable, {
   classNames: 'ui-table__tfoot',
   layout,
 
