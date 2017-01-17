@@ -34,6 +34,8 @@ export default Ember.Mixin.create({
   didInsertElement() {
     this._super(...arguments);
 
+    this.$().data('$E', this);
+
     this.runLifeCycleEvent('render');
 
     Ember.run.schedule('afterRender', () => {
@@ -43,6 +45,8 @@ export default Ember.Mixin.create({
 
   willDestroyElement() {
     this._super(...arguments);
+
+    this.$().removeData('$E');
 
     this.runLifeCycleEvent('destroy');
   }
