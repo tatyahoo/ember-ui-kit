@@ -15,9 +15,14 @@ module.exports = {
     'jquery-ui/ui/version.js',
     'jquery-ui/ui/ie.js',
     'jquery-ui/ui/scroll-parent.js',
+    'jquery-ui/ui/disable-selection.js',
+    'jquery-ui/ui/plugin.js',
     'jquery-ui/ui/widget.js',
     'jquery-ui/ui/widgets/mouse.js',
-    'jquery-ui/ui/widgets/sortable.js'
+    'jquery-ui/themes/base/sortable.css',
+    'jquery-ui/ui/widgets/sortable.js',
+    'jquery-ui/themes/base/resizable.css',
+    'jquery-ui/ui/widgets/resizable.js'
   ],
 
   treeForVendor: function() {

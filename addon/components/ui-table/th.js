@@ -59,6 +59,15 @@ export default Ember.Component.extend(Pluggable, {
       willDestroyElement() {
         this.$().trigger('unregister.th', this);
       }
-    }
+    },
+
+    resizable: {
+      render() {
+        this.$().on('resize', Ember.run.bind(this, function(evt, ui) {
+          this.set('width', ui.size.width);
+        }));
+      }
+    },
+
   }
 });
