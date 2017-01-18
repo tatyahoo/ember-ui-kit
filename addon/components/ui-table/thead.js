@@ -2,9 +2,8 @@ import Ember from 'ember';
 import layout from '../../templates/components/ui-table/thead';
 
 import Pluggable from '../../mixins/pluggable';
-import ResizeAware from '../../mixins/resize-aware';
 
-export default Ember.Component.extend(Pluggable, ResizeAware, {
+export default Ember.Component.extend(Pluggable, {
   classNames: 'ui-table__thead',
   layout,
 
@@ -33,13 +32,13 @@ export default Ember.Component.extend(Pluggable, ResizeAware, {
     return Ember.A(collect);
   }).readOnly(),
 
-  availableSpan: Ember.computed('childHeaderLeafList.@each.span', function() {
+  availableComputableSpan: Ember.computed('childHeaderLeafList.@each.span', function() {
     return this.get('childHeaderLeafList').reduce((accum, header) => {
       return accum + header.get('span');
     }, 0);
   }).readOnly(),
-  availableWidth: Ember.computed('childHeaderLeafList.@each.width', function() {
-    return this.$().width() - this.get('childHeaderLeafList').reduce((accum, header) => {
+  availableComputableWidth: Ember.computed('table.availableWidth', 'childHeaderLeafList.@each.width', function() {
+    return this.get('table.availableWidth') - this.get('childHeaderLeafList').reduce((accum, header) => {
       return accum + header.get('width');
     }, 0);
   }).readOnly(),
@@ -47,10 +46,6 @@ export default Ember.Component.extend(Pluggable, ResizeAware, {
   sheet: Ember.computed(function() {
     return this.$('style');
   }).readOnly(),
-
-  resize() {
-    this.notifyPropertyChange('availableWidth');
-  },
 
   plugins: {
     register: {

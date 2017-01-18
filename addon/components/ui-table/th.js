@@ -19,19 +19,19 @@ export default Ember.Component.extend(Pluggable, {
   // attrs }
 
   columnClass: Ember.computed.oneWay('elementId'),
-  columnWidth: Ember.computed('width', 'span', 'thead.{availableSpan,availableWidth}', function() {
+  columnWidth: Ember.computed('width', 'span', 'thead.{availableComputableSpan,availableComputableWidth}', function() {
     let width = this.get('width');
 
     if (typeof width === 'number') {
       return width;
     }
 
-    let availableSpan = this.get('thead.availableSpan');
-    let availableWidth = this.get('thead.availableWidth');
+    let availableComputableSpan = this.get('thead.availableComputableSpan');
+    let availableComputableWidth = this.get('thead.availableComputableWidth');
 
     let span = this.get('span');
 
-    return availableWidth * span / availableSpan;
+    return availableComputableWidth * span / availableComputableSpan;
   }).readOnly(),
 
   childHeaderList: Ember.computed(function() {
@@ -56,7 +56,8 @@ export default Ember.Component.extend(Pluggable, {
         this.$().trigger('register.th', this);
       },
 
-      willDestroyElement() {
+      destroy() {
+        this.$().off('register.th');
         this.$().trigger('unregister.th', this);
       }
     },
@@ -66,6 +67,10 @@ export default Ember.Component.extend(Pluggable, {
         this.$().on('resize', Ember.run.bind(this, function(evt, ui) {
           this.set('width', ui.size.width);
         }));
+      },
+
+      destroy() {
+        this.$().off('resize');
       }
     },
 
