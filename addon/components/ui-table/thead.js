@@ -2,8 +2,9 @@ import Ember from 'ember';
 import layout from '../../templates/components/ui-table/thead';
 
 import Pluggable from '../../mixins/pluggable';
+import Measurable from '../../mixins/measurable';
 
-export default Ember.Component.extend(Pluggable, {
+export default Ember.Component.extend(Pluggable, Measurable, {
   classNames: 'ui-table__thead',
   layout,
 
@@ -37,8 +38,8 @@ export default Ember.Component.extend(Pluggable, {
       return accum + header.get('span');
     }, 0);
   }).readOnly(),
-  availableComputableWidth: Ember.computed('table.availableWidth', 'childHeaderLeafList.@each.width', function() {
-    return this.get('table.availableWidth') - this.get('childHeaderLeafList').reduce((accum, header) => {
+  availableComputableWidth: Ember.computed('table.measurements.width', 'childHeaderLeafList.@each.width', function() {
+    return this.get('table.measurements.width') - this.get('childHeaderLeafList').reduce((accum, header) => {
       return accum + header.get('width');
     }, 0);
   }).readOnly(),

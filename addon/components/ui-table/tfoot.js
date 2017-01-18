@@ -2,8 +2,9 @@ import Ember from 'ember';
 import layout from '../../templates/components/ui-table/tfoot';
 
 import Pluggable from '../../mixins/pluggable';
+import Measurable from '../../mixins/measurable';
 
-export default Ember.Component.extend(Pluggable, {
+export default Ember.Component.extend(Pluggable, Measurable, {
   classNames: 'ui-table__tfoot',
   layout,
 

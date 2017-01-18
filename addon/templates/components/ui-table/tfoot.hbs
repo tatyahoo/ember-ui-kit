@@ -1,1 +1,5 @@
-{{yield}}
+{{yield
+  (hash
+    r=(component "ui-table/tr" table=table tfoot=this)
+  )
+}}

@@ -11,6 +11,8 @@ import Ember from 'ember';
 // destroy
 //
 export default Ember.Mixin.create({
+  mergedProperties: 'plugins',
+
   plugins: null,
 
   runLifeCycleEvent(lifecycle) {

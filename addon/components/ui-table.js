@@ -3,54 +3,34 @@ import layout from '../templates/components/ui-table';
 
 import Pluggable from '../mixins/pluggable';
 import ResizeAware from '../mixins/resize-aware';
+import Measurable from '../mixins/measurable';
 
-export default Ember.Component.extend(Pluggable, ResizeAware, {
+export default Ember.Component.extend(Pluggable, ResizeAware, Measurable, {
   classNames: 'ui-table',
   layout,
 
-  defaultEmptyComponent: Ember.computed(function() {
-    return {
-      $() {
-        return Ember.$();
-      }
-    };
-  }).readOnly(),
-
-  thead: Ember.computed.oneWay('defaultEmptyComponent'),
-  tbody: Ember.computed.oneWay('defaultEmptyComponent'),
-  tfoot: Ember.computed.oneWay('defaultEmptyComponent'),
-
-  availableWidth: null,
+  thead: null,
+  tbody: null,
+  tfoot: null,
 
   resize() {
-    let parts = [ 'thead', 'tbody', 'tfoot' ];
-    let components = {
-      thead: this.get('thead'),
-      tbody: this.get('tbody'),
-      tfoot: this.get('tfoot')
-    };
-    let elements = {
-      table: this.$(),
-      thead: components.thead.$(),
-      tbody: components.tbody.$(),
-      tfoot: components.tfoot.$()
-    };
-    let height = {
-      thead: elements.thead.height() || 0,
-      tbody: elements.tbody.height() || 0,
-      tfoot: elements.tfoot.height() || 0
-    };
+    let sizables = [ this, this.get('thead'), this.get('tbody'), this.get('tfoot') ];
 
-    this.set('availableWidth', this.$().width());
+    Ember.run.schedule('render', this, function() {
+      sizables.forEach(component => {
+        Ember.tryInvoke(component, 'measure');
+      });
+    });
+    Ember.run.schedule('afterRender', this, function() {
+      let components = sizables.slice(1);
 
-    elements.table.height(parts.reduce((accum, part) => {
-      return accum + (elements[part].prop('scrollHeight') || 0);
-    }, 0));
+      components.forEach(component => {
+        Ember.tryInvoke(component, 'resize');
+      });
 
-    elements.tbody.css({
-      marginTop: height.thead,
-      marginBottom: height.tfoot,
-      height: this.$().height() - (elements.thead.height() || 0) - (elements.tfoot.height() || 0)
+      this.$().height(components.reduce((accum, component) => {
+        return accum + (Ember.get(component || {}, 'measurements.scrollHeight') || 0);
+      }, 0));
     });
   },
 
