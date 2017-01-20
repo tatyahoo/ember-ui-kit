@@ -1,0 +1,43 @@
+.ui-table {
+  overflow: hidden;
+}
+
+.ui-table {
+  transition: height 150ms ease-out;
+}
+
+.ui-table__thead,
+.ui-table__tbody,
+.ui-table__tfoot {
+  position: absolute;
+}
+
+.ui-table__thead {
+  top: 0;
+}
+
+.ui-table__tbody {
+  overflow: scroll;
+}
+
+.ui-table__tfoot {
+  bottom: 0;
+}
+
+.ui-table__th,
+.ui-table__td {
+  display: inline-block;
+}
+
+.ui-table__tr {
+  white-space: nowrap;
+}
+
+.ui-table .ui-sortable {
+  display: inline-block;
+}
+
+.ui-table .ui-sortable,
+.ui-table__thead {
+  white-space: nowrap;
+}

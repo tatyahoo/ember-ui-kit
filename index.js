@@ -10,6 +10,7 @@ module.exports = {
   name: 'ember-ui-kit',
 
   files: [
+    // from `node_modules/`
     'element-resize-detector/dist/element-resize-detector.js',
     'jquery-ui/ui/data.js',
     'jquery-ui/ui/version.js',
@@ -22,11 +23,15 @@ module.exports = {
     'jquery-ui/themes/base/sortable.css',
     'jquery-ui/ui/widgets/sortable.js',
     'jquery-ui/themes/base/resizable.css',
-    'jquery-ui/ui/widgets/resizable.js'
+    'jquery-ui/ui/widgets/resizable.js',
+
+    // from `vendor/`
+    'ember-ui-kit/ui-table.css'
   ],
 
-  treeForVendor: function() {
+  treeForVendor: function(tree) {
     return new Merge([
+      tree,
       this.treeForNodeModule('jquery-ui'),
       this.treeForNodeModule('element-resize-detector')
     ]);
