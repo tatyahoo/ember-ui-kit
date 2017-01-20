@@ -1,0 +1,42 @@
+<div class="container">
+  <div>Left</div>
+  <div class="container-v flex">
+    <div>Top</div>
+    {{#ui-table class="flex" as |t|}}
+      {{#t.head as |t|}}
+        {{#ui-sortable}}
+          {{#t.h}}ID{{/t.h}}
+          {{#t.h}}
+            <div>Name</div>
+            {{#ui-sortable}}
+              {{#t.h}}First Name{{/t.h}}
+              {{#t.h}}Last Name{{/t.h}}
+            {{/ui-sortable}}
+          {{/t.h}}
+          {{#t.h}}Nick Name{{/t.h}}
+          {{#t.h}}Age{{/t.h}}
+        {{/ui-sortable}}
+      {{/t.head}}
+      {{#t.body-each model as |t item index|}}
+        {{#t.r as |t|}}
+          {{#t.d}}{{index}}{{/t.d}}
+          {{#t.d}}{{item.firstName}}{{/t.d}}
+          {{#t.d}}{{item.lastName}}{{/t.d}}
+          {{#t.d}}{{item.nickName}}{{/t.d}}
+          {{#t.d}}{{item.age}}{{/t.d}}
+        {{/t.r}}
+      {{/t.body-each}}
+      {{#t.foot as |t|}}
+        {{#t.r as |t|}}
+          {{#t.d}}Foot1{{/t.d}}
+          {{#t.d}}Foot2{{/t.d}}
+          {{#t.d}}Foot3{{/t.d}}
+          {{#t.d}}Foot4{{/t.d}}
+          {{#t.d}}Foot5{{/t.d}}
+        {{/t.r}}
+      {{/t.foot}}
+    {{/ui-table}}
+    <div>Bottom</div>
+  </div>
+  <div>Right</div>
+</div>
