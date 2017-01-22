@@ -40,7 +40,13 @@ export default Ember.Component.extend(Pluggable, Measurable, {
   }).readOnly(),
   availableComputableWidth: Ember.computed('table.measurements.width', 'childHeaderLeafList.@each.width', function() {
     return this.get('table.measurements.width') - this.get('childHeaderLeafList').reduce((accum, header) => {
-      return accum + header.get('width');
+      let width = header.get('width');
+
+      if (typeof width === 'number') {
+        return accum + width;
+      }
+
+      return accum;
     }, 0);
   }).readOnly(),
 

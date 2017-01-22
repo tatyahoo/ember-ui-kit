@@ -26,8 +26,15 @@ export default Ember.Component.extend(Pluggable, {
       return width;
     }
 
-    let availableComputableSpan = this.get('thead.availableComputableSpan');
     let availableComputableWidth = this.get('thead.availableComputableWidth');
+
+    if (typeof width === 'string' && width.match(/[\d\.]+\%$/)) {
+      let pc = parseFloat(width);
+
+      return availableComputableWidth * pc / 100;
+    }
+
+    let availableComputableSpan = this.get('thead.availableComputableSpan');
 
     let span = this.get('span');
 

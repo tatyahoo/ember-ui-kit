@@ -1,11 +1,13 @@
-<div class="ui-table__scroller">
-  {{#each buffer as |item index|}}
-    {{yield
-      (hash
-        r=(component "ui-table/tr" table=table tbody=this)
-      )
-      item.model
-      item.index
-    }}
-  {{/each}}
+<div class="ui-table__scrollable">
+  <div class="ui-table__scroller">
+    {{#each buffer as |item index|}}
+      {{yield
+        (hash
+          r=(component "ui-table/tr" table=table tbody=this)
+        )
+        item.model
+        item.index
+      }}
+    {{/each}}
+  </div>
 </div>

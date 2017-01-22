@@ -18,7 +18,11 @@ export default Body.extend({
   bufferCursors: construct(Object).readOnly(),
 
   scroller: Ember.computed(function() {
-    return this.$().children('.ui-table__scroller');
+    return this.$('.ui-table__scroller');
+  }).readOnly(),
+
+  scrollerSiblings: Ember.computed(function() {
+    return this.$().siblings('.ui-table__thead, .ui-table__tfoot');
   }).readOnly(),
 
   resize() {
@@ -91,6 +95,7 @@ export default Body.extend({
         let scroller = this.get('scroller').get(0);
         let tbody = this.$().get(0);
         let lastScrollTop = 0;
+        let lastScrollLeft = 0;
 
         this.$().on('scroll', throttle(evt => {
           let buffer = this.get('buffer');
@@ -103,6 +108,9 @@ export default Body.extend({
           let ref = tbody;
 
           lastScrollTop = evt.target.scrollTop;
+          lastScrollLeft = evt.target.scrollLeft;
+
+          this.get('scrollerSiblings').scrollLeft(evt.target.scrollLeft);
 
           function increase(pos) {
             return function(index, value) {
