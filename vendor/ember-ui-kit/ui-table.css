@@ -6,9 +6,6 @@
   max-width: 100%;
 }
 
-.ui-table {
-}
-
 .ui-table__thead,
 .ui-table__tbody,
 .ui-table__tfoot {
@@ -31,6 +28,7 @@
 .ui-table__td {
   display: inline-block;
   overflow: hidden;
+  transition: width 150ms ease-out;
 }
 
 .ui-table__tr {

@@ -15,10 +15,13 @@ export default Body.extend({
   // attrs }
 
   buffer: construct(Ember.A).readOnly(),
-  bufferCursors: construct(Object).readOnly(),
+  //bufferCursors: construct(Object).readOnly(),
+  bufferCursors: Ember.computed(function() {
+    return { start: 0, end: 0 };
+  }).readOnly(),
 
   scroller: Ember.computed(function() {
-    return this.$('.ui-table__scroller');
+    return this.$('.ui-table__scroller:last');
   }).readOnly(),
 
   scrollerSiblings: Ember.computed(function() {
@@ -48,30 +51,27 @@ export default Body.extend({
         model: model[bufLen] || model.objectAt(bufLen)
       });
     }
-    else {
+    else if (target - bufLen) {
       for (let index = buffer.get('length'); target - index; index = buffer.get('length')) {
         buffer.pushObject({
           tr: [],
           index: index,
           model: model[index] || model.objectAt(index)
         });
+
+        cursor.end++;
       }
     }
 
-    // TODO
-    // handle resize after scrolling
-    cursor.start = 0;
-    cursor.end = buffer.get('length') - 1;
+    Ember.run.schedule('afterRender', this, function() {
+      // TODO handle uneven row height
+      scroller.height(tr * modLen - parseFloat(scroller.css('margin-top')));
 
-    scroller.css({
-      marginTop: 0,
-      height: scroller.height(tr * modLen) // TODO handle uneven row height
-    });
-
-    this.$().css({
-      marginTop: thead,
-      marginBottom: tfoot,
-      height: Math.max(0, table - thead - tfoot)
+      this.$().css({
+        marginTop: thead,
+        marginBottom: tfoot,
+        height: Math.max(0, table - thead - tfoot)
+      });
     });
   },
 

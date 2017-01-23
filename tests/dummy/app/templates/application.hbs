@@ -13,8 +13,10 @@
               {{#t.h}}Last Name{{/t.h}}
             {{/ui-sortable}}
           {{/t.h}}
-          {{#t.h}}Nick Name{{/t.h}}
+          {{#t.h width="50%"}}Nick Name{{/t.h}}
           {{#t.h}}Age{{/t.h}}
+          {{#t.h}}SSN{{/t.h}}
+          {{#t.h}}Password{{/t.h}}
         {{/ui-sortable}}
       {{/t.head}}
       {{#t.body-each model as |t item index|}}
@@ -24,6 +26,8 @@
           {{#t.d}}{{item.lastName}}{{/t.d}}
           {{#t.d}}{{item.nickName}}{{/t.d}}
           {{#t.d}}{{item.age}}{{/t.d}}
+          {{#t.d}}XXX-XX-XXXX{{/t.d}}
+          {{#t.d}}********{{/t.d}}
         {{/t.r}}
       {{/t.body-each}}
       {{#t.foot as |t|}}
@@ -33,6 +37,8 @@
           {{#t.d}}Foot3{{/t.d}}
           {{#t.d}}Foot4{{/t.d}}
           {{#t.d}}Foot5{{/t.d}}
+          {{#t.d}}Foot6{{/t.d}}
+          {{#t.d}}Foot7{{/t.d}}
         {{/t.r}}
       {{/t.foot}}
     {{/ui-table}}
