@@ -6,6 +6,11 @@
   max-width: 100%;
 }
 
+.ui-table {
+  max-height: 100%;
+  align-self: flex-start;
+}
+
 .ui-table__thead,
 .ui-table__tbody,
 .ui-table__tfoot {

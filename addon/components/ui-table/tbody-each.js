@@ -63,15 +63,15 @@ export default Body.extend({
       }
     }
 
-    Ember.run.schedule('afterRender', this, function() {
-      // TODO handle uneven row height
-      scroller.height(tr * modLen - parseFloat(scroller.css('margin-top')));
+    // TODO
+    // handle uneven row height
+    // need to solve this problem before locking column
+    scroller.height(tr * modLen - parseFloat(scroller.css('margin-top')));
 
-      this.$().css({
-        marginTop: thead,
-        marginBottom: tfoot,
-        height: Math.max(0, table - thead - tfoot)
-      });
+    this.$().css({
+      marginTop: thead,
+      marginBottom: tfoot,
+      height: Math.max(0, table - thead - tfoot)
     });
   },
 
