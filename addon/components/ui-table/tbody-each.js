@@ -51,7 +51,7 @@ export default Body.extend({
         model: model[bufLen] || model.objectAt(bufLen)
       });
     }
-    else if (target - bufLen) {
+    else if (target - bufLen > 0) {
       for (let index = buffer.get('length'); target - index; index = buffer.get('length')) {
         buffer.pushObject({
           tr: [],
