@@ -15,7 +15,6 @@ export default Body.extend({
   // attrs }
 
   buffer: construct(Ember.A).readOnly(),
-  //bufferCursors: construct(Object).readOnly(),
   bufferCursors: Ember.computed(function() {
     return { start: 0, end: 0 };
   }).readOnly(),
@@ -38,8 +37,6 @@ export default Body.extend({
     let modLen = Ember.get(model, 'length');
 
     let table = this.get('table.measurements.height') || 0;
-    let thead = this.get('table.thead.measurements.height') || 0;
-    let tfoot = this.get('table.tfoot.measurements.height') || 0;
 
     let tr = scroller.children(':first').height();
     let target = Math.floor(table / tr);
@@ -68,11 +65,7 @@ export default Body.extend({
     // need to solve this problem before locking column
     scroller.height(tr * modLen - parseFloat(scroller.css('margin-top')));
 
-    this.$().css({
-      marginTop: thead,
-      marginBottom: tfoot,
-      height: Math.max(0, table - thead - tfoot)
-    });
+    this._super(...arguments);
   },
 
   plugins: {

@@ -1,7 +1,13 @@
-<div class="ui-table__scroller">
-  {{yield
-    (hash
-      h=(component "ui-table/th" table=this.table thead=this)
-    )
-  }}
+<div class="ui-table__scrollable ui-table__thead__scrollable ui-table__frozen">
+  <div class="ui-table__scroller ui-table__thead__scroller">
+  </div>
+</div>
+<div class="ui-table__scrollable ui-table__thead__scrollable">
+  <div class="ui-table__scroller ui-table__thead__scroller">
+    {{yield
+      (hash
+        h=(component "ui-table/th" table=this.table thead=this)
+      )
+    }}
+  </div>
 </div>
