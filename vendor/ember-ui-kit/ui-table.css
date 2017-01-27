@@ -15,6 +15,8 @@
 .ui-table__tbody,
 .ui-table__tfoot {
   position: absolute;
+  left: 0;
+  right: 0;
 }
 
 .ui-table__thead {

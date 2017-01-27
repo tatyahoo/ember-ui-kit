@@ -2,15 +2,13 @@ import Ember from 'ember';
 
 export default Ember.Mixin.create({
   measurements: Ember.computed(function() {
-    let rect = this.element.getBoundingClientRect();
+    let el = this.$();
 
     return {
-      top: rect.top,
-      left: rect.left,
-      width: rect.width,
-      height: rect.height,
-      scrollWidth: this.element.scrollWidth,
-      scrollHeight: this.element.scrollHeight
+      width: el.width(),
+      height: el.height(),
+      scrollWidth: el.prop('scrollWidth'),
+      scrollHeight: el.prop('scrollHeight')
     };
   }).readOnly(),
 

@@ -33,13 +33,19 @@ export default Ember.Component.extend(Pluggable, Measurable, {
     return Ember.A(collect);
   }).readOnly(),
 
-  availableComputableSpan: Ember.computed('childHeaderLeafList.@each.span', function() {
+  availableComputableSpan: Ember.computed('childHeaderLeafList.@each.{span,width}', function() {
     return this.get('childHeaderLeafList').reduce((accum, header) => {
-      return accum + header.get('span');
+      let { span, width } = header.getProperties('span', 'width');
+
+      if (typeof width === 'number') {
+        return accum;
+      }
+
+      return accum + span;
     }, 0);
   }).readOnly(),
-  availableComputableWidth: Ember.computed('table.measurements.width', 'childHeaderLeafList.@each.width', function() {
-    return this.get('table.measurements.width') - this.get('childHeaderLeafList').reduce((accum, header) => {
+  availableComputableWidth: Ember.computed('measurements.width', 'childHeaderLeafList.@each.width', function() {
+    return this.get('measurements.width') - this.get('childHeaderLeafList').reduce((accum, header) => {
       let width = header.get('width');
 
       if (typeof width === 'number') {
