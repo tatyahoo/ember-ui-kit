@@ -3,7 +3,7 @@
 .ui-table__tbody,
 .ui-table__tfoot {
   overflow: hidden;
-  max-width: 100%;
+  width: 100%;
 }
 
 .ui-table {

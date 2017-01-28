@@ -21,6 +21,10 @@ export default Ember.Component.extend(Pluggable, Measurable, {
     return this.$().children('.ui-table__scrollable');
   }).readOnly(),
 
+  scroller: Ember.computed('scrollable', function() {
+    return this.get('scrollable').children('.ui-table__scroller');
+  }).readOnly(),
+
   resize() {
     let table = this.get('table.measurements.height') || 0;
     let thead = this.get('table.thead.measurements.height') || 0;
@@ -38,6 +42,20 @@ export default Ember.Component.extend(Pluggable, Measurable, {
       afterRender() {
         this.$().trigger('register.tbody', this);
       }
-    }
+    },
+
+    parity: {
+      render() {
+        let scroller = this.get('scroller');
+
+        this.$().on('register.tr', Ember.run.bind(this, function(evt, tr) {
+          tr.set('itemIndex', scroller.children().index(tr.$()));
+        }));
+      },
+
+      destroy() {
+        this.$().off('register.tr');
+      }
+    },
   }
 });

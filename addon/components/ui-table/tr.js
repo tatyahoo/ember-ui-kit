@@ -5,6 +5,7 @@ import Pluggable from '../../mixins/pluggable';
 
 export default Ember.Component.extend(Pluggable, {
   classNames: 'ui-table__tr',
+  classNameBindings: ['even:ui-table__tr--even', 'odd:ui-table__tr--odd'],
   layout,
 
   // attrs {
@@ -12,7 +13,17 @@ export default Ember.Component.extend(Pluggable, {
   table: null,
   // @private
   tbody: null,
+  // @private
+  bufferIndex: null,
+  // @private
+  itemIndex: null,
   // attrs }
+
+  odd: Ember.computed('itemIndex', function() {
+    return this.get('itemIndex') % 2;
+  }).readOnly(),
+
+  even: Ember.computed.not('odd').readOnly(),
 
   childCellList: Ember.computed(function() {
     return Ember.A();
