@@ -4,7 +4,7 @@
 </div>
 <div class="ui-table__scrollable ui-table__tbody__scrollable">
   <div class="ui-table__scroller ui-table__tbody__scroller">
-    {{#each buffer as |item index|}}
+    {{#each buffer key="guid" as |item index|}}
       {{yield
         (hash
           r=(component "ui-table/tr" table=table tbody=this)
