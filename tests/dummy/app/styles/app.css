@@ -1,22 +1,20 @@
-.ember-application {
+body {
   margin: 0;
 }
 
-.container-v {
+#chrome {
   display: flex;
   flex-direction: column;
 }
 
-.container {
-  display: flex;
-  max-height: 100vh;
-  max-width: 100vw;
+#header-1 {
+  height: 18px;
 }
 
-.flex {
-  flex: 1;
+#content-1 {
+  height: calc(100vh - 18px);
 }
 
-.active {
+.ui-table__tr.active .ui-table__td {
   background: red;
 }

@@ -8,6 +8,7 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('ui-table');
+  this.route('ui-resizable');
 });
 
 export default Router;

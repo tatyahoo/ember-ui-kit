@@ -1,0 +1,96 @@
+{{#let (Select (array "virtual" "fixed") selection="virtual") as |scroll|}}
+  <div>
+    {{#each scroll as |item|}}
+      <label>
+        <input type="radio" checked={{item.isSelected}} onclick={{action item.select}}>
+        {{item.value}} scroll
+      </label>
+    {{/each}}
+  </div>
+  {{#if (eq scroll.selection "virtual")}}
+    {{#ui-table as |t|}}
+      {{#t.head as |t|}}
+        {{#ui-sortable}}
+          {{#t.h}}ID{{/t.h}}
+          {{#t.h}}
+            <div>Name</div>
+            {{#ui-sortable}}
+              {{#t.h}}First Name{{/t.h}}
+              {{#t.h}}Last Name{{/t.h}}
+            {{/ui-sortable}}
+          {{/t.h}}
+          {{#t.h width="50%"}}Nick Name{{/t.h}}
+          {{#t.h}}Age{{/t.h}}
+          {{#t.h}}SSN{{/t.h}}
+          {{#t.h}}Password{{/t.h}}
+        {{/ui-sortable}}
+      {{/t.head}}
+      {{#t.body-each (Select model) as |t item index|}}
+        {{#t.r class=(if item.isSelected "active") click=(action item.toggle) as |t|}}
+          {{#t.d}}{{index}}{{/t.d}}
+          {{#t.d}}{{item.value.firstName}}{{/t.d}}
+          {{#t.d}}{{item.value.lastName}}{{/t.d}}
+          {{#t.d}}{{item.value.nickName}}{{/t.d}}
+          {{#t.d}}{{item.value.age}}{{/t.d}}
+          {{#t.d}}XXX-XX-XXXX{{/t.d}}
+          {{#t.d}}********{{/t.d}}
+        {{/t.r}}
+      {{/t.body-each}}
+      {{#t.foot as |t|}}
+        {{#t.r as |t|}}
+          {{#t.d}}Foot1{{/t.d}}
+          {{#t.d}}Foot2{{/t.d}}
+          {{#t.d}}Foot3{{/t.d}}
+          {{#t.d}}Foot4{{/t.d}}
+          {{#t.d}}Foot5{{/t.d}}
+          {{#t.d}}Foot6{{/t.d}}
+          {{#t.d}}Foot7{{/t.d}}
+        {{/t.r}}
+      {{/t.foot}}
+    {{/ui-table}}
+  {{/if}}
+  {{#if (eq scroll.selection "fixed")}}
+    {{#ui-table as |t|}}
+      {{#t.head as |t|}}
+        {{#ui-sortable}}
+          {{#t.h}}ID{{/t.h}}
+          {{#t.h}}
+            <div>Name</div>
+            {{#ui-sortable}}
+              {{#t.h}}First Name{{/t.h}}
+              {{#t.h}}Last Name{{/t.h}}
+            {{/ui-sortable}}
+          {{/t.h}}
+          {{#t.h width="50%"}}Nick Name{{/t.h}}
+          {{#t.h}}Age{{/t.h}}
+          {{#t.h}}SSN{{/t.h}}
+          {{#t.h}}Password{{/t.h}}
+        {{/ui-sortable}}
+      {{/t.head}}
+      {{#t.body as |t|}}
+        {{#each (Select model) key="@index" as |item index|}}
+          {{#t.r class=(if item.isSelected "active") click=(action item.toggle) as |t|}}
+            {{#t.d}}{{index}}{{/t.d}}
+            {{#t.d}}{{item.value.firstName}}{{/t.d}}
+            {{#t.d}}{{item.value.lastName}}{{/t.d}}
+            {{#t.d}}{{item.value.nickName}}{{/t.d}}
+            {{#t.d}}{{item.value.age}}{{/t.d}}
+            {{#t.d}}XXX-XX-XXXX{{/t.d}}
+            {{#t.d}}********{{/t.d}}
+          {{/t.r}}
+        {{/each}}
+      {{/t.body}}
+      {{#t.foot as |t|}}
+        {{#t.r as |t|}}
+          {{#t.d}}Foot1{{/t.d}}
+          {{#t.d}}Foot2{{/t.d}}
+          {{#t.d}}Foot3{{/t.d}}
+          {{#t.d}}Foot4{{/t.d}}
+          {{#t.d}}Foot5{{/t.d}}
+          {{#t.d}}Foot6{{/t.d}}
+          {{#t.d}}Foot7{{/t.d}}
+        {{/t.r}}
+      {{/t.foot}}
+    {{/ui-table}}
+  {{/if}}
+{{/let}}
