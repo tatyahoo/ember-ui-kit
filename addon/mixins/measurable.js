@@ -7,6 +7,8 @@ export default Ember.Mixin.create({
     return {
       width: el.width(),
       height: el.height(),
+      outerWidth: el.outerWidth(),
+      outerHeight: el.outerHeight(),
       scrollWidth: el.prop('scrollWidth'),
       scrollHeight: el.prop('scrollHeight')
     };

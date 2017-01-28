@@ -27,8 +27,8 @@ export default Ember.Component.extend(Pluggable, Measurable, {
 
   resize() {
     let table = this.get('table.measurements.height') || 0;
-    let thead = this.get('table.thead.measurements.height') || 0;
-    let tfoot = this.get('table.tfoot.measurements.height') || 0;
+    let thead = this.get('table.thead.measurements.outerHeight') || 0;
+    let tfoot = this.get('table.tfoot.measurements.outerHeight') || 0;
 
     this.$().css({
       marginTop: thead,
