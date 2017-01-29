@@ -35,16 +35,12 @@ export default Body.extend({
     return { start: 0, end: 0 };
   }).readOnly(),
 
-  scroller: Ember.computed(function() {
-    return this.$('.ui-table__scroller:last');
-  }).readOnly(),
-
   scrollerSiblings: Ember.computed(function() {
     return this.$().siblings('.ui-table__thead, .ui-table__tfoot');
   }).readOnly(),
 
   resize() {
-    let scroller = this.get('scroller');
+    let scroller = this.get('scroller.unfroze');
 
     let cursor = this.get('bufferCursors');
     let buffer = this.get('buffer');
@@ -59,7 +55,7 @@ export default Body.extend({
 
     if (isNaN(target)) {
       buffer.pushObject(Ember.Object.create({
-        guid: Ember.generateGuid(this),
+        key: Ember.generateGuid(this),
         tr: [],
         index: bufLen,
         model: model.objectAt(bufLen)
@@ -68,7 +64,7 @@ export default Body.extend({
     else if (target - bufLen > 0) {
       for (let index = buffer.get('length'); target - index; index = buffer.get('length')) {
         buffer.pushObject(Ember.Object.create({
-          guid: Ember.generateGuid(this),
+          key: Ember.generateGuid(this),
           tr: [],
           index: index,
           model: model.objectAt(index)
@@ -109,9 +105,12 @@ export default Body.extend({
       }
     },
 
+    parity: {
+    },
+
     scroll: {
       render() {
-        let scroller = this.get('scroller').get(0);
+        let scroller = this.get('scroller.unfroze').get(0);
         let tbody = this.$().get(0);
         let lastScrollTop = 0;
         let lastScrollLeft = 0;
@@ -155,33 +154,42 @@ export default Body.extend({
               // TODO
               // shouldn't moving just one row,
               // should be all rows belong to one buffer entry
-              Ember.$(first).insertAfter(last);
+              // TODO
+              // moving the node has some real performance cost to it
+              // when trying to scroll really fast
+              Ember.run.begin();
+
+              //Ember.$(first).insertAfter(last);
               Ember.$(scroller)
                 .css('margin-top', increase(firstPos))
                 .css('height', decrease(firstPos));
 
               cursors.end++;
-              Ember.run(Ember, Ember.setProperties, buffer.objectAt(cursors.start % bufLen), {
+              buffer.pushObject(buffer.shiftObject().setProperties({
                 index: cursors.end,
                 model: model.objectAt(cursors.end)
-              });
+              }));
               cursors.start++;
+              Ember.run.end();
 
               continue;
             }
 
             if (direction < 0 && firstPos.top > refPos.top) {
-              Ember.$(last).insertBefore(first);
+              Ember.run.begin();
+
+              //Ember.$(last).insertBefore(first);
               Ember.$(scroller)
                 .css('margin-top', decrease(lastPos))
                 .css('height', increase(lastPos));
 
               cursors.start--;
-              Ember.run(Ember, Ember.setProperties, buffer.objectAt(cursors.end % bufLen), {
+              buffer.unshiftObject(buffer.popObject().setProperties({
                 index: cursors.start,
                 model: model.objectAt(cursors.start)
-              });
+              }));
               cursors.end--;
+              Ember.run.end();
 
               continue;
             }

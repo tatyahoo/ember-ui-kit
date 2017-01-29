@@ -3,6 +3,8 @@ import layout from '../../templates/components/ui-table/tr';
 
 import Pluggable from '../../mixins/pluggable';
 
+import { observerOnce } from '../../utils/run';
+
 export default Ember.Component.extend(Pluggable, {
   classNames: 'ui-table__tr',
   classNameBindings: ['even:ui-table__tr--even', 'odd:ui-table__tr--odd'],
@@ -14,10 +16,21 @@ export default Ember.Component.extend(Pluggable, {
   // @private
   tbody: null,
   // @private
+  tfoot: null,
+  // @private
   bufferIndex: null,
   // @private
   itemIndex: null,
   // attrs }
+
+  tcontainer: Ember.computed('tbody', 'tfoot', function() {
+    let tbody = this.get('tbody');
+    let tfoot = this.get('tfoot');
+
+    Ember.assert('tr cannot have both tbody and tfoot', !(tbody && tfoot));
+
+    return tbody || tfoot;
+  }).readOnly(),
 
   odd: Ember.computed('itemIndex', function() {
     return this.get('itemIndex') % 2;
@@ -27,6 +40,28 @@ export default Ember.Component.extend(Pluggable, {
 
   childCellList: Ember.computed(function() {
     return Ember.A();
+  }).readOnly(),
+
+  childCellListFroze: Ember.computed('table.thead.childHeaderListFroze.[]'/* key is indirect on purpose */, function() {
+    let cells = this.get('childCellList');
+    let leaves = this.get('table.thead.childHeaderLeafList').filterBy('frozen', true);
+
+    return leaves.map(leaf => {
+      return cells.findBy('th', leaf);
+    });
+  }).readOnly(),
+
+  childCellListUnfroze: Ember.computed('table.thead.childHeaderListUnfroze.[]'/* key is indirect on purpose */, function() {
+    let cells = this.get('childCellList');
+    let leaves = this.get('table.thead.childHeaderLeafList').filterBy('frozen', false);
+
+    return leaves.map(leaf => {
+      return cells.findBy('th', leaf);
+    });
+  }).readOnly(),
+
+  frozenMirrorRow: Ember.computed(function() {
+    return this.$('.ui-table__tr--froze');
   }).readOnly(),
 
   plugins: {
@@ -66,20 +101,59 @@ export default Ember.Component.extend(Pluggable, {
 
     sortable: {
       afterRender() {
+        let ns = this.get('elementId');
         let cells = this.get('childCellList');
 
-        this.get('table.thead').$().on('sortupdate', evt => {
-          let columns = this.get('table.thead.childHeaderLeafList');
-          let elements = cells
-            .sort((left, right) => columns.indexOf(left.get('th')) - columns.indexOf(right.get('th')))
-            .map(cell => cell.element);
-
+        this.get('table').$().on(`sortupdate.${ns}`, evt => {
           // TODO optimize repaint by moving just the elements that needs to change order
-          this.$().append(elements);
+          // TODO sort mirror cells too
+          this.$().append(Ember.$(this.get('childCellListUnfroze').map(el => el.element)));
         });
+      },
+
+      destroy() {
+        let ns = this.get('elementId');
+
+        this.get('table').$().off(`sortupdate.${ns}`);
       }
     },
 
+    freezable: {
+      render() {
+        let mirror = this.get('frozenMirrorRow');
+
+        this.$().on('register.td', (evt, td) => {
+          Ember.run.schedule('afterRender', this, function() {
+            td.get('frozenMirrorCell').appendTo(mirror);
+          });
+        });
+      },
+
+      afterRender() {
+        let ns = this.get('elementId');
+        let froze = this.get('tcontainer.scroller.froze');
+
+        this.get('table').$().on(`freezeupdate.${ns}`, evt => {
+          let frozeCells = this.get('childCellListFroze');
+          let unfrozeCells = this.get('childCellListUnfroze');
+
+          frozeCells.forEach(cell => {
+            cell.freeze();
+          });
+          unfrozeCells.forEach(cell => {
+            cell.unfreeze();
+          });
+        });
+      },
+
+      destroy() {
+        let ns = this.get('elementId');
+
+        this.get('table').$().off(`freezeupdate.${ns}`);
+      }
+    },
+
+    // TODO We can fold this into an AST transform
     textNodes: {
       afterRender() {
         let { TEXT_NODE, ELEMENT_NODE } = document;

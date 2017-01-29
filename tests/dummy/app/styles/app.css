@@ -13,8 +13,17 @@ body {
 
 #content-1 {
   height: calc(100vh - 18px);
+  display: flex;
+  flex-direction: column;
 }
 
-.ui-table__tr.active .ui-table__td {
+.ui-table__tr.active {
   background: red;
+}
+
+.ui-table__tr--even {
+  background: lightblue;
+}
+
+.ui-table {
 }

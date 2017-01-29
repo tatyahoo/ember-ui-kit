@@ -1,4 +1,4 @@
-{{#let (Select (array "virtual" "fixed") selection="virtual") as |scroll|}}
+{{#let (Select (array "fixed" "virtual") selection="fixed") as |scroll|}}
   <div>
     {{#each scroll as |item|}}
       <label>
@@ -11,7 +11,7 @@
     {{#ui-table as |t|}}
       {{#t.head as |t|}}
         {{#ui-sortable}}
-          {{#t.h}}ID{{/t.h}}
+          {{#t.h frozen=true}}ID{{/t.h}}
           {{#t.h}}
             <div>Name</div>
             {{#ui-sortable}}
@@ -52,8 +52,9 @@
   {{#if (eq scroll.selection "fixed")}}
     {{#ui-table as |t|}}
       {{#t.head as |t|}}
+        {{#t.h frozen=true}}ID{{/t.h}}
+        {{#t.h frozen=true}}Age{{/t.h}}
         {{#ui-sortable}}
-          {{#t.h}}ID{{/t.h}}
           {{#t.h}}
             <div>Name</div>
             {{#ui-sortable}}
@@ -62,7 +63,6 @@
             {{/ui-sortable}}
           {{/t.h}}
           {{#t.h width="50%"}}Nick Name{{/t.h}}
-          {{#t.h}}Age{{/t.h}}
           {{#t.h}}SSN{{/t.h}}
           {{#t.h}}Password{{/t.h}}
         {{/ui-sortable}}
@@ -71,10 +71,10 @@
         {{#each (Select model) key="@index" as |item index|}}
           {{#t.r class=(if item.isSelected "active") click=(action item.toggle) as |t|}}
             {{#t.d}}{{index}}{{/t.d}}
+            {{#t.d}}{{item.value.age}}{{/t.d}}
             {{#t.d}}{{item.value.firstName}}{{/t.d}}
             {{#t.d}}{{item.value.lastName}}{{/t.d}}
             {{#t.d}}{{item.value.nickName}}{{/t.d}}
-            {{#t.d}}{{item.value.age}}{{/t.d}}
             {{#t.d}}XXX-XX-XXXX{{/t.d}}
             {{#t.d}}********{{/t.d}}
           {{/t.r}}

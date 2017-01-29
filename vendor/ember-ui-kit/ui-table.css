@@ -1,38 +1,71 @@
-.ui-table,
-.ui-table__thead,
-.ui-table__tbody,
-.ui-table__tfoot {
+.ui-table {
   overflow: hidden;
   width: 100%;
-}
-
-.ui-table {
   max-height: 100%;
-  align-self: flex-start;
-}
+  align-self: flex-start; }
 
-.ui-table__thead,
-.ui-table__tbody,
-.ui-table__tfoot {
+.ui-table__thead {
+  overflow: hidden;
+  width: 100%;
   position: absolute;
   left: 0;
   right: 0;
-}
+  top: 0; }
 
-.ui-table__thead {
-  top: 0;
-}
+  .ui-table__thead__scroller {
+    vertical-align: bottom;
+  }
+
+  .ui-table__thead .ui-sortable {
+    display: inline-block;
+    vertical-align: bottom;
+    white-space: nowrap; }
+
+  .ui-table__thead .ui-table__scrollable {
+    position: absolute;
+    overflow: auto; }
 
 .ui-table__tbody {
-  overflow: scroll;
-}
+  overflow: hidden;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0; }
+
+  .ui-table__tbody .ui-table__scrollable {
+    overflow: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0; }
 
 .ui-table__tfoot {
-  bottom: 0;
+  overflow: hidden;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0; }
+
+  .ui-table__tfoot .ui-table__scrollable {
+    position: absolute;
+    overflow: auto; }
+
+.ui-table__froze {
+  left: 0; }
+
+.ui-table__unfroze {
+  right: 0; }
+
+.ui-table__td {
+  vertical-align: middle;
+  display: inline-block;
+  overflow: hidden;
+  transition: width 150ms ease-out;
+  background: inherit;
 }
 
-.ui-table__th,
-.ui-table__td {
+.ui-table__th {
+  vertical-align: bottom;
   display: inline-block;
   overflow: hidden;
   transition: width 150ms ease-out;
@@ -40,14 +73,5 @@
 }
 
 .ui-table__tr {
-  white-space: nowrap;
-}
-
-.ui-table .ui-sortable {
-  display: inline-block;
-}
-
-.ui-table .ui-sortable,
-.ui-table__thead {
   white-space: nowrap;
 }

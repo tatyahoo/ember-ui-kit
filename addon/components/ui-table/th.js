@@ -3,6 +3,8 @@ import layout from '../../templates/components/ui-table/th';
 
 import Pluggable from '../../mixins/pluggable';
 
+import { swapNodes } from '../../utils/dom';
+
 export default Ember.Component.extend(Pluggable, {
   classNames: 'ui-table__th',
   classNameBindings: 'columnClass',
@@ -11,14 +13,20 @@ export default Ember.Component.extend(Pluggable, {
   // attrs {
   width: null,
   span: 1,
+  frozen: false,
 
   // @private
   table: null,
   // @private
   thead: null,
+  // @private
+  th: null,
   // attrs }
 
-  columnClass: Ember.computed.oneWay('elementId'),
+  columnClass: Ember.computed.readOnly('elementId'),
+  columnIndex: Ember.computed('thead.childHeaderLeafList.[]', function() {
+    return this.get('thead.childHeaderLeafList').indexOf(this) + 1;
+  }).readOnly(),
   columnWidth: Ember.computed('width', 'span', 'thead.{availableComputableSpan,availableComputableWidth}', function() {
     let width = this.get('width');
 
@@ -46,6 +54,46 @@ export default Ember.Component.extend(Pluggable, {
   }).readOnly(),
 
   isLeafHeader: Ember.computed.empty('childHeaderList'),
+
+  frozenMirrorCellNode: Ember.computed(function() {
+    return document.createComment(`frozen-mirror-${this.get('elementId')}`);
+  }).readOnly(),
+
+  frozenMirrorCell: Ember.computed('frozenMirrorCellNode', function() {
+    return Ember.$(this.get('frozenMirrorCellNode'));
+  }).readOnly(),
+
+  freeze() {
+    let isLeaf = this.get('isLeafHeader');
+
+    if (!isLeaf) {
+      return;
+    }
+
+    let mirror = this.get('frozenMirrorCell');
+
+    Ember.run.schedule('afterRender', this, function() {
+      if (mirror.parent().is('.ui-table__thead__scroller--froze')) {
+        swapNodes(this.element, mirror);
+      }
+    });
+  },
+
+  unfreeze() {
+    let isLeaf = this.get('isLeafHeader');
+
+    if (!isLeaf) {
+      return;
+    }
+
+    let mirror = this.get('frozenMirrorCell');
+
+    Ember.run.schedule('afterRender', this, function() {
+      if (!mirror.parent().is('.ui-table__thead__scroller--froze')) {
+        swapNodes(this.element, mirror);
+      }
+    });
+  },
 
   plugins: {
     register: {
@@ -81,5 +129,10 @@ export default Ember.Component.extend(Pluggable, {
       }
     },
 
+    freezable: {
+      destroy() {
+        this.unfreeze();
+      }
+    }
   }
 });

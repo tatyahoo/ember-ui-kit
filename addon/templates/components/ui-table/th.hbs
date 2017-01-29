@@ -5,4 +5,9 @@
     }
   </style>
 {{/if}}
-{{yield}}
+{{yield
+  (hash
+    h=(component "ui-table/th" table=table thead=thead th=this frozen=frozen)
+  )
+}}
+{{unbound frozenMirrorCellNode}}
