@@ -4,6 +4,10 @@
   max-height: 100%;
   align-self: flex-start; }
 
+.ui-table__scroller {
+  pointer-events: none;
+}
+
 .ui-table__thead {
   overflow: hidden;
   width: 100%;

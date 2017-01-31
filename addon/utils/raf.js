@@ -22,3 +22,15 @@ export function throttle(fn) {
     });
   };
 }
+
+export function debounce(fn) {
+  let id = null;
+
+  return function(...args) {
+    caf(id);
+
+    id = raf(function() {
+      fn(...args);
+    });
+  };
+}

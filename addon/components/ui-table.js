@@ -5,7 +5,7 @@ import Pluggable from '../mixins/pluggable';
 import ResizeAware from '../mixins/resize-aware';
 import Measurable from '../mixins/measurable';
 
-import { throttle } from '../utils/raf';
+import { debounce } from '../utils/raf';
 
 export default Ember.Component.extend(Pluggable, ResizeAware, Measurable, {
   classNames: 'ui-table',
@@ -52,6 +52,9 @@ export default Ember.Component.extend(Pluggable, ResizeAware, Measurable, {
     scroll: {
       afterRender() {
         let active = null;
+        let scrollTop = 0;
+        let scrollLeft = 0;
+        let currentTarget = null;
         let scrollable = this.$('.ui-table__scrollable')
           .not('.ui-table__thead__scrollable.ui-table__froze')
           .not('.ui-table__tfoot__scrollable.ui-table__froze')
@@ -62,19 +65,42 @@ export default Ember.Component.extend(Pluggable, ResizeAware, Measurable, {
         let horizontal = scrollable.add()
           .filter('.ui-table__unfroze');
 
-        scrollable.on('scroll', throttle(evt => {
-          let target = evt.currentTarget;
-          let left = target.scrollLeft;
-          let top = target.scrollTop;
+        let scrolling = false;
 
-          vertical.add().not(target).each(function() {
-            this.scrollTop = top;
-          });
+        let debounceScrolling = debounce(function() {
+          scrolling = false;
+        });
 
-          horizontal.add().not(target).each(function() {
-            this.scrollLeft = left;
-          });
-        }));
+        // TODO
+        // The point here is to desynchronize upstream and downstream
+        // upstream is where scroll event updates scroll position
+        // downstream is where another "thread" updates scroll position
+
+        vertical.on('scroll', evt => {
+          currentTarget = evt.currentTarget;
+          scrollTop = currentTarget.scrollTop;
+
+          scrolling = true;
+
+          debounceScrolling();
+        });
+
+        horizontal.on('scroll', evt => {
+          currentTarget = evt.currentTarget;
+          scrollLeft = currentTarget.scrollLeft;
+
+          scrolling = true;
+
+          debounceScrolling();
+        });
+
+        requestAnimationFrame(function update() {
+          scrollable.add().not(currentTarget)
+            .scrollTop(scrollTop)
+            .scrollLeft(scrollLeft);
+
+          requestAnimationFrame(update);
+        });
       }
     },
 
