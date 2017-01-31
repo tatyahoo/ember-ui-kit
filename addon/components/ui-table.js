@@ -5,6 +5,8 @@ import Pluggable from '../mixins/pluggable';
 import ResizeAware from '../mixins/resize-aware';
 import Measurable from '../mixins/measurable';
 
+import { task, timeout } from 'ember-concurrency';
+
 import { debounce } from '../utils/raf';
 
 export default Ember.Component.extend(Pluggable, ResizeAware, Measurable, {
@@ -14,6 +16,44 @@ export default Ember.Component.extend(Pluggable, ResizeAware, Measurable, {
   thead: null,
   tbody: null,
   tfoot: null,
+
+  scrollables: Ember.computed(function() {
+    return this.$('.ui-table__scrollable')
+      .not('.ui-table__thead__scrollable.ui-table__froze')
+      .not('.ui-table__tfoot__scrollable.ui-table__froze');
+  }).readOnly(),
+
+  scrollTarget: null,
+  scrollTop: 0,
+  scrollLeft: 0,
+  scrollSync: task(function *() {
+    let id;
+    let context = this;
+
+    id = requestAnimationFrame(function update() {
+      context.scrollUpdate();
+
+      id = requestAnimationFrame(update);
+    });
+
+    try {
+      yield timeout(150);
+
+      cancelAnimationFrame(id);
+
+      context.scrollUpdate();
+    }
+    finally {
+      cancelAnimationFrame(id);
+    }
+  }).drop(),
+  scrollUpdate() {
+    let scrollables = this.get('scrollables');
+
+    scrollables.add().not(this.get('scrollTarget'))
+      .scrollTop(this.get('scrollTop'))
+      .scrollLeft(this.get('scrollLeft'));
+  },
 
   resize() {
     let sizables = [ this, this.get('thead'), this.get('tbody'), this.get('tfoot') ];
@@ -50,57 +90,44 @@ export default Ember.Component.extend(Pluggable, ResizeAware, Measurable, {
     },
 
     scroll: {
-      afterRender() {
-        let active = null;
-        let scrollTop = 0;
-        let scrollLeft = 0;
-        let currentTarget = null;
-        let scrollable = this.$('.ui-table__scrollable')
-          .not('.ui-table__thead__scrollable.ui-table__froze')
-          .not('.ui-table__tfoot__scrollable.ui-table__froze')
+      render() {
+      },
 
-        let vertical = scrollable.add()
+      afterRender() {
+        let scrollables = this.get('scrollables');
+        let sync = this.get('scrollSync');
+
+        let vertical = scrollables.add()
           .filter('.ui-table__tbody__scrollable');
 
-        let horizontal = scrollable.add()
+        let horizontal = scrollables.add()
           .filter('.ui-table__unfroze');
 
-        let scrolling = false;
-
-        let debounceScrolling = debounce(function() {
-          scrolling = false;
-        });
-
-        // TODO
         // The point here is to desynchronize upstream and downstream
         // upstream is where scroll event updates scroll position
         // downstream is where another "thread" updates scroll position
 
-        vertical.on('scroll', evt => {
-          currentTarget = evt.currentTarget;
-          scrollTop = currentTarget.scrollTop;
+        vertical.on('scroll', Ember.run.bind(this, function(evt) {
+          this.setProperties({
+            scrollTarget: evt.currentTarget,
+            scrollTop: evt.currentTarget.scrollTop
+          });
 
-          scrolling = true;
+          sync.perform();
+        }));
 
-          debounceScrolling();
-        });
+        horizontal.on('scroll', Ember.run.bind(this, function(evt) {
+          this.setProperties({
+            scrollTarget: evt.currentTarget,
+            scrollLeft: evt.currentTarget.scrollLeft
+          });
 
-        horizontal.on('scroll', evt => {
-          currentTarget = evt.currentTarget;
-          scrollLeft = currentTarget.scrollLeft;
+          sync.perform();
+        }));
+      },
 
-          scrolling = true;
-
-          debounceScrolling();
-        });
-
-        requestAnimationFrame(function update() {
-          scrollable.add().not(currentTarget)
-            .scrollTop(scrollTop)
-            .scrollLeft(scrollLeft);
-
-          requestAnimationFrame(update);
-        });
+      destroy() {
+        this.$('.ui-table__scrollable').off('scroll');
       }
     },
 

@@ -5,7 +5,10 @@
   align-self: flex-start; }
 
 .ui-table__scroller {
-  pointer-events: none;
+  transform: translate3d(0,0,0);
+  will-change: transform;
+  position: relative;
+  z-index: -1;
 }
 
 .ui-table__thead {
