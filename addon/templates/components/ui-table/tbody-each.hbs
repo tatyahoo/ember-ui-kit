@@ -7,7 +7,7 @@
     {{#each buffer key="key" as |item index|}}
       {{yield
         (hash
-          r=(component "ui-table/tr" table=table tbody=this)
+          r=(component "ui-table/tr" table=table tbody=this bufferIndex=index itemIndex=item.index)
         )
         item.model
         item.index

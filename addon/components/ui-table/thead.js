@@ -84,7 +84,7 @@ export default Ember.Component.extend(Pluggable, Measurable, {
     let scrollable = this.get('scrollable');
 
     return {
-      all: scrollable,
+      all: scrollable.all.children('.ui-table__scroller'),
       froze: scrollable.froze.children('.ui-table__scroller'),
       unfroze: scrollable.unfroze.children('.ui-table__scroller')
     };

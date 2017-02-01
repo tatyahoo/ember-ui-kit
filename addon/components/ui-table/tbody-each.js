@@ -77,7 +77,7 @@ export default Body.extend({
     // TODO
     // handle uneven row height
     // need to solve this problem before locking column
-    scroller.height(tr * modLen - parseFloat(scroller.css('margin-top')));
+    this.get('scroller.all').height(tr * modLen - parseFloat(scroller.css('margin-top')));
 
     this._super(...arguments);
   },
@@ -88,7 +88,7 @@ export default Body.extend({
         let buffer = this.get('buffer');
 
         this.$().on('register.tr', (evt, tr) => {
-          buffer.get('lastObject').tr.push(tr);
+          buffer.objectAt(tr.get('bufferIndex')).get('tr').push(tr);
         });
       },
 
@@ -106,6 +106,8 @@ export default Body.extend({
     },
 
     parity: {
+      // Overrides what's in tbody.js and do nothing
+      // itemIndex is bound in by template
     },
 
     scroll: {
@@ -115,7 +117,7 @@ export default Body.extend({
         let lastScrollTop = 0;
         let lastScrollLeft = 0;
 
-        this.$().on('scroll', throttle(evt => {
+        this.get('scrollable.unfroze').on('scroll', throttle(evt => {
           let buffer = this.get('buffer');
           let bufLen = buffer.get('length');
           let cursors = this.get('bufferCursors');
@@ -165,10 +167,11 @@ export default Body.extend({
                 .css('height', decrease(firstPos));
 
               cursors.end++;
-              buffer.pushObject(buffer.shiftObject().setProperties({
+              buffer.pushObject(buffer.shiftObject()).setProperties({
+                tr: [],
                 index: cursors.end,
                 model: model.objectAt(cursors.end)
-              }));
+              });
               cursors.start++;
               Ember.run.end();
 
@@ -184,10 +187,11 @@ export default Body.extend({
                 .css('height', increase(lastPos));
 
               cursors.start--;
-              buffer.unshiftObject(buffer.popObject().setProperties({
+              buffer.unshiftObject(buffer.popObject()).setProperties({
+                tr: [],
                 index: cursors.start,
                 model: model.objectAt(cursors.start)
-              }));
+              });
               cursors.end--;
               Ember.run.end();
 

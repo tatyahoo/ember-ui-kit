@@ -127,23 +127,30 @@ export default Ember.Component.extend(Pluggable, {
             td.get('frozenMirrorCell').appendTo(mirror);
           });
         });
+
+        this.addObserver('bufferIndex', function() {
+          console.log('tr bufferIndex', this.get('bufferIndex'));
+        });
       },
 
       afterRender() {
         let ns = this.get('elementId');
-        let froze = this.get('tcontainer.scroller.froze');
 
-        this.get('table').$().on(`freezeupdate.${ns}`, evt => {
-          let frozeCells = this.get('childCellListFroze');
-          let unfrozeCells = this.get('childCellListUnfroze');
+        this.get('table').$()
+          .on(`freezeupdate.${ns}`, evt => {
+            Ember.run.schedule('afterRender', this, function() {
+              let frozeCells = this.get('childCellListFroze');
+              let unfrozeCells = this.get('childCellListUnfroze');
 
-          frozeCells.forEach(cell => {
-            cell.freeze();
-          });
-          unfrozeCells.forEach(cell => {
-            cell.unfreeze();
-          });
-        });
+              frozeCells.forEach(cell => {
+                cell.freeze();
+              });
+              unfrozeCells.forEach(cell => {
+                cell.unfreeze();
+              });
+            });
+          })
+          .trigger(`freezeupdate.${ns}`);
       },
 
       destroy() {
