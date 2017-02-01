@@ -27,11 +27,11 @@
       {{/t.head}}
       {{#t.body-each (Select model) as |t item index|}}
         {{#t.r as |t|}}
-          {{#t.d}}{{index}}{{/t.d}}
-          {{#t.d}}{{item.value.firstName}}{{/t.d}}
-          {{#t.d}}{{item.value.lastName}}{{/t.d}}
-          {{#t.d}}{{item.value.nickName}}{{/t.d}}
-          {{#t.d}}{{item.value.age}}{{/t.d}}
+          {{#t.d}}{{item.value.id}}{{/t.d}}
+          {{#t.d}}{{item.value.attributes.age}}{{/t.d}}
+          {{#t.d}}{{item.value.attributes.first-name}}{{/t.d}}
+          {{#t.d}}{{item.value.attributes.last-name}}{{/t.d}}
+          {{#t.d}}{{item.value.attributes.nick-name}}{{/t.d}}
           {{#t.d}}XXX-XX-XXXX{{/t.d}}
           {{#t.d}}********{{/t.d}}
         {{/t.r}}
@@ -59,11 +59,11 @@
       {{#t.body as |t|}}
         {{#each (Select model) key="@index" as |item index|}}
           {{#t.r class=(if item.isSelected "active") click=(action item.toggle) as |t|}}
-            {{#t.d}}{{index}}{{/t.d}}
-            {{#t.d}}{{item.value.age}}{{/t.d}}
-            {{#t.d}}{{item.value.firstName}}{{/t.d}}
-            {{#t.d}}{{item.value.lastName}}{{/t.d}}
-            {{#t.d}}{{item.value.nickName}}{{/t.d}}
+            {{#t.d}}{{item.value.id}}{{/t.d}}
+            {{#t.d}}{{item.value.attributes.age}}{{/t.d}}
+            {{#t.d}}{{item.value.attributes.first-name}}{{/t.d}}
+            {{#t.d}}{{item.value.attributes.last-name}}{{/t.d}}
+            {{#t.d}}{{item.value.attributes.nick-name}}{{/t.d}}
             {{#t.d}}XXX-XX-XXXX{{/t.d}}
             {{#t.d}}********{{/t.d}}
           {{/t.r}}
