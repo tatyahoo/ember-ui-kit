@@ -2,7 +2,7 @@
   <div>
     {{#each scroll as |item|}}
       <label>
-        <input type="radio" checked={{item.isSelected}} onclick={{action item.select}}>
+        <input type="radio" checked={{item.isSelected}} onclick={{action "mode" item}}>
         {{item.value}} scroll
       </label>
     {{/each}}
@@ -11,7 +11,7 @@
     {{#ui-table as |t|}}
       {{#t.head as |t|}}
         {{#ui-sortable}}
-          {{#t.h frozen=true}}ID{{/t.h}}
+          {{#t.h width=83 frozen=true}}ID{{/t.h}}
           {{#t.h}}
             <div>Name</div>
             {{#ui-sortable}}
@@ -41,8 +41,8 @@
   {{#if (eq scroll.selection "fixed")}}
     {{#ui-table as |t|}}
       {{#t.head as |t|}}
-        {{#t.h frozen=true}}ID{{/t.h}}
-        {{#t.h frozen=true}}Age{{/t.h}}
+        {{#t.h width=83 frozen=true}}ID{{/t.h}}
+        {{#t.h width=83 frozen=true}}Age{{/t.h}}
         {{#ui-sortable}}
           {{#t.h}}
             <div>Name</div>

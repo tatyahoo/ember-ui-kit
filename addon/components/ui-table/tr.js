@@ -127,10 +127,6 @@ export default Ember.Component.extend(Pluggable, {
             td.get('frozenMirrorCell').appendTo(mirror);
           });
         });
-
-        this.addObserver('bufferIndex', function() {
-          console.log('tr bufferIndex', this.get('bufferIndex'));
-        });
       },
 
       afterRender() {

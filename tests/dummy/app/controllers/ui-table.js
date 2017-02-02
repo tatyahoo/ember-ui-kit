@@ -3,5 +3,11 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   queryParams: ['mode'],
 
-  mode: 'fixed'
+  mode: null,
+
+  actions: {
+    mode(item) {
+      this.set('mode', item.value);
+    }
+  }
 });
