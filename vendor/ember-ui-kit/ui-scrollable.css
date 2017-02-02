@@ -1,0 +1,8 @@
+.ui-scrollable {
+  overflow: hidden;
+  position: relative;
+}
+
+.ui-scrollable__scroller {
+  position: relative;
+}

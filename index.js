@@ -24,15 +24,19 @@ module.exports = {
     'jquery-ui/ui/widgets/sortable.js',
     'jquery-ui/themes/base/resizable.css',
     'jquery-ui/ui/widgets/resizable.js',
+    'perfect-scrollbar/dist/js/perfect-scrollbar.jquery.js',
+    'perfect-scrollbar/dist/css/perfect-scrollbar.css',
 
     // from `vendor/`
-    'ember-ui-kit/ui-table.css'
+    'ember-ui-kit/ui-table.css',
+    'ember-ui-kit/ui-scrollable.css'
   ],
 
   treeForVendor: function(tree) {
     return new Merge([
       tree,
       this.treeForNodeModule('jquery-ui'),
+      this.treeForNodeModule('perfect-scrollbar'),
       this.treeForNodeModule('element-resize-detector')
     ]);
   },
