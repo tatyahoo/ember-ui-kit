@@ -112,7 +112,8 @@ export default Body.extend({
 
     scroll: {
       render() {
-        let scroller = this.get('scroller.unfroze').get(0);
+        let unfroze = this.get('scroller.unfroze').get(0);
+        let froze = this.get('scroller.froze').get(0);
         let tbody = this.$().get(0);
         let lastScrollTop = 0;
         let lastScrollLeft = 0;
@@ -146,9 +147,9 @@ export default Body.extend({
 
           while (true) {
             let refPos = ref.getBoundingClientRect();
-            let first = scroller.firstElementChild;
+            let first = unfroze.firstElementChild;
             let firstPos = first.getBoundingClientRect();
-            let last = scroller.lastElementChild;
+            let last = unfroze.lastElementChild;
             let lastPos = last.getBoundingClientRect();
 
             // if top most one is out of viewport
@@ -161,8 +162,8 @@ export default Body.extend({
               // when trying to scroll really fast
               Ember.run.begin();
 
-              //Ember.$(first).insertAfter(last);
-              Ember.$(scroller)
+              Ember.$(froze.firstElementChild).insertAfter(froze.lastElementChild);
+              Ember.$(unfroze).add(froze)
                 .css('margin-top', increase(firstPos))
                 .css('height', decrease(firstPos));
 
@@ -181,8 +182,8 @@ export default Body.extend({
             if (direction < 0 && firstPos.top > refPos.top) {
               Ember.run.begin();
 
-              //Ember.$(last).insertBefore(first);
-              Ember.$(scroller)
+              Ember.$(froze.lastElementChild).insertBefore(froze.firstElementChild);
+              Ember.$(unfroze).add(froze)
                 .css('margin-top', decrease(lastPos))
                 .css('height', increase(lastPos));
 
