@@ -25,7 +25,7 @@
           {{#t.h}}Password{{/t.h}}
         {{/ui-sortable}}
       {{/t.head}}
-      {{#t.body-each (Select model) as |t item index|}}
+      {{#t.body-each (Select users) as |t item index|}}
         {{#t.r as |t|}}
           {{#t.d}}{{item.value.id}}{{/t.d}}
           {{#t.d}}{{item.value.attributes.age}}{{/t.d}}
@@ -57,7 +57,7 @@
         {{/ui-sortable}}
       {{/t.head}}
       {{#t.body as |t|}}
-        {{#each (Select model) key="@index" as |item index|}}
+        {{#each (Select users) key="@index" as |item index|}}
           {{#t.r class=(if item.isSelected "active") click=(action item.toggle) as |t|}}
             {{#t.d}}{{item.value.id}}{{/t.d}}
             {{#t.d}}{{item.value.attributes.age}}{{/t.d}}

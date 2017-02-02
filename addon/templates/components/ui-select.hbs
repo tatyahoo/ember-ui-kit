@@ -1,1 +1,13 @@
-{{yield}}
+{{yield
+  (hash
+    isActive=isActive
+    items=selectable.listNormalized
+    selected=selectable.selected
+    unselected=selectable.unselected
+  )
+  (hash
+    clear=(action "clear")
+    select=(action "select")
+    unselect=(action "unselect")
+  )
+}}
