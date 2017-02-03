@@ -27,6 +27,11 @@ module.exports = {
     'perfect-scrollbar/dist/js/perfect-scrollbar.jquery.js',
     'perfect-scrollbar/dist/css/perfect-scrollbar.css',
 
+    'jquery-ui-touch-punch/jquery.ui.touch-punch.js',
+
+    'perfect-scrollbar/dist/css/perfect-scrollbar.css',
+    'perfect-scrollbar/dist/js/perfect-scrollbar.jquery.js',
+
     // from `vendor/`
     'ember-ui-kit/ui-table.css',
     'ember-ui-kit/ui-scrollable.css'
@@ -37,6 +42,7 @@ module.exports = {
       tree,
       this.treeForNodeModule('jquery-ui'),
       this.treeForNodeModule('perfect-scrollbar'),
+      this.treeForNodeModule('jquery-ui-touch-punch'),
       this.treeForNodeModule('element-resize-detector')
     ]);
   },
