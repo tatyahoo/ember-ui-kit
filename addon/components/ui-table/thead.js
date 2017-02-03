@@ -41,13 +41,19 @@ export default Ember.Component.extend(Pluggable, Measurable, {
   childHeaderLeafListFroze: Ember.computed.filterBy('childHeaderLeafList', 'frozen', true).readOnly(),
   childHeaderLeafListUnfroze: Ember.computed.filterBy('childHeaderLeafList', 'frozen', false).readOnly(),
 
-  availableComputableSpan: Ember.computed('childHeaderLeafList.@each.span', function() {
+  availableComputableSpan: Ember.computed('childHeaderLeafList.@each.{width,span}', function() {
     return this.get('childHeaderLeafList').reduce((accum, header) => {
+      let width = header.get('width');
+
+      if (typeof width === 'number') {
+        return accum;
+      }
+
       return accum + header.get('span');
     }, 0);
   }).readOnly(),
-  availableComputableWidth: Ember.computed('table.measurements.width', 'childHeaderLeafList.@each.width', function() {
-    return this.get('table.measurements.width') - this.get('childHeaderLeafList').reduce((accum, header) => {
+  availableComputableWidth: Ember.computed('measurements.innerWidth', 'childHeaderLeafList.@each.width', function() {
+    return this.get('measurements.innerWidth') - this.get('childHeaderLeafList').reduce((accum, header) => {
       let width = header.get('width');
 
       if (typeof width === 'number') {

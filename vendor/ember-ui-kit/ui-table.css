@@ -8,7 +8,6 @@
   transform: translate3d(0,0,0);
   will-change: transform;
   position: relative;
-  z-index: -1;
 }
 
 .ui-table__thead {
@@ -29,6 +28,7 @@
     white-space: nowrap; }
 
   .ui-table__thead .ui-table__scrollable {
+    white-space: nowrap;
     position: absolute;
     overflow: auto; }
 
