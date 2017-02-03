@@ -3,7 +3,7 @@ import layout from '../../templates/components/ui-table/th';
 
 import Pluggable from '../../mixins/pluggable';
 
-import { swapNodes } from '../../utils/dom';
+import { swapNodes, styleable } from '../../utils/dom';
 
 export default Ember.Component.extend(Pluggable, {
   classNames: 'ui-table__th',
@@ -42,12 +42,26 @@ export default Ember.Component.extend(Pluggable, {
       return availableComputableWidth * pc / 100;
     }
 
-    let availableComputableSpan = this.get('thead.availableComputableSpan');
+    let availableComputableSpan = this.get('thead.availableComputableSpan') || 1;
 
     let span = this.get('span');
 
     return availableComputableWidth * span / availableComputableSpan;
   }).readOnly(),
+  columnWidthStyle: styleable('table', 'columnClass', 'isLeafHeader', 'columnWidth', function() {
+    let ns = this.get('table.elementId');
+    let cls = this.get('columnClass');
+
+    if (!this.get('isLeafHeader')) {
+      return null;
+    }
+
+    return {
+      [ `#${ns} .${cls}` ]: {
+        width: `${this.get('columnWidth')}px`;
+      }
+    };
+  }),
 
   childHeaderList: Ember.computed(function() {
     return Ember.A();
