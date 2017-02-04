@@ -31,41 +31,36 @@ export default Ember.Component.extend(Pluggable, {
     return Ember.$(this.get('frozenMirrorCellNode'));
   }).readOnly(),
 
+  didInsertElement() {
+    this._super(...arguments);
+
+    this.$().parent().trigger('register.td', this);
+    this.$().parent().trigger('register.all', this);
+  },
+
+  willDestroyElement() {
+    this._super(...arguments);
+
+    this.unfreeze();
+    this.get('frozenMirrorCell').remove();
+
+    this.$().parent().trigger('unregister.td', this);
+    this.$().off('register.th');
+  },
+
   freeze() {
     let mirror = this.get('frozenMirrorCell');
 
-    Ember.run.schedule('afterRender', this, function() {
-      if (mirror.parent().is('.ui-table__tr--froze')) {
-        swapNodes(this.element, mirror);
-      }
-    });
+    if (mirror.parent().is('.ui-table__tr--froze')) {
+      swapNodes(this.element, mirror);
+    }
   },
 
   unfreeze() {
     let mirror = this.get('frozenMirrorCell');
 
-    Ember.run.schedule('afterRender', this, function() {
-      if (!mirror.parent().is('.ui-table__tr--froze')) {
-        swapNodes(this.element, mirror);
-      }
-    });
-  },
-
-  plugins: {
-    register: {
-      afterRender() {
-        this.$().trigger('register.td', this);
-      },
-
-      destroy() {
-        this.$().trigger('unregister.td', this);
-      }
-    },
-
-    freezable: {
-      destroy() {
-        this.unfreeze();
-      }
+    if (!mirror.parent().is('.ui-table__tr--froze')) {
+      swapNodes(this.element, mirror);
     }
   }
 });

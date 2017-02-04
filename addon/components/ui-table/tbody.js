@@ -1,10 +1,10 @@
 import Ember from 'ember';
 import layout from '../../templates/components/ui-table/tbody';
 
-import Pluggable from '../../mixins/pluggable';
-import Measurable from '../../mixins/measurable';
+import { observerOnceIn } from '../../utils/run';
+import { construct } from '../../utils/computed';
 
-export default Ember.Component.extend(Pluggable, Measurable, {
+export default Ember.Component.extend({
   classNames: 'ui-table__tbody',
   layout,
 
@@ -17,74 +17,150 @@ export default Ember.Component.extend(Pluggable, Measurable, {
   tbody: Ember.computed.readOnly('table.tbody'),
   tfoot: Ember.computed.readOnly('table.tfoot'),
 
-  scrollable: Ember.computed(function() {
-    let scrollers = this.$().children('.ui-table__scrollable');
+  rows: construct(Ember.A).readOnly(),
+
+  rowsChange: observerOnceIn('afterRender', 'rows.[]', 'tfoot.rows.[]', function() {
+    this.get('table').measure();
+  }),
+
+  scroller: Ember.computed(function() {
+    let scrollers = this.$('.ui-scrollable__scroller');
+    let [ froze, unfroze ] = scrollers;
 
     return {
       all: scrollers,
-      froze: scrollers.filter('.ui-table__froze'),
-      unfroze: scrollers.filter('.ui-table__unfroze')
+      froze: Ember.$(froze),
+      unfroze: Ember.$(unfroze)
     };
   }).readOnly(),
 
-  scroller: Ember.computed('scrollable', function() {
-    let scrollable = this.get('scrollable');
+  scrollable: Ember.computed(function() {
+    let scrollables = this.$('.ui-scrollable');
+    let [ froze, unfroze ] = scrollables;
 
     return {
-      all: scrollable.all.children('.ui-table__scroller'),
-      froze: scrollable.froze.children('.ui-table__scroller'),
-      unfroze: scrollable.unfroze.children('.ui-table__scroller')
+      all: scrollables,
+      froze: Ember.$(froze),
+      unfroze: Ember.$(unfroze)
     };
   }).readOnly(),
 
-  resize() {
-    let table = this.get('table.measurements.height') || 0;
-    let thead = this.get('table.thead.measurements.scrollHeight') || 0;
-    let tfoot = this.get('table.tfoot.measurements.scrollHeight') || 0;
+  willInsertElement() {
+    this._super(...arguments);
 
-    this.$().css({
-      top: thead,
-      bottom: tfoot
-    });
+    let rows = this.get('rows');
 
-    this.get('scrollable.all').css({
-      height: Math.max(0, table - thead - tfoot)
+    this.$().on('register.tr', (evt, tr) => {
+      let scroller = this.get('scroller.unfroze');
+      let index = scroller.children().index(tr.$());
+
+      tr.set('itemIndex', index);
+
+      rows.pushObject(tr);
     });
   },
 
-  plugins: {
-    register: {
-      afterRender() {
-        this.$().trigger('register.tbody', this);
+  didInsertElement() {
+    this._super(...arguments);
+
+    this.$().parent().trigger('register.tbody', this)
+    this.$().parent().trigger('register.all', this);
+
+    let ns = this.get('table.elementId');
+
+    let oldOrder = this.get('table.thead.childHeaderLeafList').map(leaf => leaf.element);
+
+    this.get('table').$().on(`sortupdate.${ns}`, evt => {
+      let rows = this.get('rows').concat(this.get('tfoot.rows') || []);
+      let ops = []; // TODO there should be an algorithm where only 1 op is needed
+
+      let newOrder = this.get('table.thead').$('.ui-table__th')
+        .filter((index, element) => !Ember.$(element).find('.ui-table__th').length);
+
+      for (let index = 0, len = newOrder.length; index < len; index++) {
+        if (oldOrder[index] !== newOrder[index]) {
+          let newIndex = index;
+          let oldIndex = oldOrder.indexOf(newOrder[index]);
+
+          oldOrder.splice(index, 0, ...oldOrder.splice(oldIndex, 1));
+
+          ops.push({ oldIndex, newIndex });
+        }
       }
-    },
 
-    parity: {
-      render() {
-        let unfroze = this.get('scroller.unfroze');
+      rows.forEach(tr => {
+        let cells = tr.get('childCellList');
 
-        this.$().on('register.tr', (evt, tr) => {
-          Ember.run.join(tr, tr.set, 'itemIndex', unfroze.children().index(tr.$()));
+        ops.forEach(({ oldIndex, newIndex }) => {
+          let oldNode = cells.objectAt(oldIndex).$();
+          let newNode = cells.objectAt(newIndex).$();
+
+          oldNode.insertBefore(newNode);
+
+          cells.splice(newIndex, 0, ...cells.splice(oldIndex, 1));
+        })
+      });
+
+      // TODO sort mirror cells too
+    });
+  },
+
+  willDestroyElement() {
+    this._super(...arguments);
+
+    let ns = this.get('elementId');
+
+    this.get('table').$().off(`sortupdate.${ns}`);
+    this.$().parent().trigger('unregister.tbody', this)
+    this.$().off('register.tr');
+  },
+
+  freezeColumns: Ember.on('init', observerOnceIn('afterRender', 'thead.childHeaderList.@each.frozen', 'rows.[]', function() {
+    let leaves = this.get('thead.childHeaderLeafList');
+    let [ froze, unfroze ] = this.get('thead.childHeaderList').reduce(([ froze, unfroze ], th) => {
+      (th.get('frozen') ? froze : unfroze).push(th);
+
+      return [ froze, unfroze ];
+    }, [ [], [] ]);
+
+    froze.forEach(th => th.freeze());
+    unfroze.forEach(th => th.unfreeze());
+
+    [ [ this.get('scroller.froze'), this.get('rows') ], [ this.get('table.tfoot.froze'), this.get('table.tfoot.rows') || [] ] ]
+      .forEach(([ scroller, rows ]) => {
+        rows.forEach(tr => {
+          let mirror = tr.get('frozenMirrorRow');
+          let cells = tr.get('childCellList');
+
+          if (mirror.parent().is('.ui-table__tr')) {
+            let { TEXT_NODE, ELEMENT_NODE } = document;
+
+            cells.forEach((cell, index) => {
+              cell.set('th', leaves.objectAt(index));
+              cell.get('frozenMirrorCell').appendTo(mirror);
+            });
+
+            (function recur(nodes) {
+              nodes.each((index, node) => {
+                switch (node.nodeType) {
+                  case TEXT_NODE: node.data = node.data.trim(); return;
+                  case ELEMENT_NODE: recur(Ember.$(node).contents()); return;
+                }
+              });
+            })(tr.$().contents());
+
+            scroller.append(mirror);
+          }
+
+          cells.forEach(cell => {
+            if (cell.get('th.frozen')) {
+              cell.freeze();
+            }
+            else {
+              cell.unfreeze();
+            }
+          });
         });
-      },
-
-      destroy() {
-        this.$().off('register.tr');
-      }
-    },
-
-    freezable: {
-      render() {
-        let froze = this.get('scroller.froze');
-
-        this.$().on('register.tr', (evt, tr) => {
-          froze.append(tr.get('frozenMirrorRow'));
-        });
-      },
-
-      destroy() {
-        this.$().off('register.tr');
-      }
-    }
-  }
+      });
+  }))
 });

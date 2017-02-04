@@ -1,12 +1,12 @@
 import Ember from 'ember';
 import layout from '../../templates/components/ui-table/thead';
 
-import Pluggable from '../../mixins/pluggable';
-import Measurable from '../../mixins/measurable';
+import Styleable from '../../mixins/styleable';
 
-import { observerOnce } from '../../utils/run';
+import { styleable, getBox } from '../../utils/dom';
+import { construct } from '../../utils/computed';
 
-export default Ember.Component.extend(Pluggable, Measurable, {
+export default Ember.Component.extend(Styleable, {
   classNames: 'ui-table__thead',
   layout,
 
@@ -14,13 +14,7 @@ export default Ember.Component.extend(Pluggable, Measurable, {
   table: null,
   // attrs }
 
-  childHeaderList: Ember.computed(function() {
-    return Ember.A();
-  }).readOnly(),
-
-  childHeaderListFroze: Ember.computed.filterBy('childHeaderList', 'frozen', true).readOnly(),
-  childHeaderListUnfroze: Ember.computed.filterBy('childHeaderList', 'frozen', false).readOnly(),
-
+  childHeaderList: construct(Ember.A).readOnly(),
   childHeaderLeafList: Ember.computed('childHeaderList.[]', function() {
     let collect = [];
 
@@ -38,23 +32,74 @@ export default Ember.Component.extend(Pluggable, Measurable, {
     return Ember.A(collect);
   }).readOnly(),
 
-  childHeaderLeafListFroze: Ember.computed.filterBy('childHeaderLeafList', 'frozen', true).readOnly(),
-  childHeaderLeafListUnfroze: Ember.computed.filterBy('childHeaderLeafList', 'frozen', false).readOnly(),
+  willInsertElement() {
+    this._super(...arguments);
 
-  availableComputableSpan: Ember.computed('childHeaderLeafList.@each.{width,span}', function() {
-    return this.get('childHeaderLeafList').reduce((accum, header) => {
-      let width = header.get('width');
+    let childHeaderList = this.get('childHeaderList');
+    let thead = this.$();
+
+    thead.on('register.th', (evt, th) => {
+      childHeaderList.pushObject(th);
+
+      th.get('frozenMirrorCell').appendTo(thead.children('.ui-table__froze'));
+    });
+  },
+
+  didInsertElement() {
+    this._super(...arguments);
+
+    this.$().parent().trigger('register.thead', this)
+    this.$().parent().trigger('register.all', this);
+
+    let { TEXT_NODE, ELEMENT_NODE } = document;
+
+    (function recur(nodes) {
+      nodes.each((index, node) => {
+        switch (node.nodeType) {
+          case TEXT_NODE: node.data = node.data.trim(); return;
+          case ELEMENT_NODE: recur(Ember.$(node).contents()); return;
+        }
+      });
+    })(this.$().contents());
+  },
+
+  willDestroyElement() {
+    this._super(...arguments);
+
+    this.$().parent().trigger('unregister.thead', this)
+    this.$().off('register.th');
+  },
+
+  resizeWidth() {
+    let box = getBox(this.element);
+    let frozeBox = getBox(this.$().children('.ui-table__froze').get(0));
+    let unfrozeBox = getBox(this.$().children('.ui-table__unfroze').get(0));
+    let leaves = this.get('childHeaderLeafList');
+    let css = getComputedStyle(this.element);
+    let availableSpan = leaves.reduce((accum, th) => {
+      let width = th.get('width');
 
       if (typeof width === 'number') {
         return accum;
       }
 
-      return accum + header.get('span');
+      return accum + th.get('span');
     }, 0);
-  }).readOnly(),
-  availableComputableWidth: Ember.computed('measurements.innerWidth', 'childHeaderLeafList.@each.width', function() {
-    return this.get('measurements.innerWidth') - this.get('childHeaderLeafList').reduce((accum, header) => {
-      let width = header.get('width');
+    let availableWidth = box.width;
+
+    availableWidth -= box.padding.left + box.padding.right;
+    availableWidth -= box.border.left + box.border.right;
+
+    availableWidth -= frozeBox.padding.left + frozeBox.padding.right;
+    availableWidth -= frozeBox.margin.left + frozeBox.margin.right;
+    availableWidth -= frozeBox.border.left + frozeBox.border.right;
+
+    availableWidth -= unfrozeBox.padding.left + unfrozeBox.padding.right;
+    availableWidth -= unfrozeBox.margin.left + unfrozeBox.margin.right;
+    availableWidth -= unfrozeBox.border.left + unfrozeBox.border.right;
+
+    availableWidth -= leaves.reduce((accum, th) => {
+      let width = th.get('width');
 
       if (typeof width === 'number') {
         return accum + width;
@@ -62,156 +107,46 @@ export default Ember.Component.extend(Pluggable, Measurable, {
 
       return accum;
     }, 0);
-  }).readOnly(),
 
-  frozenColumnWidth: Ember.computed('childHeaderListFroze.@each.columnWidth', function() {
-    return this.get('childHeaderListFroze').reduce((accum, th) => {
-      return accum + th.get('columnWidth');
-    }, 0);
-  }).readOnly(),
+    leaves.forEach(th => {
+      let width = th.get('width');
 
-  unfrozenColumnWidth: Ember.computed('childHeaderListUnfroze.@each.columnWidth', function() {
-    return this.get('childHeaderListUnfroze').reduce((accum, th) => {
-      return accum + th.get('columnWidth');
-    }, 0);
-  }).readOnly(),
-
-  scrollable: Ember.computed(function() {
-    let scrollers = this.$().children('.ui-table__scrollable');
-
-    return {
-      all: scrollers,
-      froze: scrollers.filter('.ui-table__froze'),
-      unfroze: scrollers.filter('.ui-table__unfroze')
-    };
-  }).readOnly(),
-
-  scroller: Ember.computed('scrollable', function() {
-    let scrollable = this.get('scrollable');
-
-    return {
-      all: scrollable.all.children('.ui-table__scroller'),
-      froze: scrollable.froze.children('.ui-table__scroller'),
-      unfroze: scrollable.unfroze.children('.ui-table__scroller')
-    };
-  }).readOnly(),
-
-  sheet: Ember.computed(function() {
-    return this.$('style');
-  }).readOnly(),
-
-  resize() {
-    let thead = this.get('measurements.scrollHeight');
-
-    this.$()
-      .add(this.get('scrollable.all'))
-      .height(thead);
-  },
-
-  plugins: {
-    register: {
-      render() {
-        let childHeaderList = this.get('childHeaderList');
-
-        this.$().on('register.th', (evt, th) => {
-          childHeaderList.pushObject(th);
-        });
-
-        this.$().on('unregister.th', (evt, th) => {
-          childHeaderList.removeObject(th);
-        });
-      },
-
-      afterRender() {
-        this.$().trigger('register.thead', this);
-      },
-
-      destroy() {
-        this.$().off('register.th unregister.th');
+      if (typeof width === 'number') {
+        return th.set('columnWidth', width);
       }
-    },
 
-    sortable: {
-      afterRender() {
-        let rows = this.get('table.tbody');
-
-        this.$().on('sortupdate', evt => {
-          let order = [];
-          let nodes = Ember.$(evt.target).parentsUntil('.ui-table', '.ui-table__th, .ui-table__thead');
-          let junction = nodes.first();
-          let headers = junction.data('$E').get('childHeaderList');
-
-          junction.children().each(function recur() {
-            let element = Ember.$(this);
-
-            if (element.is('.ui-table__th')) {
-              order.push(element.data('$E'));
-            }
-            else {
-              element.children().each(recur);
-            }
-          });
-
-          headers.replace(0, headers.get('length'), order);
-
-          this.notifyPropertyChange('childHeaderLeafList');
-        });
-      },
-
-      destroy() {
-        this.$().off('sortupdate');
+      if (typeof width === 'string' && width.match(/[\d\.]+\%$/)) {
+        return th.set('columnWidth', availableWidth * parseFloat(width) / 100);
       }
-    },
 
-    freezable: {
-      render() {
-        this.addObserver('childHeaderList.@each.frozen', observerOnce(() => {
-          this.$().trigger('freezeupdate');
-        }));
-      },
+      return th.set('columnWidth', availableWidth * th.get('span') / availableSpan);
+    });
 
-      afterRender() {
-        let th = this.get('childHeaderList');
-        let froze = this.get('scroller.froze');
+    let ns = this.get('table.elementId');
+    let froze = leaves.filterBy('frozen', true).reduce((accum, th) => accum + th.get('columnWidth'), 0);
+    let unfroze = leaves.filterBy('frozen', false).reduce((accum, th) => accum + th.get('columnWidth'), 0);
 
-        Ember.run.schedule('render', this, function() {
-          this.get('childHeaderLeafList').forEach(th => {
-            th.get('frozenMirrorCell').appendTo(froze);
-          });
-        });
+    this.$('.ui-table__th--branch').each(function(index, element) {
+      let branch = Ember.$(element);
+      let leaves = branch.find('.ui-table__th--leaf');
 
-        this.$().on('freezeupdate', evt => {
-          let frozeHeaders = this.get('childHeaderLeafListFroze');
-          let unfrozeHeaders = this.get('childHeaderLeafListUnfroze');
+      branch.css({
+        width: leaves.toArray().reduce((accum, leaf) => {
+          return accum + Ember.$(leaf).data('$E').get('columnWidth');
+        }, 0)
+      });
+    });
 
-          frozeHeaders.forEach(th => {
-            th.freeze();
-          });
-          unfrozeHeaders.forEach(th => {
-            th.unfreeze();
-          });
-        });
-      },
-
-      destroy() {
-        this.$().off('freezeupdate');
-      }
-    },
-
-    // TODO We can fold this into an AST transform
-    textNodes: {
-      afterRender() {
-        let { TEXT_NODE, ELEMENT_NODE } = document;
-
-        (function recur(nodes) {
-          nodes.each((index, node) => {
-            switch (node.nodeType) {
-              case TEXT_NODE: node.data = node.data.trim(); return;
-              case ELEMENT_NODE: recur(Ember.$(node).contents()); return;
-            }
-          });
-        })(this.$().contents());
-      }
-    }
+    this.style(`#${ns} .ui-table__froze`, {
+      left: `${box.padding.left}px`,
+      width: `${froze + frozeBox.padding.left + frozeBox.padding.right}px`
+    });
+    this.style(`#${ns} .ui-table__unfroze`, {
+      left: `${froze + box.padding.left + frozeBox.padding.left + frozeBox.padding.right + frozeBox.border.left + frozeBox.border.right}px`,
+      width: `${box.width - box.padding.left - box.padding.right - box.border.left - box.border.right - froze - frozeBox.padding.left - frozeBox.padding.right - frozeBox.border.left - frozeBox.border.right}px`
+    });
+    this.style(`#${ns} .ui-table__unfroze .ui-scrollable__scroller`, {
+      width: `${unfroze}px`
+    });
   }
 });

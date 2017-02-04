@@ -13,61 +13,62 @@ export function swapNodes(...args) {
   PLACEHOLDER.remove();
 }
 
-function prepareSheet(node) {
-  let style = node.children().first();
+export function getBox(element) {
+  if (!element) {
+    return {
+      width: 0,
+      height: 0,
 
-  if (!style.is('style')) {
-    style = node.prepend('<style>').children().first();
+      scrollWidth: 0,
+      scrollHeight: 0,
+
+      margin: {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0
+      },
+      padding: {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0
+      },
+      border: {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0
+      }
+    };
   }
 
-  return style.prop('sheet');
-}
+  let css = getComputedStyle(element);
 
-function prepareRule(sheet, selector) {
-  let rule = Array.from(sheet.rules).reverse().find(rule => {
-    return rule.selectorText === selector;
-  });
+  return {
+    width: parseFloat(css.getPropertyValue('width')),
+    height: parseFloat(css.getPropertyValue('height')),
 
-  if (rule) {
-    return rule;
-  }
+    scrollWidth: element.scrollWidth,
+    scrollHeight: element.scrollHeight,
 
-  sheet.insertRule(`${selector} {}`, sheet.rules.length);
-
-  return prepareRule(sheet, selector);
-}
-
-export function styleable(...args) {
-  let fn = args.pop();
-  let keys = args;
-
-  function styleOnce() {
-    let context = this;
-    let applyThis = fn.call(context);
-
-    if (!applyThis) {
-      return;
+    margin: {
+      top: parseFloat(css.getPropertyValue('margin-top')),
+      right: parseFloat(css.getPropertyValue('margin-right')),
+      bottom: parseFloat(css.getPropertyValue('margin-bottom')),
+      left: parseFloat(css.getPropertyValue('margin-left'))
+    },
+    padding: {
+      top: parseFloat(css.getPropertyValue('padding-top')),
+      right: parseFloat(css.getPropertyValue('padding-right')),
+      bottom: parseFloat(css.getPropertyValue('padding-bottom')),
+      left: parseFloat(css.getPropertyValue('padding-left'))
+    },
+    border: {
+      top: parseFloat(css.getPropertyValue('border-top-width')),
+      right: parseFloat(css.getPropertyValue('border-right-width')),
+      bottom: parseFloat(css.getPropertyValue('border-bottom-width')),
+      left: parseFloat(css.getPropertyValue('border-left-width'))
     }
-
-    let sheet = prepareSheet(this.$());
-
-    Object.keys(applyThis).forEach(key => {
-      let rule = prepareRule(sheet, key);
-      let properties = applyThis[key];
-
-      Object.keys(properties).forEach(key => {
-        let value = properties[key];
-
-        if (typeof value === 'function') {
-          value = value.call(context);
-        }
-
-        rule.style.setProperty(key, value);
-      });
-    });
-  }
-
-  return Ember.observer(...keys, function() {
-    Ember.run.scheduleOnce('afterRender', this, styleOnce);
-  });
+  };
 }

@@ -7,6 +7,13 @@
       </label>
     {{/each}}
   </div>
+  <div>
+    {{let increment=(Number 5)}}
+
+    <button {{action "addData" increment}}>Add Rows</button>
+    <button {{action "removeData" increment}}>Remove Rows</button>
+    {{input value=increment change=(action (pipe (property "target.value") (action increment.set)))}}
+  </div>
   {{#if (eq scroll.selection "virtual")}}
     {{#ui-table as |t|}}
       {{#t.head as |t|}}
@@ -25,17 +32,28 @@
           {{#t.h}}Password{{/t.h}}
         {{/ui-sortable}}
       {{/t.head}}
-      {{#t.body-each (Select application.model) as |t item index|}}
+      {{#t.body-each application.model as |t item index|}}
         {{#t.r as |t|}}
-          {{#t.d}}{{item.value.id}}{{/t.d}}
-          {{#t.d}}{{item.value.attributes.age}}{{/t.d}}
-          {{#t.d}}{{item.value.attributes.first-name}}{{/t.d}}
-          {{#t.d}}{{item.value.attributes.last-name}}{{/t.d}}
-          {{#t.d}}{{item.value.attributes.nick-name}}{{/t.d}}
+          {{#t.d}}{{item.id}}{{/t.d}}
+          {{#t.d}}{{item.age}}{{/t.d}}
+          {{#t.d}}{{item.firstName}}{{/t.d}}
+          {{#t.d}}{{item.lastName}}{{/t.d}}
+          {{#t.d}}{{item.nickName}}{{/t.d}}
           {{#t.d}}XXX-XX-XXXX{{/t.d}}
           {{#t.d}}********{{/t.d}}
         {{/t.r}}
       {{/t.body-each}}
+      {{#t.foot as |t|}}
+        {{#t.r as |t|}}
+          {{#t.d}}Foot1{{/t.d}}
+          {{#t.d}}Foot2{{/t.d}}
+          {{#t.d}}Foot3{{/t.d}}
+          {{#t.d}}Foot4{{/t.d}}
+          {{#t.d}}Foot5{{/t.d}}
+          {{#t.d}}Foot6{{/t.d}}
+          {{#t.d}}Foot7{{/t.d}}
+        {{/t.r}}
+      {{/t.foot}}
     {{/ui-table}}
   {{/if}}
   {{#if (eq scroll.selection "fixed")}}
@@ -51,23 +69,29 @@
               {{#t.h}}Last Name{{/t.h}}
             {{/ui-sortable}}
           {{/t.h}}
-          {{#t.h width="50%"}}Nick Name{{/t.h}}
+          {{#t.h width="50%"}}
+            {{#ui-resizable}}
+              Nick Name
+            {{/ui-resizable}}
+          {{/t.h}}
           {{#t.h}}SSN{{/t.h}}
           {{#t.h}}Password{{/t.h}}
         {{/ui-sortable}}
       {{/t.head}}
       {{#t.body as |t|}}
-        {{#each (Select application.model) key="@index" as |item index|}}
-          {{#t.r class=(if item.isSelected "active") click=(action item.toggle) as |t|}}
-            {{#t.d}}{{item.value.id}}{{/t.d}}
-            {{#t.d}}{{item.value.attributes.age}}{{/t.d}}
-            {{#t.d}}{{item.value.attributes.first-name}}{{/t.d}}
-            {{#t.d}}{{item.value.attributes.last-name}}{{/t.d}}
-            {{#t.d}}{{item.value.attributes.nick-name}}{{/t.d}}
-            {{#t.d}}XXX-XX-XXXX{{/t.d}}
-            {{#t.d}}********{{/t.d}}
-          {{/t.r}}
-        {{/each}}
+        {{#if application.model.isFulfilled}}
+          {{#each application.model key="@index" as |item index|}}
+            {{#t.r as |t|}}
+              {{#t.d}}{{item.id}}{{/t.d}}
+              {{#t.d}}{{item.age}}{{/t.d}}
+              {{#t.d}}{{item.firstName}}{{/t.d}}
+              {{#t.d}}{{item.lastName}}{{/t.d}}
+              {{#t.d}}{{item.nickName}}{{/t.d}}
+              {{#t.d}}XXX-XX-XXXX{{/t.d}}
+              {{#t.d}}********{{/t.d}}
+            {{/t.r}}
+          {{/each}}
+        {{/if}}
       {{/t.body}}
       {{#t.foot as |t|}}
         {{#t.r as |t|}}

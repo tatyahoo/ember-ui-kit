@@ -1,26 +1,8 @@
-<style>
-  .ui-table__froze {
-    width: {{frozenColumnWidth}}px;
-  }
-
-  .ui-table__unfroze {
-    left: {{frozenColumnWidth}}px;
-  }
-
-  .ui-table__unfroze .ui-table__scroller {
-    width: {{unfrozenColumnWidth}}px;
-  }
-</style>
-<div class="ui-table__scrollable ui-table__thead__scrollable ui-table__froze">
-  <div class="ui-table__scroller ui-table__thead__scroller ui-table__thead__scroller--froze">
-  </div>
-</div>
-<div class="ui-table__scrollable ui-table__thead__scrollable ui-table__unfroze">
-  <div class="ui-table__scroller ui-table__thead__scroller">
-    {{yield
-      (hash
-        h=(component "ui-table/th" table=table thead=this)
-      )
-    }}
-  </div>
-</div>
+<div class="ui-table__froze"></div>
+{{#ui-scrollable class="ui-table__unfroze" ps=(hash suppressScrollY=true)}}
+  {{yield
+    (hash
+      h=(component "ui-table/th" table=table thead=this)
+    )
+  }}
+{{/ui-scrollable}}

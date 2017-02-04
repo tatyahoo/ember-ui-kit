@@ -1,10 +1,9 @@
 import Ember from 'ember';
 import layout from '../../templates/components/ui-table/tfoot';
 
-import Pluggable from '../../mixins/pluggable';
-import Measurable from '../../mixins/measurable';
+import { construct } from '../../utils/computed';
 
-export default Ember.Component.extend(Pluggable, Measurable, {
+export default Ember.Component.extend({
   classNames: 'ui-table__tfoot',
   layout,
 
@@ -12,67 +11,41 @@ export default Ember.Component.extend(Pluggable, Measurable, {
   table: null,
   // attrs }
 
-  scrollable: Ember.computed(function() {
-    let scrollers = this.$().children('.ui-table__scrollable');
+  rows: construct(Ember.A).readOnly(),
 
-    return {
-      all: scrollers,
-      froze: scrollers.filter('.ui-table__froze'),
-      unfroze: scrollers.filter('.ui-table__unfroze')
-    };
+  froze: Ember.computed(function() {
+    return this.$().children('.ui-table__froze');
   }).readOnly(),
 
-  scroller: Ember.computed('scrollable', function() {
-    let scrollable = this.get('scrollable');
-
-    return {
-      all: scrollable.all.children('.ui-table__scroller'),
-      froze: scrollable.froze.children('.ui-table__scroller'),
-      unfroze: scrollable.unfroze.children('.ui-table__scroller')
-    };
+  scroller: Ember.computed(function() {
+    return this.$('.ui-scrollable__scroller');
   }).readOnly(),
 
-  resize() {
-    let thead = this.get('measurements.scrollHeight');
+  willInsertElement() {
+    this._super(...arguments);
 
-    this.$()
-      .add(this.get('scrollable.all'))
-      .height(thead);
+    let rows = this.get('rows');
+
+    this.$().on('register.tr', (evt, tr) => {
+      let index = this.get('scroller').children().index(tr.$());
+
+      tr.set('itemIndex', index);
+
+      rows.pushObject(tr);
+    });
   },
 
-  plugins: {
-    register: {
-      afterRender() {
-        this.$().trigger('register.tfoot', this);
-      }
-    },
+  didInsertElement() {
+    this._super(...arguments);
 
-    parity: {
-      render() {
-        let unfroze = this.get('scroller.unfroze');
+    this.$().parent().trigger('register.tfoot', this);
+    this.$().parent().trigger('register.all', this);
+  },
 
-        this.$().on('register.tr', (evt, tr) => {
-          Ember.run.join(tr, tr.set, 'itemIndex', unfroze.children().index(tr.$()));
-        });
-      },
+  willDestroyElement() {
+    this._super(...arguments);
 
-      destroy() {
-        this.$().off('register.tr');
-      }
-    },
-
-    freezable: {
-      render() {
-        let froze = this.get('scroller.froze');
-
-        this.$().on('register.tr', (evt, tr) => {
-          froze.append(tr.get('frozenMirrorRow'));
-        });
-      },
-
-      destroy() {
-        this.$().off('register.tr');
-      }
-    }
-  }
+    this.$().parent().trigger('unregister.tfoot', this);
+    this.$().off('register.tr');
+  },
 });

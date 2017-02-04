@@ -1,13 +1,8 @@
-<div class="ui-table__scrollable ui-table__tfoot__scrollable ui-table__froze">
-  <div class="ui-table__scroller ui-table__tfoot__scroller">
-  </div>
-</div>
-<div class="ui-table__scrollable ui-table__tfoot__scrollable ui-table__unfroze">
-  <div class="ui-table__scroller ui-table__tfoot__scroller">
-    {{yield
-      (hash
-        r=(component "ui-table/tr" table=table tfoot=this)
-      )
-    }}
-  </div>
-</div>
+<div class="ui-table__froze"></div>
+{{#ui-scrollable class="ui-table__unfroze" ps=(hash suppressScrollY=true)}}
+  {{yield
+    (hash
+      r=(component "ui-table/tr" table=table tfoot=this)
+    )
+  }}
+{{/ui-scrollable}}

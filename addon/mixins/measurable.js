@@ -3,6 +3,20 @@ import Ember from 'ember';
 export default Ember.Mixin.create({
   measurements: Ember.computed(function() {
     let el = this.$();
+
+    if (!el) {
+      return {
+        width: 0,
+        height: 0,
+        innerWidth: 0,
+        innerHeight: 0,
+        outerWidth: 0,
+        outerHeight: 0,
+        scrollWidth: 0,
+        scrollHeight: 0
+      };
+    }
+
     let [ froze, unfroze ] = this.$('.ui-table__scroller');
 
     return {

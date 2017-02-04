@@ -1,11 +1,12 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  ajax: Ember.inject.service(),
+  actions: {
+    addData(count) {
+      this.controllerFor(this.routeName).addData(count);
+    },
 
-  model() {
-    return this.get('ajax').request('/users').then(response => {
-      return response.data;
-    });
+    removeData(count) {
+    }
   }
 });

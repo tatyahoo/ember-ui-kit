@@ -25,7 +25,26 @@ body {
   background: lightblue;
 }
 
-.ui-table {
-  width: 80%;
+body.ember-application .ui-table {
+  width: 640px;
+  max-height: 480px;
   margin: 50px auto;
+}
+
+body.ember-application .ui-table__thead,
+body.ember-application .ui-table__tbody,
+body.ember-application .ui-table__tfoot  {
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  padding: 0 20px;
+}
+
+body.ember-application .ui-table__froze {
+  border-right: 5px solid gray;
+}
+
+body.ember-application .ui-table__th {
+}
+
+body.ember-application .ui-table__td {
 }

@@ -1,51 +1,75 @@
 .ui-table {
+  box-sizing: border-box;
   overflow: hidden;
+  position: relative;
   width: 100%;
   max-height: 100%;
   align-self: flex-start; }
 
-.ui-table__scroller {
-  transform: translate3d(0,0,0);
-  will-change: transform;
-  position: relative;
-}
+  .ui-table .ui-table__froze,
+  .ui-table .ui-table__unfroze {
+    position: absolute;
+  }
 
 .ui-table__thead {
+  box-sizing: border-box;
   overflow: hidden;
-  width: 100%;
   position: absolute;
   left: 0;
-  right: 0;
-  top: 0; }
+  right: 0; }
 
-  .ui-table__thead__scroller {
-    vertical-align: bottom;
+  .ui-table__thead:first-of-type {
+    top: 0; }
+
+  .ui-table__tbody ~ .ui-table__thead {
+    bottom: 0; }
+
+  .ui-table__thead .ui-table__froze {
+    height: 100%;
   }
+
+  .ui-table__thead .ui-table__froze::before,
+  .ui-table__thead .ui-table__unfroze .ui-scrollable__scroller::before {
+    content: '';
+    display: inline-block;
+    vertical-align: bottom;
+    height: 100%;
+  }
+
+  .ui-table__thead .ps-container.ps-active-x > .ps-scrollbar-x-rail,
+  .ui-table__thead .ps-container.ps-active-y > .ps-scrollbar-y-rail {
+    display: none;
+  }
+
+  .ui-table__thead .ui-scrollable__scroller {
+    white-space: nowrap; }
 
   .ui-table__thead .ui-sortable {
     display: inline-block;
     vertical-align: bottom;
     white-space: nowrap; }
 
-  .ui-table__thead .ui-table__scrollable {
-    white-space: nowrap;
-    position: absolute;
-    overflow: auto; }
-
 .ui-table__tbody {
+  box-sizing: border-box;
   overflow: hidden;
   width: 100%;
   position: absolute;
   left: 0;
   right: 0; }
 
-  .ui-table__tbody .ui-table__scrollable {
-    overflow: auto;
-    position: absolute;
+  .ui-table__tbody .ui-table__froze,
+  .ui-table__tbody .ui-table__unfroze {
     top: 0;
-    bottom: 0; }
+    bottom: 0;
+  }
+
+  .ui-table__froze.ps-container.ps-active-x > .ps-scrollbar-x-rail,
+  .ui-table__froze.ps-container.ps-active-y > .ps-scrollbar-y-rail {
+    display: none;
+  }
 
 .ui-table__tfoot {
+  box-sizing: border-box;
   overflow: hidden;
   width: 100%;
   position: absolute;
@@ -53,17 +77,13 @@
   right: 0;
   bottom: 0; }
 
-  .ui-table__tfoot .ui-table__scrollable {
-    position: absolute;
-    overflow: auto; }
-
-.ui-table__froze {
-  left: 0; }
-
-.ui-table__unfroze {
-  right: 0; }
+  .ui-table__tfoot .ps-container.ps-active-x > .ps-scrollbar-x-rail,
+  .ui-table__tfoot .ps-container.ps-active-y > .ps-scrollbar-y-rail {
+    display: none;
+  }
 
 .ui-table__td {
+  box-sizing: border-box;
   vertical-align: middle;
   display: inline-block;
   overflow: hidden;
@@ -72,13 +92,14 @@
 }
 
 .ui-table__th {
+  box-sizing: border-box;
   vertical-align: bottom;
   display: inline-block;
   overflow: hidden;
   transition: width 150ms ease-out;
-  background: inherit;
-}
+  background: inherit; }
 
 .ui-table__tr {
+  box-sizing: border-box;
   white-space: nowrap;
 }
