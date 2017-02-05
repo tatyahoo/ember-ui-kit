@@ -1,9 +1,11 @@
 import Ember from 'ember';
 import layout from '../../templates/components/ui-table/tr';
 
+import Composable from '../../mixins/composable';
+
 import { construct } from '../../utils/computed';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(Composable, {
   classNames: 'ui-table__tr',
   classNameBindings: ['even:ui-table__tr--even', 'odd:ui-table__tr--odd'],
   layout,
@@ -53,7 +55,15 @@ export default Ember.Component.extend({
     let childCellList = this.get('childCellList');
 
     this.$().on('register.td', (evt, td) => {
+      evt.stopPropagation();
+
       childCellList.pushObject(td);
+    });
+
+    this.$().on('unregister.td', (evt, td) => {
+      evt.stopPropagation();
+
+      childCellList.removeObject(td);
     });
   },
 

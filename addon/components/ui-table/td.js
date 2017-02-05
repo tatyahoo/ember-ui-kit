@@ -47,18 +47,26 @@ export default Ember.Component.extend({
   },
 
   freeze() {
-    let mirror = this.get('frozenMirrorCell');
+    let th = this.get('th');
 
-    if (mirror.parent().is('.ui-table__tr--froze')) {
-      swapNodes(this.element, mirror);
+    if (th) {
+      let mirror = this.get('frozenMirrorCell');
+
+      if (mirror.parent().is('.ui-table__tr--froze')) {
+        swapNodes(this.element, mirror);
+      }
     }
   },
 
   unfreeze() {
-    let mirror = this.get('frozenMirrorCell');
+    let th = this.get('th');
 
-    if (!mirror.parent().is('.ui-table__tr--froze')) {
-      swapNodes(this.element, mirror);
+    if (th) {
+      let mirror = this.get('frozenMirrorCell');
+
+      if (!mirror.parent().is('.ui-table__tr--froze')) {
+        swapNodes(this.element, mirror);
+      }
     }
   }
 });

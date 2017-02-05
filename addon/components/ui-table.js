@@ -66,7 +66,7 @@ export default Ember.Component.extend(ResizeAware, Composable, {
       Ember.run.scheduleOnce('afterRender', this, this.triggerResize, mNew, mOld);
     }
 
-    Ember.assign(this.measurements, mNew);
+    Object.assign(this.measurements, mNew);
 
     return mOld;
   },

@@ -12,7 +12,7 @@ export default Ember.Component.extend({
   didRender() {
     this._super(...arguments);
 
-    this.$().resizable(Ember.assign({}, this.get('options')));
+    this.$().resizable(Object.assign({}, this.get('options')));
   },
 
   willDestroyElement() {

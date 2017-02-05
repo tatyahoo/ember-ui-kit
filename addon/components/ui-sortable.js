@@ -12,7 +12,7 @@ export default Ember.Component.extend({
   didRender() {
     this._super(...arguments);
 
-    this.$().sortable(Ember.assign({}, this.get('options')));
+    this.$().sortable(Object.assign({}, this.get('options')));
   },
 
   willDestroyElement() {
