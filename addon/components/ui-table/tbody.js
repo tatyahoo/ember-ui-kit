@@ -63,14 +63,14 @@ export default Ember.Component.extend({
   didInsertElement() {
     this._super(...arguments);
 
-    this.$().parent().trigger('register.tbody', this)
+    this.$().parent().trigger('register.tbody', this);
     this.$().parent().trigger('register.all', this);
 
     let ns = this.get('table.elementId');
 
     let oldOrder = this.get('table.thead.childHeaderLeafList').map(leaf => leaf.element);
 
-    this.get('table').$().on(`sortupdate.${ns}`, evt => {
+    this.get('table').$().on(`sortupdate.${ns}`, () => {
       let rows = this.get('rows').concat(this.get('tfoot.rows') || []);
       let ops = []; // TODO there should be an algorithm where only 1 op is needed
 
@@ -98,7 +98,7 @@ export default Ember.Component.extend({
           oldNode.insertBefore(newNode);
 
           cells.splice(newIndex, 0, ...cells.splice(oldIndex, 1));
-        })
+        });
       });
 
       // TODO sort mirror cells too
@@ -111,7 +111,7 @@ export default Ember.Component.extend({
     let ns = this.get('elementId');
 
     this.get('table').$().off(`sortupdate.${ns}`);
-    this.$().parent().trigger('unregister.tbody', this)
+    this.$().parent().trigger('unregister.tbody', this);
     this.$().off('register.tr');
   },
 

@@ -136,7 +136,7 @@ export default Ember.ObjectProxy.extend({
         let name = group.get('name');
         let desc = Ember.computed
           .readOnly(`groups.${name}.value`)
-          .meta({ isGroupAllProperty: true })
+          .meta({ isGroupAllProperty: true });
 
         // Ember.defineProperty is private, need better solution
         Ember.defineProperty(options.parent, name, desc);

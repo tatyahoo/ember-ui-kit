@@ -118,7 +118,7 @@ export default Body.extend({
 
     this.$().on('ps-scroll-y', throttle(evt => {
       let buffer = this.get('buffer');
-      let bufLen = buffer.get('length');
+      //let bufLen = buffer.get('length');
       let cursors = this.get('bufferCursors');
       let model = this.get('modelNormalized');
 
@@ -196,6 +196,7 @@ export default Body.extend({
 
         if (direction === 0) {
           // refresh models right at the cursor
+          /* jshint loopfunc: true */
           Ember.run(buffer, buffer.forEach, item => {
             item.set('model', model.objectAt(item.index));
           });

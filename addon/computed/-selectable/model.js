@@ -89,7 +89,7 @@ export default Ember.Object.extend({
             content: item,
             index
           });
-        })
+        });
       })
     });
   }).readOnly(),
@@ -107,7 +107,7 @@ export default Ember.Object.extend({
           .map((item, index) => {
             item.set('index', index);
 
-            return item.get('content')
+            return item.get('content');
           });
 
         while (selected.length > limit) {

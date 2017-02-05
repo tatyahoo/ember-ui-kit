@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
-export function construct(ctor, ...args) {
+export function construct(Constructor, ...args) {
   return Ember.computed(function() {
-    return new ctor(...args);
+    return new Constructor(...args);
   });
 }

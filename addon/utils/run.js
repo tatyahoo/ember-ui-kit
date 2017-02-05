@@ -18,9 +18,3 @@ export function observerOnceIn(...args) {
     Ember.run.scheduleOnce(queue, this, fn);
   });
 }
-
-export function listenOnce(fn) {
-  return function() {
-    Ember.run.once(this, fn);
-  };
-}

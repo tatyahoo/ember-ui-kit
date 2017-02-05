@@ -6,8 +6,6 @@ import Composable from '../mixins/composable';
 
 import { getBox } from '../utils/dom';
 
-import { task, timeout } from 'ember-concurrency';
-
 export default Ember.Component.extend(ResizeAware, Composable, {
   classNames: 'ui-table',
   layout,
@@ -23,9 +21,6 @@ export default Ember.Component.extend(ResizeAware, Composable, {
       evt.stopPropagation();
 
       Ember.run.scheduleOnce('afterRender', this, this.measure);
-    });
-    this.$().on('unregister.tr', evt => {
-      debugger;
     });
     this.$().on('register.thead register.tbody register.tfoot', (evt, component) => {
       evt.stopPropagation();
@@ -95,7 +90,7 @@ export default Ember.Component.extend(ResizeAware, Composable, {
 
     center.on('ps-scroll-y', evt => {
       left.add(bottom).add(top)
-        .scrollTop(evt.currentTarget.scrollTop)
+        .scrollTop(evt.currentTarget.scrollTop);
     });
 
     top.on('ps-scroll-x', evt => {
@@ -120,7 +115,9 @@ export default Ember.Component.extend(ResizeAware, Composable, {
     let tbody = this.get('tbody');
     let tfoot = this.get('tfoot');
 
-    tbody && tbody.resizeHeight();
+    thead && thead.trigger('resizeHeight');
+    tbody && tbody.trigger('resizeHeight');
+    tfoot && tfoot.trigger('resizeHeight');
 
     let heights = {
       thead: !thead ? 0 : thead.$('.ui-table__froze, .ui-table__unfroze .ui-scrollable__scroller')

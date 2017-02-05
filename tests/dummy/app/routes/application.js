@@ -6,7 +6,7 @@ export default Ember.Route.extend({
       this.controllerFor(this.routeName).addData(count);
     },
 
-    removeData(count) {
-    }
+    //removeData(count) {
+    //}
   }
 });

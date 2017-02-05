@@ -17,6 +17,7 @@
     "triggerEvent",
     "find",
     "findWithAssert",
+    "getComputedStyle",
     "wait",
     "DS",
     "andThen",

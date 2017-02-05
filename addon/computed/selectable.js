@@ -10,7 +10,7 @@ export default function selectable() {
     let from =
       typeof meta.from === 'string' ?  this.get(meta.from) :
       typeof meta.from === 'function' ? meta.from.call(this) :
-      meta.from
+      meta.from;
 
     return Selectable.create({
       meta,

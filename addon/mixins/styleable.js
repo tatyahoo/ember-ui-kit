@@ -1,15 +1,5 @@
 import Ember from 'ember';
 
-function prepareSheet(node) {
-  let style = node.children().first();
-
-  if (!style.is('style')) {
-    style = node.prepend('<style>').children().first();
-  }
-
-  return style.prop('sheet');
-}
-
 function prepareRule(sheet, selector) {
   let rule = Array.from(sheet.rules).reverse().find(rule => {
     return rule.selectorText === selector;
@@ -37,7 +27,7 @@ export default Ember.Mixin.create({
       let value = properties[key];
 
       if (typeof value === 'function') {
-        value = value.call(context);
+        value = value.call(this);
       }
 
       rule.style.setProperty(key, value);

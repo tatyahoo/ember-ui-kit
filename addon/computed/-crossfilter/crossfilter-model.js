@@ -14,7 +14,7 @@ export default Ember.ObjectProxy.extend({
     },
 
     set(key, data) {
-      let accessor = this.get('accessor')
+      let accessor = this.get('accessor');
 
       if (accessor) {
         return crossfilter(accessor(data));

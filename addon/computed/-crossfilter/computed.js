@@ -117,8 +117,7 @@ export default class CrossfilterComputed extends Ember.ComputedProperty {
     let meta = this.meta();
     let cf = meta.crossfilter;
     let last = cf.last;
-    let node = this.firstOfType(last, 'dimension')
-      || this.firstOfType(last, 'crossfilter');
+    let node = this.firstOfType(last, 'dimension') || this.firstOfType(last, 'crossfilter');
 
     if (typeof name === 'function') {
       fn = name;

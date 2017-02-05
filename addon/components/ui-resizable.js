@@ -1,9 +1,7 @@
 import Ember from 'ember';
 import layout from '../templates/components/ui-resizable';
 
-import Pluggable from '../mixins/pluggable';
-
-export default Ember.Component.extend(Pluggable, {
+export default Ember.Component.extend({
   classNames: 'ui-resizable',
   layout,
 
@@ -11,15 +9,15 @@ export default Ember.Component.extend(Pluggable, {
   options: null,
   // attrs }
 
-  plugins: {
-    ui: {
-      render() {
-        this.$().resizable(Ember.assign({}, this.get('options')));
-      },
+  didRender() {
+    this._super(...arguments);
 
-      destroy() {
-        this.$().resizable('destroy');
-      }
-    }
+    this.$().resizable(Ember.assign({}, this.get('options')));
+  },
+
+  willDestroyElement() {
+    this._super(...arguments);
+
+    this.$().resizable('destroy');
   }
 });

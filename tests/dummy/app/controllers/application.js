@@ -1,7 +1,4 @@
 import Ember from 'ember';
-import DS from 'ember-data';
-
-import { construct } from 'ember-ui-kit/utils/computed';
 
 export default Ember.Controller.extend({
   ajax: Ember.inject.service(),
@@ -34,6 +31,6 @@ export default Ember.Controller.extend({
         model.set('isFulfilled', true);
         model.set('isPending', false);
         this.incrementProperty('end', count);
-      })
+      });
   }
 });

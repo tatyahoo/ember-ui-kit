@@ -4,7 +4,7 @@ import layout from '../../templates/components/ui-table/th';
 import Styleable from '../../mixins/styleable';
 import Composable from '../../mixins/composable';
 
-import { swapNodes, styleable } from '../../utils/dom';
+import { swapNodes } from '../../utils/dom';
 import { construct } from '../../utils/computed';
 
 export default Ember.Component.extend(Styleable, Composable, {
@@ -66,7 +66,7 @@ export default Ember.Component.extend(Styleable, Composable, {
   willDestroyElement() {
     this._super(...arguments);
 
-    this.$().parent().trigger('unregister.th', this)
+    this.$().parent().trigger('unregister.th', this);
     this.$().off('register.th');
     this.$().off('resize');
   },

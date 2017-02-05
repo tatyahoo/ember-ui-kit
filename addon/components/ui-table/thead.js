@@ -3,7 +3,7 @@ import layout from '../../templates/components/ui-table/thead';
 
 import Styleable from '../../mixins/styleable';
 
-import { styleable, getBox } from '../../utils/dom';
+import { getBox } from '../../utils/dom';
 import { construct } from '../../utils/computed';
 
 export default Ember.Component.extend(Styleable, {
@@ -48,7 +48,7 @@ export default Ember.Component.extend(Styleable, {
   didInsertElement() {
     this._super(...arguments);
 
-    this.$().parent().trigger('register.thead', this)
+    this.$().parent().trigger('register.thead', this);
     this.$().parent().trigger('register.all', this);
 
     let { TEXT_NODE, ELEMENT_NODE } = document;
@@ -66,7 +66,7 @@ export default Ember.Component.extend(Styleable, {
   willDestroyElement() {
     this._super(...arguments);
 
-    this.$().parent().trigger('unregister.thead', this)
+    this.$().parent().trigger('unregister.thead', this);
     this.$().off('register.th');
   },
 
@@ -75,7 +75,6 @@ export default Ember.Component.extend(Styleable, {
     let frozeBox = getBox(this.$().children('.ui-table__froze').get(0));
     let unfrozeBox = getBox(this.$().children('.ui-table__unfroze').get(0));
     let leaves = this.get('childHeaderLeafList');
-    let css = getComputedStyle(this.element);
     let availableSpan = leaves.reduce((accum, th) => {
       let width = th.get('width');
 

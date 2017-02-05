@@ -5,6 +5,7 @@
     "window",
     "-Promise"
   ],
+  "expr": true,
   "browser": true,
   "boss": true,
   "curly": true,

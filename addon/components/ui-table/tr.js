@@ -1,12 +1,9 @@
 import Ember from 'ember';
 import layout from '../../templates/components/ui-table/tr';
 
-import Pluggable from '../../mixins/pluggable';
-
-import { observerOnce } from '../../utils/run';
 import { construct } from '../../utils/computed';
 
-export default Ember.Component.extend(Pluggable, {
+export default Ember.Component.extend({
   classNames: 'ui-table__tr',
   classNameBindings: ['even:ui-table__tr--even', 'odd:ui-table__tr--odd'],
   layout,
@@ -63,7 +60,7 @@ export default Ember.Component.extend(Pluggable, {
   didInsertElement() {
     this._super(...arguments);
 
-    this.$().parent().trigger('register.tr', this)
+    this.$().parent().trigger('register.tr', this);
     this.$().parent().trigger('register.all', this);
   },
 
@@ -72,8 +69,8 @@ export default Ember.Component.extend(Pluggable, {
 
     this.get('frozenMirrorRow').remove();
 
-    this.$().parent().trigger('unregister.tr', this)
-    this.$().parent().trigger('unregister.all', this)
+    this.$().parent().trigger('unregister.tr', this);
+    this.$().parent().trigger('unregister.all', this);
     this.$().off('register.th');
   }
 });

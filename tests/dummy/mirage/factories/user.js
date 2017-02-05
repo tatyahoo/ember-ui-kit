@@ -33,10 +33,10 @@ export default Factory.extend({
   },
 
   city() {
-    return faker.address.city()
+    return faker.address.city();
   },
 
   streetAddress() {
-    return faker.address.streetAddress()
+    return faker.address.streetAddress();
   }
 });

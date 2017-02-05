@@ -1,11 +1,9 @@
 import Ember from 'ember';
 import layout from '../../templates/components/ui-table/td';
 
-import Pluggable from '../../mixins/pluggable';
-
 import { swapNodes } from '../../utils/dom';
 
-export default Ember.Component.extend(Pluggable, {
+export default Ember.Component.extend({
   classNames: 'ui-table__td',
   classNameBindings: 'columnClass',
   layout,

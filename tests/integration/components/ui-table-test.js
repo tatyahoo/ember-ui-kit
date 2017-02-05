@@ -1,8 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-Ember.run.backburner.DEBUG = true;
-
 moduleForComponent('ui-table', 'Integration | Component | ui-table', {
   integration: true
 });
@@ -57,8 +55,6 @@ test('it renders simple table', function(assert) {
   let thead = table.get('thead');
   let leaves = thead.get('childHeaderLeafList');
   let tbody = table.get('tbody');
-
-  let css = getComputedStyle(thead.element);
 
   assert.equal(thead.get('childHeaderList.length'), 3, 'should registered 3 th');
   assert.equal(thead.get('childHeaderLeafList.length'), 4, 'should registered 4 leaf th');
@@ -146,9 +142,6 @@ test('it renders frozen column table', function(assert) {
   let table = this.$('.ui-table').data('$E');
   let thead = table.get('thead');
   let leaves = thead.get('childHeaderLeafList');
-  let tbody = table.get('tbody');
-
-  let css = getComputedStyle(thead.element);
 
   assert.equal(thead.get('childHeaderList.length'), 3, 'should registered 3 th');
   assert.equal(thead.get('childHeaderLeafList.length'), 4, 'should registered 4 leaf th');
@@ -172,11 +165,8 @@ test('it renders frozen column table', function(assert) {
 
   unfroze.map(getComputedStyle).forEach(css => {
     assert.equal(parseFloat(css.getPropertyValue('left')), 168.75, 'should unfroze width 168.75');
-    assert.equal(parseFloat(css.getPropertyValue('width')), 405, 'should unfroze width 405');
+    assert.equal(parseFloat(css.getPropertyValue('width')), 431.25, 'should unfroze width 431.25');
   });
 
-  assert.equal(parseFloat(getComputedStyle(this.$('.ui-table__unfroze .ui-scrollable__scroller').get(0)).getPropertyValue('width')), 405, 'should scroller width 405');
-
-  debugger;
-  return new Promise(Function.prototype);
+  assert.equal(parseFloat(getComputedStyle(this.$('.ui-table__unfroze .ui-scrollable__scroller').get(0)).getPropertyValue('width')), 431.25, 'should scroller width 431.25');
 });
