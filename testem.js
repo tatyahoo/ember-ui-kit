@@ -4,10 +4,14 @@ module.exports = {
   "test_page": "tests/index.html?hidepassed",
   "disable_watching": true,
   "launch_in_ci": [
-    "PhantomJS"
+    "Chromium"
   ],
   "launch_in_dev": [
-    "PhantomJS",
     "Chrome"
-  ]
+  ],
+  "browser_args": {
+    "Chromium": [
+      "--no-sandbox"
+    ]
+  }
 };
