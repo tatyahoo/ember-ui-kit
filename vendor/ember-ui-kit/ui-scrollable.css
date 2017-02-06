@@ -3,3 +3,12 @@
 
 .ui-scrollable--ps {
   position: relative; }
+
+.ui-scrollable__scroller {
+  transform: translate3d(0,0,0);
+}
+
+.ps-scrollbar-x,
+.ps-scrollbar-y {
+  transform: translate3d(0,0,0);
+}

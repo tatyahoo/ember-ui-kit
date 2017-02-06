@@ -7,8 +7,28 @@ import { throttle } from '../../utils/raf';
 import { construct } from '../../utils/computed';
 import { observerOnce } from '../../utils/run';
 
+// Over scan is number of rows
+// ahead of direction of scroll
 const OVERSCAN_ROWS = 10;
 
+function increase(pos) {
+  return function(index, value) {
+    return parseFloat(value) + pos.height;
+  };
+}
+
+function decrease(pos) {
+  return function(index, value) {
+    return parseFloat(value) - pos.height;
+  };
+}
+
+//
+// TODO Ideas on how to improve performance
+//
+// - Overscan and render paged rows in larger chunks
+// - Rows scrolled out of viewport can be "frozen" and has their dimensions cached
+//
 export default Body.extend({
   classNames: 'ui-table--tbody-each',
   layout,
@@ -60,7 +80,7 @@ export default Body.extend({
 
     let contentSize = scrollable.height();
     let trHeight = scroller.children('.ui-table__tr').height();
-    let target = Math.floor(contentSize / trHeight);
+    let target = Math.min(Math.floor(contentSize / trHeight) + OVERSCAN_ROWS, modLen);
 
     if (isNaN(trHeight)) { // first row!
       buffer.pushObject(Ember.Object.create({
@@ -91,16 +111,19 @@ export default Body.extend({
       return;
     }
     else if (scrollable.prop('scrollHeight') > scrollable.prop('clientHeight') + trHeight * OVERSCAN_ROWS) { // Ahh we're overflowing !!
+      this.detachScrollListener();
       this.attachScrollListener();
-
-      return; // really, do nothing
     }
 
-    this.get('scroller.all').height(trHeight * modLen);
+    Ember.run.schedule('afterRender', this, function() {
+      let contentTop = parseFloat(scroller.css('margin-top'));
 
-    this.$().css('visibility', '');
+      this.get('scroller.all').height(trHeight * modLen - contentTop);
 
-    this.get('table').measure();
+      this.$().css('visibility', '');
+
+      this.get('table').measure();
+    });
   },
 
   didInsertElement() {
@@ -114,95 +137,66 @@ export default Body.extend({
     let tbody = this.$().get(0);
     let unfroze = this.get('scroller.unfroze').get(0);
     let froze = this.get('scroller.froze').get(0);
-    let lastScrollTop = 0;
 
-    this.$().on('ps-scroll-y', throttle(evt => {
-      let buffer = this.get('buffer');
-      //let bufLen = buffer.get('length');
-      let cursors = this.get('bufferCursors');
-      let model = this.get('modelNormalized');
+    let buffer = this.get('buffer');
+    let cursors = this.get('bufferCursors');
+    let model = this.get('modelNormalized');
 
-      let direction = evt.target.scrollTop - lastScrollTop;
+    let ref = tbody;
 
-      let ref = tbody;
+    this.$().on('ps-scroll-up', throttle(evt => {
+      let refPos = ref.getBoundingClientRect();
+      let last = unfroze.lastElementChild;
+      let lastPos = last.getBoundingClientRect();
 
-      lastScrollTop = evt.target.scrollTop;
+      // if top most one is out of viewport
+      while (unfroze.firstElementChild.getBoundingClientRect().top > refPos.top) {
+        Ember.run.begin();
 
-      function increase(pos) {
-        return function(index, value) {
-          return parseFloat(value) + pos.height;
-        };
+        Ember.$(froze.lastElementChild).insertBefore(froze.firstElementChild);
+        Ember.$(unfroze).add(froze)
+          .css('margin-top', decrease(lastPos))
+          .css('height', increase(lastPos));
+
+        cursors.start--;
+        buffer.unshiftObject(buffer.popObject()).setProperties({
+          tr: [],
+          index: cursors.start,
+          model: model.objectAt(cursors.start)
+        });
+        cursors.end--;
+        Ember.run.end();
       }
+    }));
 
-      function decrease(pos) {
-        return function(index, value) {
-          return parseFloat(value) - pos.height;
-        };
-      }
+    this.$().on('ps-scroll-down', throttle(evt => {
+      let refPos = ref.getBoundingClientRect();
+      let first = unfroze.firstElementChild;
+      let firstPos = first.getBoundingClientRect();
 
-      while (true) {
-        let refPos = ref.getBoundingClientRect();
-        let first = unfroze.firstElementChild;
-        let firstPos = first.getBoundingClientRect();
-        let last = unfroze.lastElementChild;
-        let lastPos = last.getBoundingClientRect();
+      // if top most one is out of viewport
+      while (unfroze.lastElementChild.getBoundingClientRect().bottom < refPos.bottom/* + lastPos.height * OVERSCAN_ROWS*/) {
+        // TODO
+        // shouldn't moving just one row,
+        // should be all rows belong to one buffer entry
+        // TODO
+        // moving the node has some real performance cost to it
+        // when trying to scroll really fast
+        Ember.run.begin();
 
-        // if top most one is out of viewport
-        if (direction > 0 && lastPos.bottom < refPos.bottom/* + lastPos.height * OVERSCAN_ROWS*/) {
-          // TODO
-          // shouldn't moving just one row,
-          // should be all rows belong to one buffer entry
-          // TODO
-          // moving the node has some real performance cost to it
-          // when trying to scroll really fast
-          Ember.run.begin();
+        Ember.$(froze.firstElementChild).insertAfter(froze.lastElementChild);
+        Ember.$(unfroze).add(froze)
+          .css('margin-top', increase(firstPos))
+          .css('height', decrease(firstPos));
 
-          Ember.$(froze.firstElementChild).insertAfter(froze.lastElementChild);
-          Ember.$(unfroze).add(froze)
-            .css('margin-top', increase(firstPos))
-            .css('height', decrease(firstPos));
-
-          cursors.end++;
-          buffer.pushObject(buffer.shiftObject()).setProperties({
-            tr: [],
-            index: cursors.end,
-            model: model.objectAt(cursors.end)
-          });
-          cursors.start++;
-          Ember.run.end();
-
-          continue;
-        }
-
-        if (direction < 0 && firstPos.top > refPos.top) {
-          Ember.run.begin();
-
-          Ember.$(froze.lastElementChild).insertBefore(froze.firstElementChild);
-          Ember.$(unfroze).add(froze)
-            .css('margin-top', decrease(lastPos))
-            .css('height', increase(lastPos));
-
-          cursors.start--;
-          buffer.unshiftObject(buffer.popObject()).setProperties({
-            tr: [],
-            index: cursors.start,
-            model: model.objectAt(cursors.start)
-          });
-          cursors.end--;
-          Ember.run.end();
-
-          continue;
-        }
-
-        if (direction === 0) {
-          // refresh models right at the cursor
-          /* jshint loopfunc: true */
-          Ember.run(buffer, buffer.forEach, item => {
-            item.set('model', model.objectAt(item.index));
-          });
-        }
-
-        break;
+        cursors.end++;
+        buffer.pushObject(buffer.shiftObject()).setProperties({
+          tr: [],
+          index: cursors.end,
+          model: model.objectAt(cursors.end)
+        });
+        cursors.start++;
+        Ember.run.end();
       }
     }));
   },

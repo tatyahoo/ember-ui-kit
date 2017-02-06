@@ -11,6 +11,11 @@
     position: absolute;
   }
 
+  .ui-table:hover .ps-scrollbar-x-rail,
+  .ui-table:hover .ps-scrollbar-y-rail {
+    opacity: 0.6;
+  }
+
 .ui-table__thead {
   box-sizing: border-box;
   overflow: hidden;
