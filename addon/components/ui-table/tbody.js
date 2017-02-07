@@ -142,9 +142,11 @@ export default Ember.Component.extend({
 
             (function recur(nodes) {
               nodes.each((index, node) => {
-                switch (node.nodeType) {
-                  case TEXT_NODE: node.data = node.data.trim(); return;
-                  case ELEMENT_NODE: recur(Ember.$(node).contents()); return;
+                if (node.nodeType === TEXT_NODE) {
+                  return node.data = node.data.trim();
+                }
+                else if (!Ember.$(node).is('.ui-table__td')) {
+                  return recur(Ember.$(node).contents());
                 }
               });
             })(tr.$().contents());

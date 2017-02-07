@@ -120,7 +120,7 @@ export default Ember.Component.extend(ResizeAware, Composable, {
     tfoot && tfoot.trigger('resizeHeight');
 
     let heights = {
-      thead: !thead ? 0 : thead.$('.ui-table__froze, .ui-table__unfroze .ui-scrollable__scroller')
+      thead: !thead ? 0 : thead.$('.ui-table__th')
         .toArray()
         .map(element => element.scrollHeight)
         .reduce((left, right) => Math.max(left, right), 0),
@@ -134,6 +134,7 @@ export default Ember.Component.extend(ResizeAware, Composable, {
         .reduce((left, right) => Math.max(left, right), 0),
     };
 
+    let tableBox = getBox(this.element);
     let headBox = getBox(thead && thead.element);
     let footBox = getBox(tfoot && tfoot.element);
 
@@ -141,14 +142,16 @@ export default Ember.Component.extend(ResizeAware, Composable, {
     let footHeight = (heights.tfoot + footBox.padding.top + footBox.padding.bottom + footBox.border.top + footBox.border.bottom) || 0;
 
     this.$('.ui-table__tbody').css({
-      top: headHeight,
-      bottom: footHeight
+      top: headHeight + tableBox.padding.top,
+      bottom: footHeight + tableBox.padding.bottom
     });
     this.$('.ui-table__thead').css({
+      top: tableBox.padding.top,
       height: headHeight
     });
     this.$('.ui-table__tfoot').css({
-      height: footHeight
+      height: footHeight,
+      bottom: tableBox.padding.bottom
     });
     this.$().css({
       height: heights.tbody + headHeight + footHeight
