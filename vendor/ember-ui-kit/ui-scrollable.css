@@ -18,46 +18,15 @@
 
 .ui-scrollable .ps-scrollbar-x-rail {
   left: 0 !important;
+  bottom: 0 !important;
 }
 
 .ui-scrollable .ps-scrollbar-y-rail {
   top: 0 !important;
-}
-
-/* */
-
-.ps-scrollbar-x-rail,
-.ps-scrollbar-y-rail {
-  opacity: 1 !important;
-}
-
-.ps-scrollbar-x-rail {
-  bottom: -34px !important;
-}
-
-.ps-scrollbar-y-rail {
   right: 0 !important;
-  transform: translateX(100%);
-}
-
-.ps-scrollbar-x,
-.ps-scrollbar-y {
-  background: black;
-  transform: translate3d(0,0,0);
-}
-/*
-.ui-scrollable__viewport {
-  overflow: scroll; }
-
-.ui-scrollable--ps {
-  position: relative; }
-
-.ui-scrollable__scroller {
-  transform: translate3d(0,0,0);
 }
 
 .ps-scrollbar-x,
 .ps-scrollbar-y {
   transform: translate3d(0,0,0);
 }
-*/

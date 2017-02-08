@@ -32,6 +32,17 @@ export default Ember.Component.extend(Styleable, {
     return Ember.A(collect);
   }).readOnly(),
 
+  boxes: Ember.computed(function() {
+    let corner = this.$('.ui-table__froze');
+    let scroller = this.$('.ui-scrollable__scroller')
+
+    return scroller
+      .parentsUntil('.ui-table__thead')
+      .addBack()
+      .add(corner)
+      .toArray();
+  }).readOnly(),
+
   willInsertElement() {
     this._super(...arguments);
 
@@ -89,13 +100,12 @@ export default Ember.Component.extend(Styleable, {
     availableWidth -= box.padding.left + box.padding.right;
     availableWidth -= box.border.left + box.border.right;
 
-    availableWidth -= frozeBox.padding.left + frozeBox.padding.right;
-    availableWidth -= frozeBox.margin.left + frozeBox.margin.right;
-    availableWidth -= frozeBox.border.left + frozeBox.border.right;
+    availableWidth -= this.get('boxes').map(getBox).reduce((accum, box) => {
+      accum += box.padding.left + box.padding.right;
+      accum += box.border.left + box.border.right;
 
-    availableWidth -= unfrozeBox.padding.left + unfrozeBox.padding.right;
-    availableWidth -= unfrozeBox.margin.left + unfrozeBox.margin.right;
-    availableWidth -= unfrozeBox.border.left + unfrozeBox.border.right;
+      return accum;
+    }, 0);
 
     availableWidth -= leaves.reduce((accum, th) => {
       let width = th.get('width');
@@ -137,11 +147,9 @@ export default Ember.Component.extend(Styleable, {
     });
 
     this.style(`#${ns} .ui-table__froze`, {
-      left: `${box.padding.left}px`,
       width: `${froze + frozeBox.padding.left + frozeBox.padding.right}px`
     });
     this.style(`#${ns} .ui-table__unfroze`, {
-      left: `${froze + box.padding.left + frozeBox.padding.left + frozeBox.padding.right + frozeBox.border.left + frozeBox.border.right}px`,
       width: `${box.width - box.padding.left - box.padding.right - box.border.left - box.border.right - froze - frozeBox.padding.left - frozeBox.padding.right - frozeBox.border.left - frozeBox.border.right}px`
     });
     this.style(`#${ns} .ui-table__unfroze .ui-scrollable__scroller`, {

@@ -1,4 +1,6 @@
 {{#let (Select (array "fixed" "virtual") selection=mode) as |scroll|}}
+  {{let frozen=(Boolean false)}}
+
   <div>
     {{#each scroll as |item|}}
       <label>
@@ -10,6 +12,7 @@
   <div>
     {{let increment=(Number 5)}}
 
+    <button {{action frozen.toggle}}>Toggle Frozen</button>
     <button {{action "addData" increment}}>Add Rows</button>
     <button {{action "removeData" increment}}>Remove Rows</button>
     {{input value=increment change=(action (pipe (property "target.value") (action increment.set)))}}
@@ -18,7 +21,7 @@
     {{#ui-table as |t|}}
       {{#t.head as |t|}}
         {{#ui-sortable}}
-          {{#t.h width=83 frozen=true}}ID{{/t.h}}
+          {{#t.h width=83 frozen=frozen.value}}ID{{/t.h}}
           {{#t.h}}
             <div>Name</div>
             {{#ui-sortable}}
@@ -59,8 +62,8 @@
   {{#if (eq scroll.selection "fixed")}}
     {{#ui-table as |t|}}
       {{#t.head as |t|}}
-        {{#t.h width=83 frozen=true}}ID{{/t.h}}
-        {{#t.h width=83 frozen=true}}Age{{/t.h}}
+        {{#t.h width=83 frozen=frozen.value}}ID{{/t.h}}
+        {{#t.h width=83}}Age{{/t.h}}
         {{#ui-sortable}}
           {{#t.h}}
             <div>Name</div>
@@ -69,7 +72,7 @@
               {{#t.h}}Last Name{{/t.h}}
             {{/ui-sortable}}
           {{/t.h}}
-          {{#t.h width="50%"}}
+          {{#t.h}}
             {{#ui-resizable}}
               Nick Name
             {{/ui-resizable}}
@@ -81,7 +84,7 @@
       {{#t.body as |t|}}
         {{#if application.model.isFulfilled}}
           {{#each application.model key="@index" as |item index|}}
-            {{#t.r as |t|}}
+            {{#t.r class=(if index "" "active") as |t|}}
               {{#t.d}}{{item.id}}{{/t.d}}
               {{#t.d}}{{item.age}}{{/t.d}}
               {{#t.d}}{{item.firstName}}{{/t.d}}

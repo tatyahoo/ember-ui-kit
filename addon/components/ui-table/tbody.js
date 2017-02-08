@@ -103,6 +103,12 @@ export default Ember.Component.extend({
 
       // TODO sort mirror cells too
     });
+
+    this.$().contents().each(function(index, node) {
+      if (node.nodeType === document.TEXT_NODE) {
+        node.data = node.data.trim();
+      }
+    });
   },
 
   willDestroyElement() {

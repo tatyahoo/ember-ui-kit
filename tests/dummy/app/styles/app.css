@@ -17,8 +17,33 @@ body {
   flex-direction: column;
 }
 
+/*
 .ui-table__tr.active {
+  position: relative;
+}
+
+.ui-table__tr.active .ui-table__td {
+  position: relative;
+  z-index: 10;
+  background: transparent;
+}
+
+.ui-table__tr.active::after {
+  content: '';
   background: red;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+*/
+body.ember-application .ui-table__tr.active {
+  background: red;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: -10px;
+  margin-right: -10px;
 }
 
 .ui-table__tr--even {
@@ -40,7 +65,21 @@ body.ember-application .ui-table__tfoot  {
 }
 
 body.ember-application .ui-table__froze {
-  border-right: 5px solid gray;
+}
+
+body.ember-application .ui-table__td {
+}
+
+body.ember-application .ui-table__unfroze .ui-scrollable__scroller {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+body.ember-application .ui-table__tr {
+  padding: 10px 0;
+}
+
+body.ember-application .ui-table__tr.active {
 }
 
 body.ember-application .ui-table__th {

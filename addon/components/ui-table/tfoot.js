@@ -40,6 +40,12 @@ export default Ember.Component.extend({
 
     this.$().parent().trigger('register.tfoot', this);
     this.$().parent().trigger('register.all', this);
+
+    this.$().contents().each(function(index, node) {
+      if (node.nodeType === document.TEXT_NODE) {
+        node.data = node.data.trim();
+      }
+    });
   },
 
   willDestroyElement() {
