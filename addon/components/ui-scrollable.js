@@ -11,7 +11,7 @@ export default Ember.Component.extend(Composable, {
   ps: false,
   // attrs }
 
-  didRender() {
+  didInsertElement() {
     this._super(...arguments);
 
     let ps = this.get('ps');
@@ -21,20 +21,31 @@ export default Ember.Component.extend(Composable, {
         ps = {};
       }
 
-      this.$().addClass('ui-scrollable--ps').perfectScrollbar(ps);
-    }
-    else {
-      this.$().removeClass('ui-scrollable--ps').perfectScrollbar('destroy');
+      let classNames = this.get('classNames');
+      let scrollable = this.$().addClass('ui-scrollable--ps');
+      let viewport = this.$().children('.ui-scrollable__viewport')
+        .perfectScrollbar(ps)
+        .get(0);
+      let rails = scrollable
+        .find('.ps-scrollbar-x-rail, .ps-scrollbar-y-rail')
+        .insertAfter(viewport)
+        .toArray();
+
+      this.$().addClass(viewport.className.split(/\s+/).slice(1).join(' '));
+
+      viewport.contains = function(element) {
+        return rails.includes(element) || HTMLElement.prototype.contains.call(this, element);
+      };
     }
   },
 
   willDestroyElement() {
     this._super(...arguments);
 
-    this.$().perfectScrollbar('destroy');
+    this.$().children('.ui-scrollable__viewport').perfectScrollbar('destroy');
   },
 
   update() {
-    this.$().perfectScrollbar('update');
+    this.$().children('.ui-scrollable__viewport').perfectScrollbar('update');
   }
 });

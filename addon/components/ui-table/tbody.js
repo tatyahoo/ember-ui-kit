@@ -35,7 +35,7 @@ export default Ember.Component.extend({
   }).readOnly(),
 
   scrollable: Ember.computed(function() {
-    let scrollables = this.$('.ui-scrollable');
+    let scrollables = this.$('.ui-scrollable__viewport');
     let [ froze, unfroze ] = scrollables;
 
     return {

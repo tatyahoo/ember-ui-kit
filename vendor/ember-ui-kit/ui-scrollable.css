@@ -1,4 +1,52 @@
 .ui-scrollable {
+  position: relative;
+  overflow: visible !important;
+}
+
+.ui-scrollable__viewport {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.ui-scrollable .ps-scrollbar-x-rail,
+.ui-scrollable .ps-scrollbar-y-rail,
+.ui-scrollable .ps-scrollbar-x,
+.ui-scrollable .ps-scrollbar-y {
+  position: absolute;
+  display: block;
+}
+
+.ui-scrollable .ps-scrollbar-x-rail {
+  left: 0 !important;
+}
+
+.ui-scrollable .ps-scrollbar-y-rail {
+  top: 0 !important;
+}
+
+/* */
+
+.ps-scrollbar-x-rail,
+.ps-scrollbar-y-rail {
+  opacity: 1 !important;
+}
+
+.ps-scrollbar-x-rail {
+  bottom: -34px !important;
+}
+
+.ps-scrollbar-y-rail {
+  right: 0 !important;
+  transform: translateX(100%);
+}
+
+.ps-scrollbar-x,
+.ps-scrollbar-y {
+  background: black;
+  transform: translate3d(0,0,0);
+}
+/*
+.ui-scrollable__viewport {
   overflow: scroll; }
 
 .ui-scrollable--ps {
@@ -12,3 +60,4 @@
 .ps-scrollbar-y {
   transform: translate3d(0,0,0);
 }
+*/

@@ -30,7 +30,7 @@ export default Ember.Component.extend(ResizeAware, Composable, {
   },
 
   measure() {
-    let scrollables = this.$('.ui-scrollable');
+    let scrollables = this.$('.ui-scrollable__viewport');
 
     let mOld = this._super(...arguments);
 
@@ -74,10 +74,10 @@ export default Ember.Component.extend(ResizeAware, Composable, {
   didInsertElement() {
     this._super(...arguments);
 
-    let left = this.$('.ui-table__tbody .ui-table__froze');
-    let top = this.$('.ui-table__thead .ui-table__unfroze');
-    let bottom = this.$('.ui-table__tfoot .ui-table__unfroze');
-    let center = this.$('.ui-table__tbody .ui-table__unfroze');
+    let left = this.$('.ui-table__tbody .ui-table__froze .ui-scrollable__viewport');
+    let top = this.$('.ui-table__thead .ui-table__unfroze .ui-scrollable__viewport');
+    let bottom = this.$('.ui-table__tfoot .ui-table__unfroze .ui-scrollable__viewport');
+    let center = this.$('.ui-table__tbody .ui-table__unfroze .ui-scrollable__viewport');
 
     left.on('ps-scroll-y', evt => {
       center.scrollTop(evt.currentTarget.scrollTop);
