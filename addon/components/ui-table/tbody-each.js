@@ -144,7 +144,7 @@ export default Body.extend({
 
     let ref = tbody;
 
-    this.$().on('ps-scroll-up', throttle(evt => {
+    this.$().on('ps-scroll-up', throttle(() => {
       let refPos = ref.getBoundingClientRect();
       let last = unfroze.lastElementChild;
       let lastPos = last.getBoundingClientRect();
@@ -169,7 +169,7 @@ export default Body.extend({
       }
     }));
 
-    this.$().on('ps-scroll-down', throttle(evt => {
+    this.$().on('ps-scroll-down', throttle(() => {
       let refPos = ref.getBoundingClientRect();
       let first = unfroze.firstElementChild;
       let firstPos = first.getBoundingClientRect();

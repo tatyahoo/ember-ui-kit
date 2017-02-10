@@ -34,7 +34,7 @@ export default Ember.Component.extend(Styleable, {
 
   boxes: Ember.computed(function() {
     let corner = this.$('.ui-table__froze');
-    let scroller = this.$('.ui-scrollable__scroller')
+    let scroller = this.$('.ui-scrollable__scroller');
 
     return scroller
       .parentsUntil('.ui-table__thead')
@@ -84,7 +84,7 @@ export default Ember.Component.extend(Styleable, {
   resizeWidth() {
     let box = getBox(this.element);
     let frozeBox = getBox(this.$().children('.ui-table__froze').get(0));
-    let unfrozeBox = getBox(this.$().children('.ui-table__unfroze').get(0));
+    //let unfrozeBox = getBox(this.$().children('.ui-table__unfroze').get(0));
     let leaves = this.get('childHeaderLeafList');
     let availableSpan = leaves.reduce((accum, th) => {
       let width = th.get('width');

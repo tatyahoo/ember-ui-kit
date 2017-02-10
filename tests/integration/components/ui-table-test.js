@@ -62,19 +62,19 @@ test('it renders simple table', function(assert) {
   this.$('.ui-table__th--branch').each(function(index, th) {
     let width = parseFloat(getComputedStyle(th).getPropertyValue('width'));
 
-    assert.equal(width, 300, `should size branch th[${index}] to 300`);
+    assert.equal(width, 280, `should size branch th[${index}] to 280`);
   });
 
   leaves.forEach((leaf, index) => {
     let width = parseFloat(getComputedStyle(leaf.element).getPropertyValue('width'));
 
-    assert.equal(width, 150, `should size leaf th[${index}] to 150`);
+    assert.equal(width, 140, `should size leaf th[${index}] to 140`);
   });
 
   tbody.$('.ui-table__td').each(function(index) {
     let width = parseFloat(getComputedStyle(this).getPropertyValue('width'));
 
-    assert.equal(width, 150, `should size td[${index}] to 150`);
+    assert.equal(width, 140, `should size td[${index}] to 140`);
   });
 });
 
@@ -152,21 +152,19 @@ test('it renders frozen column table', function(assert) {
   leaves.forEach((leaf, index) => {
     let width = parseFloat(getComputedStyle(leaf.element).getPropertyValue('width'));
 
-    assert.equal(width, 143.75, `should size th[${index}] to 143.75`);
+    assert.equal(width, 128.75, `should size th[${index}] to 128.75`);
   });
 
   let froze = this.$('.ui-table__froze').toArray();
   let unfroze = this.$('.ui-table__unfroze').toArray();
 
   froze.map(getComputedStyle).forEach(css => {
-    assert.equal(parseFloat(css.getPropertyValue('left')), 20, 'should froze left 20');
-    assert.equal(parseFloat(css.getPropertyValue('width')), 143.75, 'should froze width 143.75');
+    assert.equal(parseFloat(css.getPropertyValue('width')), 128.75, 'should froze width 128.75');
   });
 
   unfroze.map(getComputedStyle).forEach(css => {
-    assert.equal(parseFloat(css.getPropertyValue('left')), 168.75, 'should unfroze width 168.75');
-    assert.equal(parseFloat(css.getPropertyValue('width')), 431.25, 'should unfroze width 431.25');
+    assert.equal(parseFloat(css.getPropertyValue('width')), 386.25, 'should unfroze width 386.25');
   });
 
-  assert.equal(parseFloat(getComputedStyle(this.$('.ui-table__unfroze .ui-scrollable__scroller').get(0)).getPropertyValue('width')), 431.25, 'should scroller width 431.25');
+  assert.equal(parseFloat(getComputedStyle(this.$('.ui-table__unfroze .ui-scrollable__scroller').get(0)).getPropertyValue('width')), 386.25, 'should scroller width 386.25');
 });

@@ -21,7 +21,6 @@ export default Ember.Component.extend(Composable, {
         ps = {};
       }
 
-      let classNames = this.get('classNames');
       let scrollable = this.$().addClass('ui-scrollable--ps');
       let viewport = this.$().children('.ui-scrollable__viewport')
         .perfectScrollbar(ps)

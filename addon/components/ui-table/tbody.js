@@ -139,7 +139,7 @@ export default Ember.Component.extend({
           let cells = tr.get('childCellList');
 
           if (mirror.parent().is('.ui-table__tr')) {
-            let { TEXT_NODE, ELEMENT_NODE } = document;
+            let { TEXT_NODE } = document;
 
             cells.forEach((cell, index) => {
               cell.set('th', leaves.objectAt(index));
@@ -170,5 +170,7 @@ export default Ember.Component.extend({
           });
         });
       });
+
+    this.get('thead').resizeWidth();
   }))
 });
