@@ -9,7 +9,7 @@ export default Ember.Mixin.create(Ember.Evented, {
   didInsertElement() {
     this._super(...arguments);
 
-    detector.listenTo(this.element, Ember.run.bind(this, this.measure));
+    detector.listenTo(this.element, this.measure = Ember.run.bind(this, this.measure));
   },
 
   triggerResizeWidth(mNew, mOld) {
@@ -64,6 +64,6 @@ export default Ember.Mixin.create(Ember.Evented, {
   willDestroyElement() {
     this._super(...arguments);
 
-    detector.uninstall(this.element);
+    detector.removeListener(this.element, this.measure);
   }
 });
