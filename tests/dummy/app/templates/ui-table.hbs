@@ -39,13 +39,13 @@
           {{#t.h}}Password{{/t.h}}
         {{/ui-sortable}}
       {{/t.head}}
-      {{#t.body-each (if application.model.isFulfilled application.model (array)) as |t item index|}}
-        {{#t.r as |t|}}
-          {{#t.d}}{{item.id}}{{/t.d}}
-          {{#t.d}}{{item.age}}{{/t.d}}
-          {{#t.d}}{{item.firstName}}{{/t.d}}
-          {{#t.d}}{{item.lastName}}{{/t.d}}
-          {{#t.d}}{{item.nickName}}{{/t.d}}
+      {{#t.body-each (if application.model.isFulfilled (Select application.model) (array)) as |t item index|}}
+        {{#t.r class=(if item.isSelected "active") click=(action item.toggle) as |t|}}
+          {{#t.d}}{{item.value.id}}{{/t.d}}
+          {{#t.d}}{{item.value.age}}{{/t.d}}
+          {{#t.d}}{{item.value.firstName}}{{/t.d}}
+          {{#t.d}}{{item.value.lastName}}{{/t.d}}
+          {{#t.d}}{{item.value.nickName}}{{/t.d}}
           {{#t.d}}XXX-XX-XXXX{{/t.d}}
           {{#t.d}}********{{/t.d}}
         {{/t.r}}

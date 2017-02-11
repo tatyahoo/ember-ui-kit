@@ -53,16 +53,22 @@ export default Body.extend({
     return Ember.ArrayProxy.create({ content });
   }).readOnly(),
 
-  modelWatcher: observerOnce('modelNormalized.[]', function() {
-    this.resizeHeight();
-  }),
-
   buffer: construct(Ember.A).readOnly(),
   bufferCursors: Ember.computed(function() {
     return { start: 0, end: 0 };
   }).readOnly(),
 
-  resizeHeight() {
+  refreshBuffer: observerOnce('modelNormalized.@each.isSelected', function() {
+    let model = this.get('modelNormalized');
+    let buffer = this.get('buffer');
+    let cursors = this.get('bufferCursors');
+
+    buffer.forEach(item => {
+      item.set('model', model.objectAt(item.get('index')));
+    });
+  }),
+
+  resizeHeight: observerOnce('modelNormalized.[]', function() {
     this._super(...arguments);
 
     let scroller = this.get('scroller.unfroze');
@@ -124,7 +130,7 @@ export default Body.extend({
 
       this.get('table').measure();
     });
-  },
+  }),
 
   didInsertElement() {
     this._super(...arguments);
