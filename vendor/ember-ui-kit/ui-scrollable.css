@@ -6,6 +6,7 @@
 .ui-scrollable__viewport {
   max-width: 100%;
   max-height: 100%;
+  min-height: 100%;
 }
 
 .ui-scrollable .ps-scrollbar-x-rail,

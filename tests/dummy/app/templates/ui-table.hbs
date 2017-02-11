@@ -29,13 +29,17 @@
               {{#t.h}}Last Name{{/t.h}}
             {{/ui-sortable}}
           {{/t.h}}
-          {{#t.h width="50%"}}{{#ui-resizable options=(hash handles="e")}}Nick Name{{/ui-resizable}}{{/t.h}}
+          {{#t.h width="50%"}}
+            {{#ui-resizable options=(hash handles="e")}}
+              Nick Name
+            {{/ui-resizable}}
+          {{/t.h}}
           {{#t.h}}Age{{/t.h}}
           {{#t.h}}SSN{{/t.h}}
           {{#t.h}}Password{{/t.h}}
         {{/ui-sortable}}
       {{/t.head}}
-      {{#t.body-each application.model as |t item index|}}
+      {{#t.body-each (if application.model.isFulfilled application.model (array)) as |t item index|}}
         {{#t.r as |t|}}
           {{#t.d}}{{item.id}}{{/t.d}}
           {{#t.d}}{{item.age}}{{/t.d}}
@@ -77,7 +81,7 @@
               Nick Name
             {{/ui-resizable}}
           {{/t.h}}
-          {{#t.h}}SSN{{/t.h}}
+          {{#t.h width="50%"}}SSN{{/t.h}}
           {{#t.h}}Password{{/t.h}}
         {{/ui-sortable}}
       {{/t.head}}

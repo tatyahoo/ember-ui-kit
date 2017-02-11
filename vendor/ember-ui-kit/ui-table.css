@@ -106,4 +106,5 @@
 .ui-table__tr {
   box-sizing: content-box;
   white-space: nowrap;
+  margin: 0;
 }

@@ -79,7 +79,7 @@ export default Body.extend({
     }
 
     let contentSize = scrollable.height();
-    let trHeight = scroller.children('.ui-table__tr').height();
+    let trHeight = scroller.children('.ui-table__tr').innerHeight();
     let target = Math.min(Math.floor(contentSize / trHeight) + OVERSCAN_ROWS, modLen);
 
     if (isNaN(trHeight)) { // first row!
