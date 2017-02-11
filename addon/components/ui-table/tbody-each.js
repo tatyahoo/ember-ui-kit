@@ -9,7 +9,7 @@ import { observerOnce } from '../../utils/run';
 
 // Over scan is number of rows
 // ahead of direction of scroll
-const OVERSCAN_ROWS = 10;
+const OVERSCAN_ROWS = 11;
 
 function increase(pos) {
   return function(index, value) {
@@ -26,7 +26,6 @@ function decrease(pos) {
 //
 // TODO Ideas on how to improve performance
 //
-// - Overscan and render paged rows in larger chunks
 // - Rows scrolled out of viewport can be "frozen" and has their dimensions cached
 //
 export default Body.extend({
@@ -159,18 +158,21 @@ export default Body.extend({
       while (unfroze.firstElementChild.getBoundingClientRect().top > refPos.top) {
         Ember.run.begin();
 
-        Ember.$(froze.lastElementChild).insertBefore(froze.firstElementChild);
-        Ember.$(unfroze).add(froze)
-          .css('margin-top', decrease(lastPos))
-          .css('height', increase(lastPos));
+        for (let count = OVERSCAN_ROWS; count > 0 && cursors.start; count--) {
+          Ember.$(froze.lastElementChild).insertBefore(froze.firstElementChild);
+          Ember.$(unfroze).add(froze)
+            .css('margin-top', decrease(lastPos))
+            .css('height', increase(lastPos));
 
-        cursors.start--;
-        buffer.unshiftObject(buffer.popObject()).setProperties({
-          tr: [],
-          index: cursors.start,
-          model: model.objectAt(cursors.start)
-        });
-        cursors.end--;
+          cursors.start--;
+          buffer.unshiftObject(buffer.popObject()).setProperties({
+            tr: [],
+            index: cursors.start,
+            model: model.objectAt(cursors.start)
+          });
+          cursors.end--;
+        }
+
         Ember.run.end();
       }
     }));
@@ -181,34 +183,32 @@ export default Body.extend({
       let firstPos = first.getBoundingClientRect();
 
       // if top most one is out of viewport
-      while (unfroze.lastElementChild.getBoundingClientRect().bottom < refPos.bottom/* + lastPos.height * OVERSCAN_ROWS*/) {
-        // TODO
-        // shouldn't moving just one row,
-        // should be all rows belong to one buffer entry
-        // TODO
-        // moving the node has some real performance cost to it
-        // when trying to scroll really fast
+      while (unfroze.lastElementChild.getBoundingClientRect().bottom < refPos.bottom) {
         Ember.run.begin();
 
-        Ember.$(froze.firstElementChild).insertAfter(froze.lastElementChild);
-        Ember.$(unfroze).add(froze)
-          .css('margin-top', increase(firstPos))
-          .css('height', decrease(firstPos));
+        for (let count = OVERSCAN_ROWS; count > 0 && cursors.end + 1 < model.get('length'); count--) {
+          Ember.$(froze.firstElementChild).insertAfter(froze.lastElementChild);
+          Ember.$(unfroze).add(froze)
+            .css('margin-top', increase(firstPos))
+            .css('height', decrease(firstPos));
 
-        cursors.end++;
-        buffer.pushObject(buffer.shiftObject()).setProperties({
-          tr: [],
-          index: cursors.end,
-          model: model.objectAt(cursors.end)
-        });
-        cursors.start++;
+          cursors.end++;
+          buffer.pushObject(buffer.shiftObject()).setProperties({
+            tr: [],
+            index: cursors.end,
+            model: model.objectAt(cursors.end)
+          });
+          cursors.start++;
+        }
+
         Ember.run.end();
       }
     }));
   },
 
   detachScrollListener() {
-    this.$().off('ps-scroll-y');
+    this.$().off('ps-scroll-up');
+    this.$().off('ps-scroll-down');
   }
 }).reopenClass({
   positionalParams: ['model']
