@@ -83,13 +83,13 @@
       {{/t.head}}
       {{#t.body as |t|}}
         {{#if application.model.isFulfilled}}
-          {{#each application.model key="@index" as |item index|}}
-            {{#t.r class=(if index "" "active") as |t|}}
-              {{#t.d}}{{item.id}}{{/t.d}}
-              {{#t.d}}{{item.age}}{{/t.d}}
-              {{#t.d}}{{item.firstName}}{{/t.d}}
-              {{#t.d}}{{item.lastName}}{{/t.d}}
-              {{#t.d}}{{item.nickName}}{{/t.d}}
+          {{#each (Select application.model) key="@index" as |item index|}}
+            {{#t.r class=(if item.isSelected "active") click=(action item.toggle) as |t|}}
+              {{#t.d}}{{item.value.id}}{{/t.d}}
+              {{#t.d}}{{item.value.age}}{{/t.d}}
+              {{#t.d}}{{item.value.firstName}}{{/t.d}}
+              {{#t.d}}{{item.value.lastName}}{{/t.d}}
+              {{#t.d}}{{item.value.nickName}}{{/t.d}}
               {{#t.d}}XXX-XX-XXXX{{/t.d}}
               {{#t.d}}********{{/t.d}}
             {{/t.r}}
