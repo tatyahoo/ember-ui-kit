@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 function prepareRule(sheet, selector) {
-  let rule = Array.from(sheet.rules).reverse().find(rule => {
+  let rule = Array.from(sheet.cssRules).reverse().find(rule => {
     return rule.selectorText === selector;
   });
 
@@ -9,7 +9,7 @@ function prepareRule(sheet, selector) {
     return rule;
   }
 
-  sheet.insertRule(`${selector} {}`, sheet.rules.length);
+  sheet.insertRule(`${selector} {}`, sheet.cssRules.length);
 
   return prepareRule(sheet, selector);
 }
