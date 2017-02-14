@@ -83,8 +83,7 @@
 
   .ui-table__tfoot .ui-scrollable .ps-scrollbar-x-rail,
   .ui-table__tfoot .ui-scrollable .ps-scrollbar-y-rail {
-    display: none;
-  }
+    display: none; }
 
 .ui-table__td {
   box-sizing: border-box;
@@ -92,8 +91,7 @@
   display: inline-block;
   overflow: hidden;
   transition: width 150ms ease-out;
-  background: inherit;
-}
+  white-space: initial; }
 
 .ui-table__th {
   box-sizing: border-box;
@@ -101,7 +99,7 @@
   display: inline-block;
   overflow: hidden;
   transition: width 150ms ease-out;
-  background: inherit; }
+  white-space: initial; }
 
 .ui-table__tr {
   box-sizing: content-box;
