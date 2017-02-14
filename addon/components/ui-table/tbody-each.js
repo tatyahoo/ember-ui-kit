@@ -9,7 +9,8 @@ import { observerOnce } from '../../utils/run';
 
 // Over scan is number of rows
 // ahead of direction of scroll
-const OVERSCAN_ROWS = 11;
+// Too much increases rendering time
+const OVERSCAN_ROWS = 5;
 
 function increase(pos) {
   return function(index, value) {
@@ -27,6 +28,7 @@ function decrease(pos) {
 // TODO Ideas on how to improve performance
 //
 // - Rows scrolled out of viewport can be "frozen" and has their dimensions cached
+// - Predict cursor position based on scroll position
 //
 export default Body.extend({
   classNames: 'ui-table--tbody-each',
