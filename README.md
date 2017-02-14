@@ -1,5 +1,7 @@
 # ember-ui-kit
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/ming-codes/ember-ui-kit.svg)](https://greenkeeper.io/)
+
 This README outlines the details of collaborating on this Ember addon.
 
 ## Installation
