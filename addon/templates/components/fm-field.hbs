@@ -1,0 +1,13 @@
+{{yield
+  (hash
+    text-field=(component "in-text-field" model)
+  )
+}}
+
+{{#if isModelValidatable}}
+  <ul class="fm-field__validation-messages">
+    {{#each model.results.messages as |message|}}
+      <li>{{message}}</li>
+    {{/each}}
+  </ul>
+{{/if}}

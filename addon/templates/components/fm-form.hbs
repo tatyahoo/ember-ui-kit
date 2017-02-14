@@ -1,0 +1,14 @@
+{{#each validatedAttributes as |attribute|}}
+  {{compute (action "registerField") attribute
+    (component
+      "fm-field"
+      (validate
+        (get model attribute)
+        update=(action (mut (get model attribute)))
+        results=(get model (concat "validations.attrs." attribute))
+      )
+    )
+  }}
+{{/each}}
+
+{{yield validatedAttributesHash}}

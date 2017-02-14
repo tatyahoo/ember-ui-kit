@@ -16,7 +16,6 @@
     <button {{action frozen.toggle}}>Toggle Frozen: {{frozen.value}}</button>
     <button {{action "addData" increment}}>Add Rows</button>
     <button {{action "removeData" increment}}>Remove Rows</button>
-    {{input value=increment change=(action (pipe (property "target.value") (action increment.set)))}}
   </div>
 
   Cursor: {{cursor}}
