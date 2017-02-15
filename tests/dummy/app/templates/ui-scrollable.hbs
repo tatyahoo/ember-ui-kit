@@ -1,7 +1,17 @@
-{{#ui-scrollable}}
-  <ul>
-    {{#each application.model as |item|}}
-      <li>Item {{item.attributes.first-name}}</li>
-    {{/each}}
-  </ul>
-{{/ui-scrollable}}
+<div class="panel">
+  {{let ps=(Boolean true)}}
+
+  <div class="header">
+    <h1>Header</h1>
+    <div>
+      <button {{action ps.toggle}}>Toggle PS: {{ps.value}}</button>
+    </div>
+  </div>
+  {{#ui-scrollable ps=ps.value}}
+    <ul>
+      {{#each application.model as |item|}}
+        <li>{{item.firstName}}</li>
+      {{/each}}
+    </ul>
+  {{/ui-scrollable}}
+</div>
