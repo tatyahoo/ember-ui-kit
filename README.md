@@ -1,8 +1,13 @@
 # ember-ui-kit
 
+[![Build Status](https://travis-ci.org/ming-codes/ember-ui-kit.svg?branch=master)](https://travis-ci.org/ming-codes/ember-ui-kit)
 [![Greenkeeper badge](https://badges.greenkeeper.io/ming-codes/ember-ui-kit.svg)](https://greenkeeper.io/)
 
-This README outlines the details of collaborating on this Ember addon.
+`ember-ui-kit` is a composable component library meant as basic building blocks for application components.
+
+All components included `ember-ui-kit` makes no assumption on the component should look and feel. As such, it is
+up to you to determine that. The components are built at an abstract level to help you manage DOM states and
+get out of the way when it's time to style it.
 
 ## Installation
 
