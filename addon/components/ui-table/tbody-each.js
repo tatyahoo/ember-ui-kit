@@ -62,7 +62,6 @@ export default Body.extend({
   refreshBuffer: observerOnce('modelNormalized.@each.isSelected', function() {
     let model = this.get('modelNormalized');
     let buffer = this.get('buffer');
-    let cursors = this.get('bufferCursors');
 
     buffer.forEach(item => {
       item.set('model', model.objectAt(item.get('index')));

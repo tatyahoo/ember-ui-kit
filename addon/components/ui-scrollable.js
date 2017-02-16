@@ -11,19 +11,12 @@ export default Ember.Component.extend(Composable, {
   ps: false,
   // attrs }
 
-  didInsertElement() {
-    this._super(...arguments);
-
-    let ps = this.get('ps');
-
-    if (ps) {
-      if (typeof ps === 'boolean') {
-        ps = {};
-      }
-
+  ui: {
+    init() {
+      let ps = this.get('ps');
       let scrollable = this.$().addClass('ui-scrollable--ps');
       let viewport = this.$().children('.ui-scrollable__viewport')
-        .perfectScrollbar(ps)
+        .perfectScrollbar(typeof ps === 'boolean' ? {} : ps)
         .get(0);
       let rails = scrollable
         .find('.ps-scrollbar-x-rail, .ps-scrollbar-y-rail')
@@ -35,16 +28,40 @@ export default Ember.Component.extend(Composable, {
       viewport.contains = function(element) {
         return rails.includes(element) || HTMLElement.prototype.contains.call(this, element);
       };
+    },
+
+    update() {
+      this.$().children('.ui-scrollable__viewport').perfectScrollbar('update');
+    },
+
+    destroy() {
+      let viewport = this.$().children('.ui-scrollable__viewport').get(0);
+
+      this.$().removeClass(viewport.className.split(/\s+/).slice(1).concat('ui-scrollable--ps').join(' '));
+      this.$().children('.ui-scrollable__viewport').perfectScrollbar('destroy');
+    }
+  },
+
+  didRender() {
+    this._super(...arguments);
+
+    let ps = this.get('ps');
+
+    if (ps) {
+      this.ui.init.call(this);
+    }
+    else {
+      this.ui.destroy.call(this);
     }
   },
 
   willDestroyElement() {
     this._super(...arguments);
 
-    this.$().children('.ui-scrollable__viewport').perfectScrollbar('destroy');
+    this.ui.destroy.call(this);
   },
 
   update() {
-    this.$().children('.ui-scrollable__viewport').perfectScrollbar('update');
+    this.ui.update.call(this);
   }
 });

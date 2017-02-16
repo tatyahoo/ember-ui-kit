@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  overflow: hidden;
 }
 
 #chrome {
@@ -79,4 +80,20 @@ body.ember-application .ui-table__th {
 }
 
 body.ember-application .ui-table__td {
+}
+
+ul {
+  margin: 0;
+  padding-left: 25px;
+}
+
+.panel {
+  max-width: 320px;
+  max-height: 480px;
+  margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+}
+
+body.ember-application .ui-scrollable {
 }
