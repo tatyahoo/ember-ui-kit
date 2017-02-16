@@ -70,7 +70,7 @@ export default Ember.Component.extend({
 
     let oldOrder = this.get('table.thead.childHeaderLeafList').map(leaf => leaf.element);
 
-    this.get('table').$().on(`sortupdate.${ns}`, () => {
+    this.$().parents('.ui-table:first').on(`sortupdate.${ns}`, () => {
       let rows = this.get('rows').concat(this.get('tfoot.rows') || []);
       let ops = []; // TODO there should be an algorithm where only 1 op is needed
 
@@ -116,7 +116,7 @@ export default Ember.Component.extend({
 
     let ns = this.get('elementId');
 
-    this.get('table').$().off(`sortupdate.${ns}`);
+    this.$().parents('.ui-table:first').off(`sortupdate.${ns}`);
     this.$().parent().trigger('unregister.tbody', this);
     this.$().off('register.tr');
   },
