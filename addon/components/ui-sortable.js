@@ -1,12 +1,26 @@
 import Ember from 'ember';
 import layout from '../templates/components/ui-sortable';
 
+/**
+ * @module component
+ * @class ui-sortable
+ * @public
+ */
 export default Ember.Component.extend({
   classNames: 'ui-sortable',
   layout,
 
   // attrs {
+
+  /**
+   * options hash for [jQuery UI sortable](http://api.jqueryui.com/sortable/)
+   *
+   * @attribute options
+   * @default null
+   * @type object
+   */
   options: null,
+
   // attrs }
 
   didRender() {

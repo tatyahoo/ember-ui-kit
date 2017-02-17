@@ -6,6 +6,53 @@ import Composable from '../mixins/composable';
 
 import { getBox } from '../utils/dom';
 
+/**
+ * The `ui-table` component is designed to have a declarative
+ * syntax that looks just like a plain html table while supporting
+ * many advanced table features such as:
+ *
+ * - Sortable column
+ * - Resizable column
+ * - Show/Hide column
+ * - Freezable column
+ * - Nested header
+ * - Table footer
+ * - Virtualized scrolling
+ * - Selectable rows
+ * - Sorting and filtering of rows
+ * - Template driven cells that enables edit-ability and
+ *   other component composition.
+ *
+ * Basic Usage:
+ *
+ * ```handlebars
+ * {{#ui-table as |t|}}
+ *   {{#t.head as |t|}}
+ *     {{#t.h width=90}}ID{{/t.h}}
+ *     {{#t.h span=1}}Name{{/t.h}}
+ *     {{#t.h width="50%"}}Address{{/t.h}}
+ *   {{/t.head}}
+ *   {{#t.body as |t|}}
+ *    {{#each users as |user|}}
+ *      {{#t.r as |t|}}
+ *        {{#t.d}}{{user.id}}{{/t.d}}
+ *        {{#t.d}}{{user.name}}{{/t.d}}
+ *        {{#t.d}}{{user.address}}{{/t.d}}
+ *      {{/t.r}}
+ *    {{/each}}
+ *   {{/t.body}}
+ * {{/ui-table}}
+ * ```
+ *
+ * See [thead](./ui-table.thead.html),
+ * [tbody](./ui-table.tbody.html), and
+ * [tfoot](./ui-table.tfoot.html)
+ * for advanced usages.
+ *
+ * @module component
+ * @class ui-table
+ * @public
+ */
 export default Ember.Component.extend(ResizeAware, Composable, {
   classNames: 'ui-table',
   layout,

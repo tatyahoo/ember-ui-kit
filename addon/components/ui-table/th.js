@@ -7,14 +7,28 @@ import Composable from '../../mixins/composable';
 import { swapNodes } from '../../utils/dom';
 import { construct } from '../../utils/computed';
 
+/**
+ * @module component
+ * @class ui-table.th
+ * @private
+ */
 export default Ember.Component.extend(Styleable, Composable, {
   classNames: 'ui-table__th',
   classNameBindings: ['columnClass', 'isLeafHeader:ui-table__th--leaf:ui-table__th--branch'],
   layout,
 
   // attrs {
+  /**
+   * @attribute width
+   */
   width: null,
+  /**
+   * @attribute span
+   */
   span: 1,
+  /**
+   * @attribute frozen
+   */
   frozen: false,
 
   // @private

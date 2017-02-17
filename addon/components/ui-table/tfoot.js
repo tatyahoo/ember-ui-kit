@@ -3,6 +3,29 @@ import layout from '../../templates/components/ui-table/tfoot';
 
 import { construct } from '../../utils/computed';
 
+/**
+ * `tfoot` is very similar to `tbody` except
+ * it is docked to the bottom of the table.
+ *
+ * Advanced Usage:
+ *
+ * ```handlebars
+ * {{#ui-table as |t|}}
+ *   {{#t.foot as |t|}}
+ *     {{#t.r as |t|}}
+ *       {{#t.d}}Cell 1{{/t.d}}
+ *       {{#t.d}}Cell 2{{/t.d}}
+ *       {{#t.d}}Cell 3{{/t.d}}
+ *       {{#t.d}}Cell 4{{/t.d}}
+ *     {{/t.r}}
+ *   {{/t.foot}}
+ * {{/ui-table}}
+ * ```
+ *
+ * @module component
+ * @class ui-table.tfoot
+ * @private
+ */
 export default Ember.Component.extend({
   classNames: 'ui-table__tfoot',
   layout,
