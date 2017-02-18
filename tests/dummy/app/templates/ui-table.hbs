@@ -1,5 +1,6 @@
 {{#let (Select (array "fixed" "virtual") selection=mode) as |scroll|}}
   {{let frozen=(Boolean false)}}
+  {{let cursor=(Number 0)}}
 
   <div>
     {{#each scroll as |item|}}
@@ -17,6 +18,9 @@
     <button {{action "removeData" increment}}>Remove Rows</button>
     {{input value=increment change=(action (pipe (property "target.value") (action increment.set)))}}
   </div>
+
+  Cursor: {{cursor}}
+
   {{#if (eq scroll.selection "virtual")}}
     {{#ui-table as |t|}}
       {{#t.head as |t|}}
@@ -39,7 +43,7 @@
           {{#t.h}}Password{{/t.h}}
         {{/ui-sortable}}
       {{/t.head}}
-      {{#t.body-each (if application.model.isFulfilled (Select (append application.model)) (array)) as |t item index|}}
+      {{#t.body-each (if application.model.isFulfilled (Select (append application.model)) (array)) cursor=cursor as |t item index|}}
         {{#t.r class=(if item.isSelected "active") click=(action item.toggle) as |t|}}
           {{#t.d}}{{item.value.id}}{{/t.d}}
           {{#t.d}}{{item.value.age}}{{/t.d}}
@@ -85,7 +89,7 @@
           {{#t.h}}Password{{/t.h}}
         {{/ui-sortable}}
       {{/t.head}}
-      {{#t.body as |t|}}
+      {{#t.body cursor=cursor as |t|}}
         {{#if application.model.isFulfilled}}
           {{#each (Select (append application.model)) key="@index" as |item index|}}
             {{#t.r class=(if item.isSelected "active") click=(action item.toggle) as |t|}}
