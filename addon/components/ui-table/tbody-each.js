@@ -24,6 +24,34 @@ function decrease(pos) {
   };
 }
 
+/**
+ * `tbody-each` is an alternative implementation
+ * of `tbody` that supports virtual buffered rows.
+ *
+ * Advanced Usage:
+ *
+ * ```handlebars
+ * {{#ui-table as |t|}}
+ *   {{#t.body-each (Select users) as |t user|}}
+ *    {{#t.r click=(action user.toggle) as |t|}}
+ *      {{#t.d}}{{user.id}}{{/t.d}}
+ *      {{#t.d}}{{user.name}}{{/t.d}}
+ *      {{#t.d}}{{user.address}}{{/t.d}}
+ *    {{/t.r}}
+ *   {{/t.body}}
+ * {{/ui-table}}
+ * ```
+ *
+ * It's public interface is very similar to tbody.
+ * `tbody-each` trades for faster initial rendering
+ * time for slightly worse scroll performance.
+ *
+ * See also [tbody](./ui-table.tbody.html)
+ *
+ * @module component
+ * @class ui-table.tbody-each
+ * @private
+ */
 //
 // TODO Ideas on how to improve performance
 //

@@ -3,12 +3,30 @@ import layout from '../templates/components/ui-scrollable';
 
 import Composable from '../mixins/composable';
 
+/**
+ * @module component
+ * @class ui-scrollable
+ * @public
+ */
 export default Ember.Component.extend(Composable, {
   classNames: 'ui-scrollable',
   layout,
 
   // attrs {
-  ps: false,
+
+  /**
+   * options hash for [perfect-scrollbar](https://github.com/noraesae/perfect-scrollbar#optional-parameters)
+   *
+   * - Set to `false` to disable perfect-scrollbar and use native scroll.
+   * - Set to `true` to enable perfect-scrollbar without any options. This is default.
+   * - Optionally pass in an option hash to enable different features on perfect-scrollbar.
+   *
+   * @attribute options
+   * @default true
+   * @type boolean|object
+   */
+  options: true,
+
   // attrs }
 
   ui: {

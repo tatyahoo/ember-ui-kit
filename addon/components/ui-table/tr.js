@@ -5,6 +5,11 @@ import Composable from '../../mixins/composable';
 
 import { construct } from '../../utils/computed';
 
+/**
+ * @module component
+ * @class ui-table.tr
+ * @private
+ */
 export default Ember.Component.extend(Composable, {
   classNames: 'ui-table__tr',
   classNameBindings: ['even:ui-table__tr--even', 'odd:ui-table__tr--odd'],

@@ -6,6 +6,36 @@ import Styleable from '../../mixins/styleable';
 import { getBox } from '../../utils/dom';
 import { construct } from '../../utils/computed';
 
+/**
+ * Advanced Usage:
+ *
+ * ```handlebars
+ * {{#ui-table as |t|}}
+ *   {{#t.head as |t|}}
+ *     {{#t.h}}
+ *       <div>Nested Headers</div>
+ *       {{#t.h width=90}}Nesting{{/t.h}}
+ *       {{#t.h width=90}}Nesting{{/t.h}}
+ *     {{/t.h}}
+ *     {{#ui-sortable}}
+ *       {{#t.h width=90}}Sortable{{/t.h}}
+ *       {{#t.h width=90}}Column{{/t.h}}
+ *       {{#t.h width=90}}That{{/t.h}}
+ *       {{#t.h width=90}}Allows{{/t.h}}
+ *       {{#t.h width=90}}
+ *         {{#ui-resizable}}
+ *           Resizing
+ *         {{/ui-resizable}}
+ *       {{/t.h}}
+ *     {{/ui-sortable}}
+ *   {{/t.head}}
+ * {{/ui-table}}
+ * ```
+ *
+ * @module component
+ * @class ui-table.thead
+ * @private
+ */
 export default Ember.Component.extend(Styleable, {
   classNames: 'ui-table__thead',
   layout,

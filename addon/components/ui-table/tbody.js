@@ -4,6 +4,30 @@ import layout from '../../templates/components/ui-table/tbody';
 import { observerOnceIn } from '../../utils/run';
 import { construct } from '../../utils/computed';
 
+/**
+ * Advanced Usage:
+ *
+ * ```handlebars
+ * {{#ui-table as |t|}}
+ *   {{#t.body as |t|}}
+ *    {{! (Select) from ember-microstates }}
+ *    {{#each (Select users) as |user|}}
+ *      {{#t.r click=(action user.toggle) as |t|}}
+ *        {{#t.d}}{{user.id}}{{/t.d}}
+ *        {{#t.d}}{{user.name}}{{/t.d}}
+ *        {{#t.d}}{{user.address}}{{/t.d}}
+ *      {{/t.r}}
+ *    {{/each}}
+ *   {{/t.body}}
+ * {{/ui-table}}
+ * ```
+ *
+ * See also [tbody-each](./ui-table.tbody-each.html)
+ *
+ * @module component
+ * @class ui-table.tbody
+ * @private
+ */
 export default Ember.Component.extend({
   classNames: 'ui-table__tbody',
   layout,
