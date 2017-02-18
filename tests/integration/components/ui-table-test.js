@@ -1,4 +1,5 @@
 import { moduleForComponent, test } from 'ember-qunit';
+import Microstates from 'ember-microstates/initializers/microstates';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('ui-table', 'Integration | Component | ui-table', {
@@ -6,7 +7,9 @@ moduleForComponent('ui-table', 'Integration | Component | ui-table', {
 });
 
 test('it renders simple table', function(assert) {
-  this.set('data', Array.from({ length: 20 }).fill({
+  Microstates.initialize(this);
+
+  this.set('data', Array.from({ length: 40 }).fill({
     id: 0,
     firstName: 'Mini',
     lastName: 'Me',
@@ -17,7 +20,7 @@ test('it renders simple table', function(assert) {
     <style>
       .ui-table {
         width: 640px;
-        max-height: 480px;
+        max-height: 240px;
       }
 
       .ui-table__thead,
@@ -27,6 +30,10 @@ test('it renders simple table', function(assert) {
         padding: 0 15px;
       }
     </style>
+
+    {{let cursor=(Number 0)}}
+
+    <div class="cursor">{{cursor}}</div>
 
     {{#ui-table as |t|}}
       {{#t.head as |t|}}
@@ -38,7 +45,7 @@ test('it renders simple table', function(assert) {
           {{#t.h}}Last Name{{/t.h}}
         {{/t.h}}
       {{/t.head}}
-      {{#t.body as |t|}}
+      {{#t.body cursor=cursor as |t|}}
         {{#each data as |datum|}}
           {{#t.r as |t|}}
             {{#t.d}}{{datum.id}}{{/t.d}}
@@ -76,10 +83,16 @@ test('it renders simple table', function(assert) {
 
     assert.equal(width, 140, `should size td[${index}] to 140`);
   });
+
+  assert.equal(this.$('.cursor').text(), '0', 'should initial cursor position at 0');
+
+  tbody.$('.ui-table__unfroze.ui-scrollable').data('$E').scrollTop(100);
+
+  assert.equal(this.$('.cursor').text(), '5', 'should scroll to 5 with scrollTop 100');
 });
 
 test('it renders frozen column table', function(assert) {
-  this.set('data', Array.from({ length: 20 }).fill({
+  this.set('data', Array.from({ length: 40 }).fill({
     id: 0,
     firstName: 'Mini',
     lastName: 'Me',
@@ -90,7 +103,7 @@ test('it renders frozen column table', function(assert) {
     <style>
       .ui-table {
         width: 640px;
-        height: 480px;
+        height: 240px;
       }
 
       .ui-table__thead,

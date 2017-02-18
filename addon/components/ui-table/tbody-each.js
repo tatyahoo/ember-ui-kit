@@ -3,7 +3,6 @@ import layout from '../../templates/components/ui-table/tbody-each';
 
 import Body from './tbody';
 
-import { throttle } from '../../utils/raf';
 import { construct } from '../../utils/computed';
 import { observerOnce } from '../../utils/run';
 
@@ -168,7 +167,6 @@ export default Body.extend({
   },
 
   attachScrollListener() {
-    let tbody = this.$().get(0);
     let unfroze = this.get('scroller.unfroze').get(0);
     let froze = this.get('scroller.froze').get(0);
 
@@ -176,9 +174,8 @@ export default Body.extend({
     let cursors = this.get('bufferCursors');
     let model = this.get('modelNormalized');
 
-    let ref = tbody;
-
-    this.$().on('ps-scroll-up', throttle(() => {
+    this.$().on('ps-scroll-up', evt => {
+      let ref = evt.currentTarget;
       let refPos = ref.getBoundingClientRect();
       let last = unfroze.lastElementChild;
       let lastPos = last.getBoundingClientRect();
@@ -204,9 +201,10 @@ export default Body.extend({
 
         Ember.run.end();
       }
-    }));
+    });
 
-    this.$().on('ps-scroll-down', throttle(() => {
+    this.$().on('ps-scroll-down', evt => {
+      let ref = evt.currentTarget;
       let refPos = ref.getBoundingClientRect();
       let first = unfroze.firstElementChild;
       let firstPos = first.getBoundingClientRect();
@@ -232,7 +230,7 @@ export default Body.extend({
 
         Ember.run.end();
       }
-    }));
+    });
   },
 
   detachScrollListener() {

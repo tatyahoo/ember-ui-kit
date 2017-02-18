@@ -3,6 +3,7 @@ import layout from '../../templates/components/ui-table/tbody';
 
 import { observerOnceIn } from '../../utils/run';
 import { construct } from '../../utils/computed';
+import { setMicrostateNumber } from '../../utils/microstate';
 
 /**
  * Advanced Usage:
@@ -33,6 +34,7 @@ export default Ember.Component.extend({
   layout,
 
   // attrs {
+  cursor: 0, // TODO cursor is write only, need to implement read
   // @private
   table: null,
   // attrs }
@@ -81,6 +83,17 @@ export default Ember.Component.extend({
       tr.set('itemIndex', index);
 
       rows.pushObject(tr);
+    });
+
+    this.$().on('ps-scroll-y', () => {
+      let unfroze = this.get('scrollable.unfroze').get(0).getBoundingClientRect();
+      let component = Ember.$(document.elementFromPoint(unfroze.left + 0.5, unfroze.top + 0.5))
+        .closest('.ui-table__tr')
+        .data('$E');
+
+      if (component) {
+        setMicrostateNumber(this, 'cursor', component.get('itemIndex'));
+      }
     });
   },
 
