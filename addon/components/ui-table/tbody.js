@@ -63,7 +63,7 @@ export default Ember.Component.extend({
 
     this.$().on('ps-scroll-y', () => {
       let unfroze = this.get('scrollable.unfroze').get(0).getBoundingClientRect();
-      let component = Ember.$(document.elementFromPoint(unfroze.left, unfroze.top))
+      let component = Ember.$(document.elementFromPoint(unfroze.left + 0.5, unfroze.top + 0.5))
         .closest('.ui-table__tr')
         .data('$E');
 
