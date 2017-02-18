@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>addon/components/ui-table/tbody-each.js - ember-ui-kit</title>
+    <meta name="description" content="The default blueprint for ember-cli addons.">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/css/theme.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700' rel='stylesheet' type='text/css'>
+    
+</head>
+<body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a href="../" class="navbar-brand">
+            <img src="../assets/img/ember-logo.png" alt="">
+            <span>ui-kit</span>
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="nav">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="" class="fa fa-github github"></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div id="main-wrapper" class="row">
+        <div id="content-wrapper">
+            <ol class="panel-group" id="sidebar" role="tablist" aria-multiselectable="true">
+                <li class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="sidebar-search-heading">
+                        <h4 class="panel-title">
+                      <a role="button" data-toggle="collapse" href="#sidebar-search" aria-expanded="true" aria-controls="collapseOne">
+                        Search
+                      </a>
+                    </h4>
+                    </div>
+                    <div id="sidebar-search" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="sidebar-search-heading">
+                        <div class="panel-body">
+                            <div id="api-tabview-filter">
+                                <input type="search" id="api-filter" placeholder="Search...">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                    <li class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="sidebar-version-heading">
+                            <h4 class="panel-title">
+                                <a role="button" href="/commits/96baffde" target="_blank">
+                                  Tag: 0.1.0.96baffde
+                                </a>
+                            </h4>
+                        </div>
+                    </li>
+                <li class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="sidebar-modules-heading">
+                        <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" href="#sidebar-modules" aria-expanded="true" aria-controls="collapseOne">
+                      Modules
+                    </a>
+                  </h4>
+                    </div>
+                    <div id="sidebar-modules" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="sidebar-modules-heading">
+                        <div class="panel-body">
+                                <ol>
+                                        <li>
+                                            <a href="../modules/component.html">component</a>
+                                        </li>
+                                </ol>
+                        </div>
+                    </div>
+                </li>
+            
+                <li class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="sidebar-classes-heading">
+                        <h4 class="panel-title">
+                      <a role="button" data-toggle="collapse" href="#sidebar-classes" aria-expanded="true" aria-controls="collapseOne">
+                        Classes
+                      </a>
+                    </h4>
+                    </div>
+                    <div id="sidebar-classes" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="sidebar-classes-heading">
+                        <div class="panel-body">
+                            <ol>
+                                    <li>
+                                        <a href="../classes/ui-resizable.html">ui-resizable</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-scrollable.html">ui-scrollable</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-sortable.html">ui-sortable</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-table.html">ui-table</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-table.tbody.html">ui-table.tbody</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-table.tbody-each.html">ui-table.tbody-each</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-table.td.html">ui-table.td</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-table.tfoot.html">ui-table.tfoot</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-table.th.html">ui-table.th</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-table.thead.html">ui-table.thead</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-table.tr.html">ui-table.tr</a>
+                                    </li>
+                            </ol>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+            <div class="content-container">
+                <div class="apidocs">
+                    <div id="docs-main">
+                        <div class="content">
+<div class="page-header">
+    <h1><i class="fa fa-file-code-o" aria-hidden="true"></i>  File</h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
+import layout from &#x27;../../templates/components/ui-table/tbody-each&#x27;;
+
+import Body from &#x27;./tbody&#x27;;
+
+import { construct } from &#x27;../../utils/computed&#x27;;
+import { observerOnce } from &#x27;../../utils/run&#x27;;
+
+// Over scan is number of rows
+// ahead of direction of scroll
+// Too much increases rendering time
+const OVERSCAN_ROWS = 5;
+
+function increase(pos) {
+  return function(index, value) {
+    return parseFloat(value) + pos.height;
+  };
+}
+
+function decrease(pos) {
+  return function(index, value) {
+    return parseFloat(value) - pos.height;
+  };
+}
+
+/**
+ * &#x60;tbody-each&#x60; is an alternative implementation
+ * of &#x60;tbody&#x60; that supports virtual buffered rows.
+ *
+ * Advanced Usage:
+ *
+ * &#x60;&#x60;&#x60;handlebars
+ * {{#ui-table as |t|}}
+ *   {{#t.body-each (Select users) as |t user|}}
+ *    {{#t.r click=(action user.toggle) as |t|}}
+ *      {{#t.d}}{{user.id}}{{/t.d}}
+ *      {{#t.d}}{{user.name}}{{/t.d}}
+ *      {{#t.d}}{{user.address}}{{/t.d}}
+ *    {{/t.r}}
+ *   {{/t.body}}
+ * {{/ui-table}}
+ * &#x60;&#x60;&#x60;
+ *
+ * It&#x27;s public interface is very similar to tbody.
+ * &#x60;tbody-each&#x60; trades for faster initial rendering
+ * time for slightly worse scroll performance.
+ *
+ * See also [tbody](./ui-table.tbody.html)
+ *
+ * @module component
+ * @class ui-table.tbody-each
+ * @private
+ */
+//
+// TODO Ideas on how to improve performance
+//
+// - Rows scrolled out of viewport can be &quot;frozen&quot; and has their dimensions cached
+// - Predict cursor position based on scroll position
+//
+export default Body.extend({
+  classNames: &#x27;ui-table--tbody-each&#x27;,
+  layout,
+
+  // attrs {
+  model: null,
+  // attrs }
+
+  modelNormalized: Ember.computed(&#x27;model&#x27;, function() {
+    let content = this.get(&#x27;model&#x27;);
+
+    if (!Ember.isArray(content) &amp;&amp; typeof content.forEach === &#x27;function&#x27;) {
+      let accum = [];
+
+      content.forEach(item =&gt; {
+        accum.push(item);
+      });
+
+      content = accum;
+    }
+
+    return Ember.ArrayProxy.create({ content });
+  }).readOnly(),
+
+  buffer: construct(Ember.A).readOnly(),
+  bufferCursors: Ember.computed(function() {
+    return { start: 0, end: 0 };
+  }).readOnly(),
+
+  refreshBuffer: observerOnce(&#x27;modelNormalized.@each.isSelected&#x27;, function() {
+    let model = this.get(&#x27;modelNormalized&#x27;);
+    let buffer = this.get(&#x27;buffer&#x27;);
+
+    buffer.forEach(item =&gt; {
+      item.set(&#x27;model&#x27;, model.objectAt(item.get(&#x27;index&#x27;)));
+    });
+  }),
+
+  resizeHeight: observerOnce(&#x27;modelNormalized.[]&#x27;, function() {
+    this._super(...arguments);
+
+    let scroller = this.get(&#x27;scroller.unfroze&#x27;);
+    let scrollable = this.get(&#x27;scrollable.unfroze&#x27;);
+
+    let cursor = this.get(&#x27;bufferCursors&#x27;);
+    let buffer = this.get(&#x27;buffer&#x27;);
+    let model = this.get(&#x27;modelNormalized&#x27;);
+    let bufLen = buffer.get(&#x27;length&#x27;);
+    let modLen = model.get(&#x27;length&#x27;);
+
+    if (!modLen) {
+      return;
+    }
+
+    let contentSize = scrollable.height();
+    let trHeight = scroller.children(&#x27;.ui-table__tr&#x27;).innerHeight();
+    let target = Math.min(Math.floor(contentSize / trHeight) + OVERSCAN_ROWS, modLen);
+
+    if (isNaN(trHeight)) { // first row!
+      buffer.pushObject(Ember.Object.create({
+        key: Ember.generateGuid(this),
+        tr: [],
+        index: bufLen,
+        model: model.objectAt(bufLen)
+      }));
+
+      this.detachScrollListener();
+
+      return;
+    }
+    else if (target - bufLen &gt; 0) { // We have surplus in model that can fill buffer
+      for (let index = buffer.get(&#x27;length&#x27;); target - index; index = buffer.get(&#x27;length&#x27;)) {
+        buffer.pushObject(Ember.Object.create({
+          key: Ember.generateGuid(this),
+          tr: [],
+          index: index,
+          model: model.objectAt(index)
+        }));
+
+        cursor.end++;
+      }
+
+      this.detachScrollListener();
+
+      return;
+    }
+    else if (scrollable.prop(&#x27;scrollHeight&#x27;) &gt; scrollable.prop(&#x27;clientHeight&#x27;) + trHeight * OVERSCAN_ROWS) { // Ahh we&#x27;re overflowing !!
+      this.detachScrollListener();
+      this.attachScrollListener();
+    }
+
+    Ember.run.schedule(&#x27;afterRender&#x27;, this, function() {
+      let contentTop = parseFloat(scroller.css(&#x27;margin-top&#x27;));
+
+      this.get(&#x27;scroller.all&#x27;).height(trHeight * modLen - contentTop);
+
+      this.$().css(&#x27;visibility&#x27;, &#x27;&#x27;);
+
+      this.get(&#x27;table&#x27;).measure();
+    });
+  }),
+
+  didInsertElement() {
+    this._super(...arguments);
+
+    this.$().css(&#x27;visibility&#x27;, &#x27;hidden&#x27;);
+    this.resizeHeight();
+  },
+
+  attachScrollListener() {
+    let unfroze = this.get(&#x27;scroller.unfroze&#x27;).get(0);
+    let froze = this.get(&#x27;scroller.froze&#x27;).get(0);
+
+    let buffer = this.get(&#x27;buffer&#x27;);
+    let cursors = this.get(&#x27;bufferCursors&#x27;);
+    let model = this.get(&#x27;modelNormalized&#x27;);
+
+    this.$().on(&#x27;ps-scroll-up&#x27;, evt =&gt; {
+      let ref = evt.currentTarget;
+      let refPos = ref.getBoundingClientRect();
+      let last = unfroze.lastElementChild;
+      let lastPos = last.getBoundingClientRect();
+
+      // if top most one is out of viewport
+      while (unfroze.firstElementChild.getBoundingClientRect().top &gt; refPos.top) {
+        Ember.run.begin();
+
+        for (let count = OVERSCAN_ROWS; count &gt; 0 &amp;&amp; cursors.start; count--) {
+          Ember.$(froze.lastElementChild).insertBefore(froze.firstElementChild);
+          Ember.$(unfroze).add(froze)
+            .css(&#x27;margin-top&#x27;, decrease(lastPos))
+            .css(&#x27;height&#x27;, increase(lastPos));
+
+          cursors.start--;
+          buffer.unshiftObject(buffer.popObject()).setProperties({
+            tr: [],
+            index: cursors.start,
+            model: model.objectAt(cursors.start)
+          });
+          cursors.end--;
+        }
+
+        Ember.run.end();
+      }
+    });
+
+    this.$().on(&#x27;ps-scroll-down&#x27;, evt =&gt; {
+      let ref = evt.currentTarget;
+      let refPos = ref.getBoundingClientRect();
+      let first = unfroze.firstElementChild;
+      let firstPos = first.getBoundingClientRect();
+
+      // if top most one is out of viewport
+      while (unfroze.lastElementChild.getBoundingClientRect().bottom &lt; refPos.bottom) {
+        Ember.run.begin();
+
+        for (let count = OVERSCAN_ROWS; count &gt; 0 &amp;&amp; cursors.end + 1 &lt; model.get(&#x27;length&#x27;); count--) {
+          Ember.$(froze.firstElementChild).insertAfter(froze.lastElementChild);
+          Ember.$(unfroze).add(froze)
+            .css(&#x27;margin-top&#x27;, increase(firstPos))
+            .css(&#x27;height&#x27;, decrease(firstPos));
+
+          cursors.end++;
+          buffer.pushObject(buffer.shiftObject()).setProperties({
+            tr: [],
+            index: cursors.end,
+            model: model.objectAt(cursors.end)
+          });
+          cursors.start++;
+        }
+
+        Ember.run.end();
+      }
+    });
+  },
+
+  detachScrollListener() {
+    this.$().off(&#x27;ps-scroll-up&#x27;);
+    this.$().off(&#x27;ps-scroll-down&#x27;);
+  }
+}).reopenClass({
+  positionalParams: [&#x27;model&#x27;]
+});
+
+    </pre>
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../assets/vendor/prettify/prettify-min.js"></script>
+    <script>prettyPrint();</script>
+    <script src="../assets/vendor/jquery/jquery.min.js"></script>
+    <script src="../assets/vendor/jquery-ui/jquery-ui.min.js"></script>
+    <script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="../assets/vendor/github-slugger/slugger.js"></script>
+    <script src="../assets/js/yuidoc-bootstrap.js"></script>
+</body>
+</html>

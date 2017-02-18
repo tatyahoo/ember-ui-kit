@@ -1,0 +1,349 @@
+{
+    "project": {
+        "name": "ember-ui-kit",
+        "description": "The default blueprint for ember-cli addons.",
+        "version": "0.1.0.96baffde"
+    },
+    "files": {
+        "addon/components/ui-table/tbody-each.js": {
+            "name": "addon/components/ui-table/tbody-each.js",
+            "modules": {
+                "component": 1
+            },
+            "classes": {
+                "ui-table.tbody-each": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "addon/components/ui-table/tbody.js": {
+            "name": "addon/components/ui-table/tbody.js",
+            "modules": {},
+            "classes": {
+                "ui-table.tbody": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "addon/components/ui-table/td.js": {
+            "name": "addon/components/ui-table/td.js",
+            "modules": {},
+            "classes": {
+                "ui-table.td": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "addon/components/ui-table/tfoot.js": {
+            "name": "addon/components/ui-table/tfoot.js",
+            "modules": {},
+            "classes": {
+                "ui-table.tfoot": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "addon/components/ui-table/th.js": {
+            "name": "addon/components/ui-table/th.js",
+            "modules": {},
+            "classes": {
+                "ui-table.th": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "addon/components/ui-table/thead.js": {
+            "name": "addon/components/ui-table/thead.js",
+            "modules": {},
+            "classes": {
+                "ui-table.thead": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "addon/components/ui-table/tr.js": {
+            "name": "addon/components/ui-table/tr.js",
+            "modules": {},
+            "classes": {
+                "ui-table.tr": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "addon/components/ui-resizable.js": {
+            "name": "addon/components/ui-resizable.js",
+            "modules": {},
+            "classes": {
+                "ui-resizable": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "addon/components/ui-scrollable.js": {
+            "name": "addon/components/ui-scrollable.js",
+            "modules": {},
+            "classes": {
+                "ui-scrollable": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "addon/components/ui-sortable.js": {
+            "name": "addon/components/ui-sortable.js",
+            "modules": {},
+            "classes": {
+                "ui-sortable": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "addon/components/ui-table.js": {
+            "name": "addon/components/ui-table.js",
+            "modules": {},
+            "classes": {
+                "ui-table": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "component": {
+            "name": "component",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "ui-table.tbody-each": 1,
+                "ui-table.tbody": 1,
+                "ui-table.td": 1,
+                "ui-table.tfoot": 1,
+                "ui-table.th": 1,
+                "ui-table.thead": 1,
+                "ui-table.tr": 1,
+                "ui-resizable": 1,
+                "ui-scrollable": 1,
+                "ui-sortable": 1,
+                "ui-table": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "addon/components/ui-table.js",
+            "line": 9,
+            "description": "`tbody-each` is an alternative implementation\nof `tbody` that supports virtual buffered rows.\n\nAdvanced Usage:\n\n```handlebars\n{{#ui-table as |t|}}\n  {{#t.body-each (Select users) as |t user|}}\n   {{#t.r click=(action user.toggle) as |t|}}\n     {{#t.d}}{{user.id}}{{/t.d}}\n     {{#t.d}}{{user.name}}{{/t.d}}\n     {{#t.d}}{{user.address}}{{/t.d}}\n   {{/t.r}}\n  {{/t.body}}\n{{/ui-table}}\n```\n\nIt's public interface is very similar to tbody.\n`tbody-each` trades for faster initial rendering\ntime for slightly worse scroll performance.\n\nSee also [tbody](./ui-table.tbody.html)",
+            "access": "private",
+            "tagname": ""
+        }
+    },
+    "classes": {
+        "ui-table.tbody-each": {
+            "name": "ui-table.tbody-each",
+            "shortname": "ui-table.tbody-each",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "component",
+            "namespace": "",
+            "file": "addon/components/ui-table/tbody-each.js",
+            "line": 26,
+            "description": "`tbody-each` is an alternative implementation\nof `tbody` that supports virtual buffered rows.\n\nAdvanced Usage:\n\n```handlebars\n{{#ui-table as |t|}}\n  {{#t.body-each (Select users) as |t user|}}\n   {{#t.r click=(action user.toggle) as |t|}}\n     {{#t.d}}{{user.id}}{{/t.d}}\n     {{#t.d}}{{user.name}}{{/t.d}}\n     {{#t.d}}{{user.address}}{{/t.d}}\n   {{/t.r}}\n  {{/t.body}}\n{{/ui-table}}\n```\n\nIt's public interface is very similar to tbody.\n`tbody-each` trades for faster initial rendering\ntime for slightly worse scroll performance.\n\nSee also [tbody](./ui-table.tbody.html)"
+        },
+        "ui-table.tbody": {
+            "name": "ui-table.tbody",
+            "shortname": "ui-table.tbody",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "component",
+            "namespace": "",
+            "file": "addon/components/ui-table/tbody.js",
+            "line": 8,
+            "description": "Advanced Usage:\n\n```handlebars\n{{#ui-table as |t|}}\n  {{#t.body as |t|}}\n   {{! (Select) from ember-microstates }}\n   {{#each (Select users) as |user|}}\n     {{#t.r click=(action user.toggle) as |t|}}\n       {{#t.d}}{{user.id}}{{/t.d}}\n       {{#t.d}}{{user.name}}{{/t.d}}\n       {{#t.d}}{{user.address}}{{/t.d}}\n     {{/t.r}}\n   {{/each}}\n  {{/t.body}}\n{{/ui-table}}\n```\n\nSee also [tbody-each](./ui-table.tbody-each.html)"
+        },
+        "ui-table.td": {
+            "name": "ui-table.td",
+            "shortname": "ui-table.td",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "component",
+            "namespace": "",
+            "file": "addon/components/ui-table/td.js",
+            "line": 6
+        },
+        "ui-table.tfoot": {
+            "name": "ui-table.tfoot",
+            "shortname": "ui-table.tfoot",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "component",
+            "namespace": "",
+            "file": "addon/components/ui-table/tfoot.js",
+            "line": 6,
+            "description": "`tfoot` is very similar to `tbody` except\nit is docked to the bottom of the table.\n\nAdvanced Usage:\n\n```handlebars\n{{#ui-table as |t|}}\n  {{#t.foot as |t|}}\n    {{#t.r as |t|}}\n      {{#t.d}}Cell 1{{/t.d}}\n      {{#t.d}}Cell 2{{/t.d}}\n      {{#t.d}}Cell 3{{/t.d}}\n      {{#t.d}}Cell 4{{/t.d}}\n    {{/t.r}}\n  {{/t.foot}}\n{{/ui-table}}\n```"
+        },
+        "ui-table.th": {
+            "name": "ui-table.th",
+            "shortname": "ui-table.th",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "component",
+            "namespace": "",
+            "file": "addon/components/ui-table/th.js",
+            "line": 10
+        },
+        "ui-table.thead": {
+            "name": "ui-table.thead",
+            "shortname": "ui-table.thead",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "component",
+            "namespace": "",
+            "file": "addon/components/ui-table/thead.js",
+            "line": 9,
+            "description": "Advanced Usage:\n\n```handlebars\n{{#ui-table as |t|}}\n  {{#t.head as |t|}}\n    {{#t.h}}\n      <div>Nested Headers</div>\n      {{#t.h width=90}}Nesting{{/t.h}}\n      {{#t.h width=90}}Nesting{{/t.h}}\n    {{/t.h}}\n    {{#ui-sortable}}\n      {{#t.h width=90}}Sortable{{/t.h}}\n      {{#t.h width=90}}Column{{/t.h}}\n      {{#t.h width=90}}That{{/t.h}}\n      {{#t.h width=90}}Allows{{/t.h}}\n      {{#t.h width=90}}\n        {{#ui-resizable}}\n          Resizing\n        {{/ui-resizable}}\n      {{/t.h}}\n    {{/ui-sortable}}\n  {{/t.head}}\n{{/ui-table}}\n```"
+        },
+        "ui-table.tr": {
+            "name": "ui-table.tr",
+            "shortname": "ui-table.tr",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "component",
+            "namespace": "",
+            "file": "addon/components/ui-table/tr.js",
+            "line": 8
+        },
+        "ui-resizable": {
+            "name": "ui-resizable",
+            "shortname": "ui-resizable",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "component",
+            "namespace": "",
+            "file": "addon/components/ui-resizable.js",
+            "line": 4
+        },
+        "ui-scrollable": {
+            "name": "ui-scrollable",
+            "shortname": "ui-scrollable",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "component",
+            "namespace": "",
+            "file": "addon/components/ui-scrollable.js",
+            "line": 6
+        },
+        "ui-sortable": {
+            "name": "ui-sortable",
+            "shortname": "ui-sortable",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "component",
+            "namespace": "",
+            "file": "addon/components/ui-sortable.js",
+            "line": 4
+        },
+        "ui-table": {
+            "name": "ui-table",
+            "shortname": "ui-table",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "component",
+            "namespace": "",
+            "file": "addon/components/ui-table.js",
+            "line": 9,
+            "description": "The `ui-table` component is designed to have a declarative\nsyntax that looks just like a plain html table while supporting\nmany advanced table features such as:\n\n- Sortable column\n- Resizable column\n- Show/Hide column\n- Freezable column\n- Nested header\n- Table footer\n- Virtualized scrolling\n- Selectable rows\n- Sorting and filtering of rows\n- Template driven cells that enables edit-ability and\n  other component composition.\n\nBasic Usage:\n\n```handlebars\n{{#ui-table as |t|}}\n  {{#t.head as |t|}}\n    {{#t.h width=90}}ID{{/t.h}}\n    {{#t.h span=1}}Name{{/t.h}}\n    {{#t.h width=\"50%\"}}Address{{/t.h}}\n  {{/t.head}}\n  {{#t.body as |t|}}\n   {{#each users as |user|}}\n     {{#t.r as |t|}}\n       {{#t.d}}{{user.id}}{{/t.d}}\n       {{#t.d}}{{user.name}}{{/t.d}}\n       {{#t.d}}{{user.address}}{{/t.d}}\n     {{/t.r}}\n   {{/each}}\n  {{/t.body}}\n{{/ui-table}}\n```\n\nSee [thead](./ui-table.thead.html),\n[tbody](./ui-table.tbody.html), and\n[tfoot](./ui-table.tfoot.html)\nfor advanced usages."
+        }
+    },
+    "elements": {},
+    "classitems": [
+        {
+            "file": "addon/components/ui-table/th.js",
+            "line": 21,
+            "itemtype": "attribute",
+            "name": "width",
+            "class": "ui-table.th",
+            "module": "component"
+        },
+        {
+            "file": "addon/components/ui-table/th.js",
+            "line": 25,
+            "itemtype": "attribute",
+            "name": "span",
+            "class": "ui-table.th",
+            "module": "component"
+        },
+        {
+            "file": "addon/components/ui-table/th.js",
+            "line": 29,
+            "itemtype": "attribute",
+            "name": "frozen",
+            "class": "ui-table.th",
+            "module": "component"
+        },
+        {
+            "file": "addon/components/ui-resizable.js",
+            "line": 15,
+            "description": "options hash for [jQuery UI resizable](http://api.jqueryui.com/resizable/)",
+            "itemtype": "attribute",
+            "name": "options",
+            "default": "null",
+            "type": "object",
+            "class": "ui-resizable",
+            "module": "component"
+        },
+        {
+            "file": "addon/components/ui-scrollable.js",
+            "line": 17,
+            "description": "options hash for [perfect-scrollbar](https://github.com/noraesae/perfect-scrollbar#optional-parameters)\n\n- Set to `false` to disable perfect-scrollbar and use native scroll.\n- Set to `true` to enable perfect-scrollbar without any options. This is default.\n- Optionally pass in an option hash to enable different features on perfect-scrollbar.",
+            "itemtype": "attribute",
+            "name": "options",
+            "default": "true",
+            "type": "boolean|object",
+            "class": "ui-scrollable",
+            "module": "component"
+        },
+        {
+            "file": "addon/components/ui-sortable.js",
+            "line": 15,
+            "description": "options hash for [jQuery UI sortable](http://api.jqueryui.com/sortable/)",
+            "itemtype": "attribute",
+            "name": "options",
+            "default": "null",
+            "type": "object",
+            "class": "ui-sortable",
+            "module": "component"
+        }
+    ],
+    "warnings": []
+}

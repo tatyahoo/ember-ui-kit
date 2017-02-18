@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>addon/components/ui-table.js - ember-ui-kit</title>
+    <meta name="description" content="The default blueprint for ember-cli addons.">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/css/theme.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700' rel='stylesheet' type='text/css'>
+    
+</head>
+<body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a href="../" class="navbar-brand">
+            <img src="../assets/img/ember-logo.png" alt="">
+            <span>ui-kit</span>
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="nav">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="" class="fa fa-github github"></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div id="main-wrapper" class="row">
+        <div id="content-wrapper">
+            <ol class="panel-group" id="sidebar" role="tablist" aria-multiselectable="true">
+                <li class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="sidebar-search-heading">
+                        <h4 class="panel-title">
+                      <a role="button" data-toggle="collapse" href="#sidebar-search" aria-expanded="true" aria-controls="collapseOne">
+                        Search
+                      </a>
+                    </h4>
+                    </div>
+                    <div id="sidebar-search" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="sidebar-search-heading">
+                        <div class="panel-body">
+                            <div id="api-tabview-filter">
+                                <input type="search" id="api-filter" placeholder="Search...">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                    <li class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="sidebar-version-heading">
+                            <h4 class="panel-title">
+                                <a role="button" href="/commits/96baffde" target="_blank">
+                                  Tag: 0.1.0.96baffde
+                                </a>
+                            </h4>
+                        </div>
+                    </li>
+                <li class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="sidebar-modules-heading">
+                        <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" href="#sidebar-modules" aria-expanded="true" aria-controls="collapseOne">
+                      Modules
+                    </a>
+                  </h4>
+                    </div>
+                    <div id="sidebar-modules" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="sidebar-modules-heading">
+                        <div class="panel-body">
+                                <ol>
+                                        <li>
+                                            <a href="../modules/component.html">component</a>
+                                        </li>
+                                </ol>
+                        </div>
+                    </div>
+                </li>
+            
+                <li class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="sidebar-classes-heading">
+                        <h4 class="panel-title">
+                      <a role="button" data-toggle="collapse" href="#sidebar-classes" aria-expanded="true" aria-controls="collapseOne">
+                        Classes
+                      </a>
+                    </h4>
+                    </div>
+                    <div id="sidebar-classes" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="sidebar-classes-heading">
+                        <div class="panel-body">
+                            <ol>
+                                    <li>
+                                        <a href="../classes/ui-resizable.html">ui-resizable</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-scrollable.html">ui-scrollable</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-sortable.html">ui-sortable</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-table.html">ui-table</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-table.tbody.html">ui-table.tbody</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-table.tbody-each.html">ui-table.tbody-each</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-table.td.html">ui-table.td</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-table.tfoot.html">ui-table.tfoot</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-table.th.html">ui-table.th</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-table.thead.html">ui-table.thead</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-table.tr.html">ui-table.tr</a>
+                                    </li>
+                            </ol>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+            <div class="content-container">
+                <div class="apidocs">
+                    <div id="docs-main">
+                        <div class="content">
+<div class="page-header">
+    <h1><i class="fa fa-file-code-o" aria-hidden="true"></i>  File</h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
+import layout from &#x27;../templates/components/ui-table&#x27;;
+
+import ResizeAware from &#x27;../mixins/resize-aware&#x27;;
+import Composable from &#x27;../mixins/composable&#x27;;
+
+import { getBox } from &#x27;../utils/dom&#x27;;
+
+/**
+ * The &#x60;ui-table&#x60; component is designed to have a declarative
+ * syntax that looks just like a plain html table while supporting
+ * many advanced table features such as:
+ *
+ * - Sortable column
+ * - Resizable column
+ * - Show/Hide column
+ * - Freezable column
+ * - Nested header
+ * - Table footer
+ * - Virtualized scrolling
+ * - Selectable rows
+ * - Sorting and filtering of rows
+ * - Template driven cells that enables edit-ability and
+ *   other component composition.
+ *
+ * Basic Usage:
+ *
+ * &#x60;&#x60;&#x60;handlebars
+ * {{#ui-table as |t|}}
+ *   {{#t.head as |t|}}
+ *     {{#t.h width=90}}ID{{/t.h}}
+ *     {{#t.h span=1}}Name{{/t.h}}
+ *     {{#t.h width=&quot;50%&quot;}}Address{{/t.h}}
+ *   {{/t.head}}
+ *   {{#t.body as |t|}}
+ *    {{#each users as |user|}}
+ *      {{#t.r as |t|}}
+ *        {{#t.d}}{{user.id}}{{/t.d}}
+ *        {{#t.d}}{{user.name}}{{/t.d}}
+ *        {{#t.d}}{{user.address}}{{/t.d}}
+ *      {{/t.r}}
+ *    {{/each}}
+ *   {{/t.body}}
+ * {{/ui-table}}
+ * &#x60;&#x60;&#x60;
+ *
+ * See [thead](./ui-table.thead.html),
+ * [tbody](./ui-table.tbody.html), and
+ * [tfoot](./ui-table.tfoot.html)
+ * for advanced usages.
+ *
+ * @module component
+ * @class ui-table
+ * @public
+ */
+export default Ember.Component.extend(ResizeAware, Composable, {
+  classNames: &#x27;ui-table&#x27;,
+  layout,
+
+  thead: null,
+  tbody: null,
+  tfoot: null,
+
+  willInsertElement() {
+    this._super(...arguments);
+
+    this.$().on(&#x27;register.all&#x27;, evt =&gt; {
+      evt.stopPropagation();
+
+      Ember.run.scheduleOnce(&#x27;afterRender&#x27;, this, this.measure);
+    });
+    this.$().on(&#x27;register.thead register.tbody register.tfoot&#x27;, (evt, component) =&gt; {
+      evt.stopPropagation();
+
+      this.set(evt.namespace, component);
+    });
+  },
+
+  measure() {
+    let scrollables = this.$(&#x27;.ui-scrollable__viewport&#x27;);
+
+    let mOld = this._super(...arguments);
+
+    mOld.scrollWidth = mOld.scrollWidth || Array.from({ length: scrollables.length }).fill(0);
+    mOld.scrollHeight = mOld.scrollHeight || new Array({ length: scrollables.length }).fill(0);
+
+    let mNew = {
+      scrollWidth: scrollables.toArray().map(el =&gt; el.scrollWidth),
+      scrollHeight: scrollables.toArray().map(el =&gt; el.scrollHeight)
+    };
+
+    let wLen = Math.max(mNew.scrollWidth.length, mOld.scrollWidth.length);
+    let hLen = Math.max(mNew.scrollHeight.length, mOld.scrollHeight.length);
+    let resized = false;
+
+    for (let index = 0; index &lt; wLen; index++) {
+      if (mOld.scrollWidth[index] !== mNew.scrollWidth[index]) {
+        resized = true;
+        Ember.run.scheduleOnce(&#x27;afterRender&#x27;, this, this.triggerResizeWidth, mNew, mOld);
+        break;
+      }
+    }
+
+    for (let index = 0; index &lt; hLen; index++) {
+      if (mOld.scrollHeight[index] !== mNew.scrollHeight[index]) {
+        resized = true;
+        Ember.run.scheduleOnce(&#x27;afterRender&#x27;, this, this.triggerResizeHeight, mNew, mOld);
+        break;
+      }
+    }
+
+    if (resized) {
+      Ember.run.scheduleOnce(&#x27;afterRender&#x27;, this, this.triggerResize, mNew, mOld);
+    }
+
+    Object.assign(this.measurements, mNew);
+
+    return mOld;
+  },
+
+  didInsertElement() {
+    this._super(...arguments);
+
+    let left = this.$(&#x27;.ui-table__tbody .ui-table__froze .ui-scrollable__viewport&#x27;);
+    let top = this.$(&#x27;.ui-table__thead .ui-table__unfroze .ui-scrollable__viewport&#x27;);
+    let bottom = this.$(&#x27;.ui-table__tfoot .ui-table__unfroze .ui-scrollable__viewport&#x27;);
+    let center = this.$(&#x27;.ui-table__tbody .ui-table__unfroze .ui-scrollable__viewport&#x27;);
+
+    left.on(&#x27;ps-scroll-y&#x27;, evt =&gt; {
+      center.scrollTop(evt.currentTarget.scrollTop);
+    });
+
+    center.on(&#x27;ps-scroll-x&#x27;, evt =&gt; {
+      left.add(bottom).add(top)
+        .scrollLeft(evt.currentTarget.scrollLeft);
+    });
+
+    center.on(&#x27;ps-scroll-y&#x27;, evt =&gt; {
+      left.add(bottom).add(top)
+        .scrollTop(evt.currentTarget.scrollTop);
+    });
+
+    top.on(&#x27;ps-scroll-x&#x27;, evt =&gt; {
+      center.add(bottom)
+        .scrollLeft(evt.currentTarget.scrollLeft);
+    });
+
+    bottom.on(&#x27;ps-scroll-x&#x27;, evt =&gt; {
+      center.add(top)
+        .scrollLeft(evt.currentTarget.scrollLeft);
+    });
+  },
+
+  resize() {
+    this.$(&#x27;.ui-scrollable&#x27;).each(function() {
+      Ember.$(this).perfectScrollbar(&#x27;update&#x27;);
+    });
+  },
+
+  resizeHeight() {
+    let thead = this.get(&#x27;thead&#x27;);
+    let tbody = this.get(&#x27;tbody&#x27;);
+    let tfoot = this.get(&#x27;tfoot&#x27;);
+
+    thead &amp;&amp; thead.trigger(&#x27;resizeHeight&#x27;);
+    tbody &amp;&amp; tbody.trigger(&#x27;resizeHeight&#x27;);
+    tfoot &amp;&amp; tfoot.trigger(&#x27;resizeHeight&#x27;);
+
+    let heights = {
+      thead: !thead ? 0 : thead.$(&#x27;.ui-table__th&#x27;)
+        .toArray()
+        .map(element =&gt; element.scrollHeight)
+        .reduce((left, right) =&gt; Math.max(left, right), 0),
+      tbody: !tbody ? 0 : tbody.$(&#x27;.ui-table__froze .ui-scrollable__scroller, .ui-table__unfroze .ui-scrollable__scroller&#x27;)
+        .toArray()
+        .map(element =&gt; element.scrollHeight)
+        .reduce((left, right) =&gt; Math.max(left, right), 0),
+      tfoot: !tfoot ? 0 : tfoot.$(&#x27;.ui-table__froze .ui-scrollable__scroller, .ui-table__unfroze .ui-scrollable__scroller&#x27;)
+        .toArray()
+        .map(element =&gt; element.scrollHeight)
+        .reduce((left, right) =&gt; Math.max(left, right), 0),
+    };
+
+    let tableBox = getBox(this.element);
+    let headBox = getBox(thead &amp;&amp; thead.element);
+    let footBox = getBox(tfoot &amp;&amp; tfoot.element);
+
+    let headHeight = (heights.thead + headBox.padding.top + headBox.padding.bottom + headBox.border.top + headBox.border.bottom) || 0;
+    let footHeight = (heights.tfoot + footBox.padding.top + footBox.padding.bottom + footBox.border.top + footBox.border.bottom) || 0;
+
+    this.$(&#x27;.ui-table__tbody&#x27;).css({
+      top: headHeight + tableBox.padding.top,
+      bottom: footHeight + tableBox.padding.bottom
+    });
+    this.$(&#x27;.ui-table__thead&#x27;).css({
+      top: tableBox.padding.top,
+      height: headHeight
+    });
+    this.$(&#x27;.ui-table__tfoot&#x27;).css({
+      height: footHeight,
+      bottom: tableBox.padding.bottom
+    });
+    this.$().css({
+      height: heights.tbody + headHeight + footHeight
+    });
+  },
+
+  resizeWidth(mNew, mOld) {
+    let thead = this.get(&#x27;thead&#x27;);
+    let tbody = this.get(&#x27;tbody&#x27;);
+    let tfoot = this.get(&#x27;tfoot&#x27;);
+
+    thead &amp;&amp; thead.trigger(&#x27;resizeWidth&#x27;, mNew, mOld);
+    tbody &amp;&amp; tbody.trigger(&#x27;resizeWidth&#x27;, mNew, mOld);
+    tfoot &amp;&amp; tfoot.trigger(&#x27;resizeWidth&#x27;, mNew, mOld);
+  }
+});
+
+    </pre>
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../assets/vendor/prettify/prettify-min.js"></script>
+    <script>prettyPrint();</script>
+    <script src="../assets/vendor/jquery/jquery.min.js"></script>
+    <script src="../assets/vendor/jquery-ui/jquery-ui.min.js"></script>
+    <script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="../assets/vendor/github-slugger/slugger.js"></script>
+    <script src="../assets/js/yuidoc-bootstrap.js"></script>
+</body>
+</html>

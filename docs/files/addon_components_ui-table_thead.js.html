@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>addon/components/ui-table/thead.js - ember-ui-kit</title>
+    <meta name="description" content="The default blueprint for ember-cli addons.">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/css/theme.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700' rel='stylesheet' type='text/css'>
+    
+</head>
+<body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a href="../" class="navbar-brand">
+            <img src="../assets/img/ember-logo.png" alt="">
+            <span>ui-kit</span>
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="nav">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="" class="fa fa-github github"></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div id="main-wrapper" class="row">
+        <div id="content-wrapper">
+            <ol class="panel-group" id="sidebar" role="tablist" aria-multiselectable="true">
+                <li class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="sidebar-search-heading">
+                        <h4 class="panel-title">
+                      <a role="button" data-toggle="collapse" href="#sidebar-search" aria-expanded="true" aria-controls="collapseOne">
+                        Search
+                      </a>
+                    </h4>
+                    </div>
+                    <div id="sidebar-search" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="sidebar-search-heading">
+                        <div class="panel-body">
+                            <div id="api-tabview-filter">
+                                <input type="search" id="api-filter" placeholder="Search...">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                    <li class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="sidebar-version-heading">
+                            <h4 class="panel-title">
+                                <a role="button" href="/commits/96baffde" target="_blank">
+                                  Tag: 0.1.0.96baffde
+                                </a>
+                            </h4>
+                        </div>
+                    </li>
+                <li class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="sidebar-modules-heading">
+                        <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" href="#sidebar-modules" aria-expanded="true" aria-controls="collapseOne">
+                      Modules
+                    </a>
+                  </h4>
+                    </div>
+                    <div id="sidebar-modules" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="sidebar-modules-heading">
+                        <div class="panel-body">
+                                <ol>
+                                        <li>
+                                            <a href="../modules/component.html">component</a>
+                                        </li>
+                                </ol>
+                        </div>
+                    </div>
+                </li>
+            
+                <li class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="sidebar-classes-heading">
+                        <h4 class="panel-title">
+                      <a role="button" data-toggle="collapse" href="#sidebar-classes" aria-expanded="true" aria-controls="collapseOne">
+                        Classes
+                      </a>
+                    </h4>
+                    </div>
+                    <div id="sidebar-classes" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="sidebar-classes-heading">
+                        <div class="panel-body">
+                            <ol>
+                                    <li>
+                                        <a href="../classes/ui-resizable.html">ui-resizable</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-scrollable.html">ui-scrollable</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-sortable.html">ui-sortable</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-table.html">ui-table</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-table.tbody.html">ui-table.tbody</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-table.tbody-each.html">ui-table.tbody-each</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-table.td.html">ui-table.td</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-table.tfoot.html">ui-table.tfoot</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-table.th.html">ui-table.th</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-table.thead.html">ui-table.thead</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-table.tr.html">ui-table.tr</a>
+                                    </li>
+                            </ol>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+            <div class="content-container">
+                <div class="apidocs">
+                    <div id="docs-main">
+                        <div class="content">
+<div class="page-header">
+    <h1><i class="fa fa-file-code-o" aria-hidden="true"></i>  File</h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
+import layout from &#x27;../../templates/components/ui-table/thead&#x27;;
+
+import Styleable from &#x27;../../mixins/styleable&#x27;;
+
+import { getBox } from &#x27;../../utils/dom&#x27;;
+import { construct } from &#x27;../../utils/computed&#x27;;
+
+/**
+ * Advanced Usage:
+ *
+ * &#x60;&#x60;&#x60;handlebars
+ * {{#ui-table as |t|}}
+ *   {{#t.head as |t|}}
+ *     {{#t.h}}
+ *       &lt;div&gt;Nested Headers&lt;/div&gt;
+ *       {{#t.h width=90}}Nesting{{/t.h}}
+ *       {{#t.h width=90}}Nesting{{/t.h}}
+ *     {{/t.h}}
+ *     {{#ui-sortable}}
+ *       {{#t.h width=90}}Sortable{{/t.h}}
+ *       {{#t.h width=90}}Column{{/t.h}}
+ *       {{#t.h width=90}}That{{/t.h}}
+ *       {{#t.h width=90}}Allows{{/t.h}}
+ *       {{#t.h width=90}}
+ *         {{#ui-resizable}}
+ *           Resizing
+ *         {{/ui-resizable}}
+ *       {{/t.h}}
+ *     {{/ui-sortable}}
+ *   {{/t.head}}
+ * {{/ui-table}}
+ * &#x60;&#x60;&#x60;
+ *
+ * @module component
+ * @class ui-table.thead
+ * @private
+ */
+export default Ember.Component.extend(Styleable, {
+  classNames: &#x27;ui-table__thead&#x27;,
+  layout,
+
+  // attrs {
+  table: null,
+  // attrs }
+
+  childHeaderList: construct(Ember.A).readOnly(),
+  childHeaderLeafList: Ember.computed(&#x27;childHeaderList.[]&#x27;, function() {
+    let collect = [];
+
+    (function recur(list) {
+      list.forEach(item =&gt; {
+        if (item.get(&#x27;isLeafHeader&#x27;)) {
+          collect.push(item);
+        }
+        else {
+          recur(item.get(&#x27;childHeaderList&#x27;));
+        }
+      });
+    })(this.get(&#x27;childHeaderList&#x27;));
+
+    return Ember.A(collect);
+  }).readOnly(),
+
+  boxes: Ember.computed(function() {
+    let corner = this.$(&#x27;.ui-table__froze&#x27;);
+    let scroller = this.$(&#x27;.ui-scrollable__scroller&#x27;);
+
+    return scroller
+      .parentsUntil(&#x27;.ui-table__thead&#x27;)
+      .addBack()
+      .add(corner)
+      .toArray();
+  }).readOnly(),
+
+  willInsertElement() {
+    this._super(...arguments);
+
+    let childHeaderList = this.get(&#x27;childHeaderList&#x27;);
+    let thead = this.$();
+
+    thead.on(&#x27;register.th&#x27;, (evt, th) =&gt; {
+      childHeaderList.pushObject(th);
+
+      th.get(&#x27;frozenMirrorCell&#x27;).appendTo(thead.children(&#x27;.ui-table__froze&#x27;));
+    });
+  },
+
+  didInsertElement() {
+    this._super(...arguments);
+
+    this.$().parent().trigger(&#x27;register.thead&#x27;, this);
+    this.$().parent().trigger(&#x27;register.all&#x27;, this);
+
+    let { TEXT_NODE, ELEMENT_NODE } = document;
+
+    (function recur(nodes) {
+      nodes.each((index, node) =&gt; {
+        switch (node.nodeType) {
+          case TEXT_NODE: node.data = node.data.trim(); return;
+          case ELEMENT_NODE: recur(Ember.$(node).contents()); return;
+        }
+      });
+    })(this.$().contents());
+  },
+
+  willDestroyElement() {
+    this._super(...arguments);
+
+    this.$().parent().trigger(&#x27;unregister.thead&#x27;, this);
+    this.$().off(&#x27;register.th&#x27;);
+  },
+
+  resizeWidth() {
+    let box = getBox(this.element);
+    let frozeBox = getBox(this.$().children(&#x27;.ui-table__froze&#x27;).get(0));
+    //let unfrozeBox = getBox(this.$().children(&#x27;.ui-table__unfroze&#x27;).get(0));
+    let leaves = this.get(&#x27;childHeaderLeafList&#x27;);
+    let availableSpan = leaves.reduce((accum, th) =&gt; {
+      let width = th.get(&#x27;width&#x27;);
+
+      if (typeof width === &#x27;number&#x27;) {
+        return accum;
+      }
+
+      return accum + th.get(&#x27;span&#x27;);
+    }, 0);
+    let availableWidth = box.width;
+
+    availableWidth -= box.padding.left + box.padding.right;
+    availableWidth -= box.border.left + box.border.right;
+
+    availableWidth -= this.get(&#x27;boxes&#x27;).map(getBox).reduce((accum, box) =&gt; {
+      accum += box.padding.left + box.padding.right;
+      accum += box.border.left + box.border.right;
+
+      return accum;
+    }, 0);
+
+    availableWidth -= leaves.reduce((accum, th) =&gt; {
+      let width = th.get(&#x27;width&#x27;);
+
+      if (typeof width === &#x27;number&#x27;) {
+        return accum + width;
+      }
+
+      return accum;
+    }, 0);
+
+    leaves.forEach(th =&gt; {
+      let width = th.get(&#x27;width&#x27;);
+
+      if (typeof width === &#x27;number&#x27;) {
+        return th.set(&#x27;columnWidth&#x27;, width);
+      }
+
+      if (typeof width === &#x27;string&#x27; &amp;&amp; width.match(/[\d\.]+\%$/)) {
+        return th.set(&#x27;columnWidth&#x27;, availableWidth * parseFloat(width) / 100);
+      }
+
+      return th.set(&#x27;columnWidth&#x27;, availableWidth * th.get(&#x27;span&#x27;) / availableSpan);
+    });
+
+    let ns = this.get(&#x27;table.elementId&#x27;);
+    let froze = leaves.filterBy(&#x27;frozen&#x27;, true).reduce((accum, th) =&gt; accum + th.get(&#x27;columnWidth&#x27;), 0);
+    let unfroze = leaves.filterBy(&#x27;frozen&#x27;, false).reduce((accum, th) =&gt; accum + th.get(&#x27;columnWidth&#x27;), 0);
+
+    this.$(&#x27;.ui-table__th--branch&#x27;).each(function(index, element) {
+      let branch = Ember.$(element);
+      let leaves = branch.find(&#x27;.ui-table__th--leaf&#x27;);
+
+      branch.css({
+        width: leaves.toArray().reduce((accum, leaf) =&gt; {
+          return accum + Ember.$(leaf).data(&#x27;$E&#x27;).get(&#x27;columnWidth&#x27;);
+        }, 0)
+      });
+    });
+
+    this.style(&#x60;#${ns} .ui-table__froze&#x60;, {
+      width: &#x60;${froze + frozeBox.padding.left + frozeBox.padding.right}px&#x60;
+    });
+    this.style(&#x60;#${ns} .ui-table__unfroze&#x60;, {
+      width: &#x60;${box.width - box.padding.left - box.padding.right - box.border.left - box.border.right - froze - frozeBox.padding.left - frozeBox.padding.right - frozeBox.border.left - frozeBox.border.right}px&#x60;
+    });
+    this.style(&#x60;#${ns} .ui-table__unfroze .ui-scrollable__scroller&#x60;, {
+      width: &#x60;${unfroze}px&#x60;
+    });
+  }
+});
+
+    </pre>
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../assets/vendor/prettify/prettify-min.js"></script>
+    <script>prettyPrint();</script>
+    <script src="../assets/vendor/jquery/jquery.min.js"></script>
+    <script src="../assets/vendor/jquery-ui/jquery-ui.min.js"></script>
+    <script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="../assets/vendor/github-slugger/slugger.js"></script>
+    <script src="../assets/js/yuidoc-bootstrap.js"></script>
+</body>
+</html>
