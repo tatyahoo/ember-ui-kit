@@ -22,9 +22,9 @@ import { construct } from '../../utils/computed';
  * {{/ui-table}}
  * ```
  *
- * @module component
- * @class ui-table.tfoot
  * @private
+ * @module ui
+ * @class ui-table.tfoot
  */
 export default Ember.Component.extend({
   classNames: 'ui-table__tfoot',

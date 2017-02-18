@@ -3,6 +3,11 @@ import layout from '../templates/components/fm-field';
 
 import { Validatable } from 'ember-ui-kit/helpers/validate';
 
+/**
+ * @module form
+ * @class fm-field
+ * @public
+ */
 export default Ember.Component.extend({
   classNames: 'fm-field',
   attributeBindings: 'modelAttribute:data-model-attribute',

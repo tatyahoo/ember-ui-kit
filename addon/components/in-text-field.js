@@ -2,6 +2,11 @@ import Ember from 'ember';
 
 import { Validatable } from 'ember-ui-kit/helpers/validate';
 
+/**
+ * @module input
+ * @class in-text-field
+ * @public
+ */
 export default Ember.Component.extend({
   tagName: 'input',
   classNames: 'in-text-field',

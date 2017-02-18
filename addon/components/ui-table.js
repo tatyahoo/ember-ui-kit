@@ -44,14 +44,22 @@ import { getBox } from '../utils/dom';
  * {{/ui-table}}
  * ```
  *
- * See [thead](./ui-table.thead.html),
- * [tbody](./ui-table.tbody.html), and
- * [tfoot](./ui-table.tfoot.html)
+ * See
+ * [thead](./ui-table.thead.html),
+ * [th](./ui-table.th.html),
+ * [tbody](./ui-table.tbody.html),
+ * [tr](./ui-table.tr.html),
+ * [td](./ui-table.td.html),
+ * and [tfoot](./ui-table.tfoot.html)
  * for advanced usages.
  *
- * @module component
- * @class ui-table
+ * Note, these components are private for the
+ * purpose that they should not be used alone,
+ * but only as contextual component of ui-table
+ *
  * @public
+ * @module ui
+ * @class ui-table
  */
 export default Ember.Component.extend(ResizeAware, Composable, {
   classNames: 'ui-table',

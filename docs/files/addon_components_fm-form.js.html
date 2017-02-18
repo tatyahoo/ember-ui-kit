@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>ui-scrollable - ember-ui-kit</title>
+    <title>addon/components/fm-form.js - ember-ui-kit</title>
     <meta name="description" content="The default blueprint for ember-cli addons.">
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -125,130 +125,92 @@
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
-
-
 <div class="page-header">
-    <h1> <i class="fa fa-bookmark-o" aria-hidden="true"></i> ui-scrollable Class
-            <a class="pull-right file-edit" href="https://github.com/ming-codes/ember-ui-kit/blob/935ea0f5/addon/components/ui-scrollable.js#L6" target="_blank">
-              <i class="fa fa-pencil" aria-hidden="true"></i>
-            </a>
-    </h1>
+    <h1><i class="fa fa-file-code-o" aria-hidden="true"></i>  File</h1>
 </div>
 
+<div class="file">
+    <pre class="prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
+import layout from &#x27;../templates/components/fm-form&#x27;;
 
-<div class="content-meta">
+import { construct } from &#x27;ember-ui-kit/utils/computed&#x27;;
 
+function collect(object) {
+  let properties = [];
+  let ctor = object.constructor;
 
-            Module: <a href="../modules/ui.html">ui</a>
+  (ctor.eachAttribute || ctor.eachComputedProperty).call(ctor, key =&gt; {
+    properties.push(key);
+  });
 
+  return properties;
+}
 
-        <div class="foundat">
-            Defined In: <a href="https://github.com/ming-codes/ember-ui-kit/blob/935ea0f5/addon/components/ui-scrollable.js#L6">addon/components/ui-scrollable.js:6</a>
-        </div>
-</div>
+/**
+ * &#x60;{{fm-form}}&#x60; component wraps a &#x60;DS.Model&#x60; object and yields
+ * &#x60;{{fm-field}}&#x60; with appropriate validations setup. Each &#x60;{{fm-field}}&#x60;
+ * yields more contextual input component to let you choose how to
+ * represent the field.
+ *
+ * &#x60;{{fm-field}}&#x60; can be interlaced with HTML tags to provide additional
+ * layout needs.
+ *
+ * Basic Usage:
+ *
+ * &#x60;&#x60;&#x60;handlebars
+ * {{#fm-form model as |attribute|}}
+ *   {{#attribute.name as |in|}}
+ *     {{in.text-field}}
+ *   {{/attribute.name}}
+ *   {{#attribute.address as |in|}}
+ *     {{in.text-field}}
+ *   {{/attribute.address}}
+ * {{/fm-form}}
+ * &#x60;&#x60;&#x60;
+ *
+ * @public
+ * @module form
+ * @class fm-form
+ */
+export default Ember.Component.extend({
+  classNames: &#x27;fm-form&#x27;,
+  layout,
 
+  // attrs {
+  model: null,
+  // attrs }
 
+  validatedAttributes: Ember.computed(&#x27;model.validations&#x27;, function() {
+    let model = this.get(&#x27;model&#x27;);
+    let validations = model.get(&#x27;validations&#x27;);
 
+    return [].concat(collect(model), collect(validations.get(&#x27;attrs&#x27;)))
+      .sort()
+      .reduce((accum, key) =&gt; {
+        if (key === accum[0]) {
+          return accum;
+        }
 
-<div>
-    <div class="page-section">
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active"><a href="#tab_index" aria-controls="tab_index" role="tab" data-toggle="tab">Index</a></li>
+        return [].concat(key, accum);
+      }, []);
+  }).readOnly(),
 
+  validatedAttributesHash: Ember.computed(&#x27;model&#x27;, function() {
+    return Ember.Object.create({});
+  }).readOnly(),
 
-            <li role="presentation"><a href="#tab_attrs" aria-controls="tab_attrs" role="tab" data-toggle="tab">Attributes</a></li>
+  actions: {
+    registerField(key, component) {
+      this.set(&#x60;validatedAttributesHash.${key}&#x60;, component);
+    }
+  }
 
-        </ul>
+}).reopenClass({
+  positionalParams: [&#x27;model&#x27;]
+});
 
-        <!-- Tab panes -->
-        <div class="tab-content">
-
-              <form id="options-form" class="form-inline">
-                  Show:
-                  <label for="api-show-inherited" class="checkbox">
-                      <input type="checkbox" id="api-show-inherited" checked>
-                      Inherited
-                  </label>
-          
-                  <label for="api-show-protected" class="checkbox">
-                      <input type="checkbox" id="api-show-protected">
-                      Protected
-                  </label>
-          
-                  <label for="api-show-private" class="checkbox">
-                      <input type="checkbox" id="api-show-private">
-                      Private
-                  </label>
-                  <label for="api-show-deprecated" class="checkbox">
-                      <input type="checkbox" id="api-show-deprecated">
-                      Deprecated
-                  </label>
-          
-              </form>
-
-          <div id="tab_index" role="tabpanel" class="tab-pane active" >
-
-
-                  <div class="index-section attrs">
-                      <h3>Attributes</h3>
-
-                      <ul class="index-list attrs">
-                              <li class="index-item attr">
-                                  <a href="#attr_options">options</a>
-                              </li>
-                      </ul>
-                  </div>
-
-          </div>
-
-
-
-              <div id="tab_attrs" role="tabpanel" class="tab-pane">
-                  <div class="item-list">
-  <div id="attr_options" class="attr item">
-      <a name="config_options"></a> 
-      <h3 class="name anchorable-toc">
-          <a class="fa fa-link toc-anchor" href="#attr_options"></a>
-          options
-      </h3>
-      <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-  
-  
-  
-  
-  
-  
-  
-  
-      <div class="meta">
-                  <p>
-                  Defined in
-          <a href="https://github.com/ming-codes/ember-ui-kit/blob/935ea0f5/addon/components/ui-scrollable.js#L17">addon/components/ui-scrollable.js:17</a>
-          </p>
-  
-  
-      </div>
-  
-      <div class="description">
-          <p>options hash for <a href="https://github.com/noraesae/perfect-scrollbar#optional-parameters">perfect-scrollbar</a></p>
-  <ul>
-  <li>Set to <code>false</code> to disable perfect-scrollbar and use native scroll.</li>
-  <li>Set to <code>true</code> to enable perfect-scrollbar without any options. This is default.</li>
-  <li>Optionally pass in an option hash to enable different features on perfect-scrollbar.</li>
-  </ul>
-  
-      </div>
-  
-          <p><strong>Default:</strong> true</p>
-  
-  
-  </div>
-                  </div>
-              </div>
-
-      </div>
-    </div>
+    </pre>
 </div>
                         </div>
                     </div>

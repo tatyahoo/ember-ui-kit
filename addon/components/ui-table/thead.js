@@ -32,9 +32,9 @@ import { construct } from '../../utils/computed';
  * {{/ui-table}}
  * ```
  *
- * @module component
- * @class ui-table.thead
  * @private
+ * @module ui
+ * @class ui-table.thead
  */
 export default Ember.Component.extend(Styleable, {
   classNames: 'ui-table__thead',

@@ -4,9 +4,9 @@ import layout from '../../templates/components/ui-table/td';
 import { swapNodes } from '../../utils/dom';
 
 /**
- * @module component
- * @class ui-table.td
  * @private
+ * @module ui
+ * @class ui-table.td
  */
 export default Ember.Component.extend({
   classNames: 'ui-table__td',

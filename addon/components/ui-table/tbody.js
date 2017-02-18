@@ -25,9 +25,9 @@ import { setMicrostateNumber } from '../../utils/microstate';
  *
  * See also [tbody-each](./ui-table.tbody-each.html)
  *
- * @module component
- * @class ui-table.tbody
  * @private
+ * @module ui
+ * @class ui-table.tbody
  */
 export default Ember.Component.extend({
   classNames: 'ui-table__tbody',

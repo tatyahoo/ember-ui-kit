@@ -2,7 +2,7 @@ import Ember from 'ember';
 import layout from '../templates/components/ui-resizable';
 
 /**
- * @module component
+ * @module ui
  * @class ui-resizable
  * @public
  */

@@ -4,7 +4,7 @@ import layout from '../templates/components/ui-scrollable';
 import Composable from '../mixins/composable';
 
 /**
- * @module component
+ * @module ui
  * @class ui-scrollable
  * @public
  */

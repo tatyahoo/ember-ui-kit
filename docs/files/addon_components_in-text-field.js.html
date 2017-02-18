@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>ui-scrollable - ember-ui-kit</title>
+    <title>addon/components/in-text-field.js - ember-ui-kit</title>
     <meta name="description" content="The default blueprint for ember-cli addons.">
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -125,130 +125,66 @@
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
-
-
 <div class="page-header">
-    <h1> <i class="fa fa-bookmark-o" aria-hidden="true"></i> ui-scrollable Class
-            <a class="pull-right file-edit" href="https://github.com/ming-codes/ember-ui-kit/blob/935ea0f5/addon/components/ui-scrollable.js#L6" target="_blank">
-              <i class="fa fa-pencil" aria-hidden="true"></i>
-            </a>
-    </h1>
+    <h1><i class="fa fa-file-code-o" aria-hidden="true"></i>  File</h1>
 </div>
 
+<div class="file">
+    <pre class="prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
 
-<div class="content-meta">
+import { Validatable } from &#x27;ember-ui-kit/helpers/validate&#x27;;
 
+/**
+ * @module input
+ * @class in-text-field
+ * @public
+ */
+export default Ember.Component.extend({
+  tagName: &#x27;input&#x27;,
+  classNames: &#x27;in-textfield&#x27;,
+  attributeBindings: &#x27;valueNormalized:value&#x27;,
 
-            Module: <a href="../modules/ui.html">ui</a>
+  // attrs {
+  value: null,
+  // attrs }
 
+  isValueValidatable: Ember.computed(&#x27;value&#x27;, function() {
+    return this.get(&#x27;value&#x27;) instanceof Validatable;
+  }).readOnly(),
 
-        <div class="foundat">
-            Defined In: <a href="https://github.com/ming-codes/ember-ui-kit/blob/935ea0f5/addon/components/ui-scrollable.js#L6">addon/components/ui-scrollable.js:6</a>
-        </div>
-</div>
+  valueNormalized: Ember.computed(&#x27;isValueValidatable&#x27;, &#x27;value&#x27;, function() {
+    if (this.get(&#x27;isValueValidatable&#x27;)) {
+      return this.get(&#x27;value.value&#x27;);
+    }
 
+    return this.get(&#x27;value&#x27;);
+  }).readOnly(),
 
+  willInsertElement() {
+    this._super(...arguments);
 
+    this.$().on(&#x27;input change&#x27;, Ember.run.bind(this, function(evt) {
+      let value = this.attrs.value;
 
-<div>
-    <div class="page-section">
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active"><a href="#tab_index" aria-controls="tab_index" role="tab" data-toggle="tab">Index</a></li>
+      if (this.get(&#x27;isValueValidatable&#x27;)) {
+        value = value.value;
+      }
 
+      value.update(evt.target.value);
+    }));
+  },
 
-            <li role="presentation"><a href="#tab_attrs" aria-controls="tab_attrs" role="tab" data-toggle="tab">Attributes</a></li>
+  willDestroyElement() {
+    this._super(...arguments);
 
-        </ul>
+    this.$().off(&#x27;input change&#x27;);
+  }
+}).reopenClass({
+  positionalParams: [&#x27;value&#x27;]
+});
 
-        <!-- Tab panes -->
-        <div class="tab-content">
-
-              <form id="options-form" class="form-inline">
-                  Show:
-                  <label for="api-show-inherited" class="checkbox">
-                      <input type="checkbox" id="api-show-inherited" checked>
-                      Inherited
-                  </label>
-          
-                  <label for="api-show-protected" class="checkbox">
-                      <input type="checkbox" id="api-show-protected">
-                      Protected
-                  </label>
-          
-                  <label for="api-show-private" class="checkbox">
-                      <input type="checkbox" id="api-show-private">
-                      Private
-                  </label>
-                  <label for="api-show-deprecated" class="checkbox">
-                      <input type="checkbox" id="api-show-deprecated">
-                      Deprecated
-                  </label>
-          
-              </form>
-
-          <div id="tab_index" role="tabpanel" class="tab-pane active" >
-
-
-                  <div class="index-section attrs">
-                      <h3>Attributes</h3>
-
-                      <ul class="index-list attrs">
-                              <li class="index-item attr">
-                                  <a href="#attr_options">options</a>
-                              </li>
-                      </ul>
-                  </div>
-
-          </div>
-
-
-
-              <div id="tab_attrs" role="tabpanel" class="tab-pane">
-                  <div class="item-list">
-  <div id="attr_options" class="attr item">
-      <a name="config_options"></a> 
-      <h3 class="name anchorable-toc">
-          <a class="fa fa-link toc-anchor" href="#attr_options"></a>
-          options
-      </h3>
-      <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-  
-  
-  
-  
-  
-  
-  
-  
-      <div class="meta">
-                  <p>
-                  Defined in
-          <a href="https://github.com/ming-codes/ember-ui-kit/blob/935ea0f5/addon/components/ui-scrollable.js#L17">addon/components/ui-scrollable.js:17</a>
-          </p>
-  
-  
-      </div>
-  
-      <div class="description">
-          <p>options hash for <a href="https://github.com/noraesae/perfect-scrollbar#optional-parameters">perfect-scrollbar</a></p>
-  <ul>
-  <li>Set to <code>false</code> to disable perfect-scrollbar and use native scroll.</li>
-  <li>Set to <code>true</code> to enable perfect-scrollbar without any options. This is default.</li>
-  <li>Optionally pass in an option hash to enable different features on perfect-scrollbar.</li>
-  </ul>
-  
-      </div>
-  
-          <p><strong>Default:</strong> true</p>
-  
-  
-  </div>
-                  </div>
-              </div>
-
-      </div>
-    </div>
+    </pre>
 </div>
                         </div>
                     </div>

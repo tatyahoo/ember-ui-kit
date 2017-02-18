@@ -47,9 +47,9 @@ function decrease(pos) {
  *
  * See also [tbody](./ui-table.tbody.html)
  *
- * @module component
- * @class ui-table.tbody-each
  * @private
+ * @module ui
+ * @class ui-table.tbody-each
  */
 //
 // TODO Ideas on how to improve performance

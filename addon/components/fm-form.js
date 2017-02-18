@@ -12,6 +12,32 @@ function collect(object) {
   return properties;
 }
 
+/**
+ * `{{fm-form}}` component wraps a `DS.Model` object and yields
+ * `{{fm-field}}` with appropriate validations setup. Each `{{fm-field}}`
+ * yields more contextual input component to let you choose how to
+ * represent the field.
+ *
+ * `{{fm-field}}` can be interlaced with HTML tags to provide additional
+ * layout needs.
+ *
+ * Basic Usage:
+ *
+ * ```handlebars
+ * {{#fm-form model as |attribute|}}
+ *   {{#attribute.name as |in|}}
+ *     {{in.text-field}}
+ *   {{/attribute.name}}
+ *   {{#attribute.address as |in|}}
+ *     {{in.text-field}}
+ *   {{/attribute.address}}
+ * {{/fm-form}}
+ * ```
+ *
+ * @public
+ * @module form
+ * @class fm-form
+ */
 export default Ember.Component.extend({
   classNames: 'fm-form',
   layout,
