@@ -8,9 +8,9 @@ import { swapNodes } from '../../utils/dom';
 import { construct } from '../../utils/computed';
 
 /**
- * @module component
- * @class ui-table.th
  * @private
+ * @module ui
+ * @class ui-table.th
  */
 export default Ember.Component.extend(Styleable, Composable, {
   classNames: 'ui-table__th',

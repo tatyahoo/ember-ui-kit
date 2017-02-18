@@ -2,7 +2,7 @@ import Ember from 'ember';
 import layout from '../templates/components/ui-sortable';
 
 /**
- * @module component
+ * @module ui
  * @class ui-sortable
  * @public
  */

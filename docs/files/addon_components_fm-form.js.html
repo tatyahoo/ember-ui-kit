@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>addon/components/fm-form.js - ember-ui-kit</title>
+    <meta name="description" content="The default blueprint for ember-cli addons.">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/css/theme.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700' rel='stylesheet' type='text/css'>
+    
+</head>
+<body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a href="../" class="navbar-brand">
+            <img src="../assets/img/ember-logo.png" alt="">
+            <span>ui-kit</span>
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="nav">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://github.com/ming-codes/ember-ui-kit" class="fa fa-github github"></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div id="main-wrapper" class="row">
+        <div id="content-wrapper">
+            <ol class="panel-group" id="sidebar" role="tablist" aria-multiselectable="true">
+                <li class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="sidebar-search-heading">
+                        <h4 class="panel-title">
+                      <a role="button" data-toggle="collapse" href="#sidebar-search" aria-expanded="true" aria-controls="collapseOne">
+                        Search
+                      </a>
+                    </h4>
+                    </div>
+                    <div id="sidebar-search" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="sidebar-search-heading">
+                        <div class="panel-body">
+                            <div id="api-tabview-filter">
+                                <input type="search" id="api-filter" placeholder="Search...">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                    <li class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="sidebar-version-heading">
+                            <h4 class="panel-title">
+                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/935ea0f5" target="_blank">
+                                  Tag: 0.1.0.935ea0f5
+                                </a>
+                            </h4>
+                        </div>
+                    </li>
+                <li class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="sidebar-modules-heading">
+                        <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" href="#sidebar-modules" aria-expanded="true" aria-controls="collapseOne">
+                      Modules
+                    </a>
+                  </h4>
+                    </div>
+                    <div id="sidebar-modules" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="sidebar-modules-heading">
+                        <div class="panel-body">
+                                <ol>
+                                        <li>
+                                            <a href="../modules/form.html">form</a>
+                                        </li>
+                                        <li>
+                                            <a href="../modules/input.html">input</a>
+                                        </li>
+                                        <li>
+                                            <a href="../modules/ui.html">ui</a>
+                                        </li>
+                                </ol>
+                        </div>
+                    </div>
+                </li>
+            
+                <li class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="sidebar-classes-heading">
+                        <h4 class="panel-title">
+                      <a role="button" data-toggle="collapse" href="#sidebar-classes" aria-expanded="true" aria-controls="collapseOne">
+                        Classes
+                      </a>
+                    </h4>
+                    </div>
+                    <div id="sidebar-classes" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="sidebar-classes-heading">
+                        <div class="panel-body">
+                            <ol>
+                                    <li>
+                                        <a href="../classes/fm-field.html">fm-field</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/fm-form.html">fm-form</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/in-text-field.html">in-text-field</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-resizable.html">ui-resizable</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-scrollable.html">ui-scrollable</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-sortable.html">ui-sortable</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-table.html">ui-table</a>
+                                    </li>
+                            </ol>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+            <div class="content-container">
+                <div class="apidocs">
+                    <div id="docs-main">
+                        <div class="content">
+<div class="page-header">
+    <h1><i class="fa fa-file-code-o" aria-hidden="true"></i>  File</h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
+import layout from &#x27;../templates/components/fm-form&#x27;;
+
+import { construct } from &#x27;ember-ui-kit/utils/computed&#x27;;
+
+function collect(object) {
+  let properties = [];
+  let ctor = object.constructor;
+
+  (ctor.eachAttribute || ctor.eachComputedProperty).call(ctor, key =&gt; {
+    properties.push(key);
+  });
+
+  return properties;
+}
+
+/**
+ * &#x60;{{fm-form}}&#x60; component wraps a &#x60;DS.Model&#x60; object and yields
+ * &#x60;{{fm-field}}&#x60; with appropriate validations setup. Each &#x60;{{fm-field}}&#x60;
+ * yields more contextual input component to let you choose how to
+ * represent the field.
+ *
+ * &#x60;{{fm-field}}&#x60; can be interlaced with HTML tags to provide additional
+ * layout needs.
+ *
+ * Basic Usage:
+ *
+ * &#x60;&#x60;&#x60;handlebars
+ * {{#fm-form model as |attribute|}}
+ *   {{#attribute.name as |in|}}
+ *     {{in.text-field}}
+ *   {{/attribute.name}}
+ *   {{#attribute.address as |in|}}
+ *     {{in.text-field}}
+ *   {{/attribute.address}}
+ * {{/fm-form}}
+ * &#x60;&#x60;&#x60;
+ *
+ * @public
+ * @module form
+ * @class fm-form
+ */
+export default Ember.Component.extend({
+  classNames: &#x27;fm-form&#x27;,
+  layout,
+
+  // attrs {
+  model: null,
+  // attrs }
+
+  validatedAttributes: Ember.computed(&#x27;model.validations&#x27;, function() {
+    let model = this.get(&#x27;model&#x27;);
+    let validations = model.get(&#x27;validations&#x27;);
+
+    return [].concat(collect(model), collect(validations.get(&#x27;attrs&#x27;)))
+      .sort()
+      .reduce((accum, key) =&gt; {
+        if (key === accum[0]) {
+          return accum;
+        }
+
+        return [].concat(key, accum);
+      }, []);
+  }).readOnly(),
+
+  validatedAttributesHash: Ember.computed(&#x27;model&#x27;, function() {
+    return Ember.Object.create({});
+  }).readOnly(),
+
+  actions: {
+    registerField(key, component) {
+      this.set(&#x60;validatedAttributesHash.${key}&#x60;, component);
+    }
+  }
+
+}).reopenClass({
+  positionalParams: [&#x27;model&#x27;]
+});
+
+    </pre>
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../assets/vendor/prettify/prettify-min.js"></script>
+    <script>prettyPrint();</script>
+    <script src="../assets/vendor/jquery/jquery.min.js"></script>
+    <script src="../assets/vendor/jquery-ui/jquery-ui.min.js"></script>
+    <script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="../assets/vendor/github-slugger/slugger.js"></script>
+    <script src="../assets/js/yuidoc-bootstrap.js"></script>
+</body>
+</html>
