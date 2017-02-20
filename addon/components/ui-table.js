@@ -57,6 +57,35 @@ import { getBox } from '../utils/dom';
  * purpose that they should not be used alone,
  * but only as contextual component of ui-table
  *
+ *
+ * `{{ui-table}}` integrates with `{{fm-form}}` to allow editability
+ * and validability.
+ *
+ * Advanced Usage:
+ *
+ * ```handlebars
+ * {{#ui-table as |t|}}
+ *   {{#t.body as |t|}}
+ *     {{#each data as |datum|}}
+ *       {{#t.r as |t|}}
+ *         {{#fm-form datum as |attribute|}}
+ *           {{#t.d}}
+ *             {{#attribute.name as |in|}}
+ *               {{in.text-field}}
+ *             {{/attribute.name}}
+ *           {{/t.d}}
+ *           {{#t.d}}
+ *             {{#attribute.age as |in|}}
+ *               {{in.text-field}}
+ *             {{/attribute.age}}
+ *           {{/t.d}}
+ *         {{/fm-form}}
+ *       {{/t.r}}
+ *     {{/each}}
+ *   {{/t.body}}
+ * {{/ui-table}}
+ * ```
+ *
  * @public
  * @module ui
  * @class ui-table

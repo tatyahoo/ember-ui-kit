@@ -34,6 +34,34 @@ function collect(object) {
  * {{/fm-form}}
  * ```
  *
+ * `{{fm-form}}` integrates with `{{ui-table}}` to allow editability
+ * and validability.
+ *
+ * Advanced Usage:
+ *
+ * ```handlebars
+ * {{#ui-table as |t|}}
+ *   {{#t.body as |t|}}
+ *     {{#each data as |datum|}}
+ *       {{#t.r as |t|}}
+ *         {{#fm-form datum as |attribute|}}
+ *           {{#t.d}}
+ *             {{#attribute.name as |in|}}
+ *               {{in.text-field}}
+ *             {{/attribute.name}}
+ *           {{/t.d}}
+ *           {{#t.d}}
+ *             {{#attribute.age as |in|}}
+ *               {{in.text-field}}
+ *             {{/attribute.age}}
+ *           {{/t.d}}
+ *         {{/fm-form}}
+ *       {{/t.r}}
+ *     {{/each}}
+ *   {{/t.body}}
+ * {{/ui-table}}
+ * ```
+ *
  * @public
  * @module form
  * @class fm-form
