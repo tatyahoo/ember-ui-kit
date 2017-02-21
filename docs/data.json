@@ -3,7 +3,7 @@
         "name": "ember-ui-kit",
         "description": "The default blueprint for ember-cli addons.",
         "url": "https://github.com/ming-codes/ember-ui-kit",
-        "version": "0.1.0.b2de1846"
+        "version": "0.2.2.da02728f"
     },
     "files": {
         "addon/components/ui-table/tbody-each.js": {
