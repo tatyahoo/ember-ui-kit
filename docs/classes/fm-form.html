@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/935ea0f5" target="_blank">
-                                  Tag: 0.1.0.935ea0f5
+                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/b2de1846" target="_blank">
+                                  Tag: 0.1.0.b2de1846
                                 </a>
                             </h4>
                         </div>
@@ -129,7 +129,7 @@
 
 <div class="page-header">
     <h1> <i class="fa fa-bookmark-o" aria-hidden="true"></i> fm-form Class
-            <a class="pull-right file-edit" href="https://github.com/ming-codes/ember-ui-kit/blob/935ea0f5/addon/components/fm-form.js#L17" target="_blank">
+            <a class="pull-right file-edit" href="https://github.com/ming-codes/ember-ui-kit/blob/b2de1846/addon/components/fm-form.js#L15" target="_blank">
               <i class="fa fa-pencil" aria-hidden="true"></i>
             </a>
     </h1>
@@ -143,7 +143,7 @@
 
 
         <div class="foundat">
-            Defined In: <a href="https://github.com/ming-codes/ember-ui-kit/blob/935ea0f5/addon/components/fm-form.js#L17">addon/components/fm-form.js:17</a>
+            Defined In: <a href="https://github.com/ming-codes/ember-ui-kit/blob/b2de1846/addon/components/fm-form.js#L15">addon/components/fm-form.js:15</a>
         </div>
 </div>
 
@@ -165,6 +165,30 @@ layout needs.</p>
     {{in.text-field}}
   {{/attribute.address}}
 {{/fm-form}}
+</code></pre>
+<p><code>{{fm-form}}</code> integrates with <code>{{ui-table}}</code> to allow editability
+and validability.</p>
+<p>Advanced Usage:</p>
+<pre class="code prettyprint"><code class="language-handlebars">{{#ui-table as |t|}}
+  {{#t.body as |t|}}
+    {{#each data as |datum|}}
+      {{#t.r as |t|}}
+        {{#fm-form datum as |attribute|}}
+          {{#t.d}}
+            {{#attribute.name as |in|}}
+              {{in.text-field}}
+            {{/attribute.name}}
+          {{/t.d}}
+          {{#t.d}}
+            {{#attribute.age as |in|}}
+              {{in.text-field}}
+            {{/attribute.age}}
+          {{/t.d}}
+        {{/fm-form}}
+      {{/t.r}}
+    {{/each}}
+  {{/t.body}}
+{{/ui-table}}
 </code></pre>
 
   </div>

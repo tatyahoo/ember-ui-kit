@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/935ea0f5" target="_blank">
-                                  Tag: 0.1.0.935ea0f5
+                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/b2de1846" target="_blank">
+                                  Tag: 0.1.0.b2de1846
                                 </a>
                             </h4>
                         </div>
@@ -183,6 +183,8 @@ export default Ember.Component.extend(Composable, {
       viewport.contains = function(element) {
         return rails.includes(element) || HTMLElement.prototype.contains.call(this, element);
       };
+
+      this.update();
     },
 
     update() {

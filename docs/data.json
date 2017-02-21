@@ -3,7 +3,7 @@
         "name": "ember-ui-kit",
         "description": "The default blueprint for ember-cli addons.",
         "url": "https://github.com/ming-codes/ember-ui-kit",
-        "version": "0.1.0.935ea0f5"
+        "version": "0.1.0.b2de1846"
     },
     "files": {
         "addon/components/ui-table/tbody-each.js": {
@@ -163,8 +163,7 @@
             "file": "addon/components/ui-table.js",
             "line": 9,
             "access": "private",
-            "tagname": "",
-            "is_constructor": 1
+            "tagname": ""
         },
         "form": {
             "name": "form",
@@ -178,7 +177,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "addon/components/fm-form.js",
-            "line": 17,
+            "line": 15,
             "access": "public",
             "tagname": ""
         },
@@ -332,8 +331,8 @@
             "module": "form",
             "namespace": "",
             "file": "addon/components/fm-form.js",
-            "line": 17,
-            "description": "`{{fm-form}}` component wraps a `DS.Model` object and yields\n`{{fm-field}}` with appropriate validations setup. Each `{{fm-field}}`\nyields more contextual input component to let you choose how to\nrepresent the field.\n\n`{{fm-field}}` can be interlaced with HTML tags to provide additional\nlayout needs.\n\nBasic Usage:\n\n```handlebars\n{{#fm-form model as |attribute|}}\n  {{#attribute.name as |in|}}\n    {{in.text-field}}\n  {{/attribute.name}}\n  {{#attribute.address as |in|}}\n    {{in.text-field}}\n  {{/attribute.address}}\n{{/fm-form}}\n```",
+            "line": 15,
+            "description": "`{{fm-form}}` component wraps a `DS.Model` object and yields\n`{{fm-field}}` with appropriate validations setup. Each `{{fm-field}}`\nyields more contextual input component to let you choose how to\nrepresent the field.\n\n`{{fm-field}}` can be interlaced with HTML tags to provide additional\nlayout needs.\n\nBasic Usage:\n\n```handlebars\n{{#fm-form model as |attribute|}}\n  {{#attribute.name as |in|}}\n    {{in.text-field}}\n  {{/attribute.name}}\n  {{#attribute.address as |in|}}\n    {{in.text-field}}\n  {{/attribute.address}}\n{{/fm-form}}\n```\n\n`{{fm-form}}` integrates with `{{ui-table}}` to allow editability\nand validability.\n\nAdvanced Usage:\n\n```handlebars\n{{#ui-table as |t|}}\n  {{#t.body as |t|}}\n    {{#each data as |datum|}}\n      {{#t.r as |t|}}\n        {{#fm-form datum as |attribute|}}\n          {{#t.d}}\n            {{#attribute.name as |in|}}\n              {{in.text-field}}\n            {{/attribute.name}}\n          {{/t.d}}\n          {{#t.d}}\n            {{#attribute.age as |in|}}\n              {{in.text-field}}\n            {{/attribute.age}}\n          {{/t.d}}\n        {{/fm-form}}\n      {{/t.r}}\n    {{/each}}\n  {{/t.body}}\n{{/ui-table}}\n```",
             "access": "public",
             "tagname": ""
         },
@@ -401,7 +400,7 @@
             "namespace": "",
             "file": "addon/components/ui-table.js",
             "line": 9,
-            "description": "The `ui-table` component is designed to have a declarative\nsyntax that looks just like a plain html table while supporting\nmany advanced table features such as:\n\n- Sortable column\n- Resizable column\n- Show/Hide column\n- Freezable column\n- Nested header\n- Table footer\n- Virtualized scrolling\n- Selectable rows\n- Sorting and filtering of rows\n- Template driven cells that enables edit-ability and\n  other component composition.\n\nBasic Usage:\n\n```handlebars\n{{#ui-table as |t|}}\n  {{#t.head as |t|}}\n    {{#t.h width=90}}ID{{/t.h}}\n    {{#t.h span=1}}Name{{/t.h}}\n    {{#t.h width=\"50%\"}}Address{{/t.h}}\n  {{/t.head}}\n  {{#t.body as |t|}}\n   {{#each users as |user|}}\n     {{#t.r as |t|}}\n       {{#t.d}}{{user.id}}{{/t.d}}\n       {{#t.d}}{{user.name}}{{/t.d}}\n       {{#t.d}}{{user.address}}{{/t.d}}\n     {{/t.r}}\n   {{/each}}\n  {{/t.body}}\n{{/ui-table}}\n```\n\nSee\n[thead](./ui-table.thead.html),\n[th](./ui-table.th.html),\n[tbody](./ui-table.tbody.html),\n[tr](./ui-table.tr.html),\n[td](./ui-table.td.html),\nand [tfoot](./ui-table.tfoot.html)\nfor advanced usages.\n\nNote, these components are private for the\npurpose that they should not be used alone,\nbut only as contextual component of ui-table",
+            "description": "The `ui-table` component is designed to have a declarative\nsyntax that looks just like a plain html table while supporting\nmany advanced table features such as:\n\n- Sortable column\n- Resizable column\n- Show/Hide column\n- Freezable column\n- Nested header\n- Table footer\n- Virtualized scrolling\n- Selectable rows\n- Sorting and filtering of rows\n- Template driven cells that enables edit-ability and\n  other component composition.\n\nBasic Usage:\n\n```handlebars\n{{#ui-table as |t|}}\n  {{#t.head as |t|}}\n    {{#t.h width=90}}ID{{/t.h}}\n    {{#t.h span=1}}Name{{/t.h}}\n    {{#t.h width=\"50%\"}}Address{{/t.h}}\n  {{/t.head}}\n  {{#t.body as |t|}}\n   {{#each users as |user|}}\n     {{#t.r as |t|}}\n       {{#t.d}}{{user.id}}{{/t.d}}\n       {{#t.d}}{{user.name}}{{/t.d}}\n       {{#t.d}}{{user.address}}{{/t.d}}\n     {{/t.r}}\n   {{/each}}\n  {{/t.body}}\n{{/ui-table}}\n```\n\nSee\n[thead](./ui-table.thead.html),\n[th](./ui-table.th.html),\n[tbody](./ui-table.tbody.html),\n[tr](./ui-table.tr.html),\n[td](./ui-table.td.html),\nand [tfoot](./ui-table.tfoot.html)\nfor advanced usages.\n\nNote, these components are private for the\npurpose that they should not be used alone,\nbut only as contextual component of ui-table\n\n\n`{{ui-table}}` integrates with `{{fm-form}}` to allow editability\nand validability.\n\nAdvanced Usage:\n\n```handlebars\n{{#ui-table as |t|}}\n  {{#t.body as |t|}}\n    {{#each data as |datum|}}\n      {{#t.r as |t|}}\n        {{#fm-form datum as |attribute|}}\n          {{#t.d}}\n            {{#attribute.name as |in|}}\n              {{in.text-field}}\n            {{/attribute.name}}\n          {{/t.d}}\n          {{#t.d}}\n            {{#attribute.age as |in|}}\n              {{in.text-field}}\n            {{/attribute.age}}\n          {{/t.d}}\n        {{/fm-form}}\n      {{/t.r}}\n    {{/each}}\n  {{/t.body}}\n{{/ui-table}}\n```",
             "access": "public",
             "tagname": ""
         }

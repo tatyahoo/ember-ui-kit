@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/935ea0f5" target="_blank">
-                                  Tag: 0.1.0.935ea0f5
+                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/b2de1846" target="_blank">
+                                  Tag: 0.1.0.b2de1846
                                 </a>
                             </h4>
                         </div>
@@ -189,6 +189,35 @@ import { getBox } from &#x27;../utils/dom&#x27;;
  * Note, these components are private for the
  * purpose that they should not be used alone,
  * but only as contextual component of ui-table
+ *
+ *
+ * &#x60;{{ui-table}}&#x60; integrates with &#x60;{{fm-form}}&#x60; to allow editability
+ * and validability.
+ *
+ * Advanced Usage:
+ *
+ * &#x60;&#x60;&#x60;handlebars
+ * {{#ui-table as |t|}}
+ *   {{#t.body as |t|}}
+ *     {{#each data as |datum|}}
+ *       {{#t.r as |t|}}
+ *         {{#fm-form datum as |attribute|}}
+ *           {{#t.d}}
+ *             {{#attribute.name as |in|}}
+ *               {{in.text-field}}
+ *             {{/attribute.name}}
+ *           {{/t.d}}
+ *           {{#t.d}}
+ *             {{#attribute.age as |in|}}
+ *               {{in.text-field}}
+ *             {{/attribute.age}}
+ *           {{/t.d}}
+ *         {{/fm-form}}
+ *       {{/t.r}}
+ *     {{/each}}
+ *   {{/t.body}}
+ * {{/ui-table}}
+ * &#x60;&#x60;&#x60;
  *
  * @public
  * @module ui
