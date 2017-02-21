@@ -50,6 +50,8 @@ export default Ember.Component.extend(Composable, {
       viewport.contains = function(element) {
         return rails.includes(element) || HTMLElement.prototype.contains.call(this, element);
       };
+
+      this.update();
     },
 
     update() {
