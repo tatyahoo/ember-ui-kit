@@ -2,19 +2,23 @@
   "name": "ember-ui-kit",
   "description": "The default blueprint for ember-cli addons.",
   "url": "https://github.com/ming-codes/ember-ui-kit",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "options": {
     "paths": [
       "addon"
     ],
     "external": {
-      "data": [{
-        "base": "http://emberjs.com/api/",
-        "json": "http://builds.emberjs.com/tags/v2.8.0/ember-docs.json"
-      }]
+      "data": [
+        {
+          "base": "http://emberjs.com/api/",
+          "json": "http://builds.emberjs.com/tags/v2.8.0/ember-docs.json"
+        }
+      ]
     },
     "themedir": "node_modules/yuidoc-ember-theme",
-    "helpers": ["node_modules/yuidoc-ember-theme/helpers/helpers.js"],
+    "helpers": [
+      "node_modules/yuidoc-ember-theme/helpers/helpers.js"
+    ],
     "exclude": "vendor",
     "outdir": "docs",
     "linkNatives": true,
