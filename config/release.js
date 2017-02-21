@@ -1,5 +1,6 @@
 /* jshint node:true */
-// var RSVP = require('rsvp');
+var execSync = require('child_process').execSync;
+//var RSVP = require('rsvp');
 
 // For details on each option run `ember help release`
 module.exports = {
@@ -11,10 +12,10 @@ module.exports = {
   // strategy: 'date',
   // format: 'YYYY-MM-DD',
   // timezone: 'America/Los_Angeles',
-  //
-  // beforeCommit: function(project, versions) {
-  //   return new RSVP.Promise(function(resolve, reject) {
-  //     // Do custom things here...
-  //   });
-  // }
+
+  beforeCommit: function(project, versions) {
+    execSync('ember ember-cli-yuidoc', { encoding: 'utf8' });
+    execSync('git add docs', { encoding: 'utf8' });
+    execSync(`git commit -m "Release ${versions.next} docs"`, { encoding: 'utf8' });
+  }
 };
