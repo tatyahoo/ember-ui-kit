@@ -13,16 +13,16 @@ test('it allows unidirectional data flow in validation', function(assert) {
 
   this.render(hbs`
     {{#fm-field (validate value update=(action (mut value))) as |in|}}
-      {{in.text-field}}
+      {{in.text}}
     {{/fm-field}}
   `);
 
   assert.equal(this.$('.fm-field').length, 1, 'should render form field');
-  assert.equal(this.$('.fm-field .in-text-field').length, 1, 'should render text-field inside form field');
-  assert.equal(this.$('.in-text-field').val(), 'Hello', 'should bind field value to text-field');
+  assert.equal(this.$('.fm-field .in-text').length, 1, 'should render text field inside form field');
+  assert.equal(this.$('.in-text').val(), 'Hello', 'should bind field value to text field');
 
-  this.$('.in-text-field').val('World').change();
+  this.$('.in-text').val('World').change();
 
-  assert.equal(this.$('.in-text-field').val(), 'World', 'should be changeable');
+  assert.equal(this.$('.in-text').val(), 'World', 'should be changeable');
   assert.equal(this.get('value'), 'World', 'should change be bound');
 });

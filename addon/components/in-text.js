@@ -4,12 +4,12 @@ import { Validatable } from 'ember-ui-kit/helpers/validate';
 
 /**
  * @module input
- * @class in-text-field
+ * @class in-text
  * @public
  */
 export default Ember.Component.extend({
   tagName: 'input',
-  classNames: 'in-text-field',
+  classNames: 'in-text',
   attributeBindings: 'valueNormalized:value',
 
   // attrs {

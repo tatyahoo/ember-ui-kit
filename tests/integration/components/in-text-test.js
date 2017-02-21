@@ -1,16 +1,16 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('in-text-field', 'Integration | Component | in-text-field', {
+moduleForComponent('in-text', 'Integration | Component | in-text', {
   integration: true
 });
 
 test('it allows two-way binding', function(assert) {
   this.set('value', 'Hello');
 
-  this.render(hbs`{{in-text-field (mut value)}}`);
+  this.render(hbs`{{in-text (mut value)}}`);
 
-  let el = this.$('.in-text-field');
+  let el = this.$('.in-text');
 
   assert.equal(el.val(), 'Hello', 'should bind value down');
 
