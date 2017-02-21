@@ -9,6 +9,7 @@ import { Validatable } from 'ember-ui-kit/helpers/validate';
  * @public
  */
 export default Ember.Component.extend({
+  tagName: 'label',
   classNames: 'fm-field',
   attributeBindings: 'modelAttribute:data-model-attribute',
   layout,
