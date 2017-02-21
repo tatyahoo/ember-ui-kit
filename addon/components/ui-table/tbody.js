@@ -3,7 +3,7 @@ import layout from '../../templates/components/ui-table/tbody';
 
 import { observerOnceIn } from '../../utils/run';
 import { construct } from '../../utils/computed';
-import { setMicrostateNumber } from '../../utils/microstate';
+import MS from '../../utils/microstate';
 
 /**
  * Advanced Usage:
@@ -92,7 +92,7 @@ export default Ember.Component.extend({
         .data('$E');
 
       if (component) {
-        setMicrostateNumber(this, 'cursor', component.get('itemIndex'));
+        MS.set(this, 'cursor', component.get('itemIndex'));
       }
     });
   },
