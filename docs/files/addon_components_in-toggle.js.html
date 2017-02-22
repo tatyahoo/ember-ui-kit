@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>in-text-field - ember-ui-kit</title>
+    <title>addon/components/in-toggle.js - ember-ui-kit</title>
     <meta name="description" content="The default blueprint for ember-cli addons.">
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/da02728f" target="_blank">
-                                  Tag: 0.2.2.da02728f
+                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/f6024e73" target="_blank">
+                                  Tag: 0.3.0.f6024e73
                                 </a>
                             </h4>
                         </div>
@@ -102,7 +102,10 @@
                                         <a href="../classes/fm-form.html">fm-form</a>
                                     </li>
                                     <li>
-                                        <a href="../classes/in-text-field.html">in-text-field</a>
+                                        <a href="../classes/in-text.html">in-text</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/in-toggle.html">in-toggle</a>
                                     </li>
                                     <li>
                                         <a href="../classes/ui-resizable.html">ui-resizable</a>
@@ -125,78 +128,50 @@
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
-
-
 <div class="page-header">
-    <h1> <i class="fa fa-bookmark-o" aria-hidden="true"></i> in-text-field Class
-            <a class="pull-right file-edit" href="https://github.com/ming-codes/ember-ui-kit/blob/da02728f/addon/components/in-text-field.js#L5" target="_blank">
-              <i class="fa fa-pencil" aria-hidden="true"></i>
-            </a>
-    </h1>
+    <h1><i class="fa fa-file-code-o" aria-hidden="true"></i>  File</h1>
 </div>
 
+<div class="file">
+    <pre class="prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
+import layout from &#x27;../templates/components/in-toggle&#x27;;
 
-<div class="content-meta">
+import MS from &#x27;../utils/microstate&#x27;;
 
+/**
+ * &#x60;{{in-toggle}}&#x60; is a simple input component that respond
+ * to click to toggle. The implementation does not provide
+ * specific styling. You are free style it in anyway you like:
+ * button, switch, or checkbox.
+ *
+ * @public
+ * @module input
+ * @class in-toggle
+ */
+export default Ember.Component.extend({
+  classNames: &#x27;in-toggle&#x27;,
+  classNameBindings: &#x27;valueNormalized:in-toggle--on:in-toggle--off&#x27;,
+  attributeBindings: &#x27;tabindex&#x27;,
+  layout,
 
-            Module: <a href="../modules/input.html">input</a>
+  // attrs {
+  value: null,
+  tabindex: 0,
+  // attrs }
 
+  valueNormalized: Ember.computed(&#x27;value&#x27;, function() {
+    return this.get(&#x27;value&#x27;).valueOf();
+  }).readOnly(),
 
-        <div class="foundat">
-            Defined In: <a href="https://github.com/ming-codes/ember-ui-kit/blob/da02728f/addon/components/in-text-field.js#L5">addon/components/in-text-field.js:5</a>
-        </div>
-</div>
+  click() {
+    MS.toggle(this, &#x27;value&#x27;);
+  }
+}).reopenClass({
+  positionalParams: [&#x27;value&#x27;]
+});
 
-
-
-
-<div>
-    <div class="page-section">
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active"><a href="#tab_index" aria-controls="tab_index" role="tab" data-toggle="tab">Index</a></li>
-
-
-
-        </ul>
-
-        <!-- Tab panes -->
-        <div class="tab-content">
-
-              <form id="options-form" class="form-inline">
-                  Show:
-                  <label for="api-show-inherited" class="checkbox">
-                      <input type="checkbox" id="api-show-inherited" checked>
-                      Inherited
-                  </label>
-          
-                  <label for="api-show-protected" class="checkbox">
-                      <input type="checkbox" id="api-show-protected">
-                      Protected
-                  </label>
-          
-                  <label for="api-show-private" class="checkbox">
-                      <input type="checkbox" id="api-show-private">
-                      Private
-                  </label>
-                  <label for="api-show-deprecated" class="checkbox">
-                      <input type="checkbox" id="api-show-deprecated">
-                      Deprecated
-                  </label>
-          
-              </form>
-
-          <div id="tab_index" role="tabpanel" class="tab-pane active" >
-
-
-
-          </div>
-
-
-
-
-      </div>
-    </div>
+    </pre>
 </div>
                         </div>
                     </div>

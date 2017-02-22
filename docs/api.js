@@ -3,7 +3,8 @@ YUI.add("yuidoc-meta", function(Y) {
     "classes": [
         "fm-field",
         "fm-form",
-        "in-text-field",
+        "in-text",
+        "in-toggle",
         "ui-resizable",
         "ui-scrollable",
         "ui-sortable",
@@ -24,15 +25,18 @@ YUI.add("yuidoc-meta", function(Y) {
     "allModules": [
         {
             "displayName": "form",
-            "name": "form"
+            "name": "form",
+            "description": "The `form` module consists of components that deals with form\nand validation. The `form` module components are separate\nfrom `input` module to provide validation."
         },
         {
             "displayName": "input",
-            "name": "input"
+            "name": "input",
+            "description": "The `input` module consists of components that deals with\nobtaining user inputs. The components themselves does not\nprovide validation, but integrates with `form` module\ncomponents for that functionality"
         },
         {
             "displayName": "ui",
-            "name": "ui"
+            "name": "ui",
+            "description": "The `ui` module consists are lower level components."
         }
     ],
     "elements": []

@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/da02728f" target="_blank">
-                                  Tag: 0.2.2.da02728f
+                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/f6024e73" target="_blank">
+                                  Tag: 0.3.0.f6024e73
                                 </a>
                             </h4>
                         </div>
@@ -102,7 +102,10 @@
                                         <a href="../classes/fm-form.html">fm-form</a>
                                     </li>
                                     <li>
-                                        <a href="../classes/in-text-field.html">in-text-field</a>
+                                        <a href="../classes/in-text.html">in-text</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/in-toggle.html">in-toggle</a>
                                     </li>
                                     <li>
                                         <a href="../classes/ui-resizable.html">ui-resizable</a>
@@ -135,6 +138,7 @@ import Ember from &#x27;ember&#x27;;
 import layout from &#x27;../templates/components/fm-field&#x27;;
 
 import { Validatable } from &#x27;ember-ui-kit/helpers/validate&#x27;;
+import MS from &#x27;../utils/microstate&#x27;;
 
 /**
  * @module form
@@ -142,6 +146,7 @@ import { Validatable } from &#x27;ember-ui-kit/helpers/validate&#x27;;
  * @public
  */
 export default Ember.Component.extend({
+  tagName: &#x27;label&#x27;,
   classNames: &#x27;fm-field&#x27;,
   attributeBindings: &#x27;modelAttribute:data-model-attribute&#x27;,
   layout,
@@ -149,6 +154,14 @@ export default Ember.Component.extend({
   // attrs {
   model: null,
   // attrs }
+
+  modelValue: Ember.computed(&#x27;isModelValidatable&#x27;, &#x27;model.value&#x27;, function() {
+    if (this.get(&#x27;isModelValidatable&#x27;)) {
+      return this.get(&#x27;model.value&#x27;);
+    }
+
+    return this.get(&#x27;model&#x27;);
+  }),
 
   modelAttribute: Ember.computed(&#x27;isModelValidatable&#x27;, &#x27;model.results.attribute&#x27;, function() {
     if (this.get(&#x27;isModelValidatable&#x27;)) {
@@ -160,8 +173,18 @@ export default Ember.Component.extend({
 
   isModelValidatable: Ember.computed(&#x27;model&#x27;, function() {
     return this.get(&#x27;model&#x27;) instanceof Validatable;
-  }).readOnly()
+  }).readOnly(),
 
+  actions: {
+    modelValueDidChange(newValue) {
+      if (this.get(&#x27;isModelValidatable&#x27;)) {
+        this.get(&#x27;model&#x27;).update(newValue);
+      }
+      else {
+        MS.set(this, &#x27;model&#x27;, newValue);
+      }
+    }
+  }
 }).reopenClass({
   positionalParams: [&#x27;model&#x27;]
 });

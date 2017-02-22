@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/components/in-text-field.js - ember-ui-kit</title>
+    <title>addon/index.js - ember-ui-kit</title>
     <meta name="description" content="The default blueprint for ember-cli addons.">
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/da02728f" target="_blank">
-                                  Tag: 0.2.2.da02728f
+                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/f6024e73" target="_blank">
+                                  Tag: 0.3.0.f6024e73
                                 </a>
                             </h4>
                         </div>
@@ -102,7 +102,10 @@
                                         <a href="../classes/fm-form.html">fm-form</a>
                                     </li>
                                     <li>
-                                        <a href="../classes/in-text-field.html">in-text-field</a>
+                                        <a href="../classes/in-text.html">in-text</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/in-toggle.html">in-toggle</a>
                                     </li>
                                     <li>
                                         <a href="../classes/ui-resizable.html">ui-resizable</a>
@@ -131,58 +134,31 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import Ember from &#x27;ember&#x27;;
-
-import { Validatable } from &#x27;ember-ui-kit/helpers/validate&#x27;;
+/**
+ * The &#x60;form&#x60; module consists of components that deals with form
+ * and validation. The &#x60;form&#x60; module components are separate
+ * from &#x60;input&#x60; module to provide validation.
+ *
+ * @module form
+ * @main
+ */
 
 /**
+ * The &#x60;input&#x60; module consists of components that deals with
+ * obtaining user inputs. The components themselves does not
+ * provide validation, but integrates with &#x60;form&#x60; module
+ * components for that functionality
+ *
  * @module input
- * @class in-text-field
- * @public
+ * @main
  */
-export default Ember.Component.extend({
-  tagName: &#x27;input&#x27;,
-  classNames: &#x27;in-text-field&#x27;,
-  attributeBindings: &#x27;valueNormalized:value&#x27;,
 
-  // attrs {
-  value: null,
-  // attrs }
-
-  isValueValidatable: Ember.computed(&#x27;value&#x27;, function() {
-    return this.get(&#x27;value&#x27;) instanceof Validatable;
-  }).readOnly(),
-
-  valueNormalized: Ember.computed(&#x27;isValueValidatable&#x27;, &#x27;value&#x27;, function() {
-    if (this.get(&#x27;isValueValidatable&#x27;)) {
-      return this.get(&#x27;value.value&#x27;);
-    }
-
-    return this.get(&#x27;value&#x27;);
-  }).readOnly(),
-
-  willInsertElement() {
-    this._super(...arguments);
-
-    this.$().on(&#x27;input change&#x27;, Ember.run.bind(this, function(evt) {
-      let value = this.attrs.value;
-
-      if (this.get(&#x27;isValueValidatable&#x27;)) {
-        value = value.value;
-      }
-
-      value.update(evt.target.value);
-    }));
-  },
-
-  willDestroyElement() {
-    this._super(...arguments);
-
-    this.$().off(&#x27;input change&#x27;);
-  }
-}).reopenClass({
-  positionalParams: [&#x27;value&#x27;]
-});
+/**
+ * The &#x60;ui&#x60; module consists are lower level components.
+ *
+ * @module ui
+ * @main
+ */
 
     </pre>
 </div>

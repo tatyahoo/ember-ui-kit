@@ -3,7 +3,7 @@
         "name": "ember-ui-kit",
         "description": "The default blueprint for ember-cli addons.",
         "url": "https://github.com/ming-codes/ember-ui-kit",
-        "version": "0.2.2.da02728f"
+        "version": "0.3.0.f6024e73"
     },
     "files": {
         "addon/components/ui-table/tbody-each.js": {
@@ -71,9 +71,7 @@
         },
         "addon/components/fm-field.js": {
             "name": "addon/components/fm-field.js",
-            "modules": {
-                "form": 1
-            },
+            "modules": {},
             "classes": {
                 "fm-field": 1
             },
@@ -89,22 +87,27 @@
             "fors": {},
             "namespaces": {}
         },
-        "addon/components/in-text-field.js": {
-            "name": "addon/components/in-text-field.js",
-            "modules": {
-                "input": 1
-            },
+        "addon/components/in-text.js": {
+            "name": "addon/components/in-text.js",
+            "modules": {},
             "classes": {
-                "in-text-field": 1
+                "in-text": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "addon/components/in-toggle.js": {
+            "name": "addon/components/in-toggle.js",
+            "modules": {},
+            "classes": {
+                "in-toggle": 1
             },
             "fors": {},
             "namespaces": {}
         },
         "addon/components/ui-resizable.js": {
             "name": "addon/components/ui-resizable.js",
-            "modules": {
-                "ui": 1
-            },
+            "modules": {},
             "classes": {
                 "ui-resizable": 1
             },
@@ -137,6 +140,24 @@
             },
             "fors": {},
             "namespaces": {}
+        },
+        "addon/utils/microstate.js": {
+            "name": "addon/utils/microstate.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "addon/index.js": {
+            "name": "addon/index.js",
+            "modules": {
+                "ui": 1,
+                "form": 1,
+                "input": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
         }
     },
     "modules": {
@@ -162,8 +183,10 @@
             "tag": "module",
             "file": "addon/components/ui-table.js",
             "line": 9,
+            "description": "The `ui` module consists are lower level components.",
             "access": "private",
-            "tagname": ""
+            "tagname": "",
+            "itemtype": "main"
         },
         "form": {
             "name": "form",
@@ -178,23 +201,28 @@
             "tag": "module",
             "file": "addon/components/fm-form.js",
             "line": 15,
+            "description": "The `form` module consists of components that deals with form\nand validation. The `form` module components are separate\nfrom `input` module to provide validation.",
             "access": "public",
-            "tagname": ""
+            "tagname": "",
+            "itemtype": "main"
         },
         "input": {
             "name": "input",
             "submodules": {},
             "elements": {},
             "classes": {
-                "in-text-field": 1
+                "in-text": 1,
+                "in-toggle": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "addon/components/in-text-field.js",
-            "line": 5,
+            "file": "addon/components/in-toggle.js",
+            "line": 6,
+            "description": "The `input` module consists of components that deals with\nobtaining user inputs. The components themselves does not\nprovide validation, but integrates with `form` module\ncomponents for that functionality",
             "access": "public",
-            "tagname": ""
+            "tagname": "",
+            "itemtype": "main"
         }
     },
     "classes": {
@@ -318,7 +346,7 @@
             "module": "form",
             "namespace": "",
             "file": "addon/components/fm-field.js",
-            "line": 6
+            "line": 7
         },
         "fm-form": {
             "name": "fm-form",
@@ -332,13 +360,13 @@
             "namespace": "",
             "file": "addon/components/fm-form.js",
             "line": 15,
-            "description": "`{{fm-form}}` component wraps a `DS.Model` object and yields\n`{{fm-field}}` with appropriate validations setup. Each `{{fm-field}}`\nyields more contextual input component to let you choose how to\nrepresent the field.\n\n`{{fm-field}}` can be interlaced with HTML tags to provide additional\nlayout needs.\n\nBasic Usage:\n\n```handlebars\n{{#fm-form model as |attribute|}}\n  {{#attribute.name as |in|}}\n    {{in.text-field}}\n  {{/attribute.name}}\n  {{#attribute.address as |in|}}\n    {{in.text-field}}\n  {{/attribute.address}}\n{{/fm-form}}\n```\n\n`{{fm-form}}` integrates with `{{ui-table}}` to allow editability\nand validability.\n\nAdvanced Usage:\n\n```handlebars\n{{#ui-table as |t|}}\n  {{#t.body as |t|}}\n    {{#each data as |datum|}}\n      {{#t.r as |t|}}\n        {{#fm-form datum as |attribute|}}\n          {{#t.d}}\n            {{#attribute.name as |in|}}\n              {{in.text-field}}\n            {{/attribute.name}}\n          {{/t.d}}\n          {{#t.d}}\n            {{#attribute.age as |in|}}\n              {{in.text-field}}\n            {{/attribute.age}}\n          {{/t.d}}\n        {{/fm-form}}\n      {{/t.r}}\n    {{/each}}\n  {{/t.body}}\n{{/ui-table}}\n```",
+            "description": "`{{fm-form}}` component wraps a `DS.Model` object and yields\n`{{fm-field}}` with appropriate validations setup. Each `{{fm-field}}`\nyields more contextual input component to let you choose how to\nrepresent the field.\n\n`{{fm-field}}` can be interlaced with HTML tags to provide additional\nlayout needs.\n\nBasic Usage:\n\n```handlebars\n{{#fm-form model as |attribute|}}\n  {{#attribute.name as |in|}}\n    {{in.text}}\n  {{/attribute.name}}\n  {{#attribute.address as |in|}}\n    {{in.text}}\n  {{/attribute.address}}\n{{/fm-form}}\n```\n\n`{{fm-form}}` integrates with `{{ui-table}}` to allow editability\nand validability.\n\nAdvanced Usage:\n\n```handlebars\n{{#ui-table as |t|}}\n  {{#t.body as |t|}}\n    {{#each data as |datum|}}\n      {{#t.r as |t|}}\n        {{#fm-form datum as |attribute|}}\n          {{#t.d}}\n            {{#attribute.name as |in|}}\n              {{in.text}}\n            {{/attribute.name}}\n          {{/t.d}}\n          {{#t.d}}\n            {{#attribute.age as |in|}}\n              {{in.text}}\n            {{/attribute.age}}\n          {{/t.d}}\n        {{/fm-form}}\n      {{/t.r}}\n    {{/each}}\n  {{/t.body}}\n{{/ui-table}}\n```",
             "access": "public",
             "tagname": ""
         },
-        "in-text-field": {
-            "name": "in-text-field",
-            "shortname": "in-text-field",
+        "in-text": {
+            "name": "in-text",
+            "shortname": "in-text",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -346,8 +374,26 @@
             "extension_for": [],
             "module": "input",
             "namespace": "",
-            "file": "addon/components/in-text-field.js",
-            "line": 5
+            "file": "addon/components/in-text.js",
+            "line": 5,
+            "access": "public",
+            "tagname": ""
+        },
+        "in-toggle": {
+            "name": "in-toggle",
+            "shortname": "in-toggle",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "input",
+            "namespace": "",
+            "file": "addon/components/in-toggle.js",
+            "line": 6,
+            "description": "`{{in-toggle}}` is a simple input component that respond\nto click to toggle. The implementation does not provide\nspecific styling. You are free style it in anyway you like:\nbutton, switch, or checkbox.",
+            "access": "public",
+            "tagname": ""
         },
         "ui-resizable": {
             "name": "ui-resizable",
@@ -400,7 +446,7 @@
             "namespace": "",
             "file": "addon/components/ui-table.js",
             "line": 9,
-            "description": "The `ui-table` component is designed to have a declarative\nsyntax that looks just like a plain html table while supporting\nmany advanced table features such as:\n\n- Sortable column\n- Resizable column\n- Show/Hide column\n- Freezable column\n- Nested header\n- Table footer\n- Virtualized scrolling\n- Selectable rows\n- Sorting and filtering of rows\n- Template driven cells that enables edit-ability and\n  other component composition.\n\nBasic Usage:\n\n```handlebars\n{{#ui-table as |t|}}\n  {{#t.head as |t|}}\n    {{#t.h width=90}}ID{{/t.h}}\n    {{#t.h span=1}}Name{{/t.h}}\n    {{#t.h width=\"50%\"}}Address{{/t.h}}\n  {{/t.head}}\n  {{#t.body as |t|}}\n   {{#each users as |user|}}\n     {{#t.r as |t|}}\n       {{#t.d}}{{user.id}}{{/t.d}}\n       {{#t.d}}{{user.name}}{{/t.d}}\n       {{#t.d}}{{user.address}}{{/t.d}}\n     {{/t.r}}\n   {{/each}}\n  {{/t.body}}\n{{/ui-table}}\n```\n\nSee\n[thead](./ui-table.thead.html),\n[th](./ui-table.th.html),\n[tbody](./ui-table.tbody.html),\n[tr](./ui-table.tr.html),\n[td](./ui-table.td.html),\nand [tfoot](./ui-table.tfoot.html)\nfor advanced usages.\n\nNote, these components are private for the\npurpose that they should not be used alone,\nbut only as contextual component of ui-table\n\n\n`{{ui-table}}` integrates with `{{fm-form}}` to allow editability\nand validability.\n\nAdvanced Usage:\n\n```handlebars\n{{#ui-table as |t|}}\n  {{#t.body as |t|}}\n    {{#each data as |datum|}}\n      {{#t.r as |t|}}\n        {{#fm-form datum as |attribute|}}\n          {{#t.d}}\n            {{#attribute.name as |in|}}\n              {{in.text-field}}\n            {{/attribute.name}}\n          {{/t.d}}\n          {{#t.d}}\n            {{#attribute.age as |in|}}\n              {{in.text-field}}\n            {{/attribute.age}}\n          {{/t.d}}\n        {{/fm-form}}\n      {{/t.r}}\n    {{/each}}\n  {{/t.body}}\n{{/ui-table}}\n```",
+            "description": "The `ui-table` component is designed to have a declarative\nsyntax that looks just like a plain html table while supporting\nmany advanced table features such as:\n\n- Sortable column\n- Resizable column\n- Show/Hide column\n- Freezable column\n- Nested header\n- Table footer\n- Virtualized scrolling\n- Selectable rows\n- Sorting and filtering of rows\n- Template driven cells that enables edit-ability and\n  other component composition.\n\nBasic Usage:\n\n```handlebars\n{{#ui-table as |t|}}\n  {{#t.head as |t|}}\n    {{#t.h width=90}}ID{{/t.h}}\n    {{#t.h span=1}}Name{{/t.h}}\n    {{#t.h width=\"50%\"}}Address{{/t.h}}\n  {{/t.head}}\n  {{#t.body as |t|}}\n   {{#each users as |user|}}\n     {{#t.r as |t|}}\n       {{#t.d}}{{user.id}}{{/t.d}}\n       {{#t.d}}{{user.name}}{{/t.d}}\n       {{#t.d}}{{user.address}}{{/t.d}}\n     {{/t.r}}\n   {{/each}}\n  {{/t.body}}\n{{/ui-table}}\n```\n\nSee\n[thead](./ui-table.thead.html),\n[th](./ui-table.th.html),\n[tbody](./ui-table.tbody.html),\n[tr](./ui-table.tr.html),\n[td](./ui-table.td.html),\nand [tfoot](./ui-table.tfoot.html)\nfor advanced usages.\n\nNote, these components are private for the\npurpose that they should not be used alone,\nbut only as contextual component of ui-table\n\n\n`{{ui-table}}` integrates with `{{fm-form}}` to allow editability\nand validability.\n\nAdvanced Usage:\n\n```handlebars\n{{#ui-table as |t|}}\n  {{#t.body as |t|}}\n    {{#each data as |datum|}}\n      {{#t.r as |t|}}\n        {{#fm-form datum as |attribute|}}\n          {{#t.d}}\n            {{#attribute.name as |in|}}\n              {{in.text}}\n            {{/attribute.name}}\n          {{/t.d}}\n          {{#t.d}}\n            {{#attribute.age as |in|}}\n              {{in.text}}\n            {{/attribute.age}}\n          {{/t.d}}\n        {{/fm-form}}\n      {{/t.r}}\n    {{/each}}\n  {{/t.body}}\n{{/ui-table}}\n```",
             "access": "public",
             "tagname": ""
         }
@@ -463,7 +509,21 @@
             "type": "object",
             "class": "ui-sortable",
             "module": "ui"
+        },
+        {
+            "file": "addon/utils/microstate.js",
+            "line": 3,
+            "description": "Utilities that provide integration with `ember-microstates`",
+            "access": "private",
+            "tagname": "",
+            "class": "",
+            "module": "ui"
         }
     ],
-    "warnings": []
+    "warnings": [
+        {
+            "message": "Missing item type\nUtilities that provide integration with `ember-microstates`",
+            "line": " addon/utils/microstate.js:3"
+        }
+    ]
 }
