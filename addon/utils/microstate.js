@@ -11,6 +11,10 @@ export default Object.freeze({
   // TODO handle select
   // TODO handle string
   isMicrostate(object) {
+    if (object === null) {
+      return false;
+    }
+
     if (typeof object === 'object') {
       let asPrimitive = object.valueOf();
 

@@ -5,6 +5,8 @@ import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 import DS from 'ember-data';
 
+import Microstates from 'ember-microstates/initializers/microstates';
+
 moduleForComponent('fm-form', 'Integration | Component | fm-form', {
   integration: true
 });
@@ -15,6 +17,8 @@ moduleForComponent('fm-form', 'Integration | Component | fm-form', {
 // TODO table form rollback through ember-time-machine
 
 test('it convert model to fm-field collection that is bindable', function(assert) {
+  Microstates.initialize(this);
+
   this.register('model:user', DS.Model.extend({
     name: DS.attr('string'),
     ssn: DS.attr('number')
@@ -212,6 +216,8 @@ test('it convert model to fm-field collection that is bindable', function(assert
 //});
 
 test('it integrates with table to allow table rows to be form', function(assert) {
+  Microstates.initialize(this);
+
   this.register('model:user', DS.Model.extend({
     name: DS.attr('string'),
     hairColor: DS.attr('string')

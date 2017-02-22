@@ -1,6 +1,7 @@
 {{yield
   (hash
-    text=(component "in-text" model)
+    text=(component "in-text" (String modelValue on-set=(action "modelValueDidChange")))
+    toggle=(component "in-toggle" (Boolean modelValue on-set=(action "modelValueDidChange")))
   )
 }}
 
