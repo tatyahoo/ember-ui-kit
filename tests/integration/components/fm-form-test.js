@@ -5,6 +5,8 @@ import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 import DS from 'ember-data';
 
+import Microstates from 'ember-microstates/initializers/microstates';
+
 moduleForComponent('fm-form', 'Integration | Component | fm-form', {
   integration: true
 });
@@ -15,6 +17,8 @@ moduleForComponent('fm-form', 'Integration | Component | fm-form', {
 // TODO table form rollback through ember-time-machine
 
 test('it convert model to fm-field collection that is bindable', function(assert) {
+  Microstates.initialize(this);
+
   this.register('model:user', DS.Model.extend({
     name: DS.attr('string'),
     ssn: DS.attr('number')
@@ -35,10 +39,10 @@ test('it convert model to fm-field collection that is bindable', function(assert
   this.render(hbs`
     {{#fm-form model as |attr|}}
       {{#attr.name as |in|}}
-        {{in.text-field}}
+        {{in.text}}
       {{/attr.name}}
       {{#attr.ssn as |in|}}
-        {{in.text-field}}
+        {{in.text}}
       {{/attr.ssn}}
     {{/fm-form}}
   `);
@@ -49,16 +53,16 @@ test('it convert model to fm-field collection that is bindable', function(assert
   let name = this.$('.fm-field[data-model-attribute="name"]');
   let ssn = this.$('.fm-field:not([data-model-attribute="name"])');
 
-  assert.equal(name.find('.in-text-field').length, 1, 'should render name field as text-field');
-  assert.equal(name.find('.in-text-field').val(), '', 'should have name field be empty');
+  assert.equal(name.find('.in-text').length, 1, 'should render name field as text field');
+  assert.equal(name.find('.in-text').val(), '', 'should have name field be empty');
   assert.equal(name.find('.fm-field__validation-messages li').length, 1, 'should show name field validation');
 
-  assert.equal(ssn.find('.in-text-field').length, 1, 'should render ssn field as text-field');
+  assert.equal(ssn.find('.in-text').length, 1, 'should render ssn field as text field');
   assert.equal(ssn.find('.fm-field__validation-messages li').length, 0, 'should not show ssn field validation');
 
-  name.find('.in-text-field').val('Link').change();
+  name.find('.in-text').val('Link').change();
 
-  assert.equal(name.find('.in-text-field').val(), 'Link', 'should have updated name field to Link');
+  assert.equal(name.find('.in-text').val(), 'Link', 'should have updated name field to Link');
   assert.equal(name.find('.fm-field__validation-messages li').length, 0, 'should name field no longer be invalid');
 
   assert.equal(this.get('model.name'), 'Link', 'should have updated model name through field');
@@ -186,8 +190,7 @@ test('it convert model to fm-field collection that is bindable', function(assert
 //  this.render(hbs`
 //    {{#fm-form model as |attribute relationship|}}
 //      {{#attribute.title as |in|}}
-//        {{in.text-field}}
-//        {{in.text-area}}
+//        {{in.text}}
 //        {{in.switch}}
 //        {{in.checkbox}}
 //      {{/attribute.title}}
@@ -213,6 +216,8 @@ test('it convert model to fm-field collection that is bindable', function(assert
 //});
 
 test('it integrates with table to allow table rows to be form', function(assert) {
+  Microstates.initialize(this);
+
   this.register('model:user', DS.Model.extend({
     name: DS.attr('string'),
     hairColor: DS.attr('string')
@@ -265,12 +270,12 @@ test('it integrates with table to allow table rows to be form', function(assert)
             {{#fm-form datum as |attribute|}}
               {{#t.d}}
                 {{#attribute.name as |in|}}
-                  {{in.text-field}}
+                  {{in.text}}
                 {{/attribute.name}}
               {{/t.d}}
               {{#t.d}}
                 {{#attribute.hairColor as |in|}}
-                  {{in.text-field}}
+                  {{in.text}}
                 {{/attribute.hairColor}}
               {{/t.d}}
             {{/fm-form}}
@@ -283,10 +288,10 @@ test('it integrates with table to allow table rows to be form', function(assert)
   let link = this.$('.ui-table__unfroze .ui-table__tr:first');
   let zelda = this.$('.ui-table__unfroze .ui-table__tr:last');
 
-  assert.equal(link.find('.ui-table__td:first .in-text-field').val(), 'Link', 'Table row form should have value set: link');
-  assert.equal(zelda.find('.ui-table__td:first .in-text-field').val(), 'Zelda', 'Table row form should have value set: zelda');
+  assert.equal(link.find('.ui-table__td:first .in-text').val(), 'Link', 'Table row form should have value set: link');
+  assert.equal(zelda.find('.ui-table__td:first .in-text').val(), 'Zelda', 'Table row form should have value set: zelda');
 
-  link.find('.ui-table__td:first .in-text-field').val('Zing').change();
+  link.find('.ui-table__td:first .in-text').val('Zing').change();
 
   assert.equal(this.get('data.0.name'), 'Zing', 'changing field value should set model');
 });

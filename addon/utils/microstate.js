@@ -1,24 +1,54 @@
 import Ember from 'ember';
 
-export function setMicrostateNumber(object, key, newValue) {
-  let oldValue = Ember.get(object, key);
-  let isAttr = Ember.hasOwnProperty.call(object.attrs || {}, key);
+/**
+ * Utilities that provide integration with `ember-microstates`
+ *
+ * @private
+ */
+export default Object.freeze({
+  // TODO handle list
+  // TODO handle object
+  // TODO handle select
+  // TODO handle string
+  isMicrostate(object) {
+    if (object === null) {
+      return false;
+    }
 
-  Ember.run.join(() => {
-    // primitive
-    if (typeof oldValue === 'number') {
-      if (isAttr) {
-        object.attrs[key].update(newValue);
+    if (typeof object === 'object') {
+      let asPrimitive = object.valueOf();
+
+      if (typeof asPrimitive !== 'object') {
+        return true;
+      }
+    }
+
+    return false;
+  },
+
+  toggle(object, key) {
+    let oldValue = Ember.get(object, key);
+
+    Ember.run.join(() => {
+      if (this.isMicrostate(oldValue)) {
+        oldValue.toggle();
       }
       else {
-        Ember.set(object, key, newValue);
+        object.set(key, !oldValue);
       }
-    }
-    // microstate
-    else if (oldValue instanceof Number) {
-      oldValue.set(newValue);
-    }
-  });
+    });
+  },
 
-  return newValue;
-}
+  set(object, key, newValue) {
+    let oldValue = Ember.get(object, key);
+
+    Ember.run.join(() => {
+      if (this.isMicrostate(oldValue)) {
+        oldValue.set(newValue);
+      }
+      else {
+        object.set(key, newValue);
+      }
+    });
+  }
+});

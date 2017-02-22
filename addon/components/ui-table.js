@@ -71,12 +71,12 @@ import { getBox } from '../utils/dom';
  *         {{#fm-form datum as |attribute|}}
  *           {{#t.d}}
  *             {{#attribute.name as |in|}}
- *               {{in.text-field}}
+ *               {{in.text}}
  *             {{/attribute.name}}
  *           {{/t.d}}
  *           {{#t.d}}
  *             {{#attribute.age as |in|}}
- *               {{in.text-field}}
+ *               {{in.text}}
  *             {{/attribute.age}}
  *           {{/t.d}}
  *         {{/fm-form}}

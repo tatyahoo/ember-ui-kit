@@ -26,10 +26,10 @@ function collect(object) {
  * ```handlebars
  * {{#fm-form model as |attribute|}}
  *   {{#attribute.name as |in|}}
- *     {{in.text-field}}
+ *     {{in.text}}
  *   {{/attribute.name}}
  *   {{#attribute.address as |in|}}
- *     {{in.text-field}}
+ *     {{in.text}}
  *   {{/attribute.address}}
  * {{/fm-form}}
  * ```
@@ -47,12 +47,12 @@ function collect(object) {
  *         {{#fm-form datum as |attribute|}}
  *           {{#t.d}}
  *             {{#attribute.name as |in|}}
- *               {{in.text-field}}
+ *               {{in.text}}
  *             {{/attribute.name}}
  *           {{/t.d}}
  *           {{#t.d}}
  *             {{#attribute.age as |in|}}
- *               {{in.text-field}}
+ *               {{in.text}}
  *             {{/attribute.age}}
  *           {{/t.d}}
  *         {{/fm-form}}
