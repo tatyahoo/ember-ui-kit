@@ -34,15 +34,7 @@ export default Object.freeze({
         oldValue.toggle();
       }
       else {
-        let isAttr = Ember.hasOwnProperty.call(object.attrs || {}, key);
-        let newValue = !oldValue;
-
-        if (isAttr) {
-          object.attrs[key].update(newValue);
-        }
-        else {
-          Ember.set(object, key, newValue);
-        }
+        object.set(key, !oldValue);
       }
     });
   },
@@ -55,14 +47,7 @@ export default Object.freeze({
         oldValue.set(newValue);
       }
       else {
-        let isAttr = Ember.hasOwnProperty.call(object.attrs || {}, key);
-
-        if (isAttr) {
-          object.attrs[key].update(newValue);
-        }
-        else {
-          Ember.set(object, key, newValue);
-        }
+        object.set(key, newValue);
       }
     });
   }
