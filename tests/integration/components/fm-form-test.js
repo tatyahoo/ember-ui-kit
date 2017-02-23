@@ -31,24 +31,31 @@ test('it convert model to fm-field collection that is bindable', function(assert
 
   this.inject.service('store');
 
-  this.set('model', Ember.run(this.store, this.store.createRecord, 'user', {
-    name: null,
-    ssn: null
-  }));
+  [1, 2].forEach(index => {
+    this.set('model', null);
 
-  this.render(hbs`
-    {{#fm-form model as |attr|}}
-      {{#attr.name as |in|}}
-        {{in.text}}
-      {{/attr.name}}
-      {{#attr.ssn as |in|}}
-        {{in.text}}
-      {{/attr.ssn}}
-    {{/fm-form}}
-  `);
+    this.render(hbs`
+      {{#fm-form model as |attr|}}
+        {{#attr.name as |in|}}
+          {{in.text}}
+        {{/attr.name}}
+        {{#attr.ssn as |in|}}
+          {{in.text}}
+        {{/attr.ssn}}
+      {{/fm-form}}
+    `);
 
-  assert.equal(this.$('.fm-form').length, 1, 'should render 1 form');
-  assert.equal(this.$('.fm-field').length, 2, 'should render 2 fields');
+    assert.equal(this.$('.fm-form').length, 1, `loop ${index} form should be ok with null model`);
+    assert.equal(this.$('.fm-form').children().length, 0, `loop ${index} form should be ok with null model, but no content`);
+
+    this.set('model', Ember.run(this.store, this.store.createRecord, 'user', {
+      name: null,
+      ssn: null
+    }));
+
+    assert.equal(this.$('.fm-form').length, 1, `loop ${index} should render 1 form`);
+    assert.equal(this.$('.fm-field').length, 2, `loop ${index} should render 2 fields`);
+  });
 
   let name = this.$('.fm-field[data-model-attribute="name"]');
   let ssn = this.$('.fm-field:not([data-model-attribute="name"])');
