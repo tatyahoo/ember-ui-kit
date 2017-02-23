@@ -2,6 +2,7 @@ YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
         "fm-field",
+        "fm-fieldset",
         "fm-form",
         "in-text",
         "in-toggle",

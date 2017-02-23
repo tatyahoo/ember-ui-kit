@@ -3,7 +3,7 @@
         "name": "ember-ui-kit",
         "description": "The default blueprint for ember-cli addons.",
         "url": "https://github.com/ming-codes/ember-ui-kit",
-        "version": "0.3.0.f6024e73"
+        "version": "0.4.0.2c8122ac"
     },
     "files": {
         "addon/components/ui-table/tbody-each.js": {
@@ -74,6 +74,15 @@
             "modules": {},
             "classes": {
                 "fm-field": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "addon/components/fm-fieldset.js": {
+            "name": "addon/components/fm-fieldset.js",
+            "modules": {},
+            "classes": {
+                "fm-fieldset": 1
             },
             "fors": {},
             "namespaces": {}
@@ -194,13 +203,14 @@
             "elements": {},
             "classes": {
                 "fm-field": 1,
+                "fm-fieldset": 1,
                 "fm-form": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
             "file": "addon/components/fm-form.js",
-            "line": 15,
+            "line": 17,
             "description": "The `form` module consists of components that deals with form\nand validation. The `form` module components are separate\nfrom `input` module to provide validation.",
             "access": "public",
             "tagname": "",
@@ -253,7 +263,7 @@
             "module": "ui",
             "namespace": "",
             "file": "addon/components/ui-table/tbody.js",
-            "line": 8,
+            "line": 11,
             "description": "Advanced Usage:\n\n```handlebars\n{{#ui-table as |t|}}\n  {{#t.body as |t|}}\n   {{! (Select) from ember-microstates }}\n   {{#each (Select users) as |user|}}\n     {{#t.r click=(action user.toggle) as |t|}}\n       {{#t.d}}{{user.id}}{{/t.d}}\n       {{#t.d}}{{user.name}}{{/t.d}}\n       {{#t.d}}{{user.address}}{{/t.d}}\n     {{/t.r}}\n   {{/each}}\n  {{/t.body}}\n{{/ui-table}}\n```\n\nSee also [tbody-each](./ui-table.tbody-each.html)",
             "access": "private",
             "tagname": ""
@@ -269,7 +279,7 @@
             "module": "ui",
             "namespace": "",
             "file": "addon/components/ui-table/td.js",
-            "line": 6,
+            "line": 8,
             "access": "private",
             "tagname": ""
         },
@@ -284,7 +294,7 @@
             "module": "ui",
             "namespace": "",
             "file": "addon/components/ui-table/tfoot.js",
-            "line": 6,
+            "line": 8,
             "description": "`tfoot` is very similar to `tbody` except\nit is docked to the bottom of the table.\n\nAdvanced Usage:\n\n```handlebars\n{{#ui-table as |t|}}\n  {{#t.foot as |t|}}\n    {{#t.r as |t|}}\n      {{#t.d}}Cell 1{{/t.d}}\n      {{#t.d}}Cell 2{{/t.d}}\n      {{#t.d}}Cell 3{{/t.d}}\n      {{#t.d}}Cell 4{{/t.d}}\n    {{/t.r}}\n  {{/t.foot}}\n{{/ui-table}}\n```",
             "access": "private",
             "tagname": ""
@@ -315,7 +325,7 @@
             "module": "ui",
             "namespace": "",
             "file": "addon/components/ui-table/thead.js",
-            "line": 9,
+            "line": 10,
             "description": "Advanced Usage:\n\n```handlebars\n{{#ui-table as |t|}}\n  {{#t.head as |t|}}\n    {{#t.h}}\n      <div>Nested Headers</div>\n      {{#t.h width=90}}Nesting{{/t.h}}\n      {{#t.h width=90}}Nesting{{/t.h}}\n    {{/t.h}}\n    {{#ui-sortable}}\n      {{#t.h width=90}}Sortable{{/t.h}}\n      {{#t.h width=90}}Column{{/t.h}}\n      {{#t.h width=90}}That{{/t.h}}\n      {{#t.h width=90}}Allows{{/t.h}}\n      {{#t.h width=90}}\n        {{#ui-resizable}}\n          Resizing\n        {{/ui-resizable}}\n      {{/t.h}}\n    {{/ui-sortable}}\n  {{/t.head}}\n{{/ui-table}}\n```",
             "access": "private",
             "tagname": ""
@@ -346,7 +356,22 @@
             "module": "form",
             "namespace": "",
             "file": "addon/components/fm-field.js",
-            "line": 7
+            "line": 10
+        },
+        "fm-fieldset": {
+            "name": "fm-fieldset",
+            "shortname": "fm-fieldset",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "form",
+            "namespace": "",
+            "file": "addon/components/fm-fieldset.js",
+            "line": 8,
+            "access": "private",
+            "tagname": ""
         },
         "fm-form": {
             "name": "fm-form",
@@ -359,7 +384,7 @@
             "module": "form",
             "namespace": "",
             "file": "addon/components/fm-form.js",
-            "line": 15,
+            "line": 17,
             "description": "`{{fm-form}}` component wraps a `DS.Model` object and yields\n`{{fm-field}}` with appropriate validations setup. Each `{{fm-field}}`\nyields more contextual input component to let you choose how to\nrepresent the field.\n\n`{{fm-field}}` can be interlaced with HTML tags to provide additional\nlayout needs.\n\nBasic Usage:\n\n```handlebars\n{{#fm-form model as |attribute|}}\n  {{#attribute.name as |in|}}\n    {{in.text}}\n  {{/attribute.name}}\n  {{#attribute.address as |in|}}\n    {{in.text}}\n  {{/attribute.address}}\n{{/fm-form}}\n```\n\n`{{fm-form}}` integrates with `{{ui-table}}` to allow editability\nand validability.\n\nAdvanced Usage:\n\n```handlebars\n{{#ui-table as |t|}}\n  {{#t.body as |t|}}\n    {{#each data as |datum|}}\n      {{#t.r as |t|}}\n        {{#fm-form datum as |attribute|}}\n          {{#t.d}}\n            {{#attribute.name as |in|}}\n              {{in.text}}\n            {{/attribute.name}}\n          {{/t.d}}\n          {{#t.d}}\n            {{#attribute.age as |in|}}\n              {{in.text}}\n            {{/attribute.age}}\n          {{/t.d}}\n        {{/fm-form}}\n      {{/t.r}}\n    {{/each}}\n  {{/t.body}}\n{{/ui-table}}\n```",
             "access": "public",
             "tagname": ""
@@ -455,7 +480,7 @@
     "classitems": [
         {
             "file": "addon/components/ui-table/th.js",
-            "line": 21,
+            "line": 22,
             "itemtype": "attribute",
             "name": "width",
             "class": "ui-table.th",
@@ -463,7 +488,7 @@
         },
         {
             "file": "addon/components/ui-table/th.js",
-            "line": 25,
+            "line": 26,
             "itemtype": "attribute",
             "name": "span",
             "class": "ui-table.th",
@@ -471,7 +496,7 @@
         },
         {
             "file": "addon/components/ui-table/th.js",
-            "line": 29,
+            "line": 30,
             "itemtype": "attribute",
             "name": "frozen",
             "class": "ui-table.th",
@@ -490,7 +515,7 @@
         },
         {
             "file": "addon/components/ui-scrollable.js",
-            "line": 17,
+            "line": 18,
             "description": "options hash for [perfect-scrollbar](https://github.com/noraesae/perfect-scrollbar#optional-parameters)\n\n- Set to `false` to disable perfect-scrollbar and use native scroll.\n- Set to `true` to enable perfect-scrollbar without any options. This is default.\n- Optionally pass in an option hash to enable different features on perfect-scrollbar.",
             "itemtype": "attribute",
             "name": "options",

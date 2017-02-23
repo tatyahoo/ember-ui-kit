@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/f6024e73" target="_blank">
-                                  Tag: 0.3.0.f6024e73
+                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/2c8122ac" target="_blank">
+                                  Tag: 0.4.0.2c8122ac
                                 </a>
                             </h4>
                         </div>
@@ -137,6 +137,8 @@
 import Ember from &#x27;ember&#x27;;
 import layout from &#x27;../../templates/components/ui-table/tfoot&#x27;;
 
+import Composable from &#x27;../../mixins/composable&#x27;;
+
 import { construct } from &#x27;../../utils/computed&#x27;;
 
 /**
@@ -162,7 +164,8 @@ import { construct } from &#x27;../../utils/computed&#x27;;
  * @module ui
  * @class ui-table.tfoot
  */
-export default Ember.Component.extend({
+export default Ember.Component.extend(Composable, {
+  componentRegistrationName: &#x27;tfoot&#x27;,
   classNames: &#x27;ui-table__tfoot&#x27;,
   layout,
 
