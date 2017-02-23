@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import layout from '../../templates/components/ui-table/thead';
 
+import Composable from '../../mixins/composable';
 import Styleable from '../../mixins/styleable';
 
 import { getBox } from '../../utils/dom';
@@ -36,7 +37,8 @@ import { construct } from '../../utils/computed';
  * @module ui
  * @class ui-table.thead
  */
-export default Ember.Component.extend(Styleable, {
+export default Ember.Component.extend(Composable, Styleable, {
+  componentRegistrationName: 'thead',
   classNames: 'ui-table__thead',
   layout,
 
@@ -89,9 +91,6 @@ export default Ember.Component.extend(Styleable, {
   didInsertElement() {
     this._super(...arguments);
 
-    this.$().parent().trigger('register.thead', this);
-    this.$().parent().trigger('register.all', this);
-
     let { TEXT_NODE, ELEMENT_NODE } = document;
 
     (function recur(nodes) {
@@ -107,7 +106,6 @@ export default Ember.Component.extend(Styleable, {
   willDestroyElement() {
     this._super(...arguments);
 
-    this.$().parent().trigger('unregister.thead', this);
     this.$().off('register.th');
   },
 

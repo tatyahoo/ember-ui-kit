@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import layout from '../../templates/components/ui-table/tfoot';
 
+import Composable from '../../mixins/composable';
+
 import { construct } from '../../utils/computed';
 
 /**
@@ -26,7 +28,8 @@ import { construct } from '../../utils/computed';
  * @module ui
  * @class ui-table.tfoot
  */
-export default Ember.Component.extend({
+export default Ember.Component.extend(Composable, {
+  componentRegistrationName: 'tfoot',
   classNames: 'ui-table__tfoot',
   layout,
 
