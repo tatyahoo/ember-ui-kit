@@ -2,6 +2,9 @@ import Ember from 'ember';
 import layout from '../templates/components/fm-field';
 
 import { Validatable } from 'ember-ui-kit/helpers/validate';
+
+import Composable from '../mixins/composable';
+
 import MS from '../utils/microstate';
 
 /**
@@ -9,7 +12,8 @@ import MS from '../utils/microstate';
  * @class fm-field
  * @public
  */
-export default Ember.Component.extend({
+export default Ember.Component.extend(Composable, {
+  componentRegistrationName: 'field',
   tagName: 'label',
   classNames: 'fm-field',
   attributeBindings: 'modelAttribute:data-model-attribute',
