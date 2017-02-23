@@ -35,6 +35,18 @@ export default Ember.Component.extend({
     return null;
   }).readOnly(),
 
+  modelValidation: Ember.computed(function() {
+    if (this.get('isModelValidatable')) {
+      return this.get('model.results');
+    }
+
+    return null;
+  }).readOnly(),
+
+  isRequired: Ember.computed('isModelValidatable', 'model.results.options.presence', function() {
+    return Boolean(this.get('isModelValidatable') && this.get('model.results.options.presence'));
+  }).readOnly(),
+
   isModelValidatable: Ember.computed('model', function() {
     return this.get('model') instanceof Validatable;
   }).readOnly(),
