@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import layout from '../../templates/components/ui-table/td';
 
+import Composable from '../../mixins/composable';
+
 import { swapNodes } from '../../utils/dom';
 
 /**
@@ -8,7 +10,8 @@ import { swapNodes } from '../../utils/dom';
  * @module ui
  * @class ui-table.td
  */
-export default Ember.Component.extend({
+export default Ember.Component.extend(Composable, {
+  componentRegistrationName: 'td',
   classNames: 'ui-table__td',
   classNameBindings: 'columnClass',
   layout,
@@ -34,20 +37,12 @@ export default Ember.Component.extend({
     return Ember.$(this.get('frozenMirrorCellNode'));
   }).readOnly(),
 
-  didInsertElement() {
-    this._super(...arguments);
-
-    this.$().parent().trigger('register.td', this);
-    this.$().parent().trigger('register.all', this);
-  },
-
   willDestroyElement() {
     this._super(...arguments);
 
     this.unfreeze();
     this.get('frozenMirrorCell').remove();
 
-    this.$().parent().trigger('unregister.td', this);
     this.$().off('register.th');
   },
 

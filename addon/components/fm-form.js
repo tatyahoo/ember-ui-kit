@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import layout from '../templates/components/fm-form';
 
+import Composable from '../mixins/composable';
+
 function collect(object) {
   let properties = [];
   let ctor = object.constructor;
@@ -66,7 +68,8 @@ function collect(object) {
  * @module form
  * @class fm-form
  */
-export default Ember.Component.extend({
+export default Ember.Component.extend(Composable, {
+  tagName: 'form',
   classNames: 'fm-form',
   layout,
 

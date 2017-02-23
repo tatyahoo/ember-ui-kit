@@ -13,6 +13,7 @@ import { construct } from '../../utils/computed';
  * @class ui-table.th
  */
 export default Ember.Component.extend(Styleable, Composable, {
+  componentRegistrationName: 'th',
   classNames: 'ui-table__th',
   classNameBindings: ['columnClass', 'isLeafHeader:ui-table__th--leaf:ui-table__th--branch'],
   layout,
@@ -70,17 +71,9 @@ export default Ember.Component.extend(Styleable, Composable, {
     }));
   },
 
-  didInsertElement() {
-    this._super(...arguments);
-
-    this.$().parent().trigger('register.th', this);
-    this.$().parent().trigger('register.all', this);
-  },
-
   willDestroyElement() {
     this._super(...arguments);
 
-    this.$().parent().trigger('unregister.th', this);
     this.$().off('register.th');
     this.$().off('resize');
   },

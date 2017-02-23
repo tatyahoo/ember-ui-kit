@@ -1,8 +1,11 @@
 import Ember from 'ember';
 import layout from '../../templates/components/ui-table/tbody';
 
+import Composable from '../../mixins/composable';
+
 import { observerOnceIn } from '../../utils/run';
 import { construct } from '../../utils/computed';
+
 import MS from '../../utils/microstate';
 
 /**
@@ -29,7 +32,8 @@ import MS from '../../utils/microstate';
  * @module ui
  * @class ui-table.tbody
  */
-export default Ember.Component.extend({
+export default Ember.Component.extend(Composable, {
+  componentRegistrationName: 'tbody',
   classNames: 'ui-table__tbody',
   layout,
 
@@ -100,9 +104,6 @@ export default Ember.Component.extend({
   didInsertElement() {
     this._super(...arguments);
 
-    this.$().parent().trigger('register.tbody', this);
-    this.$().parent().trigger('register.all', this);
-
     let ns = this.get('table.elementId');
 
     let oldOrder = this.get('table.thead.childHeaderLeafList').map(leaf => leaf.element);
@@ -154,7 +155,6 @@ export default Ember.Component.extend({
     let ns = this.get('elementId');
 
     this.$().parents('.ui-table:first').off(`sortupdate.${ns}`);
-    this.$().parent().trigger('unregister.tbody', this);
     this.$().off('register.tr');
   },
 

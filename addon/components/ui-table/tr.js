@@ -11,6 +11,8 @@ import { construct } from '../../utils/computed';
  * @class ui-table.tr
  */
 export default Ember.Component.extend(Composable, {
+  componentRegistrationName: 'tr',
+
   classNames: 'ui-table__tr',
   classNameBindings: ['even:ui-table__tr--even', 'odd:ui-table__tr--odd'],
   layout,
@@ -72,20 +74,11 @@ export default Ember.Component.extend(Composable, {
     });
   },
 
-  didInsertElement() {
-    this._super(...arguments);
-
-    this.$().parent().trigger('register.tr', this);
-    this.$().parent().trigger('register.all', this);
-  },
-
   willDestroyElement() {
     this._super(...arguments);
 
     this.get('frozenMirrorRow').remove();
 
-    this.$().parent().trigger('unregister.tr', this);
-    this.$().parent().trigger('unregister.all', this);
     this.$().off('register.th');
   }
 });
