@@ -37,11 +37,26 @@ export default Ember.Component.extend(Composable, {
   classNames: 'ui-table__tbody',
   layout,
 
-  // attrs {
+  /**
+   * The index of the first visible record in the table.
+   *
+   * Usage:
+   *
+   * ```handlebars
+   * {{ui-tbody cursor=(Number 0 on-set=(action "controllerAction"))}}
+   * ```
+   *
+   * @public
+   * @attribute cursor
+   * @type Number
+   */
   cursor: 0, // TODO cursor is write only, need to implement read
-  // @private
+
+  /**
+   * @private
+   * @attribute table
+   */
   table: null,
-  // attrs }
 
   thead: Ember.computed.readOnly('table.thead'),
   tbody: Ember.computed.readOnly('table.tbody'),
