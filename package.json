@@ -6,12 +6,12 @@
     "ember-addon"
   ],
   "license": "MIT",
-  "author": "",
+  "author": "Ming Liu",
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "",
+  "repository": "https://github.com/ming-codes/ember-ui-kit",
   "scripts": {
     "build": "ember build",
     "start": "ember server",
