@@ -23,7 +23,6 @@
   }
 
 .ui-table__thead {
-  box-sizing: content-box;
   position: absolute;
   white-space: nowrap;
   left: 0;
