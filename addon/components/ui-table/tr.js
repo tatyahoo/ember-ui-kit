@@ -30,6 +30,18 @@ export default Ember.Component.extend(Composable, {
   itemIndex: null,
   // attrs }
 
+  frozenMirrorRowClass: Ember.computed('class', 'classNames.[]', 'odd', 'even', function() {
+    return []
+      .concat(
+        this.get('class'),
+        this.get('classNames'),
+        this.get('odd') ? 'ui-table__tr--odd' : [],
+        this.get('even') ? 'ui-table__tr--even' : [],
+        'ui-table__tr--froze'
+      )
+      .join(' ');
+  }).readOnly(),
+
   frozenMirrorRow: Ember.computed(function() {
     return this.$('.ui-table__tr--froze');
   }).readOnly(),
