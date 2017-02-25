@@ -30,8 +30,24 @@ export default Ember.Component.extend(Composable, {
   itemIndex: null,
   // attrs }
 
+  frozenMirrorRowClass: Ember.computed('class', 'classNames.[]', 'odd', 'even', function() {
+    return []
+      .concat(
+        this.get('class'),
+        this.get('classNames'),
+        this.get('odd') ? 'ui-table__tr--odd' : [],
+        this.get('even') ? 'ui-table__tr--even' : [],
+        'ui-table__tr--froze'
+      )
+      .join(' ');
+  }).readOnly(),
+
   frozenMirrorRow: Ember.computed(function() {
     return this.$('.ui-table__tr--froze');
+  }).readOnly(),
+
+  rowElements: Ember.computed(function() {
+    return this.get('frozenMirrorRow').add(this.$());
   }).readOnly(),
 
   childCellList: construct(Ember.A).readOnly(),
@@ -74,11 +90,25 @@ export default Ember.Component.extend(Composable, {
     });
   },
 
+  didInsertElement() {
+    this._super(...arguments);
+
+    let rows = this.get('rowElements');
+
+    rows
+      .on('mouseenter', () => rows.addClass('ui-table__tr--hover'))
+      .on('mouseleave', () => rows.removeClass('ui-table__tr--hover'));
+  },
+
   willDestroyElement() {
     this._super(...arguments);
 
     this.get('frozenMirrorRow').remove();
 
     this.$().off('register.th');
+
+    this.get('rowElements')
+      .off('mouseenter')
+      .off('mouseleave');
   }
 });

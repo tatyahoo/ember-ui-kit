@@ -89,6 +89,31 @@ test('it renders simple table', function(assert) {
   tbody.$('.ui-table__unfroze.ui-scrollable').data('$E').scrollTop(100);
 
   assert.equal(this.$('.cursor').text(), '5', 'should scroll to 5 with scrollTop 100');
+
+  let froze = tbody.$('.ui-table__froze .ui-table__tr');
+  let unfroze = tbody.$('.ui-table__unfroze .ui-table__tr');
+
+  this.get('data').forEach((datum, index) => {
+    froze.eq(index).trigger('mouseenter');
+
+    assert.ok(froze.eq(index).hasClass('ui-table__tr--hover'));
+    assert.ok(unfroze.eq(index).hasClass('ui-table__tr--hover'));
+
+    froze.eq(index).trigger('mouseleave');
+
+    assert.ok(!froze.eq(index).hasClass('ui-table__tr--hover'));
+    assert.ok(!unfroze.eq(index).hasClass('ui-table__tr--hover'));
+
+    unfroze.eq(index).trigger('mouseenter');
+
+    assert.ok(froze.eq(index).hasClass('ui-table__tr--hover'));
+    assert.ok(unfroze.eq(index).hasClass('ui-table__tr--hover'));
+
+    unfroze.eq(index).trigger('mouseleave');
+
+    assert.ok(!froze.eq(index).hasClass('ui-table__tr--hover'));
+    assert.ok(!unfroze.eq(index).hasClass('ui-table__tr--hover'));
+  });
 });
 
 test('it renders frozen column table', function(assert) {
