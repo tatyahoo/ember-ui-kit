@@ -34,6 +34,10 @@ export default Ember.Component.extend(Composable, {
     return this.$('.ui-table__tr--froze');
   }).readOnly(),
 
+  rowElements: Ember.computed(function() {
+    return this.get('frozenMirrorRow').add(this.$());
+  }).readOnly(),
+
   childCellList: construct(Ember.A).readOnly(),
 
   odd: Ember.computed('itemIndex', function() {
@@ -74,11 +78,25 @@ export default Ember.Component.extend(Composable, {
     });
   },
 
+  didInsertElement() {
+    this._super(...arguments);
+
+    let rows = this.get('rowElements');
+
+    rows
+      .on('mouseenter', () => rows.addClass('ui-table__tr--hover'))
+      .on('mouseleave', () => rows.removeClass('ui-table__tr--hover'));
+  },
+
   willDestroyElement() {
     this._super(...arguments);
 
     this.get('frozenMirrorRow').remove();
 
     this.$().off('register.th');
+
+    this.get('rowElements')
+      .off('mouseenter')
+      .off('mouseleave');
   }
 });
