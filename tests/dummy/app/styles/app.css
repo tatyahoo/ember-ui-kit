@@ -70,7 +70,7 @@ body.ember-application .ui-table__unfroze .ui-scrollable__scroller {
 }
 
 body.ember-application .ui-table__tr {
-  padding: 10px 0;
+  height: 56px;
 }
 
 body.ember-application .ui-table__tr.active {
