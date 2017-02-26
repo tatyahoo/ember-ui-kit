@@ -106,7 +106,13 @@
   white-space: initial; }
 
 .ui-table__tr {
-  box-sizing: content-box;
   white-space: nowrap;
   margin: 0;
+}
+
+.ui-table__tr::before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
 }
