@@ -43,6 +43,10 @@ export function getBox(element) {
     };
   }
 
+  if (element instanceof Ember.$) {
+    element = element.get(0);
+  }
+
   let css = getComputedStyle(element);
 
   return {
@@ -71,4 +75,61 @@ export function getBox(element) {
       left: parseFloat(css.getPropertyValue('border-left-width'))
     }
   };
+}
+
+export function layout(width, portions) {
+  let fr = 0;
+  let available = width;
+
+  return portions
+    .map(portion => {
+      if (typeof portion === 'number') {
+        return {
+          value: portion,
+          unit: 'px'
+        };
+      }
+
+      let expr = portion.match(/([\d\.]+)(px|\%|fr)/);
+
+      Ember.assert(`Layout expression ${portion} not recognized`, expr);
+
+      let [ , value, unit ] = expr;
+
+      return {
+        value: Number(value),
+        unit
+      };
+    })
+    .map(portion => {
+      let { value, unit } = portion;
+
+      if (unit === 'px') {
+        available -= value;
+
+        return value;
+      }
+      else if (unit === '%') {
+        value = width * value / 100;
+
+        available -= value;
+
+        return value;
+      }
+      else if (unit === 'fr') {
+        fr += value;
+
+        return portion;
+      }
+      else {
+        Ember.assert(`Unrecognized unit ${unit}`);
+      }
+    })
+    .map(portion => {
+      if (typeof portion === 'number') {
+        return portion;
+      }
+
+      return available * portion.value / fr;
+    });
 }
