@@ -21,15 +21,15 @@
   Cursor: {{cursor}}
 
   {{#if (eq scroll.selection "virtual")}}
-    {{#ui-table as |t|}}
+    {{#ui-table as |t column-width|}}
       {{#t.head as |t|}}
         {{#ui-sortable}}
           {{#t.h width=83 frozen=frozen.value}}ID{{/t.h}}
           {{#t.h}}
             <div>Name</div>
             {{#ui-sortable}}
-              {{#t.h}}First Name{{/t.h}}
-              {{#t.h}}Last Name{{/t.h}}
+              {{#t.h width="15%"}}First Name{{/t.h}}
+              {{#t.h width="15%"}}Last Name{{/t.h}}
             {{/ui-sortable}}
           {{/t.h}}
           {{#t.h width="50%"}}
@@ -37,9 +37,9 @@
               Nick Name
             {{/ui-resizable}}
           {{/t.h}}
-          {{#t.h}}Age{{/t.h}}
-          {{#t.h}}SSN{{/t.h}}
-          {{#t.h}}Password{{/t.h}}
+          {{#t.h width="10%"}}Age{{/t.h}}
+          {{#t.h width="10%"}}SSN{{/t.h}}
+          {{#t.h width="20%"}}Password{{/t.h}}
         {{/ui-sortable}}
       {{/t.head}}
       {{#t.body-each (if application.model.isFulfilled (Select (append application.model)) (array)) cursor=cursor as |t item index|}}
@@ -75,17 +75,17 @@
           {{#t.h}}
             <div>Name</div>
             {{#ui-sortable}}
-              {{#t.h}}First Name{{/t.h}}
-              {{#t.h}}Last Name{{/t.h}}
+              {{#t.h width="15%"}}First Name{{/t.h}}
+              {{#t.h width="15%"}}Last Name{{/t.h}}
             {{/ui-sortable}}
           {{/t.h}}
-          {{#t.h}}
+          {{#t.h width="15%"}}
             {{#ui-resizable}}
               Nick Name
             {{/ui-resizable}}
           {{/t.h}}
           {{#t.h width="50%"}}SSN{{/t.h}}
-          {{#t.h}}Password{{/t.h}}
+          {{#t.h width="20%"}}Password{{/t.h}}
         {{/ui-sortable}}
       {{/t.head}}
       {{#t.body cursor=cursor as |t|}}
