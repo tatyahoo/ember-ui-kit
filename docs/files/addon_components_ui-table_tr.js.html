@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/2c8122ac" target="_blank">
-                                  Tag: 0.4.0.2c8122ac
+                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/3565edbf" target="_blank">
+                                  Tag: 0.4.1.3565edbf
                                 </a>
                             </h4>
                         </div>
@@ -166,8 +166,24 @@ export default Ember.Component.extend(Composable, {
   itemIndex: null,
   // attrs }
 
+  frozenMirrorRowClass: Ember.computed(&#x27;class&#x27;, &#x27;classNames.[]&#x27;, &#x27;odd&#x27;, &#x27;even&#x27;, function() {
+    return []
+      .concat(
+        this.get(&#x27;class&#x27;),
+        this.get(&#x27;classNames&#x27;),
+        this.get(&#x27;odd&#x27;) ? &#x27;ui-table__tr--odd&#x27; : [],
+        this.get(&#x27;even&#x27;) ? &#x27;ui-table__tr--even&#x27; : [],
+        &#x27;ui-table__tr--froze&#x27;
+      )
+      .join(&#x27; &#x27;);
+  }).readOnly(),
+
   frozenMirrorRow: Ember.computed(function() {
     return this.$(&#x27;.ui-table__tr--froze&#x27;);
+  }).readOnly(),
+
+  rowElements: Ember.computed(function() {
+    return this.get(&#x27;frozenMirrorRow&#x27;).add(this.$());
   }).readOnly(),
 
   childCellList: construct(Ember.A).readOnly(),
@@ -210,12 +226,26 @@ export default Ember.Component.extend(Composable, {
     });
   },
 
+  didInsertElement() {
+    this._super(...arguments);
+
+    let rows = this.get(&#x27;rowElements&#x27;);
+
+    rows
+      .on(&#x27;mouseenter&#x27;, () =&gt; rows.addClass(&#x27;ui-table__tr--hover&#x27;))
+      .on(&#x27;mouseleave&#x27;, () =&gt; rows.removeClass(&#x27;ui-table__tr--hover&#x27;));
+  },
+
   willDestroyElement() {
     this._super(...arguments);
 
     this.get(&#x27;frozenMirrorRow&#x27;).remove();
 
     this.$().off(&#x27;register.th&#x27;);
+
+    this.get(&#x27;rowElements&#x27;)
+      .off(&#x27;mouseenter&#x27;)
+      .off(&#x27;mouseleave&#x27;);
   }
 });
 

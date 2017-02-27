@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/2c8122ac" target="_blank">
-                                  Tag: 0.4.0.2c8122ac
+                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/3565edbf" target="_blank">
+                                  Tag: 0.4.1.3565edbf
                                 </a>
                             </h4>
                         </div>
@@ -140,7 +140,7 @@ import layout from &#x27;../../templates/components/ui-table/thead&#x27;;
 import Composable from &#x27;../../mixins/composable&#x27;;
 import Styleable from &#x27;../../mixins/styleable&#x27;;
 
-import { getBox } from &#x27;../../utils/dom&#x27;;
+import { getBox, layout as cssLayout } from &#x27;../../utils/dom&#x27;;
 import { construct } from &#x27;../../utils/computed&#x27;;
 
 /**
@@ -248,17 +248,7 @@ export default Ember.Component.extend(Composable, Styleable, {
   resizeWidth() {
     let box = getBox(this.element);
     let frozeBox = getBox(this.$().children(&#x27;.ui-table__froze&#x27;).get(0));
-    //let unfrozeBox = getBox(this.$().children(&#x27;.ui-table__unfroze&#x27;).get(0));
     let leaves = this.get(&#x27;childHeaderLeafList&#x27;);
-    let availableSpan = leaves.reduce((accum, th) =&gt; {
-      let width = th.get(&#x27;width&#x27;);
-
-      if (typeof width === &#x27;number&#x27;) {
-        return accum;
-      }
-
-      return accum + th.get(&#x27;span&#x27;);
-    }, 0);
     let availableWidth = box.width;
 
     availableWidth -= box.padding.left + box.padding.right;
@@ -271,28 +261,8 @@ export default Ember.Component.extend(Composable, Styleable, {
       return accum;
     }, 0);
 
-    availableWidth -= leaves.reduce((accum, th) =&gt; {
-      let width = th.get(&#x27;width&#x27;);
-
-      if (typeof width === &#x27;number&#x27;) {
-        return accum + width;
-      }
-
-      return accum;
-    }, 0);
-
-    leaves.forEach(th =&gt; {
-      let width = th.get(&#x27;width&#x27;);
-
-      if (typeof width === &#x27;number&#x27;) {
-        return th.set(&#x27;columnWidth&#x27;, width);
-      }
-
-      if (typeof width === &#x27;string&#x27; &amp;&amp; width.match(/[\d\.]+\%$/)) {
-        return th.set(&#x27;columnWidth&#x27;, availableWidth * parseFloat(width) / 100);
-      }
-
-      return th.set(&#x27;columnWidth&#x27;, availableWidth * th.get(&#x27;span&#x27;) / availableSpan);
+    cssLayout(availableWidth, leaves.mapBy(&#x27;width&#x27;)).forEach((width, index) =&gt; {
+      leaves.objectAt(index).set(&#x27;columnWidth&#x27;, width);
     });
 
     let ns = this.get(&#x27;table.elementId&#x27;);

@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/2c8122ac" target="_blank">
-                                  Tag: 0.4.0.2c8122ac
+                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/3565edbf" target="_blank">
+                                  Tag: 0.4.1.3565edbf
                                 </a>
                             </h4>
                         </div>
@@ -173,11 +173,26 @@ export default Ember.Component.extend(Composable, {
   classNames: &#x27;ui-table__tbody&#x27;,
   layout,
 
-  // attrs {
+  /**
+   * The index of the first visible record in the table.
+   *
+   * Usage:
+   *
+   * &#x60;&#x60;&#x60;handlebars
+   * {{ui-tbody cursor=(Number 0 on-set=(action &quot;controllerAction&quot;))}}
+   * &#x60;&#x60;&#x60;
+   *
+   * @public
+   * @attribute cursor
+   * @type Number
+   */
   cursor: 0, // TODO cursor is write only, need to implement read
-  // @private
+
+  /**
+   * @private
+   * @attribute table
+   */
   table: null,
-  // attrs }
 
   thead: Ember.computed.readOnly(&#x27;table.thead&#x27;),
   tbody: Ember.computed.readOnly(&#x27;table.tbody&#x27;),

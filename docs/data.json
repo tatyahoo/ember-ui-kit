@@ -3,7 +3,7 @@
         "name": "ember-ui-kit",
         "description": "The default blueprint for ember-cli addons.",
         "url": "https://github.com/ming-codes/ember-ui-kit",
-        "version": "0.4.0.2c8122ac"
+        "version": "0.4.1.3565edbf"
     },
     "files": {
         "addon/components/ui-table/tbody-each.js": {
@@ -471,7 +471,7 @@
             "namespace": "",
             "file": "addon/components/ui-table.js",
             "line": 9,
-            "description": "The `ui-table` component is designed to have a declarative\nsyntax that looks just like a plain html table while supporting\nmany advanced table features such as:\n\n- Sortable column\n- Resizable column\n- Show/Hide column\n- Freezable column\n- Nested header\n- Table footer\n- Virtualized scrolling\n- Selectable rows\n- Sorting and filtering of rows\n- Template driven cells that enables edit-ability and\n  other component composition.\n\nBasic Usage:\n\n```handlebars\n{{#ui-table as |t|}}\n  {{#t.head as |t|}}\n    {{#t.h width=90}}ID{{/t.h}}\n    {{#t.h span=1}}Name{{/t.h}}\n    {{#t.h width=\"50%\"}}Address{{/t.h}}\n  {{/t.head}}\n  {{#t.body as |t|}}\n   {{#each users as |user|}}\n     {{#t.r as |t|}}\n       {{#t.d}}{{user.id}}{{/t.d}}\n       {{#t.d}}{{user.name}}{{/t.d}}\n       {{#t.d}}{{user.address}}{{/t.d}}\n     {{/t.r}}\n   {{/each}}\n  {{/t.body}}\n{{/ui-table}}\n```\n\nSee\n[thead](./ui-table.thead.html),\n[th](./ui-table.th.html),\n[tbody](./ui-table.tbody.html),\n[tr](./ui-table.tr.html),\n[td](./ui-table.td.html),\nand [tfoot](./ui-table.tfoot.html)\nfor advanced usages.\n\nNote, these components are private for the\npurpose that they should not be used alone,\nbut only as contextual component of ui-table\n\n\n`{{ui-table}}` integrates with `{{fm-form}}` to allow editability\nand validability.\n\nAdvanced Usage:\n\n```handlebars\n{{#ui-table as |t|}}\n  {{#t.body as |t|}}\n    {{#each data as |datum|}}\n      {{#t.r as |t|}}\n        {{#fm-form datum as |attribute|}}\n          {{#t.d}}\n            {{#attribute.name as |in|}}\n              {{in.text}}\n            {{/attribute.name}}\n          {{/t.d}}\n          {{#t.d}}\n            {{#attribute.age as |in|}}\n              {{in.text}}\n            {{/attribute.age}}\n          {{/t.d}}\n        {{/fm-form}}\n      {{/t.r}}\n    {{/each}}\n  {{/t.body}}\n{{/ui-table}}\n```",
+            "description": "The `ui-table` component is designed to have a declarative\nsyntax that looks just like a plain html table while supporting\nmany advanced table features such as:\n\n- Sortable column\n- Resizable column\n- Show/Hide column\n- Freezable column\n- Nested header\n- Table footer\n- Virtualized scrolling\n- Selectable rows\n- Sorting and filtering of rows\n- Template driven cells that enables edit-ability and\n  other component composition.\n\nBasic Usage:\n\n```handlebars\n{{#ui-table as |t|}}\n  {{#t.head as |t|}}\n    {{#t.h width=\"90px\"}}ID{{/t.h}}\n    {{#t.h width=\"1fr\"}}Name{{/t.h}}\n    {{#t.h width=\"50%\"}}Address{{/t.h}}\n  {{/t.head}}\n  {{#t.body as |t|}}\n   {{#each users as |user|}}\n     {{#t.r as |t|}}\n       {{#t.d}}{{user.id}}{{/t.d}}\n       {{#t.d}}{{user.name}}{{/t.d}}\n       {{#t.d}}{{user.address}}{{/t.d}}\n     {{/t.r}}\n   {{/each}}\n  {{/t.body}}\n{{/ui-table}}\n```\n\nSee\n[thead](./ui-table.thead.html),\n[th](./ui-table.th.html),\n[tbody](./ui-table.tbody.html),\n[tr](./ui-table.tr.html),\n[td](./ui-table.td.html),\nand [tfoot](./ui-table.tfoot.html)\nfor advanced usages.\n\nNote, these components are private for the\npurpose that they should not be used alone,\nbut only as contextual component of ui-table\n\n\n`{{ui-table}}` integrates with `{{fm-form}}` to allow editability\nand validability.\n\nAdvanced Usage:\n\n```handlebars\n{{#ui-table as |t|}}\n  {{#t.body as |t|}}\n    {{#each data as |datum|}}\n      {{#t.r as |t|}}\n        {{#fm-form datum as |attribute|}}\n          {{#t.d}}\n            {{#attribute.name as |in|}}\n              {{in.text}}\n            {{/attribute.name}}\n          {{/t.d}}\n          {{#t.d}}\n            {{#attribute.age as |in|}}\n              {{in.text}}\n            {{/attribute.age}}\n          {{/t.d}}\n        {{/fm-form}}\n      {{/t.r}}\n    {{/each}}\n  {{/t.body}}\n{{/ui-table}}\n```",
             "access": "public",
             "tagname": ""
         }
@@ -479,8 +479,30 @@
     "elements": {},
     "classitems": [
         {
+            "file": "addon/components/ui-table/tbody.js",
+            "line": 40,
+            "description": "The index of the first visible record in the table.\n\nUsage:\n\n```handlebars\n{{ui-tbody cursor=(Number 0 on-set=(action \"controllerAction\"))}}\n```",
+            "access": "public",
+            "tagname": "",
+            "itemtype": "attribute",
+            "name": "cursor",
+            "type": "Number",
+            "class": "ui-table.tbody",
+            "module": "ui"
+        },
+        {
+            "file": "addon/components/ui-table/tbody.js",
+            "line": 55,
+            "access": "private",
+            "tagname": "",
+            "itemtype": "attribute",
+            "name": "table",
+            "class": "ui-table.tbody",
+            "module": "ui"
+        },
+        {
             "file": "addon/components/ui-table/th.js",
-            "line": 22,
+            "line": 21,
             "itemtype": "attribute",
             "name": "width",
             "class": "ui-table.th",
@@ -488,9 +510,9 @@
         },
         {
             "file": "addon/components/ui-table/th.js",
-            "line": 26,
+            "line": 25,
             "itemtype": "attribute",
-            "name": "span",
+            "name": "frozen",
             "class": "ui-table.th",
             "module": "ui"
         },
@@ -498,7 +520,9 @@
             "file": "addon/components/ui-table/th.js",
             "line": 30,
             "itemtype": "attribute",
-            "name": "frozen",
+            "name": "span",
+            "deprecated": true,
+            "deprecationMessage": "Use `width` with `fr` unit instead",
             "class": "ui-table.th",
             "module": "ui"
         },
