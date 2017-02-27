@@ -4,7 +4,7 @@ import layout from '../../templates/components/ui-table/thead';
 import Composable from '../../mixins/composable';
 import Styleable from '../../mixins/styleable';
 
-import { getBox } from '../../utils/dom';
+import { getBox, layout as cssLayout } from '../../utils/dom';
 import { construct } from '../../utils/computed';
 
 /**
@@ -112,17 +112,7 @@ export default Ember.Component.extend(Composable, Styleable, {
   resizeWidth() {
     let box = getBox(this.element);
     let frozeBox = getBox(this.$().children('.ui-table__froze').get(0));
-    //let unfrozeBox = getBox(this.$().children('.ui-table__unfroze').get(0));
     let leaves = this.get('childHeaderLeafList');
-    let availableSpan = leaves.reduce((accum, th) => {
-      let width = th.get('width');
-
-      if (typeof width === 'number') {
-        return accum;
-      }
-
-      return accum + th.get('span');
-    }, 0);
     let availableWidth = box.width;
 
     availableWidth -= box.padding.left + box.padding.right;
@@ -135,28 +125,8 @@ export default Ember.Component.extend(Composable, Styleable, {
       return accum;
     }, 0);
 
-    availableWidth -= leaves.reduce((accum, th) => {
-      let width = th.get('width');
-
-      if (typeof width === 'number') {
-        return accum + width;
-      }
-
-      return accum;
-    }, 0);
-
-    leaves.forEach(th => {
-      let width = th.get('width');
-
-      if (typeof width === 'number') {
-        return th.set('columnWidth', width);
-      }
-
-      if (typeof width === 'string' && width.match(/[\d\.]+\%$/)) {
-        return th.set('columnWidth', availableWidth * parseFloat(width) / 100);
-      }
-
-      return th.set('columnWidth', availableWidth * th.get('span') / availableSpan);
+    cssLayout(availableWidth, leaves.mapBy('width')).forEach((width, index) => {
+      leaves.objectAt(index).set('columnWidth', width);
     });
 
     let ns = this.get('table.elementId');

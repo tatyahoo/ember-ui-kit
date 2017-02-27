@@ -18,19 +18,28 @@ export default Ember.Component.extend(Styleable, Composable, {
   classNameBindings: ['columnClass', 'isLeafHeader:ui-table__th--leaf:ui-table__th--branch'],
   layout,
 
-  // attrs {
   /**
    * @attribute width
    */
-  width: null,
-  /**
-   * @attribute span
-   */
-  span: 1,
+  width: '1fr',
   /**
    * @attribute frozen
    */
   frozen: false,
+
+  /**
+   * @attribute span
+   * @deprecated Use `width` with `fr` unit instead
+   */
+  span: Ember.computed({
+    get() {
+      Ember.deprecate('th#span is deprecated. Use th#width with `fr` unit instead');
+    },
+
+    set() {
+      Ember.deprecate('th#span is deprecated. Use th#width with `fr` unit instead');
+    }
+  }),
 
   // @private
   table: null,

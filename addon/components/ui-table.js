@@ -28,8 +28,8 @@ import { getBox } from '../utils/dom';
  * ```handlebars
  * {{#ui-table as |t|}}
  *   {{#t.head as |t|}}
- *     {{#t.h width=90}}ID{{/t.h}}
- *     {{#t.h span=1}}Name{{/t.h}}
+ *     {{#t.h width="90px"}}ID{{/t.h}}
+ *     {{#t.h width="1fr"}}Name{{/t.h}}
  *     {{#t.h width="50%"}}Address{{/t.h}}
  *   {{/t.head}}
  *   {{#t.body as |t|}}
