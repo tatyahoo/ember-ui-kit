@@ -7,7 +7,7 @@
 
 {{#if validation}}
   <ul class="fm-field__validation-messages">
-    {{#each (get model (concat "validations.attrs." valuePath ".messages")) as |message|}}
+    {{#each validation.messages as |message|}}
       <li>{{message}}</li>
     {{/each}}
   </ul>
