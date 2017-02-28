@@ -1,1 +1,9 @@
-{{outlet}}
+{{#fm-form model as |field|}}
+  {{#fm-field value=model.name valuePath="name" validation=model.validations.attrs.name as |in|}}
+    {{in.text}}
+  {{/fm-field}}
+
+  {{#field.name as |in|}}
+    {{in.text}}
+  {{/field.name}}
+{{/fm-form}}

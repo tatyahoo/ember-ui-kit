@@ -68,5 +68,15 @@ module.exports = {
       .forEach(function(path) {
         addon.import(path);
       });
+  },
+
+  setupPreprocessorRegistry: function(type, registry) {
+    registry.add('htmlbars-ast-plugin', {
+      name: 'property-component',
+      plugin: require('./lib/contextual-component-path-transform'),
+      baseDir: function() {
+        return __dirname;
+      }
+    });
   }
 };

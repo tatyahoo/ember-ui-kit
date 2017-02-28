@@ -46,7 +46,7 @@ test('it convert model to fm-field collection that is bindable', function(assert
     `);
 
     assert.equal(this.$('.fm-form').length, 1, `loop ${index} form should be ok with null model`);
-    assert.equal(this.$('.fm-form').children().length, 0, `loop ${index} form should be ok with null model, but no content`);
+    assert.equal(this.$('.fm-form').children().length, 2, `loop ${index} form should be ok with null model`);
 
     this.set('model', Ember.run(this.store, this.store.createRecord, 'user', {
       name: null,
