@@ -4,9 +4,9 @@ import layout from '../templates/components/fm-field';
 import Composable from '../mixins/composable';
 
 /**
+ * @private
  * @module form
  * @class fm-field
- * @public
  */
 export default Ember.Component.extend(Composable, {
   componentRegistrationName: 'field',
@@ -22,6 +22,6 @@ export default Ember.Component.extend(Composable, {
   // attrs {
   value: null,
   validPath: null,
-  validation: null,
+  validation: null
   // attrs }
 });
