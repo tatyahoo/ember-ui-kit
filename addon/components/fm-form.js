@@ -2,17 +2,6 @@ import Ember from 'ember';
 
 import Composable from '../mixins/composable';
 
-function collect(object) {
-  let properties = [];
-  let ctor = object.constructor;
-
-  (ctor.eachAttribute || ctor.eachComputedProperty).call(ctor, key => {
-    properties.push(key);
-  });
-
-  return properties;
-}
-
 /**
  * `{{fm-form}}` component wraps a `DS.Model` object and yields
  * `{{fm-field}}` with appropriate validations setup. Each `{{fm-field}}`

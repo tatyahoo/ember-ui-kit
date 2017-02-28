@@ -1,11 +1,7 @@
 import Ember from 'ember';
 import layout from '../templates/components/fm-field';
 
-import { Validatable } from 'ember-ui-kit/helpers/validate';
-
 import Composable from '../mixins/composable';
-
-import MS from '../utils/microstate';
 
 /**
  * @module form
