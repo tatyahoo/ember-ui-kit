@@ -1,13 +1,13 @@
 {{yield
   (hash
-    text=(component "in-text" (String modelValue on-set=(action "modelValueDidChange")))
-    toggle=(component "in-toggle" (Boolean modelValue on-set=(action "modelValueDidChange")))
+    text=(component "in-text" value)
+    toggle=(component "in-toggle" value)
   )
 }}
 
-{{#if isModelValidatable}}
+{{#if validation}}
   <ul class="fm-field__validation-messages">
-    {{#each model.results.messages as |message|}}
+    {{#each (get model (concat "validations.attrs." valuePath ".messages")) as |message|}}
       <li>{{message}}</li>
     {{/each}}
   </ul>
