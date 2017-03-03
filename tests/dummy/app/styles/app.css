@@ -82,6 +82,10 @@ body.ember-application .ui-table__th {
 body.ember-application .ui-table__td {
 }
 
+body.ember-application .ui-table {
+  border: 20px solid black;
+}
+
 ul {
   margin: 0;
   padding-left: 25px;
