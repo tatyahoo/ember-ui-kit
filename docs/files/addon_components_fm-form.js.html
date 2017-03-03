@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/3565edbf" target="_blank">
-                                  Tag: 0.4.1.3565edbf
+                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/2c4258cf" target="_blank">
+                                  Tag: 0.4.2.2c4258cf
                                 </a>
                             </h4>
                         </div>
@@ -96,9 +96,6 @@
                         <div class="panel-body">
                             <ol>
                                     <li>
-                                        <a href="../classes/fm-field.html">fm-field</a>
-                                    </li>
-                                    <li>
                                         <a href="../classes/fm-form.html">fm-form</a>
                                     </li>
                                     <li>
@@ -135,20 +132,8 @@
 <div class="file">
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import layout from &#x27;../templates/components/fm-form&#x27;;
 
 import Composable from &#x27;../mixins/composable&#x27;;
-
-function collect(object) {
-  let properties = [];
-  let ctor = object.constructor;
-
-  (ctor.eachAttribute || ctor.eachComputedProperty).call(ctor, key =&gt; {
-    properties.push(key);
-  });
-
-  return properties;
-}
 
 /**
  * &#x60;{{fm-form}}&#x60; component wraps a &#x60;DS.Model&#x60; object and yields
@@ -207,36 +192,10 @@ function collect(object) {
 export default Ember.Component.extend(Composable, {
   tagName: &#x27;form&#x27;,
   classNames: &#x27;fm-form&#x27;,
-  layout,
 
   // attrs {
-  model: null,
+  model: null
   // attrs }
-
-  validatedAttributes: Ember.computed(&#x27;model.validations&#x27;, function() {
-    let model = this.get(&#x27;model&#x27;);
-    let validations = model.get(&#x27;validations&#x27;);
-
-    return [].concat(collect(model), collect(validations.get(&#x27;attrs&#x27;)))
-      .sort()
-      .reduce((accum, key) =&gt; {
-        if (key === accum[0]) {
-          return accum;
-        }
-
-        return [].concat(key, accum);
-      }, []);
-  }).readOnly(),
-
-  validatedAttributesHash: Ember.computed(&#x27;model&#x27;, function() {
-    return Ember.Object.create({});
-  }).readOnly(),
-
-  actions: {
-    registerField(key, component) {
-      this.set(&#x60;validatedAttributesHash.${key}&#x60;, component);
-    }
-  }
 
 }).reopenClass({
   positionalParams: [&#x27;model&#x27;]

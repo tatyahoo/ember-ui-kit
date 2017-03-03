@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/3565edbf" target="_blank">
-                                  Tag: 0.4.1.3565edbf
+                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/2c4258cf" target="_blank">
+                                  Tag: 0.4.2.2c4258cf
                                 </a>
                             </h4>
                         </div>
@@ -96,9 +96,6 @@
                         <div class="panel-body">
                             <ol>
                                     <li>
-                                        <a href="../classes/fm-field.html">fm-field</a>
-                                    </li>
-                                    <li>
                                         <a href="../classes/fm-form.html">fm-form</a>
                                     </li>
                                     <li>
@@ -137,72 +134,29 @@
 import Ember from &#x27;ember&#x27;;
 import layout from &#x27;../templates/components/fm-field&#x27;;
 
-import { Validatable } from &#x27;ember-ui-kit/helpers/validate&#x27;;
-
 import Composable from &#x27;../mixins/composable&#x27;;
 
-import MS from &#x27;../utils/microstate&#x27;;
-
 /**
+ * @private
  * @module form
  * @class fm-field
- * @public
  */
 export default Ember.Component.extend(Composable, {
   componentRegistrationName: &#x27;field&#x27;,
   tagName: &#x27;label&#x27;,
   classNames: &#x27;fm-field&#x27;,
-  attributeBindings: &#x27;modelAttribute:data-model-attribute&#x27;,
+  classNameBindings: [
+    &#x27;validation.isValid:fm-field--valid:&#x27;,
+    &#x27;validation.isInvalid:fm-field--invalid&#x27;
+  ],
+  attributeBindings: &#x27;valuePath:data-model-attribute&#x27;,
   layout,
 
   // attrs {
-  model: null,
+  value: null,
+  validPath: null,
+  validation: null
   // attrs }
-
-  modelValue: Ember.computed(&#x27;isModelValidatable&#x27;, &#x27;model.value&#x27;, function() {
-    if (this.get(&#x27;isModelValidatable&#x27;)) {
-      return this.get(&#x27;model.value&#x27;);
-    }
-
-    return this.get(&#x27;model&#x27;);
-  }),
-
-  modelAttribute: Ember.computed(&#x27;isModelValidatable&#x27;, &#x27;model.results.attribute&#x27;, function() {
-    if (this.get(&#x27;isModelValidatable&#x27;)) {
-      return this.get(&#x27;model.results.attribute&#x27;);
-    }
-
-    return null;
-  }).readOnly(),
-
-  modelValidation: Ember.computed(function() {
-    if (this.get(&#x27;isModelValidatable&#x27;)) {
-      return this.get(&#x27;model.results&#x27;);
-    }
-
-    return null;
-  }).readOnly(),
-
-  isRequired: Ember.computed(&#x27;isModelValidatable&#x27;, &#x27;model.results.options.presence&#x27;, function() {
-    return Boolean(this.get(&#x27;isModelValidatable&#x27;) &amp;&amp; this.get(&#x27;model.results.options.presence&#x27;));
-  }).readOnly(),
-
-  isModelValidatable: Ember.computed(&#x27;model&#x27;, function() {
-    return this.get(&#x27;model&#x27;) instanceof Validatable;
-  }).readOnly(),
-
-  actions: {
-    modelValueDidChange(newValue) {
-      if (this.get(&#x27;isModelValidatable&#x27;)) {
-        this.get(&#x27;model&#x27;).update(newValue);
-      }
-      else {
-        MS.set(this, &#x27;model&#x27;, newValue);
-      }
-    }
-  }
-}).reopenClass({
-  positionalParams: [&#x27;model&#x27;]
 });
 
     </pre>
