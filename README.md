@@ -1,5 +1,6 @@
 # ember-ui-kit
 
+[![Ember Version](https://embadge.io/v1/badge.svg?start=2.4.0)](https://embadge.io/v1/badge.svg?start=2.4.0)
 [![Build Status](https://travis-ci.org/ming-codes/ember-ui-kit.svg?branch=master)](https://travis-ci.org/ming-codes/ember-ui-kit)
 [![Greenkeeper badge](https://badges.greenkeeper.io/ming-codes/ember-ui-kit.svg)](https://greenkeeper.io/)
 
