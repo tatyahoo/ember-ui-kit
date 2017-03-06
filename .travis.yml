@@ -9,6 +9,7 @@ cache:
   directories:
     - $HOME/.npm
     - $HOME/.cache # includes bowers cache
+    - node_modules
 
 addons:
   firefox: "latest"

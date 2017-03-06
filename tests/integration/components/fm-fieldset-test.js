@@ -3,6 +3,7 @@ import { validator, buildValidations } from 'ember-cp-validations';
 import hbs from 'htmlbars-inline-precompile';
 
 import Ember from 'ember';
+import DS from 'ember-data';
 import Microstates from 'ember-microstates/initializers/microstates';
 
 moduleForComponent('fm-fieldset', 'Integration | Component | fm-fieldset', {
