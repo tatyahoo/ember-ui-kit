@@ -1,0 +1,9 @@
+{{#if hasBlock}}
+  {{yield items}}
+{{else}}
+  <ul>
+    {{#each items key=key as |item|}}
+      <li>{{item}}</li>
+    {{/each}}
+  </ul>
+{{/if}}
