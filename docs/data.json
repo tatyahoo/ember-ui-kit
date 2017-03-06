@@ -3,7 +3,7 @@
         "name": "ember-ui-kit",
         "description": "The default blueprint for ember-cli addons.",
         "url": "https://github.com/ming-codes/ember-ui-kit",
-        "version": "0.4.2.2c4258cf"
+        "version": "0.5.0.b8f4804d"
     },
     "files": {
         "addon/components/ui-table/tbody-each.js": {
@@ -93,6 +93,13 @@
             "classes": {
                 "fm-form": 1
             },
+            "fors": {},
+            "namespaces": {}
+        },
+        "addon/components/in-select.js": {
+            "name": "addon/components/in-select.js",
+            "modules": {},
+            "classes": {},
             "fors": {},
             "namespaces": {}
         },
@@ -527,6 +534,31 @@
             "deprecationMessage": "Use `width` with `fr` unit instead",
             "class": "ui-table.th",
             "module": "ui"
+        },
+        {
+            "file": "addon/components/in-select.js",
+            "line": 9,
+            "description": "The selected option. The select is multi select if `value` is bound\nan array-like object.\n\n`value` makes no garantee about object identity correctness. This means\n`value` may contain value that does not match `from` content by strict\nequal `===`. `value` does garantee the object match by configured `key`.",
+            "itemtype": "attribute",
+            "name": "value",
+            "class": "in-text",
+            "module": "form"
+        },
+        {
+            "file": "addon/components/in-select.js",
+            "line": 21,
+            "itemtype": "attribute",
+            "name": "from",
+            "class": "in-text",
+            "module": "form"
+        },
+        {
+            "file": "addon/components/in-select.js",
+            "line": 26,
+            "itemtype": "attribute",
+            "name": "key",
+            "class": "in-text",
+            "module": "form"
         },
         {
             "file": "addon/components/ui-resizable.js",

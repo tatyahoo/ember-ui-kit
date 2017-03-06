@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>ui-table.tr - ember-ui-kit</title>
+    <title>addon/components/in-select.js - ember-ui-kit</title>
     <meta name="description" content="The default blueprint for ember-cli addons.">
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -125,79 +125,150 @@
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
-
-
 <div class="page-header">
-    <h1> <i class="fa fa-bookmark-o" aria-hidden="true"></i> ui-table.tr Class
-            <a class="pull-right file-edit" href="https://github.com/ming-codes/ember-ui-kit/blob/b8f4804d/addon/components/ui-table/tr.js#L8" target="_blank">
-              <i class="fa fa-pencil" aria-hidden="true"></i>
-            </a>
-    </h1>
+    <h1><i class="fa fa-file-code-o" aria-hidden="true"></i>  File</h1>
 </div>
 
-  <p class="private-class">Private</p>
+<div class="file">
+    <pre class="prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
+import DS from &#x27;ember-data&#x27;;
+import layout from &#x27;../templates/components/in-select&#x27;;
 
-<div class="content-meta">
+export default Ember.Component.extend({
+  classNames: &#x27;in-select&#x27;,
+  layout,
 
+  /**
+   * The selected option. The select is multi select if &#x60;value&#x60; is bound
+   * an array-like object.
+   *
+   * &#x60;value&#x60; makes no garantee about object identity correctness. This means
+   * &#x60;value&#x60; may contain value that does not match &#x60;from&#x60; content by strict
+   * equal &#x60;===&#x60;. &#x60;value&#x60; does garantee the object match by configured &#x60;key&#x60;.
+   *
+   * @attribute value
+   */
+  value: null,
 
-            Module: <a href="../modules/ui.html">ui</a>
+  /**
+   * @attribute from
+   */
+  from: null,
 
+  /**
+   * @attribute key
+   */
+  key: null,
 
-        <div class="foundat">
-            Defined In: <a href="https://github.com/ming-codes/ember-ui-kit/blob/b8f4804d/addon/components/ui-table/tr.js#L8">addon/components/ui-table/tr.js:8</a>
-        </div>
-</div>
+  multiple: Ember.computed(&#x27;value&#x27;, function() {
+    return Ember.isArray(this.get(&#x27;value&#x27;));
+  }).readOnly(),
 
+  list: Ember.computed(&#x27;from&#x27;, function() {
+    let from = this.get(&#x27;from&#x27;);
 
+    if (typeof from === &#x27;function&#x27;) {
+      from = from();
+    }
 
+    return DS.PromiseArray.create({
+      promise: Ember.RSVP.resolve(from)
+    });
+  }).readOnly(),
 
-<div>
-    <div class="page-section">
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active"><a href="#tab_index" aria-controls="tab_index" role="tab" data-toggle="tab">Index</a></li>
+  isSelected: Ember.computed(&#x27;key&#x27;, &#x27;value.[]&#x27;, function() {
+    let key = this.get(&#x27;key&#x27;);
+    let value = this.get(&#x27;value&#x27;);
 
+    if (!Ember.isArray(value)) {
+      value = [ value ];
+    }
 
+    value = Ember.A(value);
 
-        </ul>
+    if (key) {
+      value = value.mapBy(key);
 
-        <!-- Tab panes -->
-        <div class="tab-content">
+      return item =&gt; {
+        return value.includes(Ember.get(item, key));
+      };
+    }
+    else {
+      return item =&gt; {
+        return value.includes(item);
+      };
+    }
+  }).readOnly(),
 
-              <form id="options-form" class="form-inline">
-                  Show:
-                  <label for="api-show-inherited" class="checkbox">
-                      <input type="checkbox" id="api-show-inherited" checked>
-                      Inherited
-                  </label>
-          
-                  <label for="api-show-protected" class="checkbox">
-                      <input type="checkbox" id="api-show-protected">
-                      Protected
-                  </label>
-          
-                  <label for="api-show-private" class="checkbox">
-                      <input type="checkbox" id="api-show-private">
-                      Private
-                  </label>
-                  <label for="api-show-deprecated" class="checkbox">
-                      <input type="checkbox" id="api-show-deprecated">
-                      Deprecated
-                  </label>
-          
-              </form>
+  actions: {
+    select(item) {
+      if (this.get(&#x27;multiple&#x27;)) {
+        let key = this.get(&#x27;key&#x27;);
+        let value = this.get(&#x27;value&#x27;);
 
-          <div id="tab_index" role="tabpanel" class="tab-pane active" >
+        let exists = key ?
+          Ember.A(value).findBy(key, Ember.get(item, key)) :
+          Ember.A(value).includes(item);
 
+        if (!exists) {
+          if (value.pushObject) {
+            value.pushObject(item);
+          }
+          else {
+            value.push(item);
+          }
+        }
+      }
+      else {
+        this.set(&#x27;value&#x27;, item);
+      }
+    },
 
+    unselect(item) {
+      if (this.get(&#x27;multiple&#x27;)) {
+        let key = this.get(&#x27;key&#x27;);
+        let value = this.get(&#x27;value&#x27;);
 
-          </div>
+        if (value.removeObject) {
+          if (key) {
+            value.removeObject(value.findBy(key, Ember.get(item, key)));
+          }
+          else {
+            value.removeObject(item);
+          }
+        }
+        else {
+          if (key) {
+            value.splice(value.indexOf(Ember.A(value).findBy(key, Ember.get(item, key))), 1);
+          }
+          else {
+            value.splice(value.indexOf(item), 1);
+          }
 
+        }
+      }
+      else {
+        this.set(&#x27;value&#x27;, null);
+      }
+    },
 
+    toggle(item) {
+      let check = this.get(&#x27;isSelected&#x27;);
 
+      if (check(item)) {
+        this.send(&#x27;unselect&#x27;, item);
+      }
+      else {
+        this.send(&#x27;select&#x27;, item);
+      }
+    }
+  }
+}).reopenClass({
+  positionalParams: [&#x27;value&#x27;]
+});
 
-      </div>
-    </div>
+    </pre>
 </div>
                         </div>
                     </div>
