@@ -105,11 +105,10 @@ export default Ember.Component.extend(Composable, {
     });
 
     this.$().on('ps-scroll-y', () => {
-      let width = this.get('thead.childHeaderLeafList').reduce((accum, th) => {
-        return accum + th.get('columnWidth');
-      }, 0);
-      let unfroze = this.get('scrollable.unfroze').get(0).getBoundingClientRect();
-      let component = Ember.$(document.elementFromPoint(unfroze.left + width / 2, unfroze.top + 0.5))
+      let unfroze = this.get('scrollable.unfroze');
+      let rect = unfroze.get(0).getBoundingClientRect();
+
+      let component = Ember.$(document.elementFromPoint(rect.left + rect.width / 2, rect.top + 0.5))
         .closest('.ui-table__tr')
         .data('$E');
 
