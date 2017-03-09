@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/b8f4804d" target="_blank">
-                                  Tag: 0.5.0.b8f4804d
+                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/252251c1" target="_blank">
+                                  Tag: 0.5.1.252251c1
                                 </a>
                             </h4>
                         </div>
@@ -238,8 +238,11 @@ export default Ember.Component.extend(Composable, {
     });
 
     this.$().on(&#x27;ps-scroll-y&#x27;, () =&gt; {
+      let width = this.get(&#x27;thead.childHeaderLeafList&#x27;).reduce((accum, th) =&gt; {
+        return accum + th.get(&#x27;columnWidth&#x27;);
+      }, 0);
       let unfroze = this.get(&#x27;scrollable.unfroze&#x27;).get(0).getBoundingClientRect();
-      let component = Ember.$(document.elementFromPoint(unfroze.left + 0.5, unfroze.top + 0.5))
+      let component = Ember.$(document.elementFromPoint(unfroze.left + width / 2, unfroze.top + 0.5))
         .closest(&#x27;.ui-table__tr&#x27;)
         .data(&#x27;$E&#x27;);
 
