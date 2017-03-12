@@ -23,7 +23,7 @@
     "element-resize-detector": "^1.1.10",
     "ember-cli-babel": "^5.1.7",
     "ember-cli-htmlbars": "^1.1.1",
-    "ember-cp-validations": "3.2.3",
+    "ember-cp-validations": "3.2.4",
     "jquery-ui": "^1.12.1",
     "jquery-ui-touch-punch": "^0.2.3",
     "perfect-scrollbar": "^0.6.16"
