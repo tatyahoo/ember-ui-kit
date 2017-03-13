@@ -89,6 +89,12 @@ export function layout(width, portions) {
           unit: 'px'
         };
       }
+      else if (portion === null) {
+        return {
+          value: 0,
+          unit: 'null'
+        };
+      }
 
       let expr = portion.match(/([\d\.]+)(px|\%|fr)/);
 
@@ -121,6 +127,9 @@ export function layout(width, portions) {
 
         return portion;
       }
+      else if (unit === 'null') {
+        return portion;
+      }
       else {
         Ember.assert(`Unrecognized unit ${unit}`);
       }
@@ -129,7 +138,14 @@ export function layout(width, portions) {
       if (typeof portion === 'number') {
         return portion;
       }
-
-      return available * portion.value / fr;
+      else if (portion.unit === 'fr') {
+        return available * portion.value / fr;
+      }
+      else if (portion.unit === 'null') {
+        return null;
+      }
+      else {
+        Ember.assert(`Unrecognized unit ${portion.unit}`);
+      }
     });
 }

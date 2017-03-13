@@ -111,4 +111,5 @@ test('#getBox', function(assert) {
 
 test('#layout', function(assert) {
   assert.deepEqual(layout(300, [ '45px', '10%', '15%', '1fr', '2fr' ]), [ 45, 30, 45, 60, 120 ]);
+  assert.deepEqual(layout(300, [ '45px', null, '15%', '1fr', null ]), [ 45, null, 45, 210, null ]);
 });
