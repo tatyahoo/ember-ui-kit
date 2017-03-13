@@ -2,6 +2,11 @@ import Ember from 'ember';
 import DS from 'ember-data';
 import layout from '../templates/components/in-select';
 
+/**
+ * @public
+ * @module input
+ * @class in-select
+ */
 export default Ember.Component.extend({
   classNames: 'in-select',
   layout,
