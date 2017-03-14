@@ -10,8 +10,6 @@ export default Ember.Component.extend({
   classNames: 'ui-resizable',
   layout,
 
-  // attrs {
-
   /**
    * options hash for [jQuery UI resizable](http://api.jqueryui.com/resizable/)
    *
@@ -20,8 +18,6 @@ export default Ember.Component.extend({
    * @type object
    */
   options: null,
-
-  // attrs }
 
   didRender() {
     this._super(...arguments);

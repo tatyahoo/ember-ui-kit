@@ -14,6 +14,7 @@ module.exports = {
     'element-resize-detector/dist/element-resize-detector.js',
     'jquery-ui/ui/data.js',
     'jquery-ui/ui/version.js',
+    'jquery-ui/ui/position.js',
     'jquery-ui/ui/ie.js',
     'jquery-ui/ui/scroll-parent.js',
     'jquery-ui/ui/disable-selection.js',
@@ -34,7 +35,8 @@ module.exports = {
 
     // from `vendor/`
     'ember-ui-kit/ui-table.css',
-    'ember-ui-kit/ui-scrollable.css'
+    'ember-ui-kit/ui-scrollable.css',
+    'ember-ui-kit/ui-position.css'
   ],
 
   treeForVendor: function(tree) {
