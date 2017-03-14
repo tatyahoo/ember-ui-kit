@@ -96,9 +96,17 @@ export default Ember.Component.extend(Styleable, Composable, {
       let ns = this.get('table.elementId');
       let cls = this.get('columnClass');
 
-      this.style(`#${ns} .${cls}`, {
-        width: `${value}px`
-      });
+      if (value === null) {
+        this.style(`#${ns} .${cls}`, {
+          display: 'none',
+          width: `${value}px`
+        });
+      }
+      else {
+        this.style(`#${ns} .${cls}`, {
+          width: `${value}px`
+        });
+      }
 
       return value;
     }
