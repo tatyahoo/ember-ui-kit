@@ -37,6 +37,9 @@ export default Ember.Component.extend({
     return Ember.isArray(this.get('value'));
   }).readOnly(),
 
+  /**
+   * @property list
+   */
   list: Ember.computed('from', function() {
     let from = this.get('from');
 
