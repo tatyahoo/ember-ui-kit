@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/components/ui-table/td.js - ember-ui-kit</title>
+    <title>addon/components/ui-position.js - ember-ui-kit</title>
     <meta name="description" content="The default blueprint for ember-cli addons.">
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -138,75 +138,40 @@
 <div class="file">
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import layout from &#x27;../../templates/components/ui-table/td&#x27;;
-
-import Composable from &#x27;../../mixins/composable&#x27;;
-
-import { swapNodes } from &#x27;../../utils/dom&#x27;;
+import layout from &#x27;../templates/components/ui-position&#x27;;
 
 /**
- * @private
  * @module ui
- * @class ui-table.td
+ * @class ui-position
+ * @public
  */
-export default Ember.Component.extend(Composable, {
-  componentRegistrationName: &#x27;td&#x27;,
-  classNames: &#x27;ui-table__td&#x27;,
-  classNameBindings: &#x27;columnClass&#x27;,
+export default Ember.Component.extend({
+  classNames: &#x27;ui-position&#x27;,
   layout,
 
-  // attrs {
-  // @private
-  table: null,
-  // @private
-  tbody: null,
-  // @private
-  tr: null,
-  // @private
-  th: null,
-  // attrs }
+  /**
+   * options hash for [jQuery UI position](http://api.jqueryui.com/position/)
+   *
+   * @attribute options
+   * @default null
+   * @type object
+   */
+  options: null,
 
-  columnClass: Ember.computed.readOnly(&#x27;th.columnClass&#x27;),
+  didRender() {
+    this._super(...arguments);
 
-  frozenMirrorCellNode: Ember.computed(function() {
-    return document.createComment(&#x60;frozen-mirror-${this.get(&#x27;elementId&#x27;)}&#x60;);
-  }).readOnly(),
+    let options = Object.assign({}, this.get(&#x27;options&#x27;));
 
-  frozenMirrorCell: Ember.computed(&#x27;frozenMirrorCellNode&#x27;, function() {
-    return Ember.$(this.get(&#x27;frozenMirrorCellNode&#x27;));
-  }).readOnly(),
+    options.of = options.of || this.$().parent();
+
+    this.$().position(options);
+  },
 
   willDestroyElement() {
     this._super(...arguments);
 
-    this.unfreeze();
-    this.get(&#x27;frozenMirrorCell&#x27;).remove();
-
-    this.$().off(&#x27;register.th&#x27;);
-  },
-
-  freeze() {
-    let th = this.get(&#x27;th&#x27;);
-
-    if (th) {
-      let mirror = this.get(&#x27;frozenMirrorCell&#x27;);
-
-      if (mirror.parent().is(&#x27;.ui-table__tr--froze&#x27;)) {
-        swapNodes(this.element, mirror);
-      }
-    }
-  },
-
-  unfreeze() {
-    let th = this.get(&#x27;th&#x27;);
-
-    if (th) {
-      let mirror = this.get(&#x27;frozenMirrorCell&#x27;);
-
-      if (!mirror.parent().is(&#x27;.ui-table__tr--froze&#x27;)) {
-        swapNodes(this.element, mirror);
-      }
-    }
+    this.$().position(&#x27;destroy&#x27;);
   }
 });
 

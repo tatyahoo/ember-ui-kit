@@ -3,7 +3,7 @@
         "name": "ember-ui-kit",
         "description": "The default blueprint for ember-cli addons.",
         "url": "https://github.com/ming-codes/ember-ui-kit",
-        "version": "0.5.2.0345d25d"
+        "version": "0.6.0.076a943b"
     },
     "files": {
         "addon/components/ui-table/tbody-each.js": {
@@ -99,7 +99,9 @@
         "addon/components/in-select.js": {
             "name": "addon/components/in-select.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "in-select": 1
+            },
             "fors": {},
             "namespaces": {}
         },
@@ -117,6 +119,15 @@
             "modules": {},
             "classes": {
                 "in-toggle": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "addon/components/ui-position.js": {
+            "name": "addon/components/ui-position.js",
+            "modules": {},
+            "classes": {
+                "ui-position": 1
             },
             "fors": {},
             "namespaces": {}
@@ -189,6 +200,7 @@
                 "ui-table.th": 1,
                 "ui-table.thead": 1,
                 "ui-table.tr": 1,
+                "ui-position": 1,
                 "ui-resizable": 1,
                 "ui-scrollable": 1,
                 "ui-sortable": 1,
@@ -228,6 +240,7 @@
             "submodules": {},
             "elements": {},
             "classes": {
+                "in-select": 1,
                 "in-text": 1,
                 "in-toggle": 1
             },
@@ -398,6 +411,21 @@
             "access": "public",
             "tagname": ""
         },
+        "in-select": {
+            "name": "in-select",
+            "shortname": "in-select",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "input",
+            "namespace": "",
+            "file": "addon/components/in-select.js",
+            "line": 5,
+            "access": "public",
+            "tagname": ""
+        },
         "in-text": {
             "name": "in-text",
             "shortname": "in-text",
@@ -428,6 +456,19 @@
             "description": "`{{in-toggle}}` is a simple input component that respond\nto click to toggle. The implementation does not provide\nspecific styling. You are free style it in anyway you like:\nbutton, switch, or checkbox.",
             "access": "public",
             "tagname": ""
+        },
+        "ui-position": {
+            "name": "ui-position",
+            "shortname": "ui-position",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "ui",
+            "namespace": "",
+            "file": "addon/components/ui-position.js",
+            "line": 4
         },
         "ui-resizable": {
             "name": "ui-resizable",
@@ -536,33 +577,60 @@
             "module": "ui"
         },
         {
-            "file": "addon/components/in-select.js",
-            "line": 9,
-            "description": "The selected option. The select is multi select if `value` is bound\nan array-like object.\n\n`value` makes no garantee about object identity correctness. This means\n`value` may contain value that does not match `from` content by strict\nequal `===`. `value` does garantee the object match by configured `key`.",
+            "file": "addon/components/fm-form.js",
+            "line": 63,
             "itemtype": "attribute",
-            "name": "value",
-            "class": "in-text",
+            "name": "model The model to use for property binding.",
+            "class": "fm-form",
             "module": "form"
         },
         {
             "file": "addon/components/in-select.js",
-            "line": 21,
+            "line": 14,
+            "description": "The selected option. The select is multi select if `value` is bound\nan array-like object.\n\n`value` makes no garantee about object identity correctness. This means\n`value` may contain value that does not match `from` content by strict\nequal `===`. `value` does garantee the object match by configured `key`.",
             "itemtype": "attribute",
-            "name": "from",
-            "class": "in-text",
-            "module": "form"
+            "name": "value",
+            "class": "in-select",
+            "module": "input"
         },
         {
             "file": "addon/components/in-select.js",
             "line": 26,
             "itemtype": "attribute",
+            "name": "from",
+            "class": "in-select",
+            "module": "input"
+        },
+        {
+            "file": "addon/components/in-select.js",
+            "line": 31,
+            "itemtype": "attribute",
             "name": "key",
-            "class": "in-text",
-            "module": "form"
+            "class": "in-select",
+            "module": "input"
+        },
+        {
+            "file": "addon/components/in-select.js",
+            "line": 40,
+            "itemtype": "property",
+            "name": "list",
+            "class": "in-select",
+            "module": "input"
+        },
+        {
+            "file": "addon/components/ui-position.js",
+            "line": 13,
+            "description": "options hash for [jQuery UI position](http://api.jqueryui.com/position/)",
+            "itemtype": "attribute",
+            "name": "options",
+            "default": "null",
+            "type": "object",
+            "class": "ui-position",
+            "module": "ui"
         },
         {
             "file": "addon/components/ui-resizable.js",
-            "line": 15,
+            "line": 13,
             "description": "options hash for [jQuery UI resizable](http://api.jqueryui.com/resizable/)",
             "itemtype": "attribute",
             "name": "options",
