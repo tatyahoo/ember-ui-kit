@@ -60,9 +60,20 @@ export default Ember.Component.extend(Composable, {
   tagName: 'form',
   classNames: 'fm-form',
 
-  // attrs {
-  model: null
-  // attrs }
+  /**
+   * @attribute model The model to use for property binding.
+   */
+  model: Ember.computed({
+    get() {
+      Ember.assert('fm-form#model must be set');
+    },
+
+    set(key, value) {
+      Ember.assert('fm-form#model must represent a single object', !Ember.isArray(value));
+
+      return value;
+    }
+  }),
 
 }).reopenClass({
   positionalParams: ['model']
