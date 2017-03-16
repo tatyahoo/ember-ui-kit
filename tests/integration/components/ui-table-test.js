@@ -2,11 +2,15 @@ import { moduleForComponent, test } from 'ember-qunit';
 import Microstates from 'ember-microstates/initializers/microstates';
 import hbs from 'htmlbars-inline-precompile';
 
+import Ember from 'ember';
+
 moduleForComponent('ui-table', 'Integration | Component | ui-table', {
   integration: true
 });
 
 test('it renders simple table', function(assert) {
+  let clicks = [];
+
   Microstates.initialize(this);
 
   this.set('data', Array.from({ length: 40 }).fill({
@@ -15,6 +19,10 @@ test('it renders simple table', function(assert) {
     lastName: 'Me',
     age: 0
   }));
+
+  this.set('click', evt => {
+    clicks.push(evt);
+  });
 
   this.render(hbs`
     <style>
@@ -47,7 +55,7 @@ test('it renders simple table', function(assert) {
       {{/t.head}}
       {{#t.body cursor=cursor as |t|}}
         {{#each data as |datum|}}
-          {{#t.r as |t|}}
+          {{#t.r click=(action click)  as |t|}}
             {{#t.d}}{{datum.id}}{{/t.d}}
             {{#t.d}}{{datum.age}}{{/t.d}}
             {{#t.d}}{{datum.firstName}}{{/t.d}}
@@ -114,6 +122,16 @@ test('it renders simple table', function(assert) {
     assert.ok(!froze.eq(index).hasClass('ui-table__tr--hover'));
     assert.ok(!unfroze.eq(index).hasClass('ui-table__tr--hover'));
   });
+
+  froze.each(function(index, element) {
+    Ember.$(element).click();
+  });
+
+  unfroze.each(function(index, element) {
+    Ember.$(element).click();
+  });
+
+  assert.equal(clicks.length, 80, 'should register 80 clicks');
 });
 
 test('it renders frozen column table', function(assert) {

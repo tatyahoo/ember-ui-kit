@@ -95,6 +95,10 @@ export default Ember.Component.extend(Composable, {
 
     let rows = this.get('rowElements');
 
+    this.get('frozenMirrorRow').on('click', () => {
+      this.$().click();
+    });
+
     rows
       .on('mouseenter', () => rows.addClass('ui-table__tr--hover'))
       .on('mouseleave', () => rows.removeClass('ui-table__tr--hover'));
