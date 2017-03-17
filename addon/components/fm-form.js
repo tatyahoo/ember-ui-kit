@@ -75,6 +75,11 @@ export default Ember.Component.extend(Composable, {
     }
   }),
 
+  // default behavior to stop submit
+  submit() {
+    return false;
+  }
+
 }).reopenClass({
   positionalParams: ['model']
 });

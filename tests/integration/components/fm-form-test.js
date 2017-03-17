@@ -75,6 +75,20 @@ test('it convert model to fm-field collection that is bindable', function(assert
   assert.equal(this.get('model.name'), 'Link', 'should have updated model name through field');
 });
 
+test('it should not submit form with button', function(assert) {
+  assert.expect(0);
+
+  this.render(hbs`
+    {{#fm-form model as |attr|}}
+      <button id="button">BUTTON</button>
+      <input id="input" type="submit" value="INPUT">
+    {{/fm-form}}
+  `);
+
+  this.$('#button').click();
+  this.$('#input').click();
+});
+
 //test('it allows model to have validatable relationship', function(assert) {
 //  this.register('model:user', DS.Model.extend({
 //    name: DS.attr('string'),
