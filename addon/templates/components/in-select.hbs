@@ -1,8 +1,8 @@
 {{#if hasBlock}}
-  {{yield items}}
+  {{yield list}}
 {{else}}
   <ul>
-    {{#each items key=key as |item|}}
+    {{#each list key=key as |item|}}
       <li>{{item}}</li>
     {{/each}}
   </ul>
