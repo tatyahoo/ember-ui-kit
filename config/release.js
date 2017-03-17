@@ -1,4 +1,4 @@
-/* jshint node:true */
+/* eslint-env node */
 var execSync = require('child_process').execSync;
 //var RSVP = require('rsvp');
 
