@@ -22,24 +22,11 @@ export default Ember.Component.extend(Styleable, Composable, {
    * @attribute width
    */
   width: '1fr',
+
   /**
    * @attribute frozen
    */
   frozen: false,
-
-  /**
-   * @attribute span
-   * @deprecated Use `width` with `fr` unit instead
-   */
-  span: Ember.computed({
-    get() {
-      Ember.deprecate('th#span is deprecated. Use th#width with `fr` unit instead');
-    },
-
-    set() {
-      Ember.deprecate('th#span is deprecated. Use th#width with `fr` unit instead');
-    }
-  }),
 
   // @private
   table: null,
@@ -47,7 +34,6 @@ export default Ember.Component.extend(Styleable, Composable, {
   thead: null,
   // @private
   th: null,
-  // attrs }
 
   columnClass: Ember.computed.readOnly('elementId'),
 
@@ -98,8 +84,7 @@ export default Ember.Component.extend(Styleable, Composable, {
 
       if (value === null) {
         this.style(`#${ns} .${cls}`, {
-          display: 'none',
-          width: `${value}px`
+          display: 'none'
         });
       }
       else {
