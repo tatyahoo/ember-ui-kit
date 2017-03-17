@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/38f5e98d" target="_blank">
-                                  Tag: 0.6.1.38f5e98d
+                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/0b1e6323" target="_blank">
+                                  Tag: 0.6.2.0b1e6323
                                 </a>
                             </h4>
                         </div>
@@ -161,24 +161,11 @@ export default Ember.Component.extend(Styleable, Composable, {
    * @attribute width
    */
   width: &#x27;1fr&#x27;,
+
   /**
    * @attribute frozen
    */
   frozen: false,
-
-  /**
-   * @attribute span
-   * @deprecated Use &#x60;width&#x60; with &#x60;fr&#x60; unit instead
-   */
-  span: Ember.computed({
-    get() {
-      Ember.deprecate(&#x27;th#span is deprecated. Use th#width with &#x60;fr&#x60; unit instead&#x27;);
-    },
-
-    set() {
-      Ember.deprecate(&#x27;th#span is deprecated. Use th#width with &#x60;fr&#x60; unit instead&#x27;);
-    }
-  }),
 
   // @private
   table: null,
@@ -186,7 +173,6 @@ export default Ember.Component.extend(Styleable, Composable, {
   thead: null,
   // @private
   th: null,
-  // attrs }
 
   columnClass: Ember.computed.readOnly(&#x27;elementId&#x27;),
 
@@ -237,8 +223,7 @@ export default Ember.Component.extend(Styleable, Composable, {
 
       if (value === null) {
         this.style(&#x60;#${ns} .${cls}&#x60;, {
-          display: &#x27;none&#x27;,
-          width: &#x60;${value}px&#x60;
+          display: &#x27;none&#x27;
         });
       }
       else {

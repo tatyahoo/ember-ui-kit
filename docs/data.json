@@ -3,7 +3,7 @@
         "name": "ember-ui-kit",
         "description": "The default blueprint for ember-cli addons.",
         "url": "https://github.com/ming-codes/ember-ui-kit",
-        "version": "0.6.1.38f5e98d"
+        "version": "0.6.2.0b1e6323"
     },
     "files": {
         "addon/components/ui-table/tbody-each.js": {
@@ -560,19 +560,9 @@
         },
         {
             "file": "addon/components/ui-table/th.js",
-            "line": 25,
+            "line": 26,
             "itemtype": "attribute",
             "name": "frozen",
-            "class": "ui-table.th",
-            "module": "ui"
-        },
-        {
-            "file": "addon/components/ui-table/th.js",
-            "line": 30,
-            "itemtype": "attribute",
-            "name": "span",
-            "deprecated": true,
-            "deprecationMessage": "Use `width` with `fr` unit instead",
             "class": "ui-table.th",
             "module": "ui"
         },
