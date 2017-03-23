@@ -1,8 +1,14 @@
 <div>
   <div id="ui-position">
-    {{#ui-position options=(hash my="left top" at="left bottom")}}
-      CONTENT
-    {{/ui-position}}
+    {{#ui-backdrop}}
+      {{#ui-position}}
+        CONTENT Level 1
+        {{ui-backdrop}}
+        {{#ui-position options=(hash my="left top" at="left bottom")}}
+          CONTENT Level 2
+        {{/ui-position}}
+      {{/ui-position}}
+    {{/ui-backdrop}}
   </div>
   LOTS OF CONTENTS LOTS OF CONTENTS LOTS OF CONTENTS LOTS OF CONTENTS
   LOTS OF CONTENTS LOTS OF CONTENTS LOTS OF CONTENTS LOTS OF CONTENTS

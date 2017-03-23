@@ -49,10 +49,12 @@ export default Ember.Component.extend({
     return options;
   }).readOnly(),
 
-  didRender() {
+  willRender() {
     this._super(...arguments);
 
-    this.$().position(this.get('optionsNormalized'));
+    Ember.run.schedule('render', this, function() {
+      this.$().position(this.get('optionsNormalized'));
+    });
   },
 
   willDestroyElement() {
