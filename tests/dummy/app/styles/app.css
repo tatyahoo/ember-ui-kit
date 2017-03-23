@@ -101,3 +101,14 @@ ul {
 
 body.ember-application .ui-scrollable {
 }
+
+#ui-position {
+  margin: auto;
+  width: 100px;
+  height: 100px;
+  background: lightblue;
+}
+
+#ui-position .ui-position {
+  background: lightgreen;
+}

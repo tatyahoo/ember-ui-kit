@@ -11,6 +11,7 @@ Router.map(function() {
   this.route('ui-resizable');
   this.route('ui-select');
   this.route('ui-scrollable');
+  this.route('ui-position');
   this.route('fm-form');
 });
 
