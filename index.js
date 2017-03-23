@@ -36,6 +36,7 @@ module.exports = {
     // from `vendor/`
     'ember-ui-kit/ui-table.css',
     'ember-ui-kit/ui-scrollable.css',
+    'ember-ui-kit/ui-backdrop.css',
     'ember-ui-kit/ui-position.css'
   ],
 
