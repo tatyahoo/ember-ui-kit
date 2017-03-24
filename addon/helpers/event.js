@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-export function event([ fn ], { echo, selfOnly }) {
+export function event([ fn ], { echo, selfOnly, extract }) {
   return function eventHelper(evt) {
     if (selfOnly && evt.target !== evt.currentTarget) {
       return;
@@ -12,6 +12,10 @@ export function event([ fn ], { echo, selfOnly }) {
 
         Ember.$(elements[Number(echo)]).trigger(evt.type);
       });
+    }
+
+    if (extract) {
+      return fn(Ember.get(evt, extract));
     }
 
     return fn();
