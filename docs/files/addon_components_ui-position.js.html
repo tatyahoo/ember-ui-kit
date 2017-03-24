@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/0b1e6323" target="_blank">
-                                  Tag: 0.6.2.0b1e6323
+                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/151dd42e" target="_blank">
+                                  Tag: 0.7.0.151dd42e
                                 </a>
                             </h4>
                         </div>
@@ -72,6 +72,9 @@
                                 <ol>
                                         <li>
                                             <a href="../modules/form.html">form</a>
+                                        </li>
+                                        <li>
+                                            <a href="../modules/gfx.html">gfx</a>
                                         </li>
                                         <li>
                                             <a href="../modules/input.html">input</a>
@@ -99,6 +102,9 @@
                                         <a href="../classes/fm-form.html">fm-form</a>
                                     </li>
                                     <li>
+                                        <a href="../classes/gfx-graph.html">gfx-graph</a>
+                                    </li>
+                                    <li>
                                         <a href="../classes/in-select.html">in-select</a>
                                     </li>
                                     <li>
@@ -106,6 +112,9 @@
                                     </li>
                                     <li>
                                         <a href="../classes/in-toggle.html">in-toggle</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/ui-backdrop.html">ui-backdrop</a>
                                     </li>
                                     <li>
                                         <a href="../classes/ui-position.html">ui-position</a>
@@ -140,7 +149,27 @@
 import Ember from &#x27;ember&#x27;;
 import layout from &#x27;../templates/components/ui-position&#x27;;
 
+const WHITE_SPACE_CHUNKER = /\s+/;
+
+const VERTICAL = /^(top|bottom)/;
+const HORIZONTAL = /^(left|right)/;
+
+function fix(position) {
+  let chunks = position.trim().split(WHITE_SPACE_CHUNKER);
+
+  let [ left, right ] = chunks;
+
+  if (chunks.length &gt; 1 &amp;&amp; (VERTICAL.test(left) || HORIZONTAL.test(right))) {
+    return chunks.reverse().join(&#x27; &#x27;);
+  }
+
+  return chunks.join(&#x27; &#x27;);
+}
+
 /**
+ * &#x60;ui-position&#x60; is a simple wrapper around
+ * [jQuery UI position](http://api.jqueryui.com/position/)
+ *
  * @module ui
  * @class ui-position
  * @public
@@ -158,14 +187,22 @@ export default Ember.Component.extend({
    */
   options: null,
 
-  didRender() {
-    this._super(...arguments);
-
+  optionsNormalized: Ember.computed(&#x27;options&#x27;, function() {
     let options = Object.assign({}, this.get(&#x27;options&#x27;));
 
     options.of = options.of || this.$().parent();
+    options.my = fix(options.my || &#x27;&#x27;);
+    options.at = fix(options.at || &#x27;&#x27;);
 
-    this.$().position(options);
+    return options;
+  }).readOnly(),
+
+  willRender() {
+    this._super(...arguments);
+
+    Ember.run.schedule(&#x27;render&#x27;, this, function() {
+      this.$().position(this.get(&#x27;optionsNormalized&#x27;));
+    });
   },
 
   willDestroyElement() {

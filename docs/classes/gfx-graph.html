@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/components/ui-table/tbody-each.js - ember-ui-kit</title>
+    <title>gfx-graph - ember-ui-kit</title>
     <meta name="description" content="The default blueprint for ember-cli addons.">
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -140,256 +140,123 @@
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
+
+
 <div class="page-header">
-    <h1><i class="fa fa-file-code-o" aria-hidden="true"></i>  File</h1>
+    <h1> <i class="fa fa-bookmark-o" aria-hidden="true"></i> gfx-graph Class
+            <a class="pull-right file-edit" href="https://github.com/ming-codes/ember-ui-kit/blob/151dd42e/addon/components/gfx-graph.js#L4" target="_blank">
+              <i class="fa fa-pencil" aria-hidden="true"></i>
+            </a>
+    </h1>
 </div>
 
-<div class="file">
-    <pre class="prettyprint linenums">
-import Ember from &#x27;ember&#x27;;
-import layout from &#x27;../../templates/components/ui-table/tbody-each&#x27;;
 
-import Body from &#x27;./tbody&#x27;;
+<div class="content-meta">
 
-import { construct } from &#x27;../../utils/computed&#x27;;
-import { observerOnce } from &#x27;../../utils/run&#x27;;
 
-// Over scan is number of rows
-// ahead of direction of scroll
-// Too much increases rendering time
-const OVERSCAN_ROWS = 5;
+            Module: <a href="../modules/gfx.html">gfx</a>
 
-function increase(pos) {
-  return function(index, value) {
-    return parseFloat(value) + pos.height;
-  };
-}
 
-function decrease(pos) {
-  return function(index, value) {
-    return parseFloat(value) - pos.height;
-  };
-}
+        <div class="foundat">
+            Defined In: <a href="https://github.com/ming-codes/ember-ui-kit/blob/151dd42e/addon/components/gfx-graph.js#L4">addon/components/gfx-graph.js:4</a>
+        </div>
+</div>
 
-/**
- * &#x60;tbody-each&#x60; is an alternative implementation
- * of &#x60;tbody&#x60; that supports virtual buffered rows.
- *
- * Advanced Usage:
- *
- * &#x60;&#x60;&#x60;handlebars
- * {{#ui-table as |t|}}
- *   {{#t.body-each (Select users) as |t user|}}
- *    {{#t.r click=(action user.toggle) as |t|}}
- *      {{#t.d}}{{user.id}}{{/t.d}}
- *      {{#t.d}}{{user.name}}{{/t.d}}
- *      {{#t.d}}{{user.address}}{{/t.d}}
- *    {{/t.r}}
- *   {{/t.body}}
- * {{/ui-table}}
- * &#x60;&#x60;&#x60;
- *
- * It&#x27;s public interface is very similar to tbody.
- * &#x60;tbody-each&#x60; trades for faster initial rendering
- * time for slightly worse scroll performance.
- *
- * See also [tbody](./ui-table.tbody.html)
- *
- * @private
- * @module ui
- * @class ui-table.tbody-each
- */
-//
-// TODO Ideas on how to improve performance
-//
-// - Rows scrolled out of viewport can be &quot;frozen&quot; and has their dimensions cached
-// - Predict cursor position based on scroll position
-//
-export default Body.extend({
-  classNames: &#x27;ui-table--tbody-each&#x27;,
-  layout,
 
-  // attrs {
-  model: null,
-  // attrs }
 
-  modelNormalized: Ember.computed(&#x27;model&#x27;, function() {
-    let content = this.get(&#x27;model&#x27;);
 
-    if (!Ember.isArray(content) &amp;&amp; typeof content.forEach === &#x27;function&#x27;) {
-      let accum = [];
+<div>
+    <div class="page-section">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#tab_index" aria-controls="tab_index" role="tab" data-toggle="tab">Index</a></li>
 
-      content.forEach(item =&gt; {
-        accum.push(item);
-      });
 
-      content = accum;
-    }
+            <li role="presentation"><a href="#tab_attrs" aria-controls="tab_attrs" role="tab" data-toggle="tab">Attributes</a></li>
 
-    return Ember.ArrayProxy.create({ content });
-  }).readOnly(),
+        </ul>
 
-  buffer: construct(Ember.A).readOnly(),
-  bufferCursors: Ember.computed(function() {
-    return { start: 0, end: 0 };
-  }).readOnly(),
+        <!-- Tab panes -->
+        <div class="tab-content">
 
-  refreshBuffer: observerOnce(&#x27;modelNormalized.@each.isSelected&#x27;, function() {
-    let model = this.get(&#x27;modelNormalized&#x27;);
-    let buffer = this.get(&#x27;buffer&#x27;);
+              <form id="options-form" class="form-inline">
+                  Show:
+                  <label for="api-show-inherited" class="checkbox">
+                      <input type="checkbox" id="api-show-inherited" checked>
+                      Inherited
+                  </label>
+          
+                  <label for="api-show-protected" class="checkbox">
+                      <input type="checkbox" id="api-show-protected">
+                      Protected
+                  </label>
+          
+                  <label for="api-show-private" class="checkbox">
+                      <input type="checkbox" id="api-show-private">
+                      Private
+                  </label>
+                  <label for="api-show-deprecated" class="checkbox">
+                      <input type="checkbox" id="api-show-deprecated">
+                      Deprecated
+                  </label>
+          
+              </form>
 
-    buffer.forEach(item =&gt; {
-      item.set(&#x27;model&#x27;, model.objectAt(item.get(&#x27;index&#x27;)));
-    });
-  }),
+          <div id="tab_index" role="tabpanel" class="tab-pane active" >
 
-  resizeHeight: observerOnce(&#x27;modelNormalized.[]&#x27;, function() {
-    this._super(...arguments);
 
-    let scroller = this.get(&#x27;scroller.unfroze&#x27;);
-    let scrollable = this.get(&#x27;scrollable.unfroze&#x27;);
+                  <div class="index-section attrs">
+                      <h3>Attributes</h3>
 
-    let cursor = this.get(&#x27;bufferCursors&#x27;);
-    let buffer = this.get(&#x27;buffer&#x27;);
-    let model = this.get(&#x27;modelNormalized&#x27;);
-    let bufLen = buffer.get(&#x27;length&#x27;);
-    let modLen = model.get(&#x27;length&#x27;);
+                      <ul class="index-list attrs">
+                              <li class="index-item attr">
+                                  <a href="#attr_model">model</a>
+                              </li>
+                      </ul>
+                  </div>
 
-    if (!modLen) {
-      return;
-    }
+          </div>
 
-    let contentSize = scrollable.height();
-    let trHeight = scroller.children(&#x27;.ui-table__tr&#x27;).innerHeight();
-    let target = Math.min(Math.floor(contentSize / trHeight) + OVERSCAN_ROWS, modLen);
 
-    if (isNaN(trHeight)) { // first row!
-      buffer.pushObject(Ember.Object.create({
-        key: Ember.generateGuid(this),
-        tr: [],
-        index: bufLen,
-        model: model.objectAt(bufLen)
-      }));
 
-      this.detachScrollListener();
+              <div id="tab_attrs" role="tabpanel" class="tab-pane">
+                  <div class="item-list">
+  <div id="attr_model" class="attr item">
+      <a name="config_model"></a> 
+      <h3 class="name anchorable-toc">
+          <a class="fa fa-link toc-anchor" href="#attr_model"></a>
+          model
+      </h3>
+      <span class="type"></span>
+  
+  
+  
+  
+  
+  
+  
+  
+      <div class="meta">
+                  <p>
+                  Defined in
+          <a href="https://github.com/ming-codes/ember-ui-kit/blob/151dd42e/addon/components/gfx-graph.js#L14">addon/components/gfx-graph.js:14</a>
+          </p>
+  
+  
+      </div>
+  
+      <div class="description">
+          
+      </div>
+  
+  
+  
+  </div>
+                  </div>
+              </div>
 
-      return;
-    }
-    else if (target - bufLen &gt; 0) { // We have surplus in model that can fill buffer
-      for (let index = buffer.get(&#x27;length&#x27;); target - index; index = buffer.get(&#x27;length&#x27;)) {
-        buffer.pushObject(Ember.Object.create({
-          key: Ember.generateGuid(this),
-          tr: [],
-          index: index,
-          model: model.objectAt(index)
-        }));
-
-        cursor.end++;
-      }
-
-      this.detachScrollListener();
-
-      return;
-    }
-    else if (scrollable.prop(&#x27;scrollHeight&#x27;) &gt; scrollable.prop(&#x27;clientHeight&#x27;) + trHeight * OVERSCAN_ROWS) { // Ahh we&#x27;re overflowing !!
-      this.detachScrollListener();
-      this.attachScrollListener();
-    }
-
-    Ember.run.schedule(&#x27;afterRender&#x27;, this, function() {
-      let contentTop = parseFloat(scroller.css(&#x27;margin-top&#x27;));
-
-      this.get(&#x27;scroller.all&#x27;).height(trHeight * modLen - contentTop);
-
-      this.$().css(&#x27;visibility&#x27;, &#x27;&#x27;);
-
-      this.get(&#x27;table&#x27;).measure();
-    });
-  }),
-
-  didInsertElement() {
-    this._super(...arguments);
-
-    this.$().css(&#x27;visibility&#x27;, &#x27;hidden&#x27;);
-    this.resizeHeight();
-  },
-
-  attachScrollListener() {
-    let unfroze = this.get(&#x27;scroller.unfroze&#x27;).get(0);
-    let froze = this.get(&#x27;scroller.froze&#x27;).get(0);
-
-    let buffer = this.get(&#x27;buffer&#x27;);
-    let cursors = this.get(&#x27;bufferCursors&#x27;);
-    let model = this.get(&#x27;modelNormalized&#x27;);
-
-    this.$().on(&#x27;ps-scroll-up&#x27;, evt =&gt; {
-      let ref = evt.currentTarget;
-      let refPos = ref.getBoundingClientRect();
-      let last = unfroze.lastElementChild;
-      let lastPos = last.getBoundingClientRect();
-
-      // if top most one is out of viewport
-      while (unfroze.firstElementChild.getBoundingClientRect().top &gt; refPos.top) {
-        Ember.run.begin();
-
-        for (let count = OVERSCAN_ROWS; count &gt; 0 &amp;&amp; cursors.start; count--) {
-          Ember.$(froze.lastElementChild).insertBefore(froze.firstElementChild);
-          Ember.$(unfroze).add(froze)
-            .css(&#x27;margin-top&#x27;, decrease(lastPos))
-            .css(&#x27;height&#x27;, increase(lastPos));
-
-          cursors.start--;
-          buffer.unshiftObject(buffer.popObject()).setProperties({
-            tr: [],
-            index: cursors.start,
-            model: model.objectAt(cursors.start)
-          });
-          cursors.end--;
-        }
-
-        Ember.run.end();
-      }
-    });
-
-    this.$().on(&#x27;ps-scroll-down&#x27;, evt =&gt; {
-      let ref = evt.currentTarget;
-      let refPos = ref.getBoundingClientRect();
-      let first = unfroze.firstElementChild;
-      let firstPos = first.getBoundingClientRect();
-
-      // if top most one is out of viewport
-      while (unfroze.lastElementChild.getBoundingClientRect().bottom &lt; refPos.bottom) {
-        Ember.run.begin();
-
-        for (let count = OVERSCAN_ROWS; count &gt; 0 &amp;&amp; cursors.end + 1 &lt; model.get(&#x27;length&#x27;); count--) {
-          Ember.$(froze.firstElementChild).insertAfter(froze.lastElementChild);
-          Ember.$(unfroze).add(froze)
-            .css(&#x27;margin-top&#x27;, increase(firstPos))
-            .css(&#x27;height&#x27;, decrease(firstPos));
-
-          cursors.end++;
-          buffer.pushObject(buffer.shiftObject()).setProperties({
-            tr: [],
-            index: cursors.end,
-            model: model.objectAt(cursors.end)
-          });
-          cursors.start++;
-        }
-
-        Ember.run.end();
-      }
-    });
-  },
-
-  detachScrollListener() {
-    this.$().off(&#x27;ps-scroll-up&#x27;);
-    this.$().off(&#x27;ps-scroll-down&#x27;);
-  }
-}).reopenClass({
-  positionalParams: [&#x27;model&#x27;]
-});
-
-    </pre>
+      </div>
+    </div>
 </div>
                         </div>
                     </div>

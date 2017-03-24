@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/components/ui-table/tbody-each.js - ember-ui-kit</title>
+    <title>addon/components/gfx-graph.js - ember-ui-kit</title>
     <meta name="description" content="The default blueprint for ember-cli addons.">
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -147,243 +147,38 @@
 <div class="file">
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import layout from &#x27;../../templates/components/ui-table/tbody-each&#x27;;
-
-import Body from &#x27;./tbody&#x27;;
-
-import { construct } from &#x27;../../utils/computed&#x27;;
-import { observerOnce } from &#x27;../../utils/run&#x27;;
-
-// Over scan is number of rows
-// ahead of direction of scroll
-// Too much increases rendering time
-const OVERSCAN_ROWS = 5;
-
-function increase(pos) {
-  return function(index, value) {
-    return parseFloat(value) + pos.height;
-  };
-}
-
-function decrease(pos) {
-  return function(index, value) {
-    return parseFloat(value) - pos.height;
-  };
-}
+import layout from &#x27;../templates/components/gfx-graph&#x27;;
 
 /**
- * &#x60;tbody-each&#x60; is an alternative implementation
- * of &#x60;tbody&#x60; that supports virtual buffered rows.
- *
- * Advanced Usage:
- *
- * &#x60;&#x60;&#x60;handlebars
- * {{#ui-table as |t|}}
- *   {{#t.body-each (Select users) as |t user|}}
- *    {{#t.r click=(action user.toggle) as |t|}}
- *      {{#t.d}}{{user.id}}{{/t.d}}
- *      {{#t.d}}{{user.name}}{{/t.d}}
- *      {{#t.d}}{{user.address}}{{/t.d}}
- *    {{/t.r}}
- *   {{/t.body}}
- * {{/ui-table}}
- * &#x60;&#x60;&#x60;
- *
- * It&#x27;s public interface is very similar to tbody.
- * &#x60;tbody-each&#x60; trades for faster initial rendering
- * time for slightly worse scroll performance.
- *
- * See also [tbody](./ui-table.tbody.html)
- *
- * @private
- * @module ui
- * @class ui-table.tbody-each
+ * @public
+ * @module gfx
+ * @class gfx-graph
  */
-//
-// TODO Ideas on how to improve performance
-//
-// - Rows scrolled out of viewport can be &quot;frozen&quot; and has their dimensions cached
-// - Predict cursor position based on scroll position
-//
-export default Body.extend({
-  classNames: &#x27;ui-table--tbody-each&#x27;,
+export default Ember.Component.extend({
+  tagName: &#x27;svg&#x27;,
+  classNames: &#x27;gfx-graph&#x27;,
   layout,
 
-  // attrs {
+  /**
+   * @attribute model
+   */
   model: null,
-  // attrs }
 
-  modelNormalized: Ember.computed(&#x27;model&#x27;, function() {
-    let content = this.get(&#x27;model&#x27;);
-
-    if (!Ember.isArray(content) &amp;&amp; typeof content.forEach === &#x27;function&#x27;) {
-      let accum = [];
-
-      content.forEach(item =&gt; {
-        accum.push(item);
-      });
-
-      content = accum;
-    }
-
-    return Ember.ArrayProxy.create({ content });
-  }).readOnly(),
-
-  buffer: construct(Ember.A).readOnly(),
-  bufferCursors: Ember.computed(function() {
-    return { start: 0, end: 0 };
-  }).readOnly(),
-
-  refreshBuffer: observerOnce(&#x27;modelNormalized.@each.isSelected&#x27;, function() {
-    let model = this.get(&#x27;modelNormalized&#x27;);
-    let buffer = this.get(&#x27;buffer&#x27;);
-
-    buffer.forEach(item =&gt; {
-      item.set(&#x27;model&#x27;, model.objectAt(item.get(&#x27;index&#x27;)));
-    });
-  }),
-
-  resizeHeight: observerOnce(&#x27;modelNormalized.[]&#x27;, function() {
-    this._super(...arguments);
-
-    let scroller = this.get(&#x27;scroller.unfroze&#x27;);
-    let scrollable = this.get(&#x27;scrollable.unfroze&#x27;);
-
-    let cursor = this.get(&#x27;bufferCursors&#x27;);
-    let buffer = this.get(&#x27;buffer&#x27;);
-    let model = this.get(&#x27;modelNormalized&#x27;);
-    let bufLen = buffer.get(&#x27;length&#x27;);
-    let modLen = model.get(&#x27;length&#x27;);
-
-    if (!modLen) {
-      return;
-    }
-
-    let contentSize = scrollable.height();
-    let trHeight = scroller.children(&#x27;.ui-table__tr&#x27;).innerHeight();
-    let target = Math.min(Math.floor(contentSize / trHeight) + OVERSCAN_ROWS, modLen);
-
-    if (isNaN(trHeight)) { // first row!
-      buffer.pushObject(Ember.Object.create({
-        key: Ember.generateGuid(this),
-        tr: [],
-        index: bufLen,
-        model: model.objectAt(bufLen)
-      }));
-
-      this.detachScrollListener();
-
-      return;
-    }
-    else if (target - bufLen &gt; 0) { // We have surplus in model that can fill buffer
-      for (let index = buffer.get(&#x27;length&#x27;); target - index; index = buffer.get(&#x27;length&#x27;)) {
-        buffer.pushObject(Ember.Object.create({
-          key: Ember.generateGuid(this),
-          tr: [],
-          index: index,
-          model: model.objectAt(index)
-        }));
-
-        cursor.end++;
+  actions: {
+    createLayout({ columns, rows, debug }) {
+      if (typeof columns === &#x27;number&#x27;) {
+        columns = Array.from({ length: columns }).fill(&#x27;auto&#x27;);
       }
 
-      this.detachScrollListener();
-
-      return;
-    }
-    else if (scrollable.prop(&#x27;scrollHeight&#x27;) &gt; scrollable.prop(&#x27;clientHeight&#x27;) + trHeight * OVERSCAN_ROWS) { // Ahh we&#x27;re overflowing !!
-      this.detachScrollListener();
-      this.attachScrollListener();
-    }
-
-    Ember.run.schedule(&#x27;afterRender&#x27;, this, function() {
-      let contentTop = parseFloat(scroller.css(&#x27;margin-top&#x27;));
-
-      this.get(&#x27;scroller.all&#x27;).height(trHeight * modLen - contentTop);
-
-      this.$().css(&#x27;visibility&#x27;, &#x27;&#x27;);
-
-      this.get(&#x27;table&#x27;).measure();
-    });
-  }),
-
-  didInsertElement() {
-    this._super(...arguments);
-
-    this.$().css(&#x27;visibility&#x27;, &#x27;hidden&#x27;);
-    this.resizeHeight();
-  },
-
-  attachScrollListener() {
-    let unfroze = this.get(&#x27;scroller.unfroze&#x27;).get(0);
-    let froze = this.get(&#x27;scroller.froze&#x27;).get(0);
-
-    let buffer = this.get(&#x27;buffer&#x27;);
-    let cursors = this.get(&#x27;bufferCursors&#x27;);
-    let model = this.get(&#x27;modelNormalized&#x27;);
-
-    this.$().on(&#x27;ps-scroll-up&#x27;, evt =&gt; {
-      let ref = evt.currentTarget;
-      let refPos = ref.getBoundingClientRect();
-      let last = unfroze.lastElementChild;
-      let lastPos = last.getBoundingClientRect();
-
-      // if top most one is out of viewport
-      while (unfroze.firstElementChild.getBoundingClientRect().top &gt; refPos.top) {
-        Ember.run.begin();
-
-        for (let count = OVERSCAN_ROWS; count &gt; 0 &amp;&amp; cursors.start; count--) {
-          Ember.$(froze.lastElementChild).insertBefore(froze.firstElementChild);
-          Ember.$(unfroze).add(froze)
-            .css(&#x27;margin-top&#x27;, decrease(lastPos))
-            .css(&#x27;height&#x27;, increase(lastPos));
-
-          cursors.start--;
-          buffer.unshiftObject(buffer.popObject()).setProperties({
-            tr: [],
-            index: cursors.start,
-            model: model.objectAt(cursors.start)
-          });
-          cursors.end--;
-        }
-
-        Ember.run.end();
+      if (typeof rows === &#x27;number&#x27;) {
+        rows = Array.from({ length: rows }).fill(&#x27;auto&#x27;);
       }
-    });
 
-    this.$().on(&#x27;ps-scroll-down&#x27;, evt =&gt; {
-      let ref = evt.currentTarget;
-      let refPos = ref.getBoundingClientRect();
-      let first = unfroze.firstElementChild;
-      let firstPos = first.getBoundingClientRect();
-
-      // if top most one is out of viewport
-      while (unfroze.lastElementChild.getBoundingClientRect().bottom &lt; refPos.bottom) {
-        Ember.run.begin();
-
-        for (let count = OVERSCAN_ROWS; count &gt; 0 &amp;&amp; cursors.end + 1 &lt; model.get(&#x27;length&#x27;); count--) {
-          Ember.$(froze.firstElementChild).insertAfter(froze.lastElementChild);
-          Ember.$(unfroze).add(froze)
-            .css(&#x27;margin-top&#x27;, increase(firstPos))
-            .css(&#x27;height&#x27;, decrease(firstPos));
-
-          cursors.end++;
-          buffer.pushObject(buffer.shiftObject()).setProperties({
-            tr: [],
-            index: cursors.end,
-            model: model.objectAt(cursors.end)
-          });
-          cursors.start++;
-        }
-
-        Ember.run.end();
+      if (debug) {
+        debugger;
+        return Ember.$(&#x27;&lt;svg&gt;&lt;g&gt;&lt;/svg&gt;&#x27;).find(&#x27;g&#x27;).get(0);
       }
-    });
-  },
-
-  detachScrollListener() {
-    this.$().off(&#x27;ps-scroll-up&#x27;);
-    this.$().off(&#x27;ps-scroll-down&#x27;);
+    }
   }
 }).reopenClass({
   positionalParams: [&#x27;model&#x27;]

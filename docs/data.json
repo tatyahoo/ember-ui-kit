@@ -3,7 +3,7 @@
         "name": "ember-ui-kit",
         "description": "The default blueprint for ember-cli addons.",
         "url": "https://github.com/ming-codes/ember-ui-kit",
-        "version": "0.6.2.0b1e6323"
+        "version": "0.7.0.151dd42e"
     },
     "files": {
         "addon/components/ui-table/tbody-each.js": {
@@ -96,6 +96,17 @@
             "fors": {},
             "namespaces": {}
         },
+        "addon/components/gfx-graph.js": {
+            "name": "addon/components/gfx-graph.js",
+            "modules": {
+                "gfx": 1
+            },
+            "classes": {
+                "gfx-graph": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "addon/components/in-select.js": {
             "name": "addon/components/in-select.js",
             "modules": {},
@@ -119,6 +130,15 @@
             "modules": {},
             "classes": {
                 "in-toggle": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "addon/components/ui-backdrop.js": {
+            "name": "addon/components/ui-backdrop.js",
+            "modules": {},
+            "classes": {
+                "ui-backdrop": 1
             },
             "fors": {},
             "namespaces": {}
@@ -200,6 +220,7 @@
                 "ui-table.th": 1,
                 "ui-table.thead": 1,
                 "ui-table.tr": 1,
+                "ui-backdrop": 1,
                 "ui-position": 1,
                 "ui-resizable": 1,
                 "ui-scrollable": 1,
@@ -234,6 +255,21 @@
             "access": "private",
             "tagname": "",
             "itemtype": "main"
+        },
+        "gfx": {
+            "name": "gfx",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "gfx-graph": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "addon/components/gfx-graph.js",
+            "line": 4,
+            "access": "public",
+            "tagname": ""
         },
         "input": {
             "name": "input",
@@ -411,6 +447,21 @@
             "access": "public",
             "tagname": ""
         },
+        "gfx-graph": {
+            "name": "gfx-graph",
+            "shortname": "gfx-graph",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "gfx",
+            "namespace": "",
+            "file": "addon/components/gfx-graph.js",
+            "line": 4,
+            "access": "public",
+            "tagname": ""
+        },
         "in-select": {
             "name": "in-select",
             "shortname": "in-select",
@@ -457,6 +508,22 @@
             "access": "public",
             "tagname": ""
         },
+        "ui-backdrop": {
+            "name": "ui-backdrop",
+            "shortname": "ui-backdrop",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "ui",
+            "namespace": "",
+            "file": "addon/components/ui-backdrop.js",
+            "line": 3,
+            "description": "`ui-backdrop` is a simple component to put a mask\nover the screen. Use with `ui-position` to create\nmodal.",
+            "access": "public",
+            "tagname": ""
+        },
         "ui-position": {
             "name": "ui-position",
             "shortname": "ui-position",
@@ -468,7 +535,8 @@
             "module": "ui",
             "namespace": "",
             "file": "addon/components/ui-position.js",
-            "line": 4
+            "line": 21,
+            "description": "`ui-position` is a simple wrapper around\n[jQuery UI position](http://api.jqueryui.com/position/)"
         },
         "ui-resizable": {
             "name": "ui-resizable",
@@ -575,6 +643,14 @@
             "module": "form"
         },
         {
+            "file": "addon/components/gfx-graph.js",
+            "line": 14,
+            "itemtype": "attribute",
+            "name": "model",
+            "class": "gfx-graph",
+            "module": "gfx"
+        },
+        {
             "file": "addon/components/in-select.js",
             "line": 14,
             "description": "The selected option. The select is multi select if `value` is bound\nan array-like object.\n\n`value` makes no garantee about object identity correctness. This means\n`value` may contain value that does not match `from` content by strict\nequal `===`. `value` does garantee the object match by configured `key`.",
@@ -609,7 +685,7 @@
         },
         {
             "file": "addon/components/ui-position.js",
-            "line": 13,
+            "line": 33,
             "description": "options hash for [jQuery UI position](http://api.jqueryui.com/position/)",
             "itemtype": "attribute",
             "name": "options",
