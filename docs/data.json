@@ -3,7 +3,7 @@
         "name": "ember-ui-kit",
         "description": "The default blueprint for ember-cli addons.",
         "url": "https://github.com/ming-codes/ember-ui-kit",
-        "version": "0.7.0.151dd42e"
+        "version": "0.7.1.53eff2bf"
     },
     "files": {
         "addon/components/ui-table/tbody-each.js": {
@@ -92,17 +92,6 @@
             "modules": {},
             "classes": {
                 "fm-form": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
-        "addon/components/gfx-graph.js": {
-            "name": "addon/components/gfx-graph.js",
-            "modules": {
-                "gfx": 1
-            },
-            "classes": {
-                "gfx-graph": 1
             },
             "fors": {},
             "namespaces": {}
@@ -255,21 +244,6 @@
             "access": "private",
             "tagname": "",
             "itemtype": "main"
-        },
-        "gfx": {
-            "name": "gfx",
-            "submodules": {},
-            "elements": {},
-            "classes": {
-                "gfx-graph": 1
-            },
-            "fors": {},
-            "namespaces": {},
-            "tag": "module",
-            "file": "addon/components/gfx-graph.js",
-            "line": 4,
-            "access": "public",
-            "tagname": ""
         },
         "input": {
             "name": "input",
@@ -444,21 +418,6 @@
             "file": "addon/components/fm-form.js",
             "line": 5,
             "description": "`{{fm-form}}` component wraps a `DS.Model` object and yields\n`{{fm-field}}` with appropriate validations setup. Each `{{fm-field}}`\nyields more contextual input component to let you choose how to\nrepresent the field.\n\n`{{fm-field}}` can be interlaced with HTML tags to provide additional\nlayout needs.\n\nBasic Usage:\n\n```handlebars\n{{#fm-form model as |attribute|}}\n  {{#attribute.name as |in|}}\n    {{in.text}}\n  {{/attribute.name}}\n  {{#attribute.address as |in|}}\n    {{in.text}}\n  {{/attribute.address}}\n{{/fm-form}}\n```\n\n`{{fm-form}}` integrates with `{{ui-table}}` to allow editability\nand validability.\n\nAdvanced Usage:\n\n```handlebars\n{{#ui-table as |t|}}\n  {{#t.body as |t|}}\n    {{#each data as |datum|}}\n      {{#t.r as |t|}}\n        {{#fm-form datum as |attribute|}}\n          {{#t.d}}\n            {{#attribute.name as |in|}}\n              {{in.text}}\n            {{/attribute.name}}\n          {{/t.d}}\n          {{#t.d}}\n            {{#attribute.age as |in|}}\n              {{in.text}}\n            {{/attribute.age}}\n          {{/t.d}}\n        {{/fm-form}}\n      {{/t.r}}\n    {{/each}}\n  {{/t.body}}\n{{/ui-table}}\n```",
-            "access": "public",
-            "tagname": ""
-        },
-        "gfx-graph": {
-            "name": "gfx-graph",
-            "shortname": "gfx-graph",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "gfx",
-            "namespace": "",
-            "file": "addon/components/gfx-graph.js",
-            "line": 4,
             "access": "public",
             "tagname": ""
         },
@@ -641,14 +600,6 @@
             "name": "model The model to use for property binding.",
             "class": "fm-form",
             "module": "form"
-        },
-        {
-            "file": "addon/components/gfx-graph.js",
-            "line": 14,
-            "itemtype": "attribute",
-            "name": "model",
-            "class": "gfx-graph",
-            "module": "gfx"
         },
         {
             "file": "addon/components/in-select.js",

@@ -4,7 +4,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "fm-field",
         "fm-fieldset",
         "fm-form",
-        "gfx-graph",
         "in-select",
         "in-text",
         "in-toggle",
@@ -24,7 +23,6 @@ YUI.add("yuidoc-meta", function(Y) {
     ],
     "modules": [
         "form",
-        "gfx",
         "input",
         "ui"
     ],
@@ -33,10 +31,6 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "form",
             "name": "form",
             "description": "The `form` module consists of components that deals with form\nand validation. The `form` module components are separate\nfrom `input` module to provide validation."
-        },
-        {
-            "displayName": "gfx",
-            "name": "gfx"
         },
         {
             "displayName": "input",
