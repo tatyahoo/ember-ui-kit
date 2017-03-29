@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/53eff2bf" target="_blank">
-                                  Tag: 0.7.1.53eff2bf
+                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/0c1e3bd3" target="_blank">
+                                  Tag: 0.7.2.0c1e3bd3
                                 </a>
                             </h4>
                         </div>
@@ -160,7 +160,7 @@ export default Object.freeze({
     if (typeof object === &#x27;object&#x27;) {
       let asPrimitive = object.valueOf();
 
-      if (typeof asPrimitive !== &#x27;object&#x27;) {
+      if (typeof asPrimitive !== &#x27;object&#x27; &amp;&amp; typeof object.set === &#x27;function&#x27;) {
         return true;
       }
     }
