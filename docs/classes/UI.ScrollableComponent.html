@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>ui-table - ember-ui-kit</title>
+    <title>UI.ScrollableComponent - ember-ui-kit</title>
     <meta name="description" content="The default blueprint for ember-cli addons.">
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/0c1e3bd3" target="_blank">
-                                  Tag: 0.7.2.0c1e3bd3
+                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/005ff3ed" target="_blank">
+                                  Tag: 0.7.3.005ff3ed
                                 </a>
                             </h4>
                         </div>
@@ -96,34 +96,34 @@
                         <div class="panel-body">
                             <ol>
                                     <li>
-                                        <a href="../classes/fm-form.html">fm-form</a>
+                                        <a href="../classes/UI.BackdropComponent.html">UI.BackdropComponent</a>
                                     </li>
                                     <li>
-                                        <a href="../classes/in-select.html">in-select</a>
+                                        <a href="../classes/UI.FormComponent.html">UI.FormComponent</a>
                                     </li>
                                     <li>
-                                        <a href="../classes/in-text.html">in-text</a>
+                                        <a href="../classes/UI.PositionComponent.html">UI.PositionComponent</a>
                                     </li>
                                     <li>
-                                        <a href="../classes/in-toggle.html">in-toggle</a>
+                                        <a href="../classes/UI.ResizableComponent.html">UI.ResizableComponent</a>
                                     </li>
                                     <li>
-                                        <a href="../classes/ui-backdrop.html">ui-backdrop</a>
+                                        <a href="../classes/UI.ScrollableComponent.html">UI.ScrollableComponent</a>
                                     </li>
                                     <li>
-                                        <a href="../classes/ui-position.html">ui-position</a>
+                                        <a href="../classes/UI.SelectInputComponent.html">UI.SelectInputComponent</a>
                                     </li>
                                     <li>
-                                        <a href="../classes/ui-resizable.html">ui-resizable</a>
+                                        <a href="../classes/UI.SortableComponent.html">UI.SortableComponent</a>
                                     </li>
                                     <li>
-                                        <a href="../classes/ui-scrollable.html">ui-scrollable</a>
+                                        <a href="../classes/UI.TableComponent.html">UI.TableComponent</a>
                                     </li>
                                     <li>
-                                        <a href="../classes/ui-sortable.html">ui-sortable</a>
+                                        <a href="../classes/UI.TextInputComponent.html">UI.TextInputComponent</a>
                                     </li>
                                     <li>
-                                        <a href="../classes/ui-table.html">ui-table</a>
+                                        <a href="../classes/UI.ToggleInputComponent.html">UI.ToggleInputComponent</a>
                                     </li>
                             </ol>
                         </div>
@@ -137,8 +137,8 @@
 
 
 <div class="page-header">
-    <h1> <i class="fa fa-bookmark-o" aria-hidden="true"></i> ui-table Class
-            <a class="pull-right file-edit" href="https://github.com/ming-codes/ember-ui-kit/blob/0c1e3bd3/addon/components/ui-table.js#L9" target="_blank">
+    <h1> <i class="fa fa-bookmark-o" aria-hidden="true"></i> UI.ScrollableComponent Class
+            <a class="pull-right file-edit" href="https://github.com/ming-codes/ember-ui-kit/blob/005ff3ed/addon/components/ui-scrollable.js#L6" target="_blank">
               <i class="fa fa-pencil" aria-hidden="true"></i>
             </a>
     </h1>
@@ -152,84 +152,12 @@
 
 
         <div class="foundat">
-            Defined In: <a href="https://github.com/ming-codes/ember-ui-kit/blob/0c1e3bd3/addon/components/ui-table.js#L9">addon/components/ui-table.js:9</a>
+            Defined In: <a href="https://github.com/ming-codes/ember-ui-kit/blob/005ff3ed/addon/components/ui-scrollable.js#L6">addon/components/ui-scrollable.js:6</a>
         </div>
 </div>
 
 
 
-  <div class="class-description">
-  <p>The <code>ui-table</code> component is designed to have a declarative
-syntax that looks just like a plain html table while supporting
-many advanced table features such as:</p>
-<ul>
-<li>Sortable column</li>
-<li>Resizable column</li>
-<li>Show/Hide column</li>
-<li>Freezable column</li>
-<li>Nested header</li>
-<li>Table footer</li>
-<li>Virtualized scrolling</li>
-<li>Selectable rows</li>
-<li>Sorting and filtering of rows</li>
-<li>Template driven cells that enables edit-ability and
-other component composition.</li>
-</ul>
-<p>Basic Usage:</p>
-<pre class="code prettyprint"><code class="language-handlebars">{{#ui-table as |t|}}
-  {{#t.head as |t|}}
-    {{#t.h width="90px"}}ID{{/t.h}}
-    {{#t.h width="1fr"}}Name{{/t.h}}
-    {{#t.h width="50%"}}Address{{/t.h}}
-  {{/t.head}}
-  {{#t.body as |t|}}
-   {{#each users as |user|}}
-     {{#t.r as |t|}}
-       {{#t.d}}{{user.id}}{{/t.d}}
-       {{#t.d}}{{user.name}}{{/t.d}}
-       {{#t.d}}{{user.address}}{{/t.d}}
-     {{/t.r}}
-   {{/each}}
-  {{/t.body}}
-{{/ui-table}}
-</code></pre>
-<p>See
-<a href="./ui-table.thead.html">thead</a>,
-<a href="./ui-table.th.html">th</a>,
-<a href="./ui-table.tbody.html">tbody</a>,
-<a href="./ui-table.tr.html">tr</a>,
-<a href="./ui-table.td.html">td</a>,
-and <a href="./ui-table.tfoot.html">tfoot</a>
-for advanced usages.</p>
-<p>Note, these components are private for the
-purpose that they should not be used alone,
-but only as contextual component of ui-table</p>
-<p><code>{{ui-table}}</code> integrates with <code>{{fm-form}}</code> to allow editability
-and validability.</p>
-<p>Advanced Usage:</p>
-<pre class="code prettyprint"><code class="language-handlebars">{{#ui-table as |t|}}
-  {{#t.body as |t|}}
-    {{#each data as |datum|}}
-      {{#t.r as |t|}}
-        {{#fm-form datum as |attribute|}}
-          {{#t.d}}
-            {{#attribute.name as |in|}}
-              {{in.text}}
-            {{/attribute.name}}
-          {{/t.d}}
-          {{#t.d}}
-            {{#attribute.age as |in|}}
-              {{in.text}}
-            {{/attribute.age}}
-          {{/t.d}}
-        {{/fm-form}}
-      {{/t.r}}
-    {{/each}}
-  {{/t.body}}
-{{/ui-table}}
-</code></pre>
-
-  </div>
 
 <div>
     <div class="page-section">
@@ -238,6 +166,7 @@ and validability.</p>
           <li role="presentation" class="active"><a href="#tab_index" aria-controls="tab_index" role="tab" data-toggle="tab">Index</a></li>
 
 
+            <li role="presentation"><a href="#tab_attrs" aria-controls="tab_attrs" role="tab" data-toggle="tab">Attributes</a></li>
 
         </ul>
 
@@ -270,11 +199,62 @@ and validability.</p>
           <div id="tab_index" role="tabpanel" class="tab-pane active" >
 
 
+                  <div class="index-section attrs">
+                      <h3>Attributes</h3>
+
+                      <ul class="index-list attrs">
+                              <li class="index-item attr">
+                                  <a href="#attr_options">options</a>
+                              </li>
+                      </ul>
+                  </div>
 
           </div>
 
 
 
+              <div id="tab_attrs" role="tabpanel" class="tab-pane">
+                  <div class="item-list">
+  <div id="attr_options" class="attr item">
+      <a name="config_options"></a> 
+      <h3 class="name anchorable-toc">
+          <a class="fa fa-link toc-anchor" href="#attr_options"></a>
+          options
+      </h3>
+      <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+  
+  
+  
+  
+  
+  
+  
+  
+      <div class="meta">
+                  <p>
+                  Defined in
+          <a href="https://github.com/ming-codes/ember-ui-kit/blob/005ff3ed/addon/components/ui-scrollable.js#L19">addon/components/ui-scrollable.js:19</a>
+          </p>
+  
+  
+      </div>
+  
+      <div class="description">
+          <p>options hash for <a href="https://github.com/noraesae/perfect-scrollbar#optional-parameters">perfect-scrollbar</a></p>
+  <ul>
+  <li>Set to <code>false</code> to disable perfect-scrollbar and use native scroll.</li>
+  <li>Set to <code>true</code> to enable perfect-scrollbar without any options. This is default.</li>
+  <li>Optionally pass in an option hash to enable different features on perfect-scrollbar.</li>
+  </ul>
+  
+      </div>
+  
+          <p><strong>Default:</strong> true</p>
+  
+  
+  </div>
+                  </div>
+              </div>
 
       </div>
     </div>

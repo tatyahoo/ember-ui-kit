@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>ui-resizable - ember-ui-kit</title>
+    <title>UI.SelectInputComponent - ember-ui-kit</title>
     <meta name="description" content="The default blueprint for ember-cli addons.">
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/0c1e3bd3" target="_blank">
-                                  Tag: 0.7.2.0c1e3bd3
+                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/005ff3ed" target="_blank">
+                                  Tag: 0.7.3.005ff3ed
                                 </a>
                             </h4>
                         </div>
@@ -96,34 +96,34 @@
                         <div class="panel-body">
                             <ol>
                                     <li>
-                                        <a href="../classes/fm-form.html">fm-form</a>
+                                        <a href="../classes/UI.BackdropComponent.html">UI.BackdropComponent</a>
                                     </li>
                                     <li>
-                                        <a href="../classes/in-select.html">in-select</a>
+                                        <a href="../classes/UI.FormComponent.html">UI.FormComponent</a>
                                     </li>
                                     <li>
-                                        <a href="../classes/in-text.html">in-text</a>
+                                        <a href="../classes/UI.PositionComponent.html">UI.PositionComponent</a>
                                     </li>
                                     <li>
-                                        <a href="../classes/in-toggle.html">in-toggle</a>
+                                        <a href="../classes/UI.ResizableComponent.html">UI.ResizableComponent</a>
                                     </li>
                                     <li>
-                                        <a href="../classes/ui-backdrop.html">ui-backdrop</a>
+                                        <a href="../classes/UI.ScrollableComponent.html">UI.ScrollableComponent</a>
                                     </li>
                                     <li>
-                                        <a href="../classes/ui-position.html">ui-position</a>
+                                        <a href="../classes/UI.SelectInputComponent.html">UI.SelectInputComponent</a>
                                     </li>
                                     <li>
-                                        <a href="../classes/ui-resizable.html">ui-resizable</a>
+                                        <a href="../classes/UI.SortableComponent.html">UI.SortableComponent</a>
                                     </li>
                                     <li>
-                                        <a href="../classes/ui-scrollable.html">ui-scrollable</a>
+                                        <a href="../classes/UI.TableComponent.html">UI.TableComponent</a>
                                     </li>
                                     <li>
-                                        <a href="../classes/ui-sortable.html">ui-sortable</a>
+                                        <a href="../classes/UI.TextInputComponent.html">UI.TextInputComponent</a>
                                     </li>
                                     <li>
-                                        <a href="../classes/ui-table.html">ui-table</a>
+                                        <a href="../classes/UI.ToggleInputComponent.html">UI.ToggleInputComponent</a>
                                     </li>
                             </ol>
                         </div>
@@ -137,8 +137,8 @@
 
 
 <div class="page-header">
-    <h1> <i class="fa fa-bookmark-o" aria-hidden="true"></i> ui-resizable Class
-            <a class="pull-right file-edit" href="https://github.com/ming-codes/ember-ui-kit/blob/0c1e3bd3/addon/components/ui-resizable.js#L4" target="_blank">
+    <h1> <i class="fa fa-bookmark-o" aria-hidden="true"></i> UI.SelectInputComponent Class
+            <a class="pull-right file-edit" href="https://github.com/ming-codes/ember-ui-kit/blob/005ff3ed/addon/components/in-select.js#L5" target="_blank">
               <i class="fa fa-pencil" aria-hidden="true"></i>
             </a>
     </h1>
@@ -148,11 +148,11 @@
 <div class="content-meta">
 
 
-            Module: <a href="../modules/ui.html">ui</a>
+            Module: <a href="../modules/input.html">input</a>
 
 
         <div class="foundat">
-            Defined In: <a href="https://github.com/ming-codes/ember-ui-kit/blob/0c1e3bd3/addon/components/ui-resizable.js#L4">addon/components/ui-resizable.js:4</a>
+            Defined In: <a href="https://github.com/ming-codes/ember-ui-kit/blob/005ff3ed/addon/components/in-select.js#L5">addon/components/in-select.js:5</a>
         </div>
 </div>
 
@@ -165,6 +165,7 @@
         <ul class="nav nav-tabs" role="tablist">
           <li role="presentation" class="active"><a href="#tab_index" aria-controls="tab_index" role="tab" data-toggle="tab">Index</a></li>
 
+            <li role="presentation"><a href="#tab_properties" aria-controls="tab_properties" role="tab" data-toggle="tab">Properties</a></li>
 
             <li role="presentation"><a href="#tab_attrs" aria-controls="tab_attrs" role="tab" data-toggle="tab">Attributes</a></li>
 
@@ -198,13 +199,29 @@
 
           <div id="tab_index" role="tabpanel" class="tab-pane active" >
 
+                  <div class="index-section properties">
+                      <h3>Properties</h3>
+
+                      <ul class="index-list properties">
+                              <li class="index-item property">
+                                  <a href="#property_list">list</a>
+
+                              </li>
+                      </ul>
+                  </div>
 
                   <div class="index-section attrs">
                       <h3>Attributes</h3>
 
                       <ul class="index-list attrs">
                               <li class="index-item attr">
-                                  <a href="#attr_options">options</a>
+                                  <a href="#attr_from">from</a>
+                              </li>
+                              <li class="index-item attr">
+                                  <a href="#attr_key">key</a>
+                              </li>
+                              <li class="index-item attr">
+                                  <a href="#attr_value">value</a>
                               </li>
                       </ul>
                   </div>
@@ -212,16 +229,47 @@
           </div>
 
 
+              <div id="tab_properties" role="tabpanel" class="tab-pane">
+                  <div class="item-list">
+  <div id="property_list" class="property item">
+      <h3 class="name anchorable-toc">
+          <a class="fa fa-link toc-anchor" href="#property_list"></a>
+          list
+      </h3>
+      <span class="type">Unknown</span>
+  
+  
+  
+  
+  
+      <div class="meta">
+                  <p>
+                  Defined in
+          <a href="https://github.com/ming-codes/ember-ui-kit/blob/005ff3ed/addon/components/in-select.js#L41">addon/components/in-select.js:41</a>
+          </p>
+  
+  
+      </div>
+  
+      <div class="description">
+          
+      </div>
+  
+  
+  
+  </div>
+                  </div>
+              </div>
 
               <div id="tab_attrs" role="tabpanel" class="tab-pane">
                   <div class="item-list">
-  <div id="attr_options" class="attr item">
-      <a name="config_options"></a> 
+  <div id="attr_from" class="attr item">
+      <a name="config_from"></a> 
       <h3 class="name anchorable-toc">
-          <a class="fa fa-link toc-anchor" href="#attr_options"></a>
-          options
+          <a class="fa fa-link toc-anchor" href="#attr_from"></a>
+          from
       </h3>
-      <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+      <span class="type"></span>
   
   
   
@@ -233,18 +281,83 @@
       <div class="meta">
                   <p>
                   Defined in
-          <a href="https://github.com/ming-codes/ember-ui-kit/blob/0c1e3bd3/addon/components/ui-resizable.js#L13">addon/components/ui-resizable.js:13</a>
+          <a href="https://github.com/ming-codes/ember-ui-kit/blob/005ff3ed/addon/components/in-select.js#L27">addon/components/in-select.js:27</a>
           </p>
   
   
       </div>
   
       <div class="description">
-          <p>options hash for <a href="http://api.jqueryui.com/resizable/">jQuery UI resizable</a></p>
+          
+      </div>
+  
+  
+  
+  </div>
+  <div id="attr_key" class="attr item">
+      <a name="config_key"></a> 
+      <h3 class="name anchorable-toc">
+          <a class="fa fa-link toc-anchor" href="#attr_key"></a>
+          key
+      </h3>
+      <span class="type"></span>
+  
+  
+  
+  
+  
+  
+  
+  
+      <div class="meta">
+                  <p>
+                  Defined in
+          <a href="https://github.com/ming-codes/ember-ui-kit/blob/005ff3ed/addon/components/in-select.js#L32">addon/components/in-select.js:32</a>
+          </p>
+  
   
       </div>
   
-          <p><strong>Default:</strong> null</p>
+      <div class="description">
+          
+      </div>
+  
+  
+  
+  </div>
+  <div id="attr_value" class="attr item">
+      <a name="config_value"></a> 
+      <h3 class="name anchorable-toc">
+          <a class="fa fa-link toc-anchor" href="#attr_value"></a>
+          value
+      </h3>
+      <span class="type"></span>
+  
+  
+  
+  
+  
+  
+  
+  
+      <div class="meta">
+                  <p>
+                  Defined in
+          <a href="https://github.com/ming-codes/ember-ui-kit/blob/005ff3ed/addon/components/in-select.js#L15">addon/components/in-select.js:15</a>
+          </p>
+  
+  
+      </div>
+  
+      <div class="description">
+          <p>The selected option. The select is multi select if <code>value</code> is bound
+  an array-like object.</p>
+  <p><code>value</code> makes no garantee about object identity correctness. This means
+  <code>value</code> may contain value that does not match <code>from</code> content by strict
+  equal <code>===</code>. <code>value</code> does garantee the object match by configured <code>key</code>.</p>
+  
+      </div>
+  
   
   
   </div>
