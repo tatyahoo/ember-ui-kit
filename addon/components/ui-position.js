@@ -22,9 +22,10 @@ function fix(position) {
  * `ui-position` is a simple wrapper around
  * [jQuery UI position](http://api.jqueryui.com/position/)
  *
- * @module ui
- * @class ui-position
  * @public
+ * @module ui
+ * @class PositionComponent
+ * @namespace UI
  */
 export default Ember.Component.extend({
   classNames: 'ui-position',

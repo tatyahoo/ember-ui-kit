@@ -7,7 +7,8 @@ import Ember from 'ember';
  *
  * @public
  * @module ui
- * @class ui-backdrop
+ * @namespace UI
+ * @class BackdropComponent
  */
 export default Ember.Component.extend({
   classNames: 'ui-backdrop'

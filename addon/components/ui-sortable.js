@@ -2,9 +2,10 @@ import Ember from 'ember';
 import layout from '../templates/components/ui-sortable';
 
 /**
- * @module ui
- * @class ui-sortable
  * @public
+ * @module ui
+ * @class SortableComponent
+ * @namespace UI
  */
 export default Ember.Component.extend({
   classNames: 'ui-sortable',

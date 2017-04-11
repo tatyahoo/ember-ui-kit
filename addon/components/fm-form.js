@@ -54,7 +54,8 @@ import Composable from '../mixins/composable';
  *
  * @public
  * @module form
- * @class fm-form
+ * @class FormComponent
+ * @namespace UI
  */
 export default Ember.Component.extend(Composable, {
   tagName: 'form',

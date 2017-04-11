@@ -6,7 +6,8 @@ import Composable from '../mixins/composable';
 /**
  * @private
  * @module form
- * @class fm-field
+ * @class FormFieldComponent
+ * @namespace UI
  */
 export default Ember.Component.extend(Composable, {
   componentRegistrationName: 'field',

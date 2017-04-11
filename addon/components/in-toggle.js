@@ -11,7 +11,8 @@ import MS from '../utils/microstate';
  *
  * @public
  * @module input
- * @class in-toggle
+ * @class ToggleInputComponent
+ * @namespace UI
  */
 export default Ember.Component.extend({
   classNames: 'in-toggle',

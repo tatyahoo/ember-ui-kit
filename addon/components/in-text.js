@@ -5,7 +5,8 @@ import MS from '../utils/microstate';
 /**
  * @public
  * @module input
- * @class in-text
+ * @class TextInputComponent
+ * @namespace UI
  */
 export default Ember.Component.extend({
   tagName: 'input',

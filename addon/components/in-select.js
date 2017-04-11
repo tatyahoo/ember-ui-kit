@@ -5,7 +5,8 @@ import layout from '../templates/components/in-select';
 /**
  * @public
  * @module input
- * @class in-select
+ * @class SelectInputComponent
+ * @namespace UI
  */
 export default Ember.Component.extend({
   classNames: 'in-select',

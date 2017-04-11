@@ -8,7 +8,8 @@ import { observerOnceIn } from '../utils/run';
 /**
  * @private
  * @module form
- * @class fm-fieldset
+ * @class FormFieldsetComponent
+ * @namespace UI
  */
 export default Ember.Component.extend(Composable, {
   tagName: 'fieldset',

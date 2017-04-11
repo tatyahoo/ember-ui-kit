@@ -2,9 +2,10 @@ import Ember from 'ember';
 import layout from '../templates/components/ui-resizable';
 
 /**
- * @module ui
- * @class ui-resizable
  * @public
+ * @module ui
+ * @class ResizableComponent
+ * @namespace UI
  */
 export default Ember.Component.extend({
   classNames: 'ui-resizable',

@@ -4,9 +4,10 @@ import layout from '../templates/components/ui-scrollable';
 import Composable from '../mixins/composable';
 
 /**
- * @module ui
- * @class ui-scrollable
  * @public
+ * @module ui
+ * @class ScrollableComponent
+ * @namespace UI
  */
 export default Ember.Component.extend(Composable, {
   componentRegistrationName: 'scrollable',

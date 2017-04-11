@@ -88,7 +88,8 @@ import { getBox } from '../utils/dom';
  *
  * @public
  * @module ui
- * @class ui-table
+ * @class TableComponent
+ * @namespace UI
  */
 export default Ember.Component.extend(ResizeAware, Composable, {
   classNames: 'ui-table',
