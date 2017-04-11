@@ -34,10 +34,10 @@ module.exports = {
     'perfect-scrollbar/dist/js/perfect-scrollbar.jquery.js',
 
     // from `vendor/`
-    'ember-ui-kit/ui-table.css',
-    'ember-ui-kit/ui-scrollable.css',
-    'ember-ui-kit/ui-backdrop.css',
-    'ember-ui-kit/ui-position.css'
+    //'ember-ui-kit/ui-table.css',
+    //'ember-ui-kit/ui-scrollable.css',
+    //'ember-ui-kit/ui-backdrop.css',
+    //'ember-ui-kit/ui-position.css'
   ],
 
   treeForVendor: function(tree) {
