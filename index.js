@@ -25,6 +25,10 @@ module.exports = {
     'jquery-ui/ui/widgets/sortable.js',
     'jquery-ui/themes/base/resizable.css',
     'jquery-ui/ui/widgets/resizable.js',
+    'jquery-ui/themes/base/draggable.css',
+    'jquery-ui/ui/widgets/draggable.js',
+    'jquery-ui/ui/safe-active-element.js',
+    'jquery-ui/ui/safe-blur.js',
     'perfect-scrollbar/dist/js/perfect-scrollbar.jquery.js',
     'perfect-scrollbar/dist/css/perfect-scrollbar.css',
 

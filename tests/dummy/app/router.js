@@ -9,6 +9,7 @@ const Router = Ember.Router.extend({
 Router.map(function() {
   this.route('ui-table');
   this.route('ui-resizable');
+  this.route('ui-draggable');
   this.route('ui-select');
   this.route('ui-scrollable');
   this.route('ui-position');
