@@ -316,3 +316,50 @@ test('it integrates with table to allow table rows to be form', function(assert)
 
   assert.equal(this.get('data.0.name'), 'Zing', 'changing field value should set model');
 });
+
+test('it can be nested with property fm-field transform', function(assert) {
+  this.set('user', {
+    name: 'Link 1',
+
+    related: {
+      user: 'Zelda 2',
+
+      related: {
+        name: 'Link 3',
+
+        related: {
+          user: 'Zelda 4'
+        }
+      }
+    }
+  });
+
+  this.render(hbs`
+    {{#fm-form user as |field|}}
+      {{#field.name as |in|}}{{in.text}}{{/field.name}}
+
+      {{#fm-form user.related as |field|}}
+        {{#field.user as |in|}}{{in.text}}{{/field.user}}
+
+        {{#fm-form user.related.related as |field|}}
+          {{#field.name as |in|}}{{in.text}}{{/field.name}}
+
+          {{#fm-form user.related.related.related as |field|}}
+            {{#field.user as |in|}}{{in.text}}{{/field.user}}
+          {{/fm-form}}
+        {{/fm-form}}
+      {{/fm-form}}
+    {{/fm-form}}
+  `);
+
+  assert.equal(this.$('.fm-form').length, 4, '4 forms are rendered');
+  assert.equal(this.$('.fm-form .fm-form .fm-form .fm-form').length, 1, '1 deep form is rendered');
+
+  assert.equal(this.$('.fm-field').length, 4, '4 form fields are rendered');
+  assert.equal(this.$('.in-text').length, 4, '4 inputs are rendered');
+
+  assert.equal(this.$('.in-text:nth(0)').val(), 'Link 1', 'First level bound correctly');
+  assert.equal(this.$('.in-text:nth(1)').val(), 'Zelda 2', 'Second level bound correctly');
+  assert.equal(this.$('.in-text:nth(2)').val(), 'Link 3', 'Third level bound correctly');
+  assert.equal(this.$('.in-text:nth(3)').val(), 'Zelda 4', 'Fourth level bound correctly');
+});
