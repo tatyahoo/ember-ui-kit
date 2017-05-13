@@ -3,7 +3,7 @@
         "name": "ember-ui-kit",
         "description": "The default blueprint for ember-cli addons.",
         "url": "https://github.com/ming-codes/ember-ui-kit",
-        "version": "0.7.4.df9edeb4"
+        "version": "0.8.0.890552f6"
     },
     "files": {
         "addon/components/ui-table/tbody-each.js": {
@@ -146,6 +146,17 @@
                 "UI": 1
             }
         },
+        "addon/components/ui-draggable.js": {
+            "name": "addon/components/ui-draggable.js",
+            "modules": {},
+            "classes": {
+                "UI.DraggableComponent": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "UI": 1
+            }
+        },
         "addon/components/ui-position.js": {
             "name": "addon/components/ui-position.js",
             "modules": {},
@@ -234,6 +245,7 @@
                 "ui-table.thead": 1,
                 "ui-table.tr": 1,
                 "UI.BackdropComponent": 1,
+                "UI.DraggableComponent": 1,
                 "UI.PositionComponent": 1,
                 "UI.ResizableComponent": 1,
                 "UI.ScrollableComponent": 1,
@@ -513,6 +525,21 @@
             "access": "public",
             "tagname": ""
         },
+        "UI.DraggableComponent": {
+            "name": "UI.DraggableComponent",
+            "shortname": "UI.DraggableComponent",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "ui",
+            "namespace": "UI",
+            "file": "addon/components/ui-draggable.js",
+            "line": 4,
+            "access": "public",
+            "tagname": ""
+        },
         "UI.PositionComponent": {
             "name": "UI.PositionComponent",
             "shortname": "UI.PositionComponent",
@@ -675,6 +702,18 @@
             "name": "list",
             "class": "UI.SelectInputComponent",
             "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/ui-draggable.js",
+            "line": 14,
+            "description": "options hash for [jQuery UI draggable](http://api.jqueryui.com/draggable/)",
+            "itemtype": "attribute",
+            "name": "options",
+            "default": "null",
+            "type": "object",
+            "class": "UI.DraggableComponent",
+            "module": "ui",
             "namespace": "UI"
         },
         {
