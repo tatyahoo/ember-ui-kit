@@ -45,13 +45,12 @@ module.exports = {
   ],
 
   treeForVendor: function(tree) {
-    return new Merge([
-      tree,
+    return new Merge([].concat(tree || [], [
       this.treeForNodeModule('jquery-ui'),
       this.treeForNodeModule('perfect-scrollbar'),
       this.treeForNodeModule('jquery-ui-touch-punch'),
       this.treeForNodeModule('element-resize-detector')
-    ]);
+    ]));
   },
 
   treeForNodeModule: function(module) {
