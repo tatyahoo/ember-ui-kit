@@ -2,3 +2,7 @@
 @import "./components/ui-scrollable";
 @import "./components/ui-position";
 @import "./components/ui-backdrop";
+
+.ui-x-resize-aware {
+  position: relative;
+}

@@ -6,6 +6,8 @@ let detector = elementResizeDetectorMaker({
 });
 
 export default Ember.Mixin.create(Ember.Evented, {
+  classNames: 'ui-x-resize-aware',
+
   didInsertElement() {
     this._super(...arguments);
 
