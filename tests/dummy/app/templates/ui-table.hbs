@@ -1,119 +1,47 @@
-{{#let (Select (array "fixed" "virtual") selection=mode) as |scroll|}}
-  {{let frozen=(Boolean false)}}
-  {{let cursor=(Number 0)}}
+{{#ui-table--v2}}
+  {{#ui-thead--fixed}}
+    {{#ui-th width="83px" column=0 children=0}}ID{{/ui-th}}
+  {{else}}
+    {{#ui-th children=2}}
+      <div>Name</div>
+      {{#ui-th width="15%" column=1 children=0}}First Name{{/ui-th}}
+      {{#ui-th width="15%" column=2 children=0}}Last Name{{/ui-th}}
+    {{/ui-th}}
+    {{#ui-th width="1fr" column=3 children=0}}Nick Name{{/ui-th}}
+    {{#ui-th width="10%" column=4 children=0}}Age{{/ui-th}}
+    {{#ui-th width="10%" column=5 children=0}}SSN{{/ui-th}}
+    {{#ui-th width="20%" column=6 children=0}}Password{{/ui-th}}
+  {{/ui-thead--fixed}}
 
-  <div>
-    {{#each scroll as |item|}}
-      <label>
-        <input type="radio" checked={{item.isSelected}} onclick={{action "mode" item}}>
-        {{item.value}} scroll
-      </label>
-    {{/each}}
-  </div>
-  <div>
-    {{let increment=(Number 5)}}
+  {{#if application.model.isFulfilled}}
+    {{#ui-tbody--fixed}}
+      {{#ui-tr--each application.model key="id" as |item|}}
+        {{#ui-td column=0}}{{item.id}}{{/ui-td}}
+      {{/ui-tr--each}}
+    {{else}}
+      {{#ui-tr--each application.model key="id" as |item|}}
+        {{#ui-td column=1}}{{item.firstName}}{{/ui-td}}
+        {{#ui-td column=2}}{{item.lastName}}{{/ui-td}}
+        {{#ui-td column=3}}{{item.nickName}}{{/ui-td}}
+        {{#ui-td column=4}}{{item.age}}{{/ui-td}}
+        {{#ui-td column=5}}XXX-XX-XXXX{{/ui-td}}
+        {{#ui-td column=6}}********{{/ui-td}}
+      {{/ui-tr--each}}
+    {{/ui-tbody--fixed}}
 
-    <button {{action frozen.toggle}}>Toggle Frozen: {{frozen.value}}</button>
-    <button {{action "addData" increment}}>Add Rows</button>
-    <button {{action "removeData" increment}}>Remove Rows</button>
-  </div>
-
-  Cursor: {{cursor}}
-
-  {{#if (eq scroll.selection "virtual")}}
-    {{#ui-table as |t column-width|}}
-      {{#t.head as |t|}}
-        {{#ui-sortable}}
-          {{#t.h width=83 frozen=frozen.value}}ID{{/t.h}}
-          {{#t.h}}
-            <div>Name</div>
-            {{#ui-sortable}}
-              {{#t.h width="15%"}}First Name{{/t.h}}
-              {{#t.h width="15%"}}Last Name{{/t.h}}
-            {{/ui-sortable}}
-          {{/t.h}}
-          {{#t.h width="50%"}}
-            {{#ui-resizable options=(hash handles="e")}}
-              Nick Name
-            {{/ui-resizable}}
-          {{/t.h}}
-          {{#t.h width="10%"}}Age{{/t.h}}
-          {{#t.h width="10%"}}SSN{{/t.h}}
-          {{#t.h width="20%"}}Password{{/t.h}}
-        {{/ui-sortable}}
-      {{/t.head}}
-      {{#t.body-each (if application.model.isFulfilled (Select (append application.model)) (array)) cursor=cursor as |t item index|}}
-        {{#t.r class=(if item.isSelected "active") click=(action item.toggle) as |t|}}
-          {{#t.d}}{{item.value.id}}{{/t.d}}
-          {{#t.d}}{{item.value.age}}{{/t.d}}
-          {{#t.d}}{{item.value.firstName}}{{/t.d}}
-          {{#t.d}}{{item.value.lastName}}{{/t.d}}
-          {{#t.d}}{{item.value.nickName}}{{/t.d}}
-          {{#t.d}}XXX-XX-XXXX{{/t.d}}
-          {{#t.d}}********{{/t.d}}
-        {{/t.r}}
-      {{/t.body-each}}
-      {{#t.foot as |t|}}
-        {{#t.r as |t|}}
-          {{#t.d}}Foot1{{/t.d}}
-          {{#t.d}}Foot2{{/t.d}}
-          {{#t.d}}Foot3{{/t.d}}
-          {{#t.d}}Foot4{{/t.d}}
-          {{#t.d}}Foot5{{/t.d}}
-          {{#t.d}}Foot6{{/t.d}}
-          {{#t.d}}Foot7{{/t.d}}
-        {{/t.r}}
-      {{/t.foot}}
-    {{/ui-table}}
+    {{#ui-tfoot--fixed}}
+      {{#ui-tr}}
+        {{#ui-td column="0"}}ID{{/ui-td}}
+      {{/ui-tr}}
+    {{else}}
+      {{#ui-tr}}
+        {{#ui-td column=1}}First Name{{/ui-td}}
+        {{#ui-td column=2}}Last Name{{/ui-td}}
+        {{#ui-td column=3}}Nick Name{{/ui-td}}
+        {{#ui-td column=4}}Age{{/ui-td}}
+        {{#ui-td column=5}}SSN{{/ui-td}}
+        {{#ui-td column=6}}Password{{/ui-td}}
+      {{/ui-tr}}
+    {{/ui-tfoot--fixed}}
   {{/if}}
-  {{#if (eq scroll.selection "fixed")}}
-    {{#ui-table as |t|}}
-      {{#t.head as |t|}}
-        {{#t.h width=83 frozen=frozen.value}}ID{{/t.h}}
-        {{#t.h width=83}}Age{{/t.h}}
-        {{#ui-sortable}}
-          {{#t.h}}
-            <div>Name</div>
-            {{#ui-sortable}}
-              {{#t.h width="15%"}}First Name{{/t.h}}
-              {{#t.h width="15%"}}Last Name{{/t.h}}
-            {{/ui-sortable}}
-          {{/t.h}}
-          {{#t.h width="15%"}}
-            {{#ui-resizable}}
-              Nick Name
-            {{/ui-resizable}}
-          {{/t.h}}
-          {{#t.h width="50%"}}SSN{{/t.h}}
-          {{#t.h width="20%"}}Password{{/t.h}}
-        {{/ui-sortable}}
-      {{/t.head}}
-      {{#t.body cursor=cursor as |t|}}
-        {{#if application.model.isFulfilled}}
-          {{#each (Select (append application.model)) key="@index" as |item index|}}
-            {{#t.r class=(if item.isSelected "active") click=(action item.toggle) as |t|}}
-              {{#t.d}}{{item.value.id}}{{/t.d}}
-              {{#t.d}}{{item.value.age}}{{/t.d}}
-              {{#t.d}}{{item.value.firstName}}{{/t.d}}
-              {{#t.d}}{{item.value.lastName}}{{/t.d}}
-              {{#t.d}}{{item.value.nickName}}{{/t.d}}
-              {{#t.d}}XXX-XX-XXXX{{/t.d}}
-              {{#t.d}}********{{/t.d}}
-            {{/t.r}}
-          {{/each}}
-        {{/if}}
-      {{/t.body}}
-      {{#t.foot as |t|}}
-        {{#t.r as |t|}}
-          {{#t.d}}Foot1{{/t.d}}
-          {{#t.d}}Foot2{{/t.d}}
-          {{#t.d}}Foot3{{/t.d}}
-          {{#t.d}}Foot4{{/t.d}}
-          {{#t.d}}Foot5{{/t.d}}
-          {{#t.d}}Foot6{{/t.d}}
-          {{#t.d}}Foot7{{/t.d}}
-        {{/t.r}}
-      {{/t.foot}}
-    {{/ui-table}}
-  {{/if}}
-{{/let}}
+{{/ui-table--v2}}

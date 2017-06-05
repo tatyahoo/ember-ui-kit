@@ -102,6 +102,14 @@ ul {
 body.ember-application .ui-scrollable {
 }
 
+.ui-tr {
+  height: 50px;
+}
+
+.ui-table--v2 {
+  max-height: calc(100vh - 50px);
+}
+
 #ui-position {
   margin: auto;
   width: 100px;

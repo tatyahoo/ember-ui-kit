@@ -1,0 +1,43 @@
+.ui-table--v2,
+.ui-tr--each {
+  display: flex;
+  flex-direction: column;
+}
+
+.ui-thead__content,
+.ui-tbody,
+.ui-tfoot {
+  display: flex;
+  background: white;
+}
+
+.ui-th {
+  display: inline-block;
+}
+
+.ui-thead__fixed,
+.ui-thead__variable {
+  white-space: nowrap;
+}
+
+.ui-tbody {
+  overflow: auto;
+}
+
+.ui-tbody .infinite-list-content {
+  padding: 0;
+}
+
+.ui-tbody .virtual-each {
+  overflow: auto;
+}
+
+.ui-tr {
+  display: flex;
+  min-height: 1em;
+}
+
+.ui-tr--measure {
+  height: 0;
+  overflow: hidden;
+}

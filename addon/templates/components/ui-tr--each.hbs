@@ -1,0 +1,8 @@
+<div class="ui-tr--measure">
+  <div class="ui-tr"></div>
+</div>
+{{#each buffer as key=key as |item index|}}
+  {{#ui-tr}}
+    {{yield item index}}
+  {{/ui-tr}}
+{{/each}}
