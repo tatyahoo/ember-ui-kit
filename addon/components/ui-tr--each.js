@@ -24,7 +24,16 @@ export default Ember.Component.extend({
   // TODO flatten tree model
   modelNormalized: Ember.computed.readOnly('model'),
 
-  bufferSize: 20,
+  rowHeight: Ember.computed(function() {
+    return this.$('.ui-tr--measure .ui-tr').height();
+  }).readOnly(),
+
+  bufferSize: Ember.computed('rowHeight', function() {
+    let screenHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    let rowHeight = this.get('rowHeight');
+
+    return Math.ceil(screenHeight / rowHeight);
+  }),
   bufferStart: 0,
   buffer: Ember.computed('modelNormalized.[]', 'bufferStart', 'bufferSize', function() {
     let model = this.get('modelNormalized');
@@ -38,7 +47,7 @@ export default Ember.Component.extend({
     this._super(...arguments);
 
     let length = this.get('model.length');
-    let rowHeight = this.$('.ui-tr--measure .ui-tr').height();
+    let rowHeight = this.get('rowHeight');
     let bodyHeight = this.$().height();
 
     let block = this.$().parentsUntil('.ui-table--v2', '.ui-tbody__block');
