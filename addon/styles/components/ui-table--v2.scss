@@ -12,6 +12,11 @@
   }
 }
 
+.ui-thead,
+.ui-tfoot {
+  min-height: max-content;
+}
+
 .ui-thead__content,
 .ui-tbody,
 .ui-tfoot {
@@ -24,6 +29,7 @@
 
 .ui-tbody {
   overflow: auto;
+  flex: 1;
 }
 
 .ui-tbody .infinite-list-content {
@@ -37,6 +43,7 @@
 .ui-tr {
   display: flex;
   min-height: 1em;
+  align-items: center;
 }
 
 .ui-tr--measure {

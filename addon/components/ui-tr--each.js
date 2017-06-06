@@ -1,12 +1,6 @@
 import Ember from 'ember';
 import layout from '../templates/components/ui-tr--each';
 
-const BufferedArrayProxy = Ember.ArrayProxy.extend({
-  bufferLength: null,
-
-  length: Ember.computed.readOnly('bufferLength')
-});
-
 export default Ember.Component.extend({
   classNames: 'ui-tr--each',
   layout,
@@ -40,7 +34,14 @@ export default Ember.Component.extend({
     let start = this.get('bufferStart');
     let size = this.get('bufferSize');
 
-    return model.slice(start, start + size);
+    return model.slice(start, start + size).map((item, index) => {
+      return {
+        model: item,
+        index: start + index,
+        isEven: ((start + index) % 2),
+        isOdd: !((start + index) % 2)
+      };
+    });
   }).readOnly(),
 
   didInsertElement() {

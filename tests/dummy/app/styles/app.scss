@@ -1,8 +1,3 @@
-.ember-application {
-  margin: 0;
-  overflow: hidden;
-}
-
 #chrome {
   display: flex;
   flex-direction: column;
@@ -18,72 +13,44 @@
   flex-direction: column;
 }
 
-/*
-.ui-table__tr.active {
-  position: relative;
-}
+.ember-application {
+  margin: 0;
+  overflow: hidden;
 
-.ui-table__tr.active .ui-table__td {
-  position: relative;
-  z-index: 10;
-  background: transparent;
-}
+  .ui-tr--even,
+  .ui-table__tr--even {
+    background: lightblue;
+  }
 
-.ui-table__tr.active::after {
-  content: '';
-  background: red;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-}
-*/
-body.ember-application .ui-table__tr.active {
-}
+  .ui-thead,
+  .ui-tbody,
+  .ui-tfoot {
+    border: 1px dotted red;
+  }
 
-.ui-table__tr--even {
-  background: lightblue;
-}
+  .ui-thead,
+  .ui-tbody,
+  .ui-tfoot,
+  .ui-table__thead,
+  .ui-table__tbody,
+  .ui-table__tfoot  {
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    padding: 0 20px;
+  }
 
-body.ember-application .ui-table {
-  width: 640px;
-  max-height: 480px;
-  margin: 50px auto;
-}
+  .ui-tr,
+  .ui-table__tr {
+    height: 56px;
+  }
 
-body.ember-application .ui-table__thead,
-body.ember-application .ui-table__tbody,
-body.ember-application .ui-table__tfoot  {
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  padding: 0 20px;
-}
+  .ui-table {
+    border: 20px solid black;
+  }
 
-body.ember-application .ui-table__froze {
-}
-
-body.ember-application .ui-table__td {
-}
-
-body.ember-application .ui-table__unfroze .ui-scrollable__scroller {
-}
-
-body.ember-application .ui-table__tr {
-  height: 56px;
-}
-
-body.ember-application .ui-table__tr.active {
-}
-
-body.ember-application .ui-table__th {
-}
-
-body.ember-application .ui-table__td {
-}
-
-body.ember-application .ui-table {
-  border: 20px solid black;
+  .ui-table--v2 {
+    max-height: calc(100vh - 50px);
+  }
 }
 
 ul {
@@ -100,14 +67,6 @@ ul {
 }
 
 body.ember-application .ui-scrollable {
-}
-
-.ui-tr {
-  height: 50px;
-}
-
-.ui-table--v2 {
-  max-height: calc(100vh - 50px);
 }
 
 #ui-position {

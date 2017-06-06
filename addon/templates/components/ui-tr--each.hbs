@@ -1,8 +1,8 @@
 <div class="ui-tr--measure">
   <div class="ui-tr"></div>
 </div>
-{{#each buffer as key=key as |item index|}}
-  {{#ui-tr}}
-    {{yield item index}}
+{{#each buffer key=(concat "model." key) as |item|}}
+  {{#ui-tr class=(concat (if item.isOdd "ui-tr--odd") (if item.isEven "ui-tr--even"))}}
+    {{yield item.model item.index}}
   {{/ui-tr}}
 {{/each}}
