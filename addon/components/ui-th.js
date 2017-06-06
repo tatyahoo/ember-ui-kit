@@ -29,6 +29,8 @@ export default Ember.Component.extend({
   didInsertElement() {
     this._super(...arguments);
 
+    let children = this.get('children');
+
     //this.$()
     //  .attr('data-column-width', this.get('width'))
     //  .attr('data-children', (index, prev) => (prev || 0))
@@ -44,5 +46,11 @@ export default Ember.Component.extend({
         this.data = this.data.trim();
       }
     });
+
+    if (!children) {
+      this.$().on('resize', (evt, { size: { width } }) => {
+        Ember.run(this, this.set, 'width', `${width}px`);
+      });
+    }
   }
 });

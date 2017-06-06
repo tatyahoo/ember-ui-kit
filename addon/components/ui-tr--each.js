@@ -50,7 +50,7 @@ export default Ember.Component.extend({
     let rowHeight = this.get('rowHeight');
     let bodyHeight = this.$().height();
 
-    let block = this.$().parentsUntil('.ui-table--v2', '.ui-tbody__block');
+    let block = this.$().parentsUntil('.ui-table--v2', '[data-table-block]');
 
     block.css({
       marginTop: 0,

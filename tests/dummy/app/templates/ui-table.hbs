@@ -2,15 +2,21 @@
   {{#ui-thead--fixed}}
     {{#ui-th width="83px" column=0 children=0}}ID{{/ui-th}}
   {{else}}
-    {{#ui-th children=2}}
-      <div>Name</div>
-      {{#ui-th width="15%" column=1 children=0}}First Name{{/ui-th}}
-      {{#ui-th width="15%" column=2 children=0}}Last Name{{/ui-th}}
-    {{/ui-th}}
-    {{#ui-th width="1fr" column=3 children=0}}Nick Name{{/ui-th}}
-    {{#ui-th width="10%" column=4 children=0}}Age{{/ui-th}}
-    {{#ui-th width="10%" column=5 children=0}}SSN{{/ui-th}}
-    {{#ui-th width="20%" column=6 children=0}}Password{{/ui-th}}
+    {{#ui-sortable}}
+      {{#ui-th children=2}}
+        <div>Name</div>
+        {{#ui-th width="15%" column=1 children=0}}First Name{{/ui-th}}
+        {{#ui-th width="15%" column=2 children=0}}Last Name{{/ui-th}}
+      {{/ui-th}}
+      {{#ui-th width="1fr" column=3 children=0}}
+        {{#ui-resizable}}
+          Nick Name
+        {{/ui-resizable}}
+      {{/ui-th}}
+      {{#ui-th width="10%" column=4 children=0}}Age{{/ui-th}}
+      {{#ui-th width="10%" column=5 children=0}}SSN{{/ui-th}}
+      {{#ui-th width="20%" column=6 children=0}}Password{{/ui-th}}
+    {{/ui-sortable}}
   {{/ui-thead--fixed}}
 
   {{#if application.model.isFulfilled}}

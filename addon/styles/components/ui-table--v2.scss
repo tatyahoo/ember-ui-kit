@@ -6,6 +6,10 @@
 
 .ui-thead__content {
   align-items: flex-end;
+
+  .ui-sortable {
+    white-space: nowrap;
+  }
 }
 
 .ui-thead__content,
@@ -16,11 +20,6 @@
 
 .ui-th {
   display: inline-block;
-}
-
-.ui-thead__fixed,
-.ui-thead__variable {
-  white-space: nowrap;
 }
 
 .ui-tbody {

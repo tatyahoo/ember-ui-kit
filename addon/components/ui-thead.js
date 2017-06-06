@@ -20,11 +20,13 @@ export default Ember.Component.extend(Styleable, {
   breakpoints: null,
 
   leafNodes: Ember.computed(function() {
-    return this.$('[data-column-children="0"]').toArray().map(Ember.$);
+    return this.$('[data-column-children="0"]');
   }).readOnly(),
 
   leafNodeWidths: Ember.computed('leafNodes', function() {
-    return this.get('leafNodes').map(el => el.attr('data-column-width'));
+    return this.get('leafNodes')
+      .toArray()
+      .map(el => Ember.$(el).attr('data-column-width'));
   }).readOnly(),
 
   ns: Ember.computed(function() {
@@ -34,7 +36,34 @@ export default Ember.Component.extend(Styleable, {
   didInsertElement() {
     this._super(...arguments);
 
+    let leaves = this.get('leafNodes');
+    let table = this.$().closest('.ui-table--v2');
+
     detector.listenTo(this.$('.ui-thead__resizer').get(0), this.rerender = Ember.run.bind(this, this.rerender));
+
+    this.$('.ui-sortable').on('sortupdate', (evt, { item }) => {
+      let target = item.attr('data-column-id');
+      let after = item.next().attr('data-column-id');
+
+      // `target` is moved to before `after`
+
+      table.find('.ui-tr').each(function() {
+        let tr = Ember.$(this);
+
+        if (typeof after !== 'undefined') {
+          let before = tr.find(`[data-column-id="${after}"]`);
+
+          tr.find(`[data-column-id="${target}"]`).insertBefore(before);
+        }
+        else {
+          tr.find(`[data-column-id="${target}"]`).appendTo(tr);
+        }
+      });
+    });
+    this.$().on('resize', Ember.run.bind(this, function() {
+      this.notifyPropertyChange('leafNodeWidths');
+      this.rerender();
+    }));
   },
 
   didRender() {
@@ -55,5 +84,7 @@ export default Ember.Component.extend(Styleable, {
     this._super(...arguments);
 
     detector.removeListener(this.$('.ui-thead__resizer').get(0), this.rerender);
+
+    this.$().off();
   }
 });
