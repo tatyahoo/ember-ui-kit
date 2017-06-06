@@ -4,11 +4,14 @@
   flex-direction: column;
 }
 
+.ui-thead__content {
+  align-items: flex-end;
+}
+
 .ui-thead__content,
 .ui-tbody,
 .ui-tfoot {
   display: flex;
-  background: white;
 }
 
 .ui-th {
