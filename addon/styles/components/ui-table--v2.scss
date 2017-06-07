@@ -1,3 +1,8 @@
+.ui-tbody,
+.ui-tbody__content {
+  will-change: transform;
+}
+
 .ui-table--v2,
 .ui-tr--each {
   display: flex;
@@ -29,8 +34,18 @@
   display: flex;
 }
 
+.ui-td {
+  overflow: hidden;
+
+  * {
+    display: block;
+  }
+}
+
 .ui-th {
+  overflow: hidden;
   display: inline-block;
+  vertical-align: bottom;
 }
 
 .ui-tbody {
@@ -48,6 +63,7 @@
 
 [data-table-block="variable"] {
   min-width: 0;
+  flex: 1;
 }
 
 .ui-tbody__content {
