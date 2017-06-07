@@ -1,9 +1,11 @@
-<div class="ui-thead__content">
+<div class="ui-thead__resizer-content">
   <div data-table-block="fixed">
     {{yield}}
   </div>
   <div data-table-block="variable">
-    {{yield to="inverse"}}
+    <div class="ui-thead__content">
+      {{yield to="inverse"}}
+    </div>
   </div>
 </div>
 <div class="ui-thead__resizer"></div>

@@ -75,7 +75,8 @@ export default Ember.Component.extend(Styleable, {
     // TODO handle breakpoints
     cssLayout(this.$().width(), widths).forEach((width, index) => {
       this.style(`#${ns} [data-column-id="${index}"]`, {
-        width: `${width}px`
+        'width': `${width}px`,
+        'min-width': `${width}px`
       });
     });
   },
