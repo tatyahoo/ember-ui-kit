@@ -99,6 +99,8 @@ export default Ember.Component.extend({
       else {
         this.set('value', item);
       }
+
+      Ember.$(this.$()).change();
     },
 
     unselect(item) {
@@ -127,6 +129,8 @@ export default Ember.Component.extend({
       else {
         this.set('value', null);
       }
+
+      Ember.$(this.$()).change();
     },
 
     toggle(item) {
@@ -138,6 +142,8 @@ export default Ember.Component.extend({
       else {
         this.send('select', item);
       }
+
+      Ember.$(this.$()).change();
     }
   }
 }).reopenClass({
