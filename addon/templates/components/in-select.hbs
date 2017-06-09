@@ -3,7 +3,13 @@
 {{else}}
   <ul>
     {{#each list key=key as |item|}}
-      <li>{{item}}</li>
+      <li onclick={{action "select" item}}>
+        {{#if labelPath}}
+          {{get item labelPath}}
+        {{else}}
+          {{item}}
+        {{/if}}
+      </li>
     {{/each}}
   </ul>
 {{/if}}
