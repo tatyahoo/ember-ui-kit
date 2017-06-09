@@ -1,6 +1,26 @@
 import Ember from 'ember';
-import DS from 'ember-data';
 import layout from '../templates/components/in-select';
+
+import { task } from 'ember-concurrency';
+
+function robustRemove(list, target, key) {
+  if (list.removeObject) {
+    if (key) {
+      list.removeObject(list.findBy(key, Ember.get(target, key)));
+    }
+    else {
+      list.removeObject(target);
+    }
+  }
+  else {
+    if (key) {
+      list.splice(list.indexOf(Ember.A(list).findBy(key, Ember.get(target, key))), 1);
+    }
+    else {
+      list.splice(list.indexOf(target), 1);
+    }
+  }
+}
 
 /**
  * @public
@@ -34,24 +54,58 @@ export default Ember.Component.extend({
    */
   key: null,
 
-  multiple: Ember.computed('value', function() {
-    return Ember.isArray(this.get('value'));
-  }).readOnly(),
-
-  /**
-   * @property list
-   */
-  list: Ember.computed('from', function() {
+  fromNormalized: Ember.computed('from', function() {
     let from = this.get('from');
 
     if (typeof from === 'function') {
       from = from();
     }
 
-    return DS.PromiseArray.create({
-      promise: Ember.RSVP.resolve(from)
-    });
+    return from;
   }).readOnly(),
+
+  multiple: Ember.computed('value', function() {
+    return Ember.isArray(this.get('value'));
+  }).readOnly(),
+
+  list: Ember.computed.readOnly('resolveFrom.last.value'),
+
+  resolveFrom: task(function *() {
+    let list = yield this.get('fromNormalized');
+    let value = yield this.get('value');
+
+    if (!Ember.isEmpty(value)) {
+      let key = this.get('key');
+      let multiple = this.get('multiple');
+
+      let aList = Ember.A(list);
+
+      if (!multiple) {
+        let found = aList.findBy(key, Ember.get(value, key));
+
+        if (!found) {
+          this.set('value', multiple ? [] : null);
+        }
+      }
+      else {
+        value.slice().forEach(val => {
+          let found = aList.findBy(key, Ember.get(val, key))
+
+          if (!found) {
+            robustRemove(value, val, key);
+          }
+        });
+      }
+    }
+
+    return list;
+  }).restartable(),
+
+  fromNormalizedChanged: Ember.observer('fromNormalized', function() {
+    let ec = this.get('resolveFrom');
+
+    Ember.run.join(ec, ec.perform);
+  }),
 
   isSelected: Ember.computed('key', 'value.[]', function() {
     let key = this.get('key');
@@ -76,6 +130,12 @@ export default Ember.Component.extend({
       };
     }
   }).readOnly(),
+
+  didReceiveAttrs() {
+    this._super(...arguments);
+
+    this.fromNormalizedChanged();
+  },
 
   actions: {
     select(item) {
@@ -108,23 +168,7 @@ export default Ember.Component.extend({
         let key = this.get('key');
         let value = this.get('value');
 
-        if (value.removeObject) {
-          if (key) {
-            value.removeObject(value.findBy(key, Ember.get(item, key)));
-          }
-          else {
-            value.removeObject(item);
-          }
-        }
-        else {
-          if (key) {
-            value.splice(value.indexOf(Ember.A(value).findBy(key, Ember.get(item, key))), 1);
-          }
-          else {
-            value.splice(value.indexOf(item), 1);
-          }
-
-        }
+        robustRemove(value, item, key);
       }
       else {
         this.set('value', null);

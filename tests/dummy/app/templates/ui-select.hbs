@@ -1,7 +1,2 @@
-{{#ui-select users as |state action|}}
-  <ul>
-    {{#each state.items as |item|}}
-      <li class="{{if item.isSelected 'active'}}" onclick={{action action.select item}}>{{item.attributes.first-name}}</li>
-    {{/each}}
-  </ul>
-{{/ui-select}}
+{{value.firstName}}
+{{in-select value=value from=from key="id" labelPath="firstName"}}

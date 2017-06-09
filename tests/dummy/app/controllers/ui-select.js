@@ -5,6 +5,9 @@ import selectable from 'ember-ui-kit/computed/selectable';
 export default Ember.Controller.extend({
   application: Ember.inject.controller(),
 
+  value: Ember.computed.oneWay('application.model.firstObject'),
+  from: Ember.computed.oneWay('application.model'),
+
   trimmed: Ember.computed('application.model', function() {
     return this.get('application.model').slice(0, 10);
   }).readOnly(),
