@@ -9,7 +9,7 @@ moduleForComponent('in-select', 'Unit | Component | in-select', {
 });
 
 test('#multiple', function(assert) {
-  let subject = this.subject();
+  let subject = Ember.run(this, 'subject');
 
   let multiple = [
     [],
@@ -41,7 +41,7 @@ test('#multiple', function(assert) {
 });
 
 test('#list', async function(assert) {
-  let subject = this.subject();
+  let subject = Ember.run(this, 'subject');
   let content = [
     'hello',
     'world'
@@ -64,7 +64,7 @@ test('#list', async function(assert) {
 });
 
 test('#isSelected', function(assert) {
-  let subject = this.subject();
+  let subject = Ember.run(this, 'subject');
 
   subject.set('value', 1)
 
@@ -110,9 +110,9 @@ test('#isSelected', function(assert) {
 });
 
 test('@select', function(assert) {
-  let subject = this.subject();
+  let subject = Ember.run(this, 'subject');
 
-  subject.setProperties({
+  Ember.run(subject, subject.setProperties, {
     value: null,
     key: 'id',
     from: [
@@ -131,7 +131,7 @@ test('@select', function(assert) {
 
   assert.deepEqual(subject.get('value'), { id: 1 });
 
-  subject.setProperties({
+  Ember.run(subject, subject.setProperties, {
     value: [],
     key: 'id',
     from: [
@@ -160,52 +160,12 @@ test('@select', function(assert) {
 });
 
 test('@unselect', function(assert) {
-  let subject = this.subject();
+  let subject = Ember.run(this, 'subject');
 
-  //subject.setProperties({
-  //  value: { id: 1 },
-  //  key: 'id',
-  //  from: [
-  //    {
-  //      id: 1,
-  //      name: 'Link'
-  //    },
-  //    {
-  //      id: 2,
-  //      name: 'Zelda'
-  //    }
-  //  ]
-  //});
-
-  //assert.deepEqual(subject.get('value'), { id: 1 });
-
-  //subject.send('unselect', { id: 1 });
-
-  //assert.deepEqual(subject.get('value'), null);
-
-  //subject.setProperties({
-  //  value: [ { id: 1 } ],
-  //  key: 'id',
-  //  from: [
-  //    {
-  //      id: 1,
-  //      name: 'Link'
-  //    },
-  //    {
-  //      id: 2,
-  //      name: 'Zelda'
-  //    }
-  //  ]
-  //});
-
-  //subject.send('unselect', { id: 1 });
-
-  //assert.deepEqual(subject.get('value'), []);
-
-  subject.setProperties({
-    value: [ { id: 1 }, { id: 2 } ],
+  Ember.run(subject, subject.setProperties, {
+    value: { id: 1 },
     key: 'id',
-    from: [
+    from: Object.freeze([
       {
         id: 1,
         name: 'Link'
@@ -214,7 +174,68 @@ test('@unselect', function(assert) {
         id: 2,
         name: 'Zelda'
       }
-    ]
+    ])
+  });
+
+  assert.deepEqual(subject.get('value'), { id: 1 });
+
+  subject.send('unselect', { id: 1 });
+
+  assert.deepEqual(subject.get('value'), null);
+
+  Ember.run(subject, subject.setProperties, {
+    value: [ { id: 1 } ],
+    key: 'id',
+    from: Object.freeze([
+      {
+        id: 1,
+        name: 'Link'
+      },
+      {
+        id: 2,
+        name: 'Zelda'
+      }
+    ])
+  });
+
+  subject.send('unselect', { id: 1 });
+
+  assert.deepEqual(subject.get('value'), []);
+
+  Ember.run(subject, subject.setProperties, {
+    value: { id: 1 },
+    key: 'id',
+    from: Object.freeze([
+      {
+        id: 1,
+        name: 'Link'
+      },
+      {
+        id: 2,
+        name: 'Zelda'
+      }
+    ])
+  });
+
+  assert.deepEqual(subject.get('value'), { id: 1 });
+
+  subject.send('unselect', { id: 1 });
+
+  assert.deepEqual(subject.get('value'), null);
+
+  Ember.run(subject, subject.setProperties, {
+    value: [ { id: 1 }, { id: 2 } ],
+    key: 'id',
+    from: Object.freeze([
+      {
+        id: 1,
+        name: 'Link'
+      },
+      {
+        id: 2,
+        name: 'Zelda'
+      }
+    ])
   });
 
   subject.send('unselect', { id: 1 });

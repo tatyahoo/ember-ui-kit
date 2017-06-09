@@ -68,7 +68,9 @@ export default Ember.Component.extend({
     return Ember.isArray(this.get('value'));
   }).readOnly(),
 
-  list: Ember.computed.readOnly('resolveFrom.last.value'),
+  list: Ember.computed('resolveFrom.last.value', function() {
+    return Ember.A((this.get('resolveFrom.last.value') || []).slice());
+  }).readOnly(),
 
   resolveFrom: task(function *() {
     let list = yield this.get('fromNormalized');
@@ -78,7 +80,7 @@ export default Ember.Component.extend({
       let key = this.get('key');
       let multiple = this.get('multiple');
 
-      let aList = Ember.A(list);
+      let aList = Ember.A((list || []).slice());
 
       if (!multiple) {
         let found = aList.findBy(key, Ember.get(value, key));
@@ -101,17 +103,11 @@ export default Ember.Component.extend({
     return list;
   }).restartable(),
 
-  fromNormalizedChanged: Ember.observer('fromNormalized', function() {
-    let ec = this.get('resolveFrom');
-
-    Ember.run.join(ec, ec.perform);
-  }),
-
   isSelected: Ember.computed('key', 'value.[]', function() {
     let key = this.get('key');
     let value = this.get('value');
 
-    if (!Ember.isArray(value)) {
+    if (!Ember.isEmpty(value) && !Ember.isArray(value)) {
       value = [ value ];
     }
 
@@ -131,10 +127,14 @@ export default Ember.Component.extend({
     }
   }).readOnly(),
 
-  didReceiveAttrs() {
+  fromNormalizedChanged: Ember.observer('fromNormalized', function() {
+    Ember.run.once(this.get('resolveFrom'), 'perform');
+  }),
+
+  init() {
     this._super(...arguments);
 
-    this.fromNormalizedChanged();
+    Ember.run(this.get('resolveFrom'), 'perform');
   },
 
   actions: {
