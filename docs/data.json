@@ -3,7 +3,7 @@
         "name": "ember-ui-kit",
         "description": "The default blueprint for ember-cli addons.",
         "url": "https://github.com/ming-codes/ember-ui-kit",
-        "version": "0.8.2.fa4e16fd"
+        "version": "0.8.3.375cf8ae"
     },
     "files": {
         "addon/components/ui-table/tbody-each.js": {
@@ -474,7 +474,7 @@
             "module": "input",
             "namespace": "UI",
             "file": "addon/components/in-select.js",
-            "line": 5,
+            "line": 25,
             "access": "public",
             "tagname": ""
         },
@@ -669,7 +669,7 @@
         },
         {
             "file": "addon/components/in-select.js",
-            "line": 15,
+            "line": 35,
             "description": "The selected option. The select is multi select if `value` is bound\nan array-like object.\n\n`value` makes no garantee about object identity correctness. This means\n`value` may contain value that does not match `from` content by strict\nequal `===`. `value` does garantee the object match by configured `key`.",
             "itemtype": "attribute",
             "name": "value",
@@ -679,7 +679,7 @@
         },
         {
             "file": "addon/components/in-select.js",
-            "line": 27,
+            "line": 47,
             "itemtype": "attribute",
             "name": "from",
             "class": "UI.SelectInputComponent",
@@ -688,18 +688,9 @@
         },
         {
             "file": "addon/components/in-select.js",
-            "line": 32,
+            "line": 52,
             "itemtype": "attribute",
             "name": "key",
-            "class": "UI.SelectInputComponent",
-            "module": "input",
-            "namespace": "UI"
-        },
-        {
-            "file": "addon/components/in-select.js",
-            "line": 41,
-            "itemtype": "property",
-            "name": "list",
             "class": "UI.SelectInputComponent",
             "module": "input",
             "namespace": "UI"
