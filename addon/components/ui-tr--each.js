@@ -49,7 +49,6 @@ export default Ember.Component.extend({
 
     let length = this.get('model.length');
     let rowHeight = this.get('rowHeight');
-    let bodyHeight = this.$().height();
 
     let block = this.$().parentsUntil('.ui-table--v2', '[data-table-block]');
 

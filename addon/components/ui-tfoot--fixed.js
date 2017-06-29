@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import TableFoot from './ui-tfoot';
 import layout from '../templates/components/ui-tfoot--fixed';
 

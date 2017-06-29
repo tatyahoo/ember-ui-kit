@@ -36,7 +36,6 @@ export default Ember.Component.extend(Styleable, {
   didInsertElement() {
     this._super(...arguments);
 
-    let leaves = this.get('leafNodes');
     let table = this.$().closest('.ui-table--v2');
 
     detector.listenTo(this.$('.ui-thead__resizer').get(0), this.rerender = Ember.run.bind(this, this.rerender));

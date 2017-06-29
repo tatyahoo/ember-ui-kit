@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import Table from './ui-table--v2';
 import layout from '../templates/components/ui-table--fixed';
 

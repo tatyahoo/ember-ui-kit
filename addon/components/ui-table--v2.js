@@ -1,8 +1,6 @@
 import Ember from 'ember';
 import layout from '../templates/components/ui-table--v2';
 
-import { debounce } from 'ember-ui-kit/utils/raf';
-
 export default Ember.Component.extend({
   classNames: 'ui-table--v2',
   layout,
@@ -55,13 +53,13 @@ export default Ember.Component.extend({
     this.get('hScroller').off(`scroll.${ns}`);
   },
 
-  onScrollVertical(evt) {
+  onScrollVertical() {
     let ns = this.get('elementId');
 
     this.get('hScroller').off(`mousewheel.${ns}`);
   },
 
-  onScrollHorizontal(evt) {
+  onScrollHorizontal() {
     let ns = this.get('elementId');
 
     let contents = this.get('contentBlocks');
