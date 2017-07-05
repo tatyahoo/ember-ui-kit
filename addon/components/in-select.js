@@ -48,7 +48,7 @@ export default Ember.Component.extend({
       from = from();
     }
 
-    return DS.PromiseArray.create({
+    return Ember.run(DS.PromiseArray, 'create', {
       promise: Ember.RSVP.resolve(from)
     });
   }).readOnly(),
