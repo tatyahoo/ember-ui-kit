@@ -2,7 +2,7 @@
   "name": "ember-ui-kit",
   "description": "The default blueprint for ember-cli addons.",
   "url": "https://github.com/ming-codes/ember-ui-kit",
-  "version": "0.8.3",
+  "version": "0.8.4",
   "options": {
     "paths": [
       "addon"
