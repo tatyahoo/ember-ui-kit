@@ -80,7 +80,7 @@ test('linked lists can be cleared with help', async function(assert) {
   this.set('value2', this.get('array1')[0].array2[0]);
 
   this.render(hbs`
-    {{in-select key="name" from=array1 value=value1 labelPath="name"}}
+    {{in-select key="name" from=array1 value=value1 labelPath="name" change=(event (action (mut value2) null))}}
     {{in-select key="name" from=value1.array2 value=value2 labelPath="name"}}
 
     <div>{{value1.name}} {{value2.name}}</div>

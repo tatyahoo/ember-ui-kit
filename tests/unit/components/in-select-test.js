@@ -57,7 +57,7 @@ test('#list', async function(assert) {
   });
 
   while (checks.length) {
-    Ember.run(subject, subject.set, 'from', checks.shift());
+    subject.set('from', checks.shift());
 
     assert.deepEqual((await subject.get('list')).toArray(), content);
   }
@@ -160,12 +160,12 @@ test('@select', function(assert) {
 });
 
 test('@unselect', function(assert) {
-  let subject = Ember.run(this, 'subject');
+  let subject = this.subject();
 
-  Ember.run(subject, subject.setProperties, {
+  subject.setProperties({
     value: { id: 1 },
     key: 'id',
-    from: Object.freeze([
+    from: [
       {
         id: 1,
         name: 'Link'
@@ -174,7 +174,7 @@ test('@unselect', function(assert) {
         id: 2,
         name: 'Zelda'
       }
-    ])
+    ]
   });
 
   assert.deepEqual(subject.get('value'), { id: 1 });
@@ -183,10 +183,10 @@ test('@unselect', function(assert) {
 
   assert.deepEqual(subject.get('value'), null);
 
-  Ember.run(subject, subject.setProperties, {
+  subject.setProperties({
     value: [ { id: 1 } ],
     key: 'id',
-    from: Object.freeze([
+    from: [
       {
         id: 1,
         name: 'Link'
@@ -195,35 +195,14 @@ test('@unselect', function(assert) {
         id: 2,
         name: 'Zelda'
       }
-    ])
+    ]
   });
 
   subject.send('unselect', { id: 1 });
 
   assert.deepEqual(subject.get('value'), []);
 
-  Ember.run(subject, subject.setProperties, {
-    value: { id: 1 },
-    key: 'id',
-    from: Object.freeze([
-      {
-        id: 1,
-        name: 'Link'
-      },
-      {
-        id: 2,
-        name: 'Zelda'
-      }
-    ])
-  });
-
-  assert.deepEqual(subject.get('value'), { id: 1 });
-
-  subject.send('unselect', { id: 1 });
-
-  assert.deepEqual(subject.get('value'), null);
-
-  Ember.run(subject, subject.setProperties, {
+  subject.setProperties({
     value: [ { id: 1 }, { id: 2 } ],
     key: 'id',
     from: Object.freeze([
