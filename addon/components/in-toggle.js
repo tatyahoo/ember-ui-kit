@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import layout from '../templates/components/in-toggle';
 
-import MS from '../utils/microstate';
+import Input from './in-base';
 
 /**
  * `{{in-toggle}}` is a simple input component that respond
@@ -14,24 +14,27 @@ import MS from '../utils/microstate';
  * @class ToggleInputComponent
  * @namespace UI
  */
-export default Ember.Component.extend({
+export default Input.extend({
   classNames: 'in-toggle',
-  classNameBindings: 'valueNormalized:in-toggle--on:in-toggle--off',
-  attributeBindings: 'tabindex',
+  classNameBindings: [
+    'value:in-toggle--on:in-toggle--off',
+    'isFocused:in-toggle--focus',
+    'isBlurred:in-toggle--blur'
+  ],
   layout,
 
-  // attrs {
-  value: null,
-  tabindex: 0,
-  // attrs }
+  /**
+   * @public
+   * @attribute value
+   */
+  value: false,
 
-  valueNormalized: Ember.computed('value', function() {
-    return this.get('value').valueOf();
-  }).readOnly(),
+  didRender() {
+    this._super(...arguments);
 
-  click() {
-    MS.toggle(this, 'value');
+    this.get('inputElement').prop('checked', this.get('value'));
   }
+
 }).reopenClass({
   positionalParams: ['value']
 });

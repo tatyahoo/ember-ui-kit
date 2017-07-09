@@ -1,24 +1,49 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
+import { fillIn, focus, blur, click } from 'ember-native-dom-helpers';
 import Microstates from 'ember-microstates/initializers/microstates';
+
+const INPUT_SELECTOR = '.in-toggle input';
 
 moduleForComponent('in-toggle', 'Integration | Component | in-toggle', {
   integration: true
 });
 
-test('it is a bindable input', function(assert) {
-  Microstates.initialize(this);
+test('it is a bindable input', async function(assert) {
+  this.set('value', false);
 
   this.render(hbs`
-    {{#in-toggle (Boolean false) as |on|}}
-      On: {{on}}
-    {{/in-toggle}}
+    {{in-toggle value}}
   `);
 
-  assert.equal(this.$('.in-toggle').text().trim(), 'On: false', 'should init as false');
+  await click(INPUT_SELECTOR);
 
-  this.$('.in-toggle').click();
+  assert.ok(this.$(INPUT_SELECTOR).is(':checked'));
 
-  assert.equal(this.$('.in-toggle').text().trim(), 'On: true', 'should click to true');
+  await click(INPUT_SELECTOR);
+
+  assert.notOk(this.$(INPUT_SELECTOR).is(':checked'));
+});
+
+test('it triggers focus/blur action', async function(assert) {
+  let onFocusAction = sinon.spy();
+  let onBlurAction = sinon.spy();
+
+  this.on('focus', onFocusAction);
+  this.on('blur', onBlurAction);
+
+  this.render(hbs`{{in-toggle on-focus=(action "focus") on-blur=(action "blur")}}`);
+
+  let component = this.$('.in-toggle');
+
+  await focus(INPUT_SELECTOR);
+
+  assert.ok(onFocusAction.called);
+  assert.ok(component.is('.in-toggle--focus'));
+
+  await blur(INPUT_SELECTOR);
+
+  assert.ok(onBlurAction.called);
+  assert.ok(component.is('.in-toggle--blur'));
 });

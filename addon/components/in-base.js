@@ -3,7 +3,8 @@ import Ember from 'ember';
 function sendAction(actionName) {
   let action = this.get(actionName);
   let type = typeof action;
-  let updatedValue = this.get('inputElement').val();
+  let input = this.get('inputElement')
+  let updatedValue = input.is('input[type=checkbox]') ? input.is(':checked') : input.val();
 
   if (typeof action === 'function') {
     let newValue = action(updatedValue);
