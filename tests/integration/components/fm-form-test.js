@@ -5,7 +5,7 @@ import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 import DS from 'ember-data';
 
-import Microstates from 'ember-microstates/initializers/microstates';
+import { fillIn } from 'ember-native-dom-helpers';
 
 moduleForComponent('fm-form', 'Integration | Component | fm-form', {
   integration: true
@@ -16,9 +16,7 @@ moduleForComponent('fm-form', 'Integration | Component | fm-form', {
 // TODO integration with table
 // TODO table form rollback through ember-time-machine
 
-test('it convert model to fm-field collection that is bindable', function(assert) {
-  Microstates.initialize(this);
-
+test('it convert model to fm-field collection that is bindable', async function(assert) {
   this.register('model:user', DS.Model.extend({
     name: DS.attr('string'),
     ssn: DS.attr('number')
@@ -60,16 +58,16 @@ test('it convert model to fm-field collection that is bindable', function(assert
   let name = this.$('.fm-field[data-model-attribute="name"]');
   let ssn = this.$('.fm-field:not([data-model-attribute="name"])');
 
-  assert.equal(name.find('.in-text').length, 1, 'should render name field as text field');
-  assert.equal(name.find('.in-text').val(), '', 'should have name field be empty');
+  assert.equal(name.find('.in-text input').length, 1, 'should render name field as text field');
+  assert.equal(name.find('.in-text input').val(), '', 'should have name field be empty');
   assert.equal(name.find('.fm-field__validation-messages li').length, 1, 'should show name field validation');
 
-  assert.equal(ssn.find('.in-text').length, 1, 'should render ssn field as text field');
+  assert.equal(ssn.find('.in-text input').length, 1, 'should render ssn field as text field');
   assert.equal(ssn.find('.fm-field__validation-messages li').length, 0, 'should not show ssn field validation');
 
-  name.find('.in-text').val('Link').change();
+  await fillIn(name.find('.in-text input').get(0), 'Link');
 
-  assert.equal(name.find('.in-text').val(), 'Link', 'should have updated name field to Link');
+  assert.equal(name.find('.in-text input').val(), 'Link', 'should have updated name field to Link');
   assert.equal(name.find('.fm-field__validation-messages li').length, 0, 'should name field no longer be invalid');
 
   assert.equal(this.get('model.name'), 'Link', 'should have updated model name through field');
@@ -236,9 +234,7 @@ test('it should not submit form with button', function(assert) {
 //  `);
 //});
 
-test('it integrates with table to allow table rows to be form', function(assert) {
-  Microstates.initialize(this);
-
+test('it integrates with table to allow table rows to be form', async function(assert) {
   this.register('model:user', DS.Model.extend({
     name: DS.attr('string'),
     hairColor: DS.attr('string')
@@ -309,10 +305,10 @@ test('it integrates with table to allow table rows to be form', function(assert)
   let link = this.$('.ui-table__unfroze .ui-table__tr:first');
   let zelda = this.$('.ui-table__unfroze .ui-table__tr:last');
 
-  assert.equal(link.find('.ui-table__td:first .in-text').val(), 'Link', 'Table row form should have value set: link');
-  assert.equal(zelda.find('.ui-table__td:first .in-text').val(), 'Zelda', 'Table row form should have value set: zelda');
+  assert.equal(link.find('.ui-table__td:first .in-text input').val(), 'Link', 'Table row form should have value set: link');
+  assert.equal(zelda.find('.ui-table__td:first .in-text input').val(), 'Zelda', 'Table row form should have value set: zelda');
 
-  link.find('.ui-table__td:first .in-text').val('Zing').change();
+  await fillIn(link.find('.ui-table__td:first .in-text input').get(0), 'Zing');
 
   assert.equal(this.get('data.0.name'), 'Zing', 'changing field value should set model');
 });
@@ -358,8 +354,8 @@ test('it can be nested with property fm-field transform', function(assert) {
   assert.equal(this.$('.fm-field').length, 4, '4 form fields are rendered');
   assert.equal(this.$('.in-text').length, 4, '4 inputs are rendered');
 
-  assert.equal(this.$('.in-text:nth(0)').val(), 'Link 1', 'First level bound correctly');
-  assert.equal(this.$('.in-text:nth(1)').val(), 'Zelda 2', 'Second level bound correctly');
-  assert.equal(this.$('.in-text:nth(2)').val(), 'Link 3', 'Third level bound correctly');
-  assert.equal(this.$('.in-text:nth(3)').val(), 'Zelda 4', 'Fourth level bound correctly');
+  assert.equal(this.$('.in-text:nth(0) input').val(), 'Link 1', 'First level bound correctly');
+  assert.equal(this.$('.in-text:nth(1) input').val(), 'Zelda 2', 'Second level bound correctly');
+  assert.equal(this.$('.in-text:nth(2) input').val(), 'Link 3', 'Third level bound correctly');
+  assert.equal(this.$('.in-text:nth(3) input').val(), 'Zelda 4', 'Fourth level bound correctly');
 });

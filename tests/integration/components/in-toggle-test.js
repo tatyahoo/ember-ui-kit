@@ -1,8 +1,8 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-import { fillIn, focus, blur, click } from 'ember-native-dom-helpers';
-import Microstates from 'ember-microstates/initializers/microstates';
+import { focus, blur, click } from 'ember-native-dom-helpers';
+import sinon from 'sinon';
 
 const INPUT_SELECTOR = '.in-toggle input';
 

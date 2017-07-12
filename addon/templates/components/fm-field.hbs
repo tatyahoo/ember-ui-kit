@@ -1,7 +1,7 @@
 {{yield
   (hash
-    text=(component "in-text" value)
-    toggle=(component "in-toggle" value)
+    text=(component "in-text" value on-input=(action (mut value)))
+    toggle=(component "in-toggle" value on-change=(action (mut value)))
     select=(component "in-select" value)
   )
 }}
