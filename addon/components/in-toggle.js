@@ -29,12 +29,23 @@ export default Input.extend({
    */
   value: false,
 
+  /**
+   * @protected
+   * @property inputElement
+   */
+  inputElement: Ember.computed(function() {
+    return this.element.querySelector('.in-toggle__infix');
+  }).readOnly(),
+
   didRender() {
     this._super(...arguments);
 
-    this.get('inputElement').prop('checked', this.get('value'));
-  }
+    this.set('inputElement.checked', this.get('value'));
+  },
 
+  sendEventAction(actionName) {
+    return this._super(actionName, this.get('inputElement.checked'));
+  }
 }).reopenClass({
   positionalParams: ['value']
 });

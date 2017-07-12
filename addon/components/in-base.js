@@ -1,21 +1,5 @@
 import Ember from 'ember';
 
-function sendAction(actionName) {
-  let action = this.get(actionName);
-  let type = typeof action;
-  let input = this.get('inputElement')
-  let updatedValue = input.is('input[type=checkbox]') ? input.is(':checked') : input.val();
-
-  if (typeof action === 'function') {
-    let newValue = action(updatedValue);
-
-    this.set('value', typeof newValue !== 'undefined' ? newValue : updatedValue);
-  }
-  else {
-    return this.sendAction(actionName, updatedValue);
-  }
-}
-
 /**
  * @protected
  * @module input
@@ -23,26 +7,7 @@ function sendAction(actionName) {
  * @namespace UI
  */
 export default Ember.Component.extend({
-  mergedProperties: ['actionDispatcher'],
-
   tagName: 'label',
-
-  actionDispatcher: {
-    /**
-     * @event on-change
-     */
-    change: 'on-change',
-
-    /**
-     * @event on-focus
-     */
-    focus: 'on-focus',
-
-    /**
-     * @event on-blur
-     */
-    blur: 'on-blur'
-  },
 
   /**
    * @public
@@ -63,69 +28,49 @@ export default Ember.Component.extend({
   isBlurred: true,
 
   /**
-   * @protected
-   * @property inputElement
+   * @event on-focus-in
    */
-  inputElement: Ember.computed(function() {
-    return this.$('input');
-  }).readOnly(),
-
-  attachActionDispatchers() {
-    let ns = this.get('elementId');
-    let input = this.get('inputElement');
-
-    let dispatcher = this.get('actionDispatcher');
-
-    let events = Object.keys(dispatcher).map(event => `${event}.${ns}`).join(' ');
-
-    input.on(events, evt => {
-      let action = dispatcher[evt.type];
-
-      if (typeof action === 'string') {
-        Ember.run(this, sendAction, action);
-      }
-      else {
-        let name = action(evt);
-
-        if (typeof name === 'string') {
-          Ember.run(this, sendAction, name);
-        }
-      }
-    });
-  },
-
-  detachActionDispatchers() {
-    let ns = this.get('elementId');
-    let input = this.get('inputElement');
-
-    input.off(`.${ns}`);
-  },
-
-  didRender() {
-    this._super(...arguments);
-
-    this.detachActionDispatchers();
-    this.attachActionDispatchers();
-  },
-
-  willDestroyElement() {
-    this._super(...arguments);
-
-    this.detachActionDispatchers();
-  },
-
   focusIn() {
     this._super(...arguments);
 
     this.set('isFocused', true);
     this.set('isBlurred', false);
+
+    this.sendEventAction('on-focus-in');
   },
 
+  /**
+   * @event on-focus-out
+   */
   focusOut() {
     this._super(...arguments);
 
     this.set('isFocused', false);
     this.set('isBlurred', true);
+
+    this.sendEventAction('on-focus-out');
+  },
+
+  /**
+   * @event on-change
+   */
+  change() {
+    this._super(...arguments);
+
+    this.sendEventAction('on-change');
+  },
+
+  sendEventAction(actionName, updatedValue) {
+    let action = this.get(actionName);
+
+    if (typeof action === 'function') {
+      let newValue = action(updatedValue);
+
+      this.set('value', typeof newValue !== 'undefined' ? newValue : updatedValue);
+    }
+    else {
+      this.sendAction(actionName, updatedValue);
+    }
   }
 }).reopenClass({
   positionalParams: ['value']

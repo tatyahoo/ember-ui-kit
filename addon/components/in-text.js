@@ -34,7 +34,7 @@ export default Input.extend({
 
   /**
    * @protected
-   * @property actionDispatcher
+   * @property inputElement
    */
   inputElement: Ember.computed(function() {
     return this.element.querySelector('.in-text__infix');
@@ -48,13 +48,34 @@ export default Input.extend({
   },
 
   /**
-   * @attribute placeholder
+   * @event on-input
    */
-  placeholder: null,
-
-  didRender() {
+  input() {
     this._super(...arguments);
 
-    this.get('inputElement').val(this.get('value'));
+    this.sendEventAction('on-input');
+  },
+
+  /**
+   * @event on-enter-key
+   */
+  /**
+   * @event on-escape-key
+   */
+  /**
+   * @event on-backspace-key
+   */
+  keyUp(evt) {
+    this._super(...arguments);
+
+    switch (evt.key) {
+      case 'Enter': this.sendEventAction('on-enter-key'); break;
+      case 'Escape': this.sendEventAction('on-escape-key'); break;
+      case 'Backspace': this.sendEventAction('on-backspace-key'); break;
+    }
+  },
+
+  sendEventAction(actionName) {
+    return this._super(actionName, this.get('inputElement.value'));
   }
 });

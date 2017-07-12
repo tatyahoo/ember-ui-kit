@@ -33,7 +33,7 @@ test('it triggers focus/blur action', async function(assert) {
   this.on('focus', onFocusAction);
   this.on('blur', onBlurAction);
 
-  this.render(hbs`{{in-toggle on-focus=(action "focus") on-blur=(action "blur")}}`);
+  this.render(hbs`{{in-toggle on-focus-in=(action "focus") on-focus-out=(action "blur")}}`);
 
   let component = this.$('.in-toggle');
 
