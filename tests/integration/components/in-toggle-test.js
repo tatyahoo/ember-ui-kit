@@ -1,10 +1,8 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-import { focus, blur, click } from 'ember-native-dom-helpers';
+import ToggleInput from 'ember-ui-kit/test-support/pages/components/in-toggle';
 import sinon from 'sinon';
-
-const INPUT_SELECTOR = '.in-toggle input';
 
 moduleForComponent('in-toggle', 'Integration | Component | in-toggle', {
   integration: true
@@ -14,16 +12,18 @@ test('it is a bindable input', async function(assert) {
   this.set('value', false);
 
   this.render(hbs`
-    {{in-toggle value}}
+    {{in-toggle value on-change=(action (mut value))}}
   `);
 
-  await click(INPUT_SELECTOR);
+  let input = new ToggleInput(this);
 
-  assert.ok(this.$(INPUT_SELECTOR).is(':checked'));
+  await input.click();
 
-  await click(INPUT_SELECTOR);
+  assert.ok(input.is('.in-toggle--on'));
 
-  assert.notOk(this.$(INPUT_SELECTOR).is(':checked'));
+  await input.click();
+
+  assert.ok(input.is('.in-toggle--off'));
 });
 
 test('it triggers focus/blur action', async function(assert) {
@@ -35,15 +35,15 @@ test('it triggers focus/blur action', async function(assert) {
 
   this.render(hbs`{{in-toggle on-focus-in=(action "focus") on-focus-out=(action "blur")}}`);
 
-  let component = this.$('.in-toggle');
+  let input = new ToggleInput(this);
 
-  await focus(INPUT_SELECTOR);
+  await input.focus();
 
   assert.ok(onFocusAction.called);
-  assert.ok(component.is('.in-toggle--focus'));
+  assert.ok(input.is('.in-toggle--focus'));
 
-  await blur(INPUT_SELECTOR);
+  await input.blur();
 
   assert.ok(onBlurAction.called);
-  assert.ok(component.is('.in-toggle--blur'));
+  assert.ok(input.is('.in-toggle--blur'));
 });
