@@ -3,7 +3,7 @@
         "name": "ember-ui-kit",
         "description": "The default blueprint for ember-cli addons.",
         "url": "https://github.com/ming-codes/ember-ui-kit",
-        "version": "0.8.4.0b34ee28"
+        "version": "0.9.0.29d9fa50"
     },
     "files": {
         "addon/components/ui-table/tbody-each.js": {
@@ -102,6 +102,17 @@
                 "UI": 1
             }
         },
+        "addon/components/in-base.js": {
+            "name": "addon/components/in-base.js",
+            "modules": {},
+            "classes": {
+                "UI.BaseInputComponent": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "UI": 1
+            }
+        },
         "addon/components/in-select.js": {
             "name": "addon/components/in-select.js",
             "modules": {},
@@ -145,6 +156,15 @@
             "namespaces": {
                 "UI": 1
             }
+        },
+        "addon/components/ui-component.js": {
+            "name": "addon/components/ui-component.js",
+            "modules": {},
+            "classes": {
+                "UI.ComponentComponent": 1
+            },
+            "fors": {},
+            "namespaces": {}
         },
         "addon/components/ui-draggable.js": {
             "name": "addon/components/ui-draggable.js",
@@ -245,6 +265,7 @@
                 "ui-table.thead": 1,
                 "ui-table.tr": 1,
                 "UI.BackdropComponent": 1,
+                "UI.ComponentComponent": 1,
                 "UI.DraggableComponent": 1,
                 "UI.PositionComponent": 1,
                 "UI.ResizableComponent": 1,
@@ -290,6 +311,7 @@
             "submodules": {},
             "elements": {},
             "classes": {
+                "UI.BaseInputComponent": 1,
                 "UI.SelectInputComponent": 1,
                 "UI.TextInputComponent": 1,
                 "UI.ToggleInputComponent": 1
@@ -302,8 +324,9 @@
             "file": "addon/components/in-toggle.js",
             "line": 6,
             "description": "The `input` module consists of components that deals with\nobtaining user inputs. The components themselves does not\nprovide validation, but integrates with `form` module\ncomponents for that functionality",
-            "access": "public",
+            "access": "protected",
             "tagname": "",
+            "extends": "UI.BaseInputComponent",
             "itemtype": "main"
         }
     },
@@ -463,6 +486,21 @@
             "access": "public",
             "tagname": ""
         },
+        "UI.BaseInputComponent": {
+            "name": "UI.BaseInputComponent",
+            "shortname": "UI.BaseInputComponent",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "input",
+            "namespace": "UI",
+            "file": "addon/components/in-base.js",
+            "line": 3,
+            "access": "protected",
+            "tagname": ""
+        },
         "UI.SelectInputComponent": {
             "name": "UI.SelectInputComponent",
             "shortname": "UI.SelectInputComponent",
@@ -523,6 +561,22 @@
             "line": 3,
             "description": "`ui-backdrop` is a simple component to put a mask\nover the screen. Use with `ui-position` to create\nmodal.",
             "access": "public",
+            "tagname": ""
+        },
+        "UI.ComponentComponent": {
+            "name": "UI.ComponentComponent",
+            "shortname": "ComponentComponent",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "ui",
+            "namespace": "UI",
+            "file": "addon/components/ui-component.js",
+            "line": 4,
+            "description": "Helper component to aid in the composition of components",
+            "access": "private",
             "tagname": ""
         },
         "UI.DraggableComponent": {
@@ -668,6 +722,66 @@
             "namespace": "UI"
         },
         {
+            "file": "addon/components/in-base.js",
+            "line": 12,
+            "access": "public",
+            "tagname": "",
+            "itemtype": "attribute",
+            "name": "value",
+            "class": "UI.BaseInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-base.js",
+            "line": 18,
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "isFocused",
+            "class": "UI.BaseInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-base.js",
+            "line": 24,
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "isBlurred",
+            "class": "UI.BaseInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-base.js",
+            "line": 30,
+            "itemtype": "event",
+            "name": "on-focus-in",
+            "class": "UI.BaseInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-base.js",
+            "line": 42,
+            "itemtype": "event",
+            "name": "on-focus-out",
+            "class": "UI.BaseInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-base.js",
+            "line": 54,
+            "itemtype": "event",
+            "name": "on-change",
+            "class": "UI.BaseInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
             "file": "addon/components/in-select.js",
             "line": 15,
             "description": "The selected option. The select is multi select if `value` is bound\nan array-like object.\n\n`value` makes no garantee about object identity correctness. This means\n`value` may contain value that does not match `from` content by strict\nequal `===`. `value` does garantee the object match by configured `key`.",
@@ -702,6 +816,111 @@
             "name": "list",
             "class": "UI.SelectInputComponent",
             "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-text.js",
+            "line": 20,
+            "itemtype": "attribute",
+            "name": "placeholder",
+            "class": "UI.TextInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-text.js",
+            "line": 25,
+            "itemtype": "attribute",
+            "name": "autocomplete",
+            "class": "UI.TextInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-text.js",
+            "line": 30,
+            "itemtype": "attribute",
+            "name": "autofocus",
+            "class": "UI.TextInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-text.js",
+            "line": 35,
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "inputElement",
+            "class": "UI.TextInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-text.js",
+            "line": 50,
+            "itemtype": "event",
+            "name": "on-input",
+            "class": "UI.TextInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-text.js",
+            "line": 59,
+            "itemtype": "event",
+            "name": "on-enter-key",
+            "class": "UI.TextInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-text.js",
+            "line": 62,
+            "itemtype": "event",
+            "name": "on-escape-key",
+            "class": "UI.TextInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-text.js",
+            "line": 65,
+            "itemtype": "event",
+            "name": "on-backspace-key",
+            "class": "UI.TextInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-toggle.js",
+            "line": 26,
+            "access": "public",
+            "tagname": "",
+            "itemtype": "attribute",
+            "name": "value",
+            "class": "UI.ToggleInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-toggle.js",
+            "line": 32,
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "inputElement",
+            "class": "UI.ToggleInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/ui-component.js",
+            "line": 14,
+            "itemtype": "attribute",
+            "name": "value",
+            "class": "UI.ComponentComponent",
+            "module": "ui",
             "namespace": "UI"
         },
         {
