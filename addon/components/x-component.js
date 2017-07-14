@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from '../templates/components/ui-component';
+import layout from '../templates/components/x-component';
 
 /**
  * Helper component to aid in the composition of components
@@ -8,7 +8,7 @@ import layout from '../templates/components/ui-component';
  * @class ComponentComponent
  */
 export default Ember.Component.extend({
-  classNames: 'ui-component',
+  classNames: 'x-component',
   layout,
 
   /**
