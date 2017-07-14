@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/29d9fa50" target="_blank">
-                                  Tag: 0.9.0.29d9fa50
+                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/fd6e5d6f" target="_blank">
+                                  Tag: 0.9.1.fd6e5d6f
                                 </a>
                             </h4>
                         </div>
@@ -144,6 +144,7 @@
 <div class="file">
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
+import { sendEventAction } from &#x27;ember-ui-kit/utils/ddau&#x27;;
 
 /**
  * @protected
@@ -206,16 +207,7 @@ export default Ember.Component.extend({
   },
 
   sendEventAction(actionName, updatedValue) {
-    let action = this.get(actionName);
-
-    if (typeof action === &#x27;function&#x27;) {
-      let newValue = action(updatedValue);
-
-      this.set(&#x27;value&#x27;, typeof newValue !== &#x27;undefined&#x27; ? newValue : updatedValue);
-    }
-    else {
-      this.sendAction(actionName, updatedValue);
-    }
+    sendEventAction(this, actionName, &#x27;value&#x27;, updatedValue);
   }
 }).reopenClass({
   positionalParams: [&#x27;value&#x27;]
