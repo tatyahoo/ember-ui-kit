@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { sendEventAction } from 'ember-ui-kit/utils/ddau';
 
 /**
  * @protected
@@ -61,16 +62,7 @@ export default Ember.Component.extend({
   },
 
   sendEventAction(actionName, updatedValue) {
-    let action = this.get(actionName);
-
-    if (typeof action === 'function') {
-      let newValue = action(updatedValue);
-
-      this.set('value', typeof newValue !== 'undefined' ? newValue : updatedValue);
-    }
-    else {
-      this.sendAction(actionName, updatedValue);
-    }
+    sendEventAction(this, actionName, 'value', updatedValue);
   }
 }).reopenClass({
   positionalParams: ['value']
