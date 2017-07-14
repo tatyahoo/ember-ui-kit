@@ -1,0 +1,12 @@
+.x-resize {
+  display: inline-block;
+
+  &__flex {
+    display: flex;
+    align-items: stretch;
+  }
+
+  &__h-detector, &__v-detector {
+    position: relative;
+  }
+}
