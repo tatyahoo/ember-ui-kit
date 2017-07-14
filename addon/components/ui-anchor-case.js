@@ -39,6 +39,14 @@ export default Ember.Component.extend({
     if (this.get('match')) {
       Ember.run.schedule('afterRender', this, 'scrollIntoView');
     }
+
+    this.$().data('case', this.get('case'));
+  },
+
+  willDestroyElement() {
+    this._super(...arguments);
+
+    this.$().removeData();
   },
 
   // TODO smooth scroll

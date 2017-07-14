@@ -1,11 +1,15 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
+import sinon from 'sinon';
+
 moduleForComponent('ui-anchor-switch', 'Integration | Component | ui-anchor', {
   integration: true,
 
   beforeEach() {
     this.set('position', 2);
+
+    this.on('position-update', this.update = sinon.spy());
 
     this.render(hbs`
       <style>
@@ -13,8 +17,7 @@ moduleForComponent('ui-anchor-switch', 'Integration | Component | ui-anchor', {
           width: 640px;
           height: 200px;
           margin: 50px auto;
-          outline: 1px solid lightyellow;
-          overflow: scroll;
+          border: 1px solid darkblue;
         }
 
         .ui-anchor-case {
@@ -22,7 +25,7 @@ moduleForComponent('ui-anchor-switch', 'Integration | Component | ui-anchor', {
           height: 160px;
         }
 
-        .ui-anchor-case:nth-child(even) {
+        .ui-anchor-case:nth-child(even) div {
           background: lightblue;
         }
 
@@ -33,10 +36,12 @@ moduleForComponent('ui-anchor-switch', 'Integration | Component | ui-anchor', {
         }
       </style>
 
-      {{#ui-anchor-switch position on-scroll=(action (mut position)) as |anchor|}}
+      {{#ui-anchor-switch position on-change=(action "position-update") as |anchor|}}
         {{#each (array 0 1 2 3 4 5 6 7 8 9) as |section|}}
           {{#anchor.case section}}
-            <h1>{{section}}</h1>
+            <div>
+              <h1>{{section}}</h1>
+            </div>
           {{/anchor.case}}
         {{/each}}
       {{/ui-anchor-switch}}
@@ -57,7 +62,9 @@ test('it binds data down', async function(assert) {
 });
 
 test('it fire action up', function(assert) {
+  this.update.reset();
+
   this.$('.ui-anchor-switch').scrollTop(0);
 
-  return new Ember.RSVP.Promise(Ember.$.noop);
+  assert.ok(this.update.calledWith(0));
 });
