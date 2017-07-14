@@ -2,6 +2,14 @@
 const raf = window.requestAnimationFrame;
 const caf = window.cancelAnimationFrame;
 
+export function thenable() {
+  return {
+    then(onResolve) {
+      return raf(onResolve);
+    }
+  };
+}
+
 export function throttle(fn) {
   let wait = false;
 
