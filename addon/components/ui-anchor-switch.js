@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import layout from '../templates/components/ui-anchor-switch';
 
-import { task, timeout, waitForEvent } from 'ember-concurrency';
+import { task, waitForEvent } from 'ember-concurrency';
 import { thenable } from 'ember-ui-kit/utils/raf';
 
 export default Ember.Component.extend({
@@ -29,27 +29,49 @@ export default Ember.Component.extend({
   // a scroll spy feature
   sync: task(function *() {
     let cases = this.$('.ui-anchor-case');
+
+    let { target } = yield waitForEvent(this.$(), 'scroll');
+
+    yield this.get('poll').perform(target, cases);
+
+    this.get('sync').perform();
+  }).restartable(),
+
+  poll: task(function *(target, cases) {
+    let debounce = 60;
+    let page = 0.2;
+
     let { offsetHeight, offsetTop } = this.element;
 
-    while (true) {
-      let evt = yield waitForEvent(this.$(), 'scroll');
+    let last = target.scrollTop;
+    let count = 0;
 
+    while (count < debounce) {
       let active = cases
         .filter(function() {
-          return this.offsetTop - offsetTop - evt.target.scrollTop >= 0;
+          return this.offsetTop - offsetTop - target.scrollTop >= 0;
         })
         .filter(function() {
-          return (this.offsetTop - offsetTop - evt.target.scrollTop) / offsetHeight < 0.2;
+          return (this.offsetTop - offsetTop - target.scrollTop) / offsetHeight < page;
         })
         .first();
 
       if (active.length) {
         this.sendAction('on-change', active.data('case'));
       }
-    }
 
-    //yield thenable();
-  }).restartable(),
+      if (target.scrollTop === last) {
+        count++;
+      }
+      else {
+        count = 0;
+      }
+
+      last = target.scrollTop;
+
+      yield thenable();
+    }
+  }).drop(),
 
   /**
    * @event on-change

@@ -1,6 +1,8 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
+import Ember from 'ember';
+
 import sinon from 'sinon';
 
 moduleForComponent('ui-anchor-switch', 'Integration | Component | ui-anchor', {
@@ -61,10 +63,12 @@ test('it binds data down', async function(assert) {
   assert.equal(this.$('.ui-anchor-switch').scrollTop(), 0);
 });
 
-test('it fire action up', function(assert) {
+test('it fire action up', async function(assert) {
   this.update.reset();
 
   this.$('.ui-anchor-switch').scrollTop(0);
+
+  await new Ember.RSVP.Promise(requestAnimationFrame);
 
   assert.ok(this.update.calledWith(0));
 });
