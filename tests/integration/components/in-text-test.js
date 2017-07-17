@@ -8,6 +8,18 @@ moduleForComponent('in-text', 'Integration | Component | in-text', {
   integration: true
 });
 
+test('it should never show null and undefined', function(assert) {
+  [ null, undefined ].forEach(value => {
+    this.set('value', value);
+
+    this.render(hbs`
+      {{in-text value}}
+    `);
+
+    assert.equal(this.$('.in-text input').val(), '');
+  });
+});
+
 test('it allows two-way binding with help', async function(assert) {
   this.set('value', 'Hello');
 

@@ -43,7 +43,7 @@ export default Input.extend({
   didRender() {
     this._super(...arguments);
 
-    this.set('inputElement.value', this.get('value'));
+    this.set('inputElement.value', this.get('value') || '');
     this.set('inputElement.autofocus', this.get('autofocus'));
   },
 
