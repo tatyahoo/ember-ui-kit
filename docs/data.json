@@ -3,7 +3,7 @@
         "name": "ember-ui-kit",
         "description": "The default blueprint for ember-cli addons.",
         "url": "https://github.com/ming-codes/ember-ui-kit",
-        "version": "0.9.1.fd6e5d6f"
+        "version": "0.9.2.7cc11e6f"
     },
     "files": {
         "addon/components/ui-table/tbody-each.js": {
@@ -145,6 +145,20 @@
             "namespaces": {
                 "UI": 1
             }
+        },
+        "addon/components/ui-anchor-case.js": {
+            "name": "addon/components/ui-anchor-case.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "addon/components/ui-anchor-switch.js": {
+            "name": "addon/components/ui-anchor-switch.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
         },
         "addon/components/ui-backdrop.js": {
             "name": "addon/components/ui-backdrop.js",
@@ -918,6 +932,92 @@
             "itemtype": "property",
             "name": "inputElement",
             "class": "UI.ToggleInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/ui-anchor-case.js",
+            "line": 8,
+            "access": "private",
+            "tagname": "",
+            "itemtype": "attribute",
+            "name": "switch",
+            "class": "UI.BackdropComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/ui-anchor-case.js",
+            "line": 14,
+            "access": "private",
+            "tagname": "",
+            "itemtype": "attribute",
+            "name": "behavior",
+            "class": "UI.BackdropComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/ui-anchor-case.js",
+            "line": 20,
+            "access": "private",
+            "tagname": "",
+            "itemtype": "attribute",
+            "name": "block",
+            "class": "UI.BackdropComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/ui-anchor-case.js",
+            "line": 26,
+            "access": "public",
+            "tagname": "",
+            "itemtype": "attribute",
+            "name": "case",
+            "class": "UI.BackdropComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/ui-anchor-switch.js",
+            "line": 11,
+            "access": "public",
+            "tagname": "",
+            "itemtype": "attribute",
+            "name": "switch",
+            "class": "UI.BackdropComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/ui-anchor-switch.js",
+            "line": 17,
+            "access": "public",
+            "tagname": "",
+            "itemtype": "attribute",
+            "name": "behavior",
+            "class": "UI.BackdropComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/ui-anchor-switch.js",
+            "line": 23,
+            "access": "public",
+            "tagname": "",
+            "itemtype": "attribute",
+            "name": "block",
+            "class": "UI.BackdropComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/ui-anchor-switch.js",
+            "line": 76,
+            "itemtype": "event",
+            "name": "on-change",
+            "class": "UI.BackdropComponent",
             "module": "input",
             "namespace": "UI"
         },
