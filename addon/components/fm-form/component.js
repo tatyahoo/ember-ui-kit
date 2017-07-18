@@ -1,7 +1,5 @@
 import Ember from 'ember';
 
-import Composable from '../mixins/composable';
-
 /**
  * `{{fm-form}}` component wraps a `DS.Model` object and yields
  * `{{fm-field}}` with appropriate validations setup. Each `{{fm-field}}`
@@ -57,7 +55,7 @@ import Composable from '../mixins/composable';
  * @class FormComponent
  * @namespace UI
  */
-export default Ember.Component.extend(Composable, {
+export default Ember.Component.extend({
   tagName: 'form',
   classNames: 'fm-form',
 

@@ -1,1 +1,1 @@
-export { default } from 'ember-ui-kit/components/fm-form';
+export { default } from 'ember-ui-kit/components/fm-form/component';
