@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import layout from '../templates/components/in-toggle';
+import layout from './template';
 
-import Input from './in-base';
+import Input from '../in-base';
 
 /**
  * `{{in-toggle}}` is a simple input component that respond

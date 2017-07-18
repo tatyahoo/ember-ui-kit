@@ -1,1 +1,1 @@
-export { default } from 'ember-ui-kit/components/in-toggle';
+export { default } from 'ember-ui-kit/components/in-toggle/component';
