@@ -1,9 +1,6 @@
 import Ember from 'ember';
-import layout from '../templates/components/fm-fieldset';
 
-import Composable from '../mixins/composable';
-
-import { observerOnceIn } from '../utils/run';
+import { observerOnceIn } from 'ember-ui-kit/utils/run';
 
 /**
  * @private
@@ -11,10 +8,9 @@ import { observerOnceIn } from '../utils/run';
  * @class FormFieldsetComponent
  * @namespace UI
  */
-export default Ember.Component.extend(Composable, {
+export default Ember.Component.extend({
   tagName: 'fieldset',
   classNames: 'fm-fieldset',
-  layout,
 
   // attrs {
   disabled: false,
