@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import layout from '../templates/components/ui-draggable';
 
 /**
  * @public
@@ -9,7 +8,6 @@ import layout from '../templates/components/ui-draggable';
  */
 export default Ember.Component.extend({
   classNames: 'ui-draggable',
-  layout,
 
   /**
    * options hash for [jQuery UI draggable](http://api.jqueryui.com/draggable/)

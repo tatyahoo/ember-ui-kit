@@ -1,1 +1,1 @@
-export { default } from 'ember-ui-kit/components/ui-draggable';
+export { default } from 'ember-ui-kit/components/ui-draggable/component';
