@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from '../templates/components/ui-anchor-switch';
+import layout from './template';
 
 import { task, waitForEvent } from 'ember-concurrency';
 import { thenable } from 'ember-ui-kit/utils/raf';

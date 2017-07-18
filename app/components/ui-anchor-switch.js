@@ -1,1 +1,1 @@
-export { default } from 'ember-ui-kit/components/ui-anchor-switch';
+export { default } from 'ember-ui-kit/components/ui-anchor-switch/component';
