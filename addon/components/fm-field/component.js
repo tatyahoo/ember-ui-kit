@@ -1,7 +1,5 @@
 import Ember from 'ember';
-import layout from '../templates/components/fm-field';
-
-import Composable from '../mixins/composable';
+import layout from './template';
 
 /**
  * @private
@@ -9,8 +7,7 @@ import Composable from '../mixins/composable';
  * @class FormFieldComponent
  * @namespace UI
  */
-export default Ember.Component.extend(Composable, {
-  componentRegistrationName: 'field',
+export default Ember.Component.extend({
   tagName: 'label',
   classNames: 'fm-field',
   classNameBindings: [
