@@ -1,6 +1,6 @@
 import Ember from 'ember';
-import layout from '../templates/components/in-text';
-import Input from './in-base';
+import layout from './template';
+import Input from '../in-base';
 
 /**
  * @public
