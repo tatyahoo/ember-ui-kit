@@ -26,6 +26,20 @@ test('it is a bindable input', async function(assert) {
   assert.ok(input.is('.in-toggle--off'));
 });
 
+test('it should bind disabled', function(assert) {
+  this.set('disabled', false);
+
+  this.render(hbs`
+    {{in-toggle value disabled=disabled}}
+  `);
+
+  assert.equal(this.$('.in-toggle input').is(':disabled'), false);
+
+  this.set('disabled', true);
+
+  assert.equal(this.$('.in-toggle input').is(':disabled'), true);
+});
+
 test('it triggers focus/blur action', async function(assert) {
   let onFocusAction = sinon.spy();
   let onBlurAction = sinon.spy();

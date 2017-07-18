@@ -20,6 +20,20 @@ test('it should never show null and undefined', function(assert) {
   });
 });
 
+test('it should bind disabled', function(assert) {
+  this.set('disabled', false);
+
+  this.render(hbs`
+    {{in-text value disabled=disabled}}
+  `);
+
+  assert.equal(this.$('.in-text input').is(':disabled'), false);
+
+  this.set('disabled', true);
+
+  assert.equal(this.$('.in-text input').is(':disabled'), true);
+});
+
 test('it allows two-way binding with help', async function(assert) {
   this.set('value', 'Hello');
 

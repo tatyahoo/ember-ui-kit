@@ -30,6 +30,11 @@ export default Input.extend({
   value: false,
 
   /**
+   * @attribute disabled
+   */
+  disabled: false,
+
+  /**
    * @protected
    * @property inputElement
    */
@@ -41,6 +46,7 @@ export default Input.extend({
     this._super(...arguments);
 
     this.set('inputElement.checked', this.get('value'));
+    this.set('inputElement.disabled', this.get('disabled'));
   },
 
   sendEventAction(actionName) {

@@ -33,6 +33,11 @@ export default Input.extend({
   autofocus: false,
 
   /**
+   * @attribute disabled
+   */
+  disabled: false,
+
+  /**
    * @protected
    * @property inputElement
    */
@@ -45,6 +50,7 @@ export default Input.extend({
 
     this.set('inputElement.value', this.get('value') || '');
     this.set('inputElement.autofocus', this.get('autofocus'));
+    this.set('inputElement.disabled', this.get('disabled'));
   },
 
   /**
