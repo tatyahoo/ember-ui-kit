@@ -1,9 +1,7 @@
 import Ember from 'ember';
-import layout from '../templates/components/ui-anchor-case';
 
 export default Ember.Component.extend({
   classNames: 'ui-anchor-case',
-  layout,
 
   /**
    * @private
