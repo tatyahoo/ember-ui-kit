@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from '../templates/components/x-resize';
+import layout from './template';
 
 import { sendEventAction } from 'ember-ui-kit/utils/ddau';
 
