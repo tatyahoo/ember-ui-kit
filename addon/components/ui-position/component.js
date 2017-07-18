@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import layout from '../templates/components/ui-position';
 
 const WHITE_SPACE_CHUNKER = /\s+/;
 
@@ -29,7 +28,6 @@ function fix(position) {
  */
 export default Ember.Component.extend({
   classNames: 'ui-position',
-  layout,
 
   /**
    * options hash for [jQuery UI position](http://api.jqueryui.com/position/)
