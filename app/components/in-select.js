@@ -1,1 +1,1 @@
-export { default } from 'ember-ui-kit/components/in-select';
+export { default } from 'ember-ui-kit/components/in-select/component';

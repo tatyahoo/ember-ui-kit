@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import DS from 'ember-data';
-import layout from '../templates/components/in-select';
+import layout from './template';
 
 /**
  * @public
