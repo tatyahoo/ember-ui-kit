@@ -1,1 +1,1 @@
-export { default } from 'ember-ui-kit/components/ui-resizable';
+export { default } from 'ember-ui-kit/components/ui-resizable/component';
