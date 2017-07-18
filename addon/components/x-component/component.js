@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from '../templates/components/x-component';
+import layout from './template';
 
 /**
  * Helper component to aid in the composition of components
