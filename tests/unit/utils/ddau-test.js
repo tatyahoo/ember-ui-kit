@@ -30,8 +30,9 @@ test('#sendEventAction', function(assert) {
   sendEventAction(context, 'action', 'value', 1);
 
   assert.notOk(fn.called);
-  assert.ok(context.set.called);
+  assert.notOk(context.set.called);
   assert.ok(context.get.calledWith('action'));
+  assert.notOk(context.set.called);
   assert.ok(context.sendAction.calledWith('action', 1));
 
   fn.reset();
@@ -49,16 +50,4 @@ test('#sendEventAction', function(assert) {
   assert.ok(context.get.calledWith('action'));
   assert.ok(context.set.calledWith('value', 2));
   assert.notOk(context.sendAction.called);
-
-  fn.reset();
-  context.get.reset();
-  context.set.reset();
-  context.sendAction.reset();
-
-  context.get.returns(undefined);
-
-  sendEventAction(context, 'action', 'value', 1);
-
-  assert.ok(context.set.called);
-  assert.ok(context.sendAction.called);
 });
