@@ -5,8 +5,11 @@ export function sendEventAction(context, actionName, valueName, updatedValue) {
     let newValue = action(updatedValue);
 
     context.set(valueName, typeof newValue !== 'undefined' ? newValue : updatedValue);
+
+    return;
   }
-  else {
-    context.sendAction(actionName, updatedValue);
-  }
+
+  context.set(valueName, updatedValue);
+
+  context.sendAction(actionName, updatedValue);
 }
