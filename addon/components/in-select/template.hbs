@@ -3,12 +3,11 @@
 {{else}}
   <ul>
     {{#each list key=key as |item|}}
-      <li onclick={{action "select" item}}>
-        {{#if labelPath}}
-          {{get item labelPath}}
-        {{else}}
-          {{item}}
-        {{/if}}
+      <li>
+        <label>
+          <input type="{{if multiple 'checkbox' 'radio'}}" value="{{get item key}}" name="{{elementId}}">
+          {{item.name}}
+        </label>
       </li>
     {{/each}}
   </ul>
