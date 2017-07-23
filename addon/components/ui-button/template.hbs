@@ -1,0 +1,11 @@
+{{#if hasBlock}}
+  {{~yield value~}}
+{{else}}
+  {{~#if prefix~}}
+    {{~x-component prefix tagName="span" class="ui-button__prefix"~}}
+  {{~/if~}}
+  {{x-component label tagName="span" class="ui-button__infix"}}
+  {{~#if postfix~}}
+    {{~x-component postfix tagName="span" class="ui-button__postfix"~}}
+  {{~/if~}}
+{{/if}}
