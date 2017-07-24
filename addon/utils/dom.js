@@ -96,7 +96,7 @@ export function layout(width, portions) {
         };
       }
 
-      let expr = portion.match(/([\d\.]+)(px|\%|fr)/);
+      let expr = portion.match(/([\d.]+)(px|%|fr)/);
 
       Ember.assert(`Layout expression ${portion} not recognized`, expr);
 
