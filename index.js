@@ -84,6 +84,14 @@ module.exports = {
     });
   },
 
+  config(env, baseConfig) {
+    baseConfig['ember-component-css'] = {
+      namespacing: false
+    };
+
+    return baseConfig;
+  },
+
   included: function(app) {
     this._super.included.apply(this, arguments);
 
