@@ -47,22 +47,14 @@ export default class ButtonComponent extends PageObject {
   click() {
     if (typeof document.elementsFromPoint === 'function') {
       let self = this.self;
+      let rect = self.getBoundingClientRect();
 
-      let offsetTop = 0;
-      let offsetLeft = 0;
-
-      for (let node = self; node !== document.body; node = node.offsetParent) {
-        offsetTop += node.offsetTop;
-        offsetLeft += node.offsetLeft;
-      }
-
-      let stack = document.elementsFromPoint(offsetLeft + self.offsetWidth / 2, offsetTop + self.offsetHeight / 2);
+      let stack = document.elementsFromPoint(rect.left + rect.width / 2, rect.top + rect.height / 2);
 
       let count = stack
         .slice(0, stack.indexOf(this.self))
-        .map(node => {
-          return getComputedStyle(node).getPropertyValue('pointer-events');
-        })
+        .filter(node => !self.contains(node))
+        .map(node => getComputedStyle(node).getPropertyValue('pointer-events'))
         .filter(pe => pe !== 'none');
 
       if (count.length) {
