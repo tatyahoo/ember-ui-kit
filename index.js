@@ -72,7 +72,7 @@ module.exports = {
   },
 
   treeForAddonTestSupport: function(tree) {
-    let namespacedTree = new Funnel('addon', {
+    let namespacedTree = new Funnel(path.join(__dirname, 'addon'), {
       srcDir: '/',
       destDir: `/${this.moduleName()}`,
       include: ['**/page-object.js'],
