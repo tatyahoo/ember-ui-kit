@@ -13,7 +13,8 @@ export default Input.extend({
   classNames: 'in-text',
   classNameBindings: [
     'isFocused:in-text--focus',
-    'isBlurred:in-text--blur'
+    'isBlurred:in-text--blur',
+    'disabled:in-text--disabled:in-text--enabled'
   ],
   layout,
 

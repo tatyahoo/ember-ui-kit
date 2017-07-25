@@ -3,6 +3,7 @@
 
 var Merge = require('broccoli-merge-trees');
 var Funnel = require('broccoli-funnel');
+var stew = require('broccoli-stew');
 
 var path = require('path');
 
@@ -53,12 +54,33 @@ module.exports = {
     ]));
   },
 
+  treeForAddon: function(tree) {
+    return new Funnel(this._super(tree), {
+      srcDir: '/',
+      destDir: '/',
+      exclude: ['**/page-object.js']
+    });
+  },
+
   treeForNodeModule: function(module) {
     var fullPath = require.resolve(module);
     var ui = path.join(fullPath.substring(0, fullPath.indexOf(module)), module);
 
     return new Funnel(ui, {
       destDir: module
+    });
+  },
+
+  treeForAddonTestSupport: function(tree) {
+    let namespacedTree = new Funnel('addon', {
+      srcDir: '/',
+      destDir: `/${this.moduleName()}`,
+      include: ['**/page-object.js'],
+      annotation: `Addon#treeForTestSupport (${this.name})`,
+    });
+
+    return this.preprocessJs(namespacedTree, '/', this.name, {
+      registry: this.registry,
     });
   },
 

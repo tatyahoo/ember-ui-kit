@@ -1,11 +1,16 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-import TextInput from 'ember-ui-kit/test-support/pages/components/in-text';
 import sinon from 'sinon';
 
+import TextInput from 'ember-ui-kit/components/in-text/page-object';
+
 moduleForComponent('in-text', 'Integration | Component | in-text', {
-  integration: true
+  integration: true,
+
+  beforeEach() {
+    this.po = new TextInput('.in-text');
+  }
 });
 
 test('it should never show null and undefined', function(assert) {
@@ -16,7 +21,7 @@ test('it should never show null and undefined', function(assert) {
       {{in-text value}}
     `);
 
-    assert.equal(this.$('.in-text input').val(), '');
+    assert.equal(this.po.value, '');
   });
 });
 
@@ -27,11 +32,11 @@ test('it should bind disabled', function(assert) {
     {{in-text value disabled=disabled}}
   `);
 
-  assert.equal(this.$('.in-text input').is(':disabled'), false);
+  assert.ok(this.po.enabled);
 
   this.set('disabled', true);
 
-  assert.equal(this.$('.in-text input').is(':disabled'), true);
+  assert.ok(this.po.disabled);
 });
 
 test('it allows two-way binding with help', async function(assert) {
@@ -41,7 +46,7 @@ test('it allows two-way binding with help', async function(assert) {
     {{in-text value on-input=(action (mut value))}}
   `);
 
-  let input = new TextInput(this);
+  let input = new TextInput('.in-text');
 
   await input.fillIn('Hello');
 
@@ -62,17 +67,15 @@ test('it triggers focus/blur action', async function(assert) {
 
   this.render(hbs`{{in-text on-focus-in=(action "focus") on-focus-out=(action "blur")}}`);
 
-  let input = new TextInput(this);
+  let input = new TextInput('.in-text');
 
   await input.focus();
 
   assert.ok(onFocusAction.called, 'focus action called');
-  assert.ok(input.is('.in-text--focus'));
 
   await input.blur();
 
   assert.ok(onBlurAction.called, 'blur action called');
-  assert.ok(input.is('.in-text--blur'));
 });
 
 test('it renders prefix and postfixes', function(assert) {
@@ -94,6 +97,6 @@ test('it renders prefix and postfixes', function(assert) {
     }}
   `);
 
-  assert.equal(this.$('.in-text__prefix .in-text__prefix').length, 1, 'render component prefix')
-  assert.equal(this.$('.in-text__postfix .in-text__postfix').length, 1, 'render component postfix')
+  assert.equal(this.$('.in-text__prefix .in-text__infix').length, 1, 'render component prefix')
+  assert.equal(this.$('.in-text__postfix .in-text__infix').length, 1, 'render component postfix')
 });

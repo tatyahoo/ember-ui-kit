@@ -19,7 +19,8 @@ export default Input.extend({
   classNameBindings: [
     'value:in-toggle--on:in-toggle--off',
     'isFocused:in-toggle--focus',
-    'isBlurred:in-toggle--blur'
+    'isBlurred:in-toggle--blur',
+    'disabled:in-toggle--disabled:in-toggle--enabled'
   ],
   layout,
 

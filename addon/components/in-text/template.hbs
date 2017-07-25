@@ -1,3 +1,7 @@
-{{x-component prefix tagName="span" class="in-text__prefix"}}
+{{#if prefix}}
+  {{~x-component prefix tagName="span" class="in-text__prefix"~}}
+{{/if}}
 <input class="in-text__infix" placeholder={{placeholder}} autocomplete={{autocomplete}}>
-{{x-component postfix tagName="span" class="in-text__postfix"}}
+{{#if postfix}}
+{{~x-component postfix tagName="span" class="in-text__postfix"~}}
+{{/if}}

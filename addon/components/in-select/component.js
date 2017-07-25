@@ -10,6 +10,11 @@ import layout from './template';
  */
 export default Ember.Component.extend({
   classNames: 'in-select',
+  classNameBindings: [
+    'isFocused:in-select--focus',
+    'isBlurred:in-select--blur',
+    'disabled:in-select--disabled:in-select--enabled'
+  ],
   layout,
 
   /**
@@ -33,6 +38,23 @@ export default Ember.Component.extend({
    * @attribute key
    */
   key: null,
+
+  /**
+   * @attribute disabled
+   */
+  disabled: false,
+
+  /**
+   * @property isFocused
+   * @private
+   */
+  isFocused: false,
+
+  /**
+   * @property isFocused
+   * @private
+   */
+  isBlurred: true,
 
   multiple: Ember.computed('value', function() {
     return Ember.isArray(this.get('value'));
@@ -76,6 +98,20 @@ export default Ember.Component.extend({
       };
     }
   }).readOnly(),
+
+  focusIn() {
+    this._super(...arguments);
+
+    this.set('isFocused', true);
+    this.set('isBlurred', false);
+  },
+
+  focusOut() {
+    this._super(...arguments);
+
+    this.set('isFocused', false);
+    this.set('isBlurred', true);
+  },
 
   actions: {
     select(item) {

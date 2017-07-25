@@ -1,3 +1,7 @@
-{{x-component prefix tagName="span" class="in-toggle__prefix"}}
+{{#if prefix}}
+  {{~x-component prefix tagName="span" class="in-toggle__prefix"~}}
+{{/if}}
 <input type="checkbox" class="in-toggle__infix">
-{{x-component postfix tagName="span" class="in-toggle__postfix"}}
+{{#if postfix}}
+  {{~x-component postfix tagName="span" class="in-toggle__postfix"~}}
+{{/if}}
