@@ -1,6 +1,11 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
+import sinon from 'sinon';
+
+import Backdrop from 'ember-ui-kit/components/ui-backdrop/page-object';
+import Button from 'ember-ui-kit/components/ui-button/page-object';
+
 moduleForComponent('ui-backdrop', 'Integration | Component | ui-backdrop', {
   integration: true
 });
@@ -32,10 +37,15 @@ test('it renders a simple backdrop in inline form', function(assert) {
   assert.ok(this.$('.ui-backdrop').next().is('.ui-position'));
 });
 
-test('it renders a simple backdrop in block form', function(assert) {
-  this.on('backdrop', function() {
-    assert.ok('backdrop');
+test('it renders a simple backdrop in block form', async function(assert) {
+  let onBackdropClick = sinon.spy();
+  let onButtonClick = sinon.spy();
+  let po = new Backdrop('.ui-backdrop', {
+    content: new Button('.ui-button')
   });
+
+  this.on('backdrop', onBackdropClick);
+  this.on('button', onButtonClick);
 
   this.render(hbs`
     <style>
@@ -46,18 +56,24 @@ test('it renders a simple backdrop in block form', function(assert) {
     </style>
     <div id="content">
       CONTENT CONTENT CONTENT CONTENT CONTENT
-      {{#ui-backdrop click=(event (action "backdrop") selfOnly=true)}}
+      {{#ui-backdrop on-click=(action "backdrop")}}
         {{#ui-position options=(hash my="left top" at="left bottom")}}
-          POSITIONED
+          {{ui-button "POSITIONED" on-click=(action "button")}}
         {{/ui-position}}
       {{/ui-backdrop}}
     </div>
   `);
 
-  this.$('.ui-position').click();
-  this.$('.ui-backdrop').click();
+  await po.content.click();
 
-  assert.ok(this.$('.ui-backdrop').children().is('.ui-position'));
+  assert.notOk(onBackdropClick.called, 'on button click, backdrop not clicked');
+  assert.ok(onButtonClick.called, 'on button click, button clicked');
 
-  assert.expect(2);
+  onBackdropClick.reset();
+  onButtonClick.reset();
+
+  await po.click();
+
+  assert.notOk(onButtonClick.called, 'on backdrop click, backdrop clicked');
+  assert.ok(onBackdropClick.called, 'on backdrop click, button not clicked');
 });

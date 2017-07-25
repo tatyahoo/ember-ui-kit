@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import layout from './template';
 
 /**
  * `ui-backdrop` is a simple component to put a mask
@@ -11,5 +12,12 @@ import Ember from 'ember';
  * @class BackdropComponent
  */
 export default Ember.Component.extend({
-  classNames: 'ui-backdrop'
+  classNames: 'ui-backdrop',
+  layout,
+
+  click(evt) {
+    if (evt.target === this.element) {
+      this.sendAction('on-click');
+    }
+  }
 });
