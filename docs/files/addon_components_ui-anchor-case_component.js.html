@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/components/in-text.js - ember-ui-kit</title>
+    <title>addon/components/ui-anchor-case/component.js - ember-ui-kit</title>
     <meta name="description" content="The default blueprint for ember-cli addons.">
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/7cc11e6f" target="_blank">
-                                  Tag: 0.9.2.7cc11e6f
+                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/e1f6cfed" target="_blank">
+                                  Tag: 0.10.0.e1f6cfed
                                 </a>
                             </h4>
                         </div>
@@ -144,85 +144,66 @@
 <div class="file">
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import layout from &#x27;../templates/components/in-text&#x27;;
-import Input from &#x27;./in-base&#x27;;
 
-/**
- * @public
- * @module input
- * @class TextInputComponent
- * @extends UI.BaseInputComponent
- * @namespace UI
- */
-export default Input.extend({
-  classNames: &#x27;in-text&#x27;,
-  classNameBindings: [
-    &#x27;isFocused:in-text--focus&#x27;,
-    &#x27;isBlurred:in-text--blur&#x27;
-  ],
-  layout,
+export default Ember.Component.extend({
+  classNames: &#x27;ui-anchor-case&#x27;,
 
   /**
-   * @attribute placeholder
+   * @private
+   * @attribute switch
    */
-  placeholder: null,
+  switch: null,
 
   /**
-   * @attribute autocomplete
+   * @private
+   * @attribute behavior
    */
-  autocomplete: &#x27;off&#x27;,
+  behavior: &#x27;smooth&#x27;,
 
   /**
-   * @attribute autofocus
+   * @private
+   * @attribute block
    */
-  autofocus: false,
+  block: &#x27;start&#x27;,
 
   /**
-   * @protected
-   * @property inputElement
+   * @public
+   * @attribute case
    */
-  inputElement: Ember.computed(function() {
-    return this.element.querySelector(&#x27;.in-text__infix&#x27;);
+  case: null,
+
+  match: Ember.computed(&#x27;switch&#x27;, &#x27;case&#x27;, function() {
+    return this.get(&#x27;switch&#x27;) === this.get(&#x27;case&#x27;);
   }).readOnly(),
 
   didRender() {
     this._super(...arguments);
 
-    this.set(&#x27;inputElement.value&#x27;, this.get(&#x27;value&#x27;) || &#x27;&#x27;);
-    this.set(&#x27;inputElement.autofocus&#x27;, this.get(&#x27;autofocus&#x27;));
-  },
-
-  /**
-   * @event on-input
-   */
-  input() {
-    this._super(...arguments);
-
-    this.sendEventAction(&#x27;on-input&#x27;);
-  },
-
-  /**
-   * @event on-enter-key
-   */
-  /**
-   * @event on-escape-key
-   */
-  /**
-   * @event on-backspace-key
-   */
-  keyUp(evt) {
-    this._super(...arguments);
-
-    switch (evt.key) {
-      case &#x27;Enter&#x27;: this.sendEventAction(&#x27;on-enter-key&#x27;); break;
-      case &#x27;Escape&#x27;: this.sendEventAction(&#x27;on-escape-key&#x27;); break;
-      case &#x27;Backspace&#x27;: this.sendEventAction(&#x27;on-backspace-key&#x27;); break;
+    if (this.get(&#x27;match&#x27;)) {
+      Ember.run.schedule(&#x27;afterRender&#x27;, this, &#x27;scrollIntoView&#x27;);
     }
+
+    this.$().data(&#x27;case&#x27;, this.get(&#x27;case&#x27;));
   },
 
-  sendEventAction(actionName) {
-    return this._super(actionName, this.get(&#x27;inputElement.value&#x27;));
+  willDestroyElement() {
+    this._super(...arguments);
+
+    this.$().removeData();
+  },
+
+  // TODO smooth scroll
+  scrollIntoView() {
+    if (Ember.testing) {
+      this.element.scrollIntoView();
+    }
+    else {
+      this.element.scrollIntoView(this.getProperties(&#x27;block&#x27;, &#x27;behavior&#x27;));
+    }
   }
+
+}).reopenClass({
+  positionalParams: [&#x27;case&#x27;]
 });
 
     </pre>

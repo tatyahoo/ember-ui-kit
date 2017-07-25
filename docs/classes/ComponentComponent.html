@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/components/ui-resizable.js - ember-ui-kit</title>
+    <title>ComponentComponent - ember-ui-kit</title>
     <meta name="description" content="The default blueprint for ember-cli addons.">
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/7cc11e6f" target="_blank">
-                                  Tag: 0.9.2.7cc11e6f
+                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/e1f6cfed" target="_blank">
+                                  Tag: 0.10.0.e1f6cfed
                                 </a>
                             </h4>
                         </div>
@@ -137,48 +137,129 @@
                 <div class="apidocs">
                     <div id="docs-main">
                         <div class="content">
+
+
 <div class="page-header">
-    <h1><i class="fa fa-file-code-o" aria-hidden="true"></i>  File</h1>
+    <h1> <i class="fa fa-bookmark-o" aria-hidden="true"></i> ComponentComponent Class
+            <a class="pull-right file-edit" href="https://github.com/ming-codes/ember-ui-kit/blob/e1f6cfed/addon/components/x-component/component.js#L4" target="_blank">
+              <i class="fa fa-pencil" aria-hidden="true"></i>
+            </a>
+    </h1>
 </div>
 
-<div class="file">
-    <pre class="prettyprint linenums">
-import Ember from &#x27;ember&#x27;;
-import layout from &#x27;../templates/components/ui-resizable&#x27;;
+  <p class="private-class">Private</p>
 
-/**
- * @public
- * @module ui
- * @class ResizableComponent
- * @namespace UI
- */
-export default Ember.Component.extend({
-  classNames: &#x27;ui-resizable&#x27;,
-  layout,
 
-  /**
-   * options hash for [jQuery UI resizable](http://api.jqueryui.com/resizable/)
-   *
-   * @attribute options
-   * @default null
-   * @type object
-   */
-  options: null,
+<div class="content-meta">
 
-  didRender() {
-    this._super(...arguments);
 
-    this.$().resizable(Object.assign({}, this.get(&#x27;options&#x27;)));
-  },
+            Module: <a href="../modules/ui.html">ui</a>
 
-  willDestroyElement() {
-    this._super(...arguments);
 
-    this.$().resizable(&#x27;destroy&#x27;);
-  }
-});
+        <div class="foundat">
+            Defined In: <a href="https://github.com/ming-codes/ember-ui-kit/blob/e1f6cfed/addon/components/x-component/component.js#L4">addon/components/x-component/component.js:4</a>
+        </div>
+</div>
 
-    </pre>
+
+
+  <div class="class-description">
+  <p>Helper component to aid in the composition of components</p>
+
+  </div>
+
+<div>
+    <div class="page-section">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#tab_index" aria-controls="tab_index" role="tab" data-toggle="tab">Index</a></li>
+
+
+            <li role="presentation"><a href="#tab_attrs" aria-controls="tab_attrs" role="tab" data-toggle="tab">Attributes</a></li>
+
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+
+              <form id="options-form" class="form-inline">
+                  Show:
+                  <label for="api-show-inherited" class="checkbox">
+                      <input type="checkbox" id="api-show-inherited" checked>
+                      Inherited
+                  </label>
+          
+                  <label for="api-show-protected" class="checkbox">
+                      <input type="checkbox" id="api-show-protected">
+                      Protected
+                  </label>
+          
+                  <label for="api-show-private" class="checkbox">
+                      <input type="checkbox" id="api-show-private">
+                      Private
+                  </label>
+                  <label for="api-show-deprecated" class="checkbox">
+                      <input type="checkbox" id="api-show-deprecated">
+                      Deprecated
+                  </label>
+          
+              </form>
+
+          <div id="tab_index" role="tabpanel" class="tab-pane active" >
+
+
+                  <div class="index-section attrs">
+                      <h3>Attributes</h3>
+
+                      <ul class="index-list attrs">
+                              <li class="index-item attr">
+                                  <a href="#attr_value">value</a>
+                              </li>
+                      </ul>
+                  </div>
+
+          </div>
+
+
+
+              <div id="tab_attrs" role="tabpanel" class="tab-pane">
+                  <div class="item-list">
+  <div id="attr_value" class="attr item">
+      <a name="config_value"></a> 
+      <h3 class="name anchorable-toc">
+          <a class="fa fa-link toc-anchor" href="#attr_value"></a>
+          value
+      </h3>
+      <span class="type"></span>
+  
+  
+  
+  
+  
+  
+  
+  
+      <div class="meta">
+                  <p>
+                  Defined in
+          <a href="https://github.com/ming-codes/ember-ui-kit/blob/e1f6cfed/addon/components/x-component/component.js#L14">addon/components/x-component/component.js:14</a>
+          </p>
+  
+  
+      </div>
+  
+      <div class="description">
+          
+      </div>
+  
+  
+  
+  </div>
+                  </div>
+              </div>
+
+      </div>
+    </div>
 </div>
                         </div>
                     </div>

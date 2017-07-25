@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/components/in-select.js - ember-ui-kit</title>
+    <title>addon/components/fm-field/component.js - ember-ui-kit</title>
     <meta name="description" content="The default blueprint for ember-cli addons.">
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/7cc11e6f" target="_blank">
-                                  Tag: 0.9.2.7cc11e6f
+                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/e1f6cfed" target="_blank">
+                                  Tag: 0.10.0.e1f6cfed
                                 </a>
                             </h4>
                         </div>
@@ -144,155 +144,29 @@
 <div class="file">
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import DS from &#x27;ember-data&#x27;;
-import layout from &#x27;../templates/components/in-select&#x27;;
+import layout from &#x27;./template&#x27;;
 
 /**
- * @public
- * @module input
- * @class SelectInputComponent
+ * @private
+ * @module form
+ * @class FormFieldComponent
  * @namespace UI
  */
 export default Ember.Component.extend({
-  classNames: &#x27;in-select&#x27;,
+  tagName: &#x27;label&#x27;,
+  classNames: &#x27;fm-field&#x27;,
+  classNameBindings: [
+    &#x27;validation.isValid:fm-field--valid:&#x27;,
+    &#x27;validation.isInvalid:fm-field--invalid&#x27;
+  ],
+  attributeBindings: &#x27;valuePath:data-model-attribute&#x27;,
   layout,
 
-  /**
-   * The selected option. The select is multi select if &#x60;value&#x60; is bound
-   * an array-like object.
-   *
-   * &#x60;value&#x60; makes no garantee about object identity correctness. This means
-   * &#x60;value&#x60; may contain value that does not match &#x60;from&#x60; content by strict
-   * equal &#x60;===&#x60;. &#x60;value&#x60; does garantee the object match by configured &#x60;key&#x60;.
-   *
-   * @attribute value
-   */
+  // attrs {
   value: null,
-
-  /**
-   * @attribute from
-   */
-  from: null,
-
-  /**
-   * @attribute key
-   */
-  key: null,
-
-  multiple: Ember.computed(&#x27;value&#x27;, function() {
-    return Ember.isArray(this.get(&#x27;value&#x27;));
-  }).readOnly(),
-
-  /**
-   * @property list
-   */
-  list: Ember.computed(&#x27;from&#x27;, function() {
-    let from = this.get(&#x27;from&#x27;);
-
-    if (typeof from === &#x27;function&#x27;) {
-      from = from();
-    }
-
-    return Ember.run(DS.PromiseArray, &#x27;create&#x27;, {
-      promise: Ember.RSVP.resolve(from)
-    });
-  }).readOnly(),
-
-  isSelected: Ember.computed(&#x27;key&#x27;, &#x27;value.[]&#x27;, function() {
-    let key = this.get(&#x27;key&#x27;);
-    let value = this.get(&#x27;value&#x27;);
-
-    if (!Ember.isEmpty(value) &amp;&amp; !Ember.isArray(value)) {
-      value = [ value ];
-    }
-
-    value = Ember.A(value);
-
-    if (key) {
-      value = value.mapBy(key);
-
-      return item =&gt; {
-        return value.includes(Ember.get(item, key));
-      };
-    }
-    else {
-      return item =&gt; {
-        return value.includes(item);
-      };
-    }
-  }).readOnly(),
-
-  actions: {
-    select(item) {
-      if (this.get(&#x27;multiple&#x27;)) {
-        let key = this.get(&#x27;key&#x27;);
-        let value = this.get(&#x27;value&#x27;);
-
-        let exists = key ?
-          Ember.A(value).findBy(key, Ember.get(item, key)) :
-          Ember.A(value).includes(item);
-
-        if (!exists) {
-          if (value.pushObject) {
-            value.pushObject(item);
-          }
-          else {
-            value.push(item);
-          }
-        }
-      }
-      else {
-        this.set(&#x27;value&#x27;, item);
-      }
-
-      Ember.$(this.$()).change();
-    },
-
-    unselect(item) {
-      if (this.get(&#x27;multiple&#x27;)) {
-        let key = this.get(&#x27;key&#x27;);
-        let value = this.get(&#x27;value&#x27;);
-
-        if (value.removeObject) {
-          if (key) {
-            value.removeObject(value.findBy(key, Ember.get(item, key)));
-          }
-          else {
-            value.removeObject(item);
-          }
-        }
-        else {
-          if (key) {
-            value.splice(value.indexOf(Ember.A(value).findBy(key, Ember.get(item, key))), 1);
-          }
-          else {
-            value.splice(value.indexOf(item), 1);
-          }
-
-        }
-      }
-      else {
-        this.set(&#x27;value&#x27;, null);
-      }
-
-      Ember.$(this.$()).change();
-    },
-
-    toggle(item) {
-      let check = this.get(&#x27;isSelected&#x27;);
-
-      if (check(item)) {
-        this.send(&#x27;unselect&#x27;, item);
-      }
-      else {
-        this.send(&#x27;select&#x27;, item);
-      }
-
-      Ember.$(this.$()).change();
-    }
-  }
-}).reopenClass({
-  positionalParams: [&#x27;value&#x27;]
+  validPath: null,
+  validation: null
+  // attrs }
 });
 
     </pre>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/components/fm-field.js - ember-ui-kit</title>
+    <title>addon/components/ui-button/component.js - ember-ui-kit</title>
     <meta name="description" content="The default blueprint for ember-cli addons.">
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -53,8 +53,8 @@
                     <li class="panel panel-default">
                         <div class="panel-heading" role="tab" id="sidebar-version-heading">
                             <h4 class="panel-title">
-                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/7cc11e6f" target="_blank">
-                                  Tag: 0.9.2.7cc11e6f
+                                <a role="button" href="https://github.com/ming-codes/ember-ui-kit/commits/e1f6cfed" target="_blank">
+                                  Tag: 0.10.0.e1f6cfed
                                 </a>
                             </h4>
                         </div>
@@ -144,32 +144,68 @@
 <div class="file">
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import layout from &#x27;../templates/components/fm-field&#x27;;
+import layout from &#x27;./template&#x27;;
 
-import Composable from &#x27;../mixins/composable&#x27;;
+import { sendEventAction } from &#x27;ember-ui-kit/utils/ddau&#x27;;
 
-/**
- * @private
- * @module form
- * @class FormFieldComponent
- * @namespace UI
- */
-export default Ember.Component.extend(Composable, {
-  componentRegistrationName: &#x27;field&#x27;,
-  tagName: &#x27;label&#x27;,
-  classNames: &#x27;fm-field&#x27;,
+export default Ember.Component.extend({
+  tagName: &#x27;button&#x27;,
+  classNames: &#x27;ui-button&#x27;,
   classNameBindings: [
-    &#x27;validation.isValid:fm-field--valid:&#x27;,
-    &#x27;validation.isInvalid:fm-field--invalid&#x27;
+    &#x27;isFocused:ui-button--focus&#x27;,
+    &#x27;isBlurred:ui-button--blur&#x27;,
+    &#x27;disabled:ui-button--disabled:ui-button--enabled&#x27;
   ],
-  attributeBindings: &#x27;valuePath:data-model-attribute&#x27;,
+  attributeBindings: &#x27;disabled&#x27;,
   layout,
 
-  // attrs {
-  value: null,
-  validPath: null,
-  validation: null
-  // attrs }
+  /**
+   * @attribute label
+   */
+  label: null,
+
+  /**
+   * @attribute value
+   */
+  value: Ember.computed.oneWay(&#x27;label&#x27;),
+
+  /**
+   * @attribute value
+   */
+  disabled: null,
+
+  isFocused: false,
+  isBlurred: true,
+
+  didRender() {
+    this._super(...arguments);
+
+    this.element.value = this.get(&#x27;value&#x27;);
+  },
+
+  focusIn() {
+    this._super(...arguments);
+
+    this.set(&#x27;isFocused&#x27;, true);
+    this.set(&#x27;isBlurred&#x27;, false);
+
+    sendEventAction(this, &#x27;on-focus-in&#x27;, &#x27;value&#x27;, this.get(&#x27;value&#x27;));
+  },
+
+  focusOut() {
+    this._super(...arguments);
+
+    this.set(&#x27;isFocused&#x27;, false);
+    this.set(&#x27;isBlurred&#x27;, true);
+
+    sendEventAction(this, &#x27;on-focus-out&#x27;, &#x27;value&#x27;, this.get(&#x27;value&#x27;));
+  },
+
+  click() {
+    sendEventAction(this, &#x27;on-click&#x27;, &#x27;value&#x27;, this.get(&#x27;value&#x27;));
+  }
+}).reopenClass({
+  positionalParams: [&#x27;label&#x27;, &#x27;value&#x27;]
 });
 
     </pre>

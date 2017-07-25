@@ -3,9 +3,151 @@
         "name": "ember-ui-kit",
         "description": "The default blueprint for ember-cli addons.",
         "url": "https://github.com/ming-codes/ember-ui-kit",
-        "version": "0.9.2.7cc11e6f"
+        "version": "0.10.0.e1f6cfed"
     },
     "files": {
+        "addon/components/fm-field/component.js": {
+            "name": "addon/components/fm-field/component.js",
+            "modules": {},
+            "classes": {
+                "UI.FormFieldComponent": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "UI": 1
+            }
+        },
+        "addon/components/fm-fieldset/component.js": {
+            "name": "addon/components/fm-fieldset/component.js",
+            "modules": {},
+            "classes": {
+                "UI.FormFieldsetComponent": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "UI": 1
+            }
+        },
+        "addon/components/fm-form/component.js": {
+            "name": "addon/components/fm-form/component.js",
+            "modules": {},
+            "classes": {
+                "UI.FormComponent": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "UI": 1
+            }
+        },
+        "addon/components/in-select/component.js": {
+            "name": "addon/components/in-select/component.js",
+            "modules": {},
+            "classes": {
+                "UI.SelectInputComponent": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "UI": 1
+            }
+        },
+        "addon/components/in-text/component.js": {
+            "name": "addon/components/in-text/component.js",
+            "modules": {},
+            "classes": {
+                "UI.TextInputComponent": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "UI": 1
+            }
+        },
+        "addon/components/in-toggle/component.js": {
+            "name": "addon/components/in-toggle/component.js",
+            "modules": {},
+            "classes": {
+                "UI.ToggleInputComponent": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "UI": 1
+            }
+        },
+        "addon/components/ui-anchor-case/component.js": {
+            "name": "addon/components/ui-anchor-case/component.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "addon/components/ui-anchor-switch/component.js": {
+            "name": "addon/components/ui-anchor-switch/component.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "addon/components/ui-backdrop/component.js": {
+            "name": "addon/components/ui-backdrop/component.js",
+            "modules": {},
+            "classes": {
+                "UI.BackdropComponent": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "UI": 1
+            }
+        },
+        "addon/components/ui-button/component.js": {
+            "name": "addon/components/ui-button/component.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "addon/components/ui-draggable/component.js": {
+            "name": "addon/components/ui-draggable/component.js",
+            "modules": {},
+            "classes": {
+                "UI.DraggableComponent": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "UI": 1
+            }
+        },
+        "addon/components/ui-position/component.js": {
+            "name": "addon/components/ui-position/component.js",
+            "modules": {},
+            "classes": {
+                "UI.PositionComponent": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "UI": 1
+            }
+        },
+        "addon/components/ui-resizable/component.js": {
+            "name": "addon/components/ui-resizable/component.js",
+            "modules": {},
+            "classes": {
+                "UI.ResizableComponent": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "UI": 1
+            }
+        },
+        "addon/components/ui-sortable/component.js": {
+            "name": "addon/components/ui-sortable/component.js",
+            "modules": {},
+            "classes": {
+                "UI.SortableComponent": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "UI": 1
+            }
+        },
         "addon/components/ui-table/tbody-each.js": {
             "name": "addon/components/ui-table/tbody-each.js",
             "modules": {},
@@ -69,135 +211,27 @@
             "fors": {},
             "namespaces": {}
         },
-        "addon/components/fm-field.js": {
-            "name": "addon/components/fm-field.js",
+        "addon/components/x-component/component.js": {
+            "name": "addon/components/x-component/component.js",
             "modules": {},
             "classes": {
-                "UI.FormFieldComponent": 1
+                "ComponentComponent": 1
             },
             "fors": {},
-            "namespaces": {
-                "UI": 1
-            }
+            "namespaces": {}
         },
-        "addon/components/fm-fieldset.js": {
-            "name": "addon/components/fm-fieldset.js",
+        "addon/components/x-resize/component.js": {
+            "name": "addon/components/x-resize/component.js",
             "modules": {},
-            "classes": {
-                "UI.FormFieldsetComponent": 1
-            },
+            "classes": {},
             "fors": {},
-            "namespaces": {
-                "UI": 1
-            }
-        },
-        "addon/components/fm-form.js": {
-            "name": "addon/components/fm-form.js",
-            "modules": {},
-            "classes": {
-                "UI.FormComponent": 1
-            },
-            "fors": {},
-            "namespaces": {
-                "UI": 1
-            }
+            "namespaces": {}
         },
         "addon/components/in-base.js": {
             "name": "addon/components/in-base.js",
             "modules": {},
             "classes": {
                 "UI.BaseInputComponent": 1
-            },
-            "fors": {},
-            "namespaces": {
-                "UI": 1
-            }
-        },
-        "addon/components/in-select.js": {
-            "name": "addon/components/in-select.js",
-            "modules": {},
-            "classes": {
-                "UI.SelectInputComponent": 1
-            },
-            "fors": {},
-            "namespaces": {
-                "UI": 1
-            }
-        },
-        "addon/components/in-text.js": {
-            "name": "addon/components/in-text.js",
-            "modules": {},
-            "classes": {
-                "UI.TextInputComponent": 1
-            },
-            "fors": {},
-            "namespaces": {
-                "UI": 1
-            }
-        },
-        "addon/components/in-toggle.js": {
-            "name": "addon/components/in-toggle.js",
-            "modules": {},
-            "classes": {
-                "UI.ToggleInputComponent": 1
-            },
-            "fors": {},
-            "namespaces": {
-                "UI": 1
-            }
-        },
-        "addon/components/ui-anchor-case.js": {
-            "name": "addon/components/ui-anchor-case.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
-        "addon/components/ui-anchor-switch.js": {
-            "name": "addon/components/ui-anchor-switch.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
-        "addon/components/ui-backdrop.js": {
-            "name": "addon/components/ui-backdrop.js",
-            "modules": {},
-            "classes": {
-                "UI.BackdropComponent": 1
-            },
-            "fors": {},
-            "namespaces": {
-                "UI": 1
-            }
-        },
-        "addon/components/ui-draggable.js": {
-            "name": "addon/components/ui-draggable.js",
-            "modules": {},
-            "classes": {
-                "UI.DraggableComponent": 1
-            },
-            "fors": {},
-            "namespaces": {
-                "UI": 1
-            }
-        },
-        "addon/components/ui-position.js": {
-            "name": "addon/components/ui-position.js",
-            "modules": {},
-            "classes": {
-                "UI.PositionComponent": 1
-            },
-            "fors": {},
-            "namespaces": {
-                "UI": 1
-            }
-        },
-        "addon/components/ui-resizable.js": {
-            "name": "addon/components/ui-resizable.js",
-            "modules": {},
-            "classes": {
-                "UI.ResizableComponent": 1
             },
             "fors": {},
             "namespaces": {
@@ -215,17 +249,6 @@
                 "UI": 1
             }
         },
-        "addon/components/ui-sortable.js": {
-            "name": "addon/components/ui-sortable.js",
-            "modules": {},
-            "classes": {
-                "UI.SortableComponent": 1
-            },
-            "fors": {},
-            "namespaces": {
-                "UI": 1
-            }
-        },
         "addon/components/ui-table.js": {
             "name": "addon/components/ui-table.js",
             "modules": {},
@@ -237,22 +260,6 @@
                 "UI": 1
             }
         },
-        "addon/components/x-component.js": {
-            "name": "addon/components/x-component.js",
-            "modules": {},
-            "classes": {
-                "UI.ComponentComponent": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
-        "addon/components/x-resize.js": {
-            "name": "addon/components/x-resize.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
         "addon/utils/microstate.js": {
             "name": "addon/utils/microstate.js",
             "modules": {},
@@ -263,9 +270,9 @@
         "addon/index.js": {
             "name": "addon/index.js",
             "modules": {
-                "ui": 1,
                 "form": 1,
-                "input": 1
+                "input": 1,
+                "ui": 1
             },
             "classes": {},
             "fors": {},
@@ -273,39 +280,6 @@
         }
     },
     "modules": {
-        "ui": {
-            "name": "ui",
-            "submodules": {},
-            "elements": {},
-            "classes": {
-                "ui-table.tbody-each": 1,
-                "ui-table.tbody": 1,
-                "ui-table.td": 1,
-                "ui-table.tfoot": 1,
-                "ui-table.th": 1,
-                "ui-table.thead": 1,
-                "ui-table.tr": 1,
-                "UI.BackdropComponent": 1,
-                "UI.DraggableComponent": 1,
-                "UI.PositionComponent": 1,
-                "UI.ResizableComponent": 1,
-                "UI.ScrollableComponent": 1,
-                "UI.SortableComponent": 1,
-                "UI.TableComponent": 1,
-                "UI.ComponentComponent": 1
-            },
-            "fors": {},
-            "namespaces": {
-                "UI": 1
-            },
-            "tag": "module",
-            "file": "addon/components/x-component.js",
-            "line": 4,
-            "description": "The `ui` module consists are lower level components.",
-            "access": "private",
-            "tagname": "",
-            "itemtype": "main"
-        },
         "form": {
             "name": "form",
             "submodules": {},
@@ -320,8 +294,8 @@
                 "UI": 1
             },
             "tag": "module",
-            "file": "addon/components/fm-form.js",
-            "line": 5,
+            "file": "addon/components/fm-form/component.js",
+            "line": 3,
             "description": "The `form` module consists of components that deals with form\nand validation. The `form` module components are separate\nfrom `input` module to provide validation.",
             "access": "private",
             "tagname": "",
@@ -332,26 +306,228 @@
             "submodules": {},
             "elements": {},
             "classes": {
-                "UI.BaseInputComponent": 1,
                 "UI.SelectInputComponent": 1,
                 "UI.TextInputComponent": 1,
-                "UI.ToggleInputComponent": 1
+                "UI.ToggleInputComponent": 1,
+                "UI.BaseInputComponent": 1
             },
             "fors": {},
             "namespaces": {
                 "UI": 1
             },
             "tag": "module",
-            "file": "addon/components/in-toggle.js",
-            "line": 6,
+            "file": "addon/components/in-base.js",
+            "line": 4,
             "description": "The `input` module consists of components that deals with\nobtaining user inputs. The components themselves does not\nprovide validation, but integrates with `form` module\ncomponents for that functionality",
-            "access": "protected",
+            "access": "public",
             "tagname": "",
             "extends": "UI.BaseInputComponent",
+            "itemtype": "main"
+        },
+        "ui": {
+            "name": "ui",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "UI.BackdropComponent": 1,
+                "UI.DraggableComponent": 1,
+                "UI.PositionComponent": 1,
+                "UI.ResizableComponent": 1,
+                "UI.SortableComponent": 1,
+                "ui-table.tbody-each": 1,
+                "ui-table.tbody": 1,
+                "ui-table.td": 1,
+                "ui-table.tfoot": 1,
+                "ui-table.th": 1,
+                "ui-table.thead": 1,
+                "ui-table.tr": 1,
+                "ComponentComponent": 1,
+                "UI.ScrollableComponent": 1,
+                "UI.TableComponent": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "UI": 1
+            },
+            "tag": "module",
+            "file": "addon/components/ui-table.js",
+            "line": 9,
+            "description": "The `ui` module consists are lower level components.",
+            "access": "public",
+            "tagname": "",
             "itemtype": "main"
         }
     },
     "classes": {
+        "UI.FormFieldComponent": {
+            "name": "UI.FormFieldComponent",
+            "shortname": "UI.FormFieldComponent",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "form",
+            "namespace": "UI",
+            "file": "addon/components/fm-field/component.js",
+            "line": 4,
+            "access": "private",
+            "tagname": ""
+        },
+        "UI.FormFieldsetComponent": {
+            "name": "UI.FormFieldsetComponent",
+            "shortname": "UI.FormFieldsetComponent",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "form",
+            "namespace": "UI",
+            "file": "addon/components/fm-fieldset/component.js",
+            "line": 5,
+            "access": "private",
+            "tagname": ""
+        },
+        "UI.FormComponent": {
+            "name": "UI.FormComponent",
+            "shortname": "UI.FormComponent",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "form",
+            "namespace": "UI",
+            "file": "addon/components/fm-form/component.js",
+            "line": 3,
+            "description": "`{{fm-form}}` component wraps a `DS.Model` object and yields\n`{{fm-field}}` with appropriate validations setup. Each `{{fm-field}}`\nyields more contextual input component to let you choose how to\nrepresent the field.\n\n`{{fm-field}}` can be interlaced with HTML tags to provide additional\nlayout needs.\n\nBasic Usage:\n\n```handlebars\n{{#fm-form model as |attribute|}}\n  {{#attribute.name as |in|}}\n    {{in.text}}\n  {{/attribute.name}}\n  {{#attribute.address as |in|}}\n    {{in.text}}\n  {{/attribute.address}}\n{{/fm-form}}\n```\n\n`{{fm-form}}` integrates with `{{ui-table}}` to allow editability\nand validability.\n\nAdvanced Usage:\n\n```handlebars\n{{#ui-table as |t|}}\n  {{#t.body as |t|}}\n    {{#each data as |datum|}}\n      {{#t.r as |t|}}\n        {{#fm-form datum as |attribute|}}\n          {{#t.d}}\n            {{#attribute.name as |in|}}\n              {{in.text}}\n            {{/attribute.name}}\n          {{/t.d}}\n          {{#t.d}}\n            {{#attribute.age as |in|}}\n              {{in.text}}\n            {{/attribute.age}}\n          {{/t.d}}\n        {{/fm-form}}\n      {{/t.r}}\n    {{/each}}\n  {{/t.body}}\n{{/ui-table}}\n```",
+            "access": "public",
+            "tagname": ""
+        },
+        "UI.SelectInputComponent": {
+            "name": "UI.SelectInputComponent",
+            "shortname": "UI.SelectInputComponent",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "input",
+            "namespace": "UI",
+            "file": "addon/components/in-select/component.js",
+            "line": 5,
+            "access": "public",
+            "tagname": ""
+        },
+        "UI.TextInputComponent": {
+            "name": "UI.TextInputComponent",
+            "shortname": "UI.TextInputComponent",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "input",
+            "namespace": "UI",
+            "file": "addon/components/in-text/component.js",
+            "line": 5,
+            "access": "public",
+            "tagname": ""
+        },
+        "UI.ToggleInputComponent": {
+            "name": "UI.ToggleInputComponent",
+            "shortname": "UI.ToggleInputComponent",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "input",
+            "namespace": "UI",
+            "file": "addon/components/in-toggle/component.js",
+            "line": 6,
+            "description": "`{{in-toggle}}` is a simple input component that respond\nto click to toggle. The implementation does not provide\nspecific styling. You are free style it in anyway you like:\nbutton, switch, or checkbox.",
+            "access": "public",
+            "tagname": ""
+        },
+        "UI.BackdropComponent": {
+            "name": "UI.BackdropComponent",
+            "shortname": "UI.BackdropComponent",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "ui",
+            "namespace": "UI",
+            "file": "addon/components/ui-backdrop/component.js",
+            "line": 3,
+            "description": "`ui-backdrop` is a simple component to put a mask\nover the screen. Use with `ui-position` to create\nmodal.",
+            "access": "public",
+            "tagname": ""
+        },
+        "UI.DraggableComponent": {
+            "name": "UI.DraggableComponent",
+            "shortname": "UI.DraggableComponent",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "ui",
+            "namespace": "UI",
+            "file": "addon/components/ui-draggable/component.js",
+            "line": 3,
+            "access": "public",
+            "tagname": ""
+        },
+        "UI.PositionComponent": {
+            "name": "UI.PositionComponent",
+            "shortname": "UI.PositionComponent",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "ui",
+            "namespace": "UI",
+            "file": "addon/components/ui-position/component.js",
+            "line": 20,
+            "description": "`ui-position` is a simple wrapper around\n[jQuery UI position](http://api.jqueryui.com/position/)",
+            "access": "public",
+            "tagname": ""
+        },
+        "UI.ResizableComponent": {
+            "name": "UI.ResizableComponent",
+            "shortname": "UI.ResizableComponent",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "ui",
+            "namespace": "UI",
+            "file": "addon/components/ui-resizable/component.js",
+            "line": 3,
+            "access": "public",
+            "tagname": ""
+        },
+        "UI.SortableComponent": {
+            "name": "UI.SortableComponent",
+            "shortname": "UI.SortableComponent",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "ui",
+            "namespace": "UI",
+            "file": "addon/components/ui-sortable/component.js",
+            "line": 3,
+            "access": "public",
+            "tagname": ""
+        },
         "ui-table.tbody-each": {
             "name": "ui-table.tbody-each",
             "shortname": "ui-table.tbody-each",
@@ -461,50 +637,20 @@
             "access": "private",
             "tagname": ""
         },
-        "UI.FormFieldComponent": {
-            "name": "UI.FormFieldComponent",
-            "shortname": "UI.FormFieldComponent",
+        "ComponentComponent": {
+            "name": "ComponentComponent",
+            "shortname": "ComponentComponent",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "form",
-            "namespace": "UI",
-            "file": "addon/components/fm-field.js",
-            "line": 6,
+            "module": "ui",
+            "namespace": "",
+            "file": "addon/components/x-component/component.js",
+            "line": 4,
+            "description": "Helper component to aid in the composition of components",
             "access": "private",
-            "tagname": ""
-        },
-        "UI.FormFieldsetComponent": {
-            "name": "UI.FormFieldsetComponent",
-            "shortname": "UI.FormFieldsetComponent",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "form",
-            "namespace": "UI",
-            "file": "addon/components/fm-fieldset.js",
-            "line": 8,
-            "access": "private",
-            "tagname": ""
-        },
-        "UI.FormComponent": {
-            "name": "UI.FormComponent",
-            "shortname": "UI.FormComponent",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "form",
-            "namespace": "UI",
-            "file": "addon/components/fm-form.js",
-            "line": 5,
-            "description": "`{{fm-form}}` component wraps a `DS.Model` object and yields\n`{{fm-field}}` with appropriate validations setup. Each `{{fm-field}}`\nyields more contextual input component to let you choose how to\nrepresent the field.\n\n`{{fm-field}}` can be interlaced with HTML tags to provide additional\nlayout needs.\n\nBasic Usage:\n\n```handlebars\n{{#fm-form model as |attribute|}}\n  {{#attribute.name as |in|}}\n    {{in.text}}\n  {{/attribute.name}}\n  {{#attribute.address as |in|}}\n    {{in.text}}\n  {{/attribute.address}}\n{{/fm-form}}\n```\n\n`{{fm-form}}` integrates with `{{ui-table}}` to allow editability\nand validability.\n\nAdvanced Usage:\n\n```handlebars\n{{#ui-table as |t|}}\n  {{#t.body as |t|}}\n    {{#each data as |datum|}}\n      {{#t.r as |t|}}\n        {{#fm-form datum as |attribute|}}\n          {{#t.d}}\n            {{#attribute.name as |in|}}\n              {{in.text}}\n            {{/attribute.name}}\n          {{/t.d}}\n          {{#t.d}}\n            {{#attribute.age as |in|}}\n              {{in.text}}\n            {{/attribute.age}}\n          {{/t.d}}\n        {{/fm-form}}\n      {{/t.r}}\n    {{/each}}\n  {{/t.body}}\n{{/ui-table}}\n```",
-            "access": "public",
             "tagname": ""
         },
         "UI.BaseInputComponent": {
@@ -522,114 +668,6 @@
             "access": "protected",
             "tagname": ""
         },
-        "UI.SelectInputComponent": {
-            "name": "UI.SelectInputComponent",
-            "shortname": "UI.SelectInputComponent",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "input",
-            "namespace": "UI",
-            "file": "addon/components/in-select.js",
-            "line": 5,
-            "access": "public",
-            "tagname": ""
-        },
-        "UI.TextInputComponent": {
-            "name": "UI.TextInputComponent",
-            "shortname": "UI.TextInputComponent",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "input",
-            "namespace": "UI",
-            "file": "addon/components/in-text.js",
-            "line": 5,
-            "access": "public",
-            "tagname": ""
-        },
-        "UI.ToggleInputComponent": {
-            "name": "UI.ToggleInputComponent",
-            "shortname": "UI.ToggleInputComponent",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "input",
-            "namespace": "UI",
-            "file": "addon/components/in-toggle.js",
-            "line": 6,
-            "description": "`{{in-toggle}}` is a simple input component that respond\nto click to toggle. The implementation does not provide\nspecific styling. You are free style it in anyway you like:\nbutton, switch, or checkbox.",
-            "access": "public",
-            "tagname": ""
-        },
-        "UI.BackdropComponent": {
-            "name": "UI.BackdropComponent",
-            "shortname": "UI.BackdropComponent",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "ui",
-            "namespace": "UI",
-            "file": "addon/components/ui-backdrop.js",
-            "line": 3,
-            "description": "`ui-backdrop` is a simple component to put a mask\nover the screen. Use with `ui-position` to create\nmodal.",
-            "access": "public",
-            "tagname": ""
-        },
-        "UI.DraggableComponent": {
-            "name": "UI.DraggableComponent",
-            "shortname": "UI.DraggableComponent",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "ui",
-            "namespace": "UI",
-            "file": "addon/components/ui-draggable.js",
-            "line": 4,
-            "access": "public",
-            "tagname": ""
-        },
-        "UI.PositionComponent": {
-            "name": "UI.PositionComponent",
-            "shortname": "UI.PositionComponent",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "ui",
-            "namespace": "UI",
-            "file": "addon/components/ui-position.js",
-            "line": 21,
-            "description": "`ui-position` is a simple wrapper around\n[jQuery UI position](http://api.jqueryui.com/position/)",
-            "access": "public",
-            "tagname": ""
-        },
-        "UI.ResizableComponent": {
-            "name": "UI.ResizableComponent",
-            "shortname": "UI.ResizableComponent",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "ui",
-            "namespace": "UI",
-            "file": "addon/components/ui-resizable.js",
-            "line": 4,
-            "access": "public",
-            "tagname": ""
-        },
         "UI.ScrollableComponent": {
             "name": "UI.ScrollableComponent",
             "shortname": "UI.ScrollableComponent",
@@ -642,21 +680,6 @@
             "namespace": "UI",
             "file": "addon/components/ui-scrollable.js",
             "line": 6,
-            "access": "public",
-            "tagname": ""
-        },
-        "UI.SortableComponent": {
-            "name": "UI.SortableComponent",
-            "shortname": "UI.SortableComponent",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "ui",
-            "namespace": "UI",
-            "file": "addon/components/ui-sortable.js",
-            "line": 4,
             "access": "public",
             "tagname": ""
         },
@@ -675,26 +698,362 @@
             "description": "The `ui-table` component is designed to have a declarative\nsyntax that looks just like a plain html table while supporting\nmany advanced table features such as:\n\n- Sortable column\n- Resizable column\n- Show/Hide column\n- Freezable column\n- Nested header\n- Table footer\n- Virtualized scrolling\n- Selectable rows\n- Sorting and filtering of rows\n- Template driven cells that enables edit-ability and\n  other component composition.\n\nBasic Usage:\n\n```handlebars\n{{#ui-table as |t|}}\n  {{#t.head as |t|}}\n    {{#t.h width=\"90px\"}}ID{{/t.h}}\n    {{#t.h width=\"1fr\"}}Name{{/t.h}}\n    {{#t.h width=\"50%\"}}Address{{/t.h}}\n  {{/t.head}}\n  {{#t.body as |t|}}\n   {{#each users as |user|}}\n     {{#t.r as |t|}}\n       {{#t.d}}{{user.id}}{{/t.d}}\n       {{#t.d}}{{user.name}}{{/t.d}}\n       {{#t.d}}{{user.address}}{{/t.d}}\n     {{/t.r}}\n   {{/each}}\n  {{/t.body}}\n{{/ui-table}}\n```\n\nSee\n[thead](./ui-table.thead.html),\n[th](./ui-table.th.html),\n[tbody](./ui-table.tbody.html),\n[tr](./ui-table.tr.html),\n[td](./ui-table.td.html),\nand [tfoot](./ui-table.tfoot.html)\nfor advanced usages.\n\nNote, these components are private for the\npurpose that they should not be used alone,\nbut only as contextual component of ui-table\n\n\n`{{ui-table}}` integrates with `{{fm-form}}` to allow editability\nand validability.\n\nAdvanced Usage:\n\n```handlebars\n{{#ui-table as |t|}}\n  {{#t.body as |t|}}\n    {{#each data as |datum|}}\n      {{#t.r as |t|}}\n        {{#fm-form datum as |attribute|}}\n          {{#t.d}}\n            {{#attribute.name as |in|}}\n              {{in.text}}\n            {{/attribute.name}}\n          {{/t.d}}\n          {{#t.d}}\n            {{#attribute.age as |in|}}\n              {{in.text}}\n            {{/attribute.age}}\n          {{/t.d}}\n        {{/fm-form}}\n      {{/t.r}}\n    {{/each}}\n  {{/t.body}}\n{{/ui-table}}\n```",
             "access": "public",
             "tagname": ""
-        },
-        "UI.ComponentComponent": {
-            "name": "UI.ComponentComponent",
-            "shortname": "ComponentComponent",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "ui",
-            "namespace": "UI",
-            "file": "addon/components/x-component.js",
-            "line": 4,
-            "description": "Helper component to aid in the composition of components",
-            "access": "private",
-            "tagname": ""
         }
     },
     "elements": {},
     "classitems": [
+        {
+            "file": "addon/components/fm-form/component.js",
+            "line": 62,
+            "itemtype": "attribute",
+            "name": "model The model to use for property binding.",
+            "class": "UI.FormComponent",
+            "module": "form",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-select/component.js",
+            "line": 20,
+            "description": "The selected option. The select is multi select if `value` is bound\nan array-like object.\n\n`value` makes no garantee about object identity correctness. This means\n`value` may contain value that does not match `from` content by strict\nequal `===`. `value` does garantee the object match by configured `key`.",
+            "itemtype": "attribute",
+            "name": "value",
+            "class": "UI.SelectInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-select/component.js",
+            "line": 32,
+            "itemtype": "attribute",
+            "name": "from",
+            "class": "UI.SelectInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-select/component.js",
+            "line": 37,
+            "itemtype": "attribute",
+            "name": "key",
+            "class": "UI.SelectInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-select/component.js",
+            "line": 42,
+            "itemtype": "attribute",
+            "name": "disabled",
+            "class": "UI.SelectInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-select/component.js",
+            "line": 47,
+            "itemtype": "property",
+            "name": "isFocused",
+            "access": "private",
+            "tagname": "",
+            "class": "UI.SelectInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-select/component.js",
+            "line": 53,
+            "itemtype": "property",
+            "name": "isFocused",
+            "access": "private",
+            "tagname": "",
+            "class": "UI.SelectInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-select/component.js",
+            "line": 63,
+            "itemtype": "property",
+            "name": "list",
+            "class": "UI.SelectInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-text/component.js",
+            "line": 21,
+            "itemtype": "attribute",
+            "name": "placeholder",
+            "class": "UI.TextInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-text/component.js",
+            "line": 26,
+            "itemtype": "attribute",
+            "name": "autocomplete",
+            "class": "UI.TextInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-text/component.js",
+            "line": 31,
+            "itemtype": "attribute",
+            "name": "autofocus",
+            "class": "UI.TextInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-text/component.js",
+            "line": 36,
+            "itemtype": "attribute",
+            "name": "disabled",
+            "class": "UI.TextInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-text/component.js",
+            "line": 41,
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "inputElement",
+            "class": "UI.TextInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-text/component.js",
+            "line": 57,
+            "itemtype": "event",
+            "name": "on-input",
+            "class": "UI.TextInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-text/component.js",
+            "line": 66,
+            "itemtype": "event",
+            "name": "on-enter-key",
+            "class": "UI.TextInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-text/component.js",
+            "line": 69,
+            "itemtype": "event",
+            "name": "on-escape-key",
+            "class": "UI.TextInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-text/component.js",
+            "line": 72,
+            "itemtype": "event",
+            "name": "on-backspace-key",
+            "class": "UI.TextInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-toggle/component.js",
+            "line": 27,
+            "access": "public",
+            "tagname": "",
+            "itemtype": "attribute",
+            "name": "value",
+            "class": "UI.ToggleInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-toggle/component.js",
+            "line": 33,
+            "itemtype": "attribute",
+            "name": "disabled",
+            "class": "UI.ToggleInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/in-toggle/component.js",
+            "line": 38,
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "inputElement",
+            "class": "UI.ToggleInputComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/ui-anchor-case/component.js",
+            "line": 6,
+            "access": "private",
+            "tagname": "",
+            "itemtype": "attribute",
+            "name": "switch",
+            "class": "UI.BackdropComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/ui-anchor-case/component.js",
+            "line": 12,
+            "access": "private",
+            "tagname": "",
+            "itemtype": "attribute",
+            "name": "behavior",
+            "class": "UI.BackdropComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/ui-anchor-case/component.js",
+            "line": 18,
+            "access": "private",
+            "tagname": "",
+            "itemtype": "attribute",
+            "name": "block",
+            "class": "UI.BackdropComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/ui-anchor-case/component.js",
+            "line": 24,
+            "access": "public",
+            "tagname": "",
+            "itemtype": "attribute",
+            "name": "case",
+            "class": "UI.BackdropComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/ui-anchor-switch/component.js",
+            "line": 11,
+            "access": "public",
+            "tagname": "",
+            "itemtype": "attribute",
+            "name": "switch",
+            "class": "UI.BackdropComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/ui-anchor-switch/component.js",
+            "line": 17,
+            "access": "public",
+            "tagname": "",
+            "itemtype": "attribute",
+            "name": "behavior",
+            "class": "UI.BackdropComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/ui-anchor-switch/component.js",
+            "line": 23,
+            "access": "public",
+            "tagname": "",
+            "itemtype": "attribute",
+            "name": "block",
+            "class": "UI.BackdropComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/ui-anchor-switch/component.js",
+            "line": 76,
+            "itemtype": "event",
+            "name": "on-change",
+            "class": "UI.BackdropComponent",
+            "module": "input",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/ui-button/component.js",
+            "line": 17,
+            "itemtype": "attribute",
+            "name": "label",
+            "class": "UI.DraggableComponent",
+            "module": "ui",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/ui-button/component.js",
+            "line": 22,
+            "itemtype": "attribute",
+            "name": "value",
+            "class": "UI.DraggableComponent",
+            "module": "ui",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/ui-button/component.js",
+            "line": 27,
+            "itemtype": "attribute",
+            "name": "value",
+            "class": "UI.DraggableComponent",
+            "module": "ui",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/ui-draggable/component.js",
+            "line": 12,
+            "description": "options hash for [jQuery UI draggable](http://api.jqueryui.com/draggable/)",
+            "itemtype": "attribute",
+            "name": "options",
+            "default": "null",
+            "type": "object",
+            "class": "UI.DraggableComponent",
+            "module": "ui",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/ui-position/component.js",
+            "line": 32,
+            "description": "options hash for [jQuery UI position](http://api.jqueryui.com/position/)",
+            "itemtype": "attribute",
+            "name": "options",
+            "default": "null",
+            "type": "object",
+            "class": "UI.PositionComponent",
+            "module": "ui",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/ui-resizable/component.js",
+            "line": 12,
+            "description": "options hash for [jQuery UI resizable](http://api.jqueryui.com/resizable/)",
+            "itemtype": "attribute",
+            "name": "options",
+            "default": "null",
+            "type": "object",
+            "class": "UI.ResizableComponent",
+            "module": "ui",
+            "namespace": "UI"
+        },
+        {
+            "file": "addon/components/ui-sortable/component.js",
+            "line": 14,
+            "description": "options hash for [jQuery UI sortable](http://api.jqueryui.com/sortable/)",
+            "itemtype": "attribute",
+            "name": "options",
+            "default": "null",
+            "type": "object",
+            "class": "UI.SortableComponent",
+            "module": "ui",
+            "namespace": "UI"
+        },
         {
             "file": "addon/components/ui-table/tbody.js",
             "line": 40,
@@ -734,13 +1093,28 @@
             "module": "ui"
         },
         {
-            "file": "addon/components/fm-form.js",
-            "line": 64,
+            "file": "addon/components/x-component/component.js",
+            "line": 14,
             "itemtype": "attribute",
-            "name": "model The model to use for property binding.",
-            "class": "UI.FormComponent",
-            "module": "form",
-            "namespace": "UI"
+            "name": "value",
+            "class": "ComponentComponent",
+            "module": "ui"
+        },
+        {
+            "file": "addon/components/x-resize/component.js",
+            "line": 33,
+            "itemtype": "event",
+            "name": "on-resize-x",
+            "class": "UI.BaseInputComponent",
+            "module": "ui"
+        },
+        {
+            "file": "addon/components/x-resize/component.js",
+            "line": 40,
+            "itemtype": "event",
+            "name": "on-resize-y",
+            "class": "UI.BaseInputComponent",
+            "module": "ui"
         },
         {
             "file": "addon/components/in-base.js",
@@ -803,261 +1177,6 @@
             "namespace": "UI"
         },
         {
-            "file": "addon/components/in-select.js",
-            "line": 15,
-            "description": "The selected option. The select is multi select if `value` is bound\nan array-like object.\n\n`value` makes no garantee about object identity correctness. This means\n`value` may contain value that does not match `from` content by strict\nequal `===`. `value` does garantee the object match by configured `key`.",
-            "itemtype": "attribute",
-            "name": "value",
-            "class": "UI.SelectInputComponent",
-            "module": "input",
-            "namespace": "UI"
-        },
-        {
-            "file": "addon/components/in-select.js",
-            "line": 27,
-            "itemtype": "attribute",
-            "name": "from",
-            "class": "UI.SelectInputComponent",
-            "module": "input",
-            "namespace": "UI"
-        },
-        {
-            "file": "addon/components/in-select.js",
-            "line": 32,
-            "itemtype": "attribute",
-            "name": "key",
-            "class": "UI.SelectInputComponent",
-            "module": "input",
-            "namespace": "UI"
-        },
-        {
-            "file": "addon/components/in-select.js",
-            "line": 41,
-            "itemtype": "property",
-            "name": "list",
-            "class": "UI.SelectInputComponent",
-            "module": "input",
-            "namespace": "UI"
-        },
-        {
-            "file": "addon/components/in-text.js",
-            "line": 20,
-            "itemtype": "attribute",
-            "name": "placeholder",
-            "class": "UI.TextInputComponent",
-            "module": "input",
-            "namespace": "UI"
-        },
-        {
-            "file": "addon/components/in-text.js",
-            "line": 25,
-            "itemtype": "attribute",
-            "name": "autocomplete",
-            "class": "UI.TextInputComponent",
-            "module": "input",
-            "namespace": "UI"
-        },
-        {
-            "file": "addon/components/in-text.js",
-            "line": 30,
-            "itemtype": "attribute",
-            "name": "autofocus",
-            "class": "UI.TextInputComponent",
-            "module": "input",
-            "namespace": "UI"
-        },
-        {
-            "file": "addon/components/in-text.js",
-            "line": 35,
-            "access": "protected",
-            "tagname": "",
-            "itemtype": "property",
-            "name": "inputElement",
-            "class": "UI.TextInputComponent",
-            "module": "input",
-            "namespace": "UI"
-        },
-        {
-            "file": "addon/components/in-text.js",
-            "line": 50,
-            "itemtype": "event",
-            "name": "on-input",
-            "class": "UI.TextInputComponent",
-            "module": "input",
-            "namespace": "UI"
-        },
-        {
-            "file": "addon/components/in-text.js",
-            "line": 59,
-            "itemtype": "event",
-            "name": "on-enter-key",
-            "class": "UI.TextInputComponent",
-            "module": "input",
-            "namespace": "UI"
-        },
-        {
-            "file": "addon/components/in-text.js",
-            "line": 62,
-            "itemtype": "event",
-            "name": "on-escape-key",
-            "class": "UI.TextInputComponent",
-            "module": "input",
-            "namespace": "UI"
-        },
-        {
-            "file": "addon/components/in-text.js",
-            "line": 65,
-            "itemtype": "event",
-            "name": "on-backspace-key",
-            "class": "UI.TextInputComponent",
-            "module": "input",
-            "namespace": "UI"
-        },
-        {
-            "file": "addon/components/in-toggle.js",
-            "line": 26,
-            "access": "public",
-            "tagname": "",
-            "itemtype": "attribute",
-            "name": "value",
-            "class": "UI.ToggleInputComponent",
-            "module": "input",
-            "namespace": "UI"
-        },
-        {
-            "file": "addon/components/in-toggle.js",
-            "line": 32,
-            "access": "protected",
-            "tagname": "",
-            "itemtype": "property",
-            "name": "inputElement",
-            "class": "UI.ToggleInputComponent",
-            "module": "input",
-            "namespace": "UI"
-        },
-        {
-            "file": "addon/components/ui-anchor-case.js",
-            "line": 8,
-            "access": "private",
-            "tagname": "",
-            "itemtype": "attribute",
-            "name": "switch",
-            "class": "UI.BackdropComponent",
-            "module": "input",
-            "namespace": "UI"
-        },
-        {
-            "file": "addon/components/ui-anchor-case.js",
-            "line": 14,
-            "access": "private",
-            "tagname": "",
-            "itemtype": "attribute",
-            "name": "behavior",
-            "class": "UI.BackdropComponent",
-            "module": "input",
-            "namespace": "UI"
-        },
-        {
-            "file": "addon/components/ui-anchor-case.js",
-            "line": 20,
-            "access": "private",
-            "tagname": "",
-            "itemtype": "attribute",
-            "name": "block",
-            "class": "UI.BackdropComponent",
-            "module": "input",
-            "namespace": "UI"
-        },
-        {
-            "file": "addon/components/ui-anchor-case.js",
-            "line": 26,
-            "access": "public",
-            "tagname": "",
-            "itemtype": "attribute",
-            "name": "case",
-            "class": "UI.BackdropComponent",
-            "module": "input",
-            "namespace": "UI"
-        },
-        {
-            "file": "addon/components/ui-anchor-switch.js",
-            "line": 11,
-            "access": "public",
-            "tagname": "",
-            "itemtype": "attribute",
-            "name": "switch",
-            "class": "UI.BackdropComponent",
-            "module": "input",
-            "namespace": "UI"
-        },
-        {
-            "file": "addon/components/ui-anchor-switch.js",
-            "line": 17,
-            "access": "public",
-            "tagname": "",
-            "itemtype": "attribute",
-            "name": "behavior",
-            "class": "UI.BackdropComponent",
-            "module": "input",
-            "namespace": "UI"
-        },
-        {
-            "file": "addon/components/ui-anchor-switch.js",
-            "line": 23,
-            "access": "public",
-            "tagname": "",
-            "itemtype": "attribute",
-            "name": "block",
-            "class": "UI.BackdropComponent",
-            "module": "input",
-            "namespace": "UI"
-        },
-        {
-            "file": "addon/components/ui-anchor-switch.js",
-            "line": 76,
-            "itemtype": "event",
-            "name": "on-change",
-            "class": "UI.BackdropComponent",
-            "module": "input",
-            "namespace": "UI"
-        },
-        {
-            "file": "addon/components/ui-draggable.js",
-            "line": 14,
-            "description": "options hash for [jQuery UI draggable](http://api.jqueryui.com/draggable/)",
-            "itemtype": "attribute",
-            "name": "options",
-            "default": "null",
-            "type": "object",
-            "class": "UI.DraggableComponent",
-            "module": "ui",
-            "namespace": "UI"
-        },
-        {
-            "file": "addon/components/ui-position.js",
-            "line": 34,
-            "description": "options hash for [jQuery UI position](http://api.jqueryui.com/position/)",
-            "itemtype": "attribute",
-            "name": "options",
-            "default": "null",
-            "type": "object",
-            "class": "UI.PositionComponent",
-            "module": "ui",
-            "namespace": "UI"
-        },
-        {
-            "file": "addon/components/ui-resizable.js",
-            "line": 14,
-            "description": "options hash for [jQuery UI resizable](http://api.jqueryui.com/resizable/)",
-            "itemtype": "attribute",
-            "name": "options",
-            "default": "null",
-            "type": "object",
-            "class": "UI.ResizableComponent",
-            "module": "ui",
-            "namespace": "UI"
-        },
-        {
             "file": "addon/components/ui-scrollable.js",
             "line": 19,
             "description": "options hash for [perfect-scrollbar](https://github.com/noraesae/perfect-scrollbar#optional-parameters)\n\n- Set to `false` to disable perfect-scrollbar and use native scroll.\n- Set to `true` to enable perfect-scrollbar without any options. This is default.\n- Optionally pass in an option hash to enable different features on perfect-scrollbar.",
@@ -1066,45 +1185,6 @@
             "default": "true",
             "type": "boolean|object",
             "class": "UI.ScrollableComponent",
-            "module": "ui",
-            "namespace": "UI"
-        },
-        {
-            "file": "addon/components/ui-sortable.js",
-            "line": 16,
-            "description": "options hash for [jQuery UI sortable](http://api.jqueryui.com/sortable/)",
-            "itemtype": "attribute",
-            "name": "options",
-            "default": "null",
-            "type": "object",
-            "class": "UI.SortableComponent",
-            "module": "ui",
-            "namespace": "UI"
-        },
-        {
-            "file": "addon/components/x-component.js",
-            "line": 14,
-            "itemtype": "attribute",
-            "name": "value",
-            "class": "UI.ComponentComponent",
-            "module": "ui",
-            "namespace": "UI"
-        },
-        {
-            "file": "addon/components/x-resize.js",
-            "line": 33,
-            "itemtype": "event",
-            "name": "on-resize-x",
-            "class": "",
-            "module": "ui",
-            "namespace": "UI"
-        },
-        {
-            "file": "addon/components/x-resize.js",
-            "line": 40,
-            "itemtype": "event",
-            "name": "on-resize-y",
-            "class": "",
             "module": "ui",
             "namespace": "UI"
         },

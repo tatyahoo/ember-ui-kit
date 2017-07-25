@@ -1,9 +1,9 @@
 YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
+        "ComponentComponent",
         "UI.BackdropComponent",
         "UI.BaseInputComponent",
-        "UI.ComponentComponent",
         "UI.DraggableComponent",
         "UI.FormComponent",
         "UI.FormFieldComponent",
