@@ -1,7 +1,10 @@
 export default function() {
-  this.get('/users', ({ db }, req) => {
-    let { start, end } = req.queryParams;
-
-    return db.users.slice(Number(start), Number(end));
-  });
+  this.get('/users');
+  this.get('/users/:id');
+  this.get('/posts');
+  this.get('/posts/:id');
+  this.get('/comments');
+  this.get('/comments/:id');
+  this.get('/tags');
+  this.get('/tags/:id');
 }

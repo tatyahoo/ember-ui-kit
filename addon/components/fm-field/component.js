@@ -11,7 +11,7 @@ export default Ember.Component.extend({
   tagName: 'label',
   classNames: 'fm-field',
   classNameBindings: [
-    'validation.isValid:fm-field--valid:',
+    'validation.isValid:fm-field--valid',
     'validation.isInvalid:fm-field--invalid'
   ],
   attributeBindings: 'valuePath:data-model-attribute',
