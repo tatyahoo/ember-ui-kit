@@ -7,7 +7,14 @@ import Backdrop from 'ember-ui-kit/components/ui-backdrop/page-object';
 import Button from 'ember-ui-kit/components/ui-button/page-object';
 
 moduleForComponent('ui-backdrop', 'Integration | Component | ui-backdrop', {
-  integration: true
+  integration: true,
+
+  beforeEach() {
+    document.querySelectorAll('#ember-testing-container,#ember-testing')
+      .forEach(function(node) {
+        node.scrollTop = 0;
+      });
+  }
 });
 
 test('it renders a simple backdrop in inline form', function(assert) {

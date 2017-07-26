@@ -4,7 +4,14 @@ import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 
 moduleForComponent('ui-position', 'Integration | Component | ui-position', {
-  integration: true
+  integration: true,
+
+  beforeEach() {
+    document.querySelectorAll('#ember-testing-container,#ember-testing')
+      .forEach(function(node) {
+        node.scrollTop = 0;
+      });
+  }
 });
 
 test('it positions itself', function(assert) {
@@ -46,8 +53,8 @@ test('it positions correctly when nested', function(assert) {
   let iRect = inner.get(0).getBoundingClientRect();
   let oRect = outer.get(0).getBoundingClientRect();
 
-  let iEl = Ember.$(document.elementsFromPoint(iRect.left + 2, iRect.top + 2));
-  let oEl = Ember.$(document.elementsFromPoint(oRect.left + 2, oRect.top + 2));
+  let iEl = Ember.$(document.elementsFromPoint(iRect.left + iRect.width / 2, iRect.top + iRect.height / 2));
+  let oEl = Ember.$(document.elementsFromPoint(oRect.left + oRect.width / 2, oRect.top + oRect.height / 2));
 
   assert.ok(iEl.eq(0).is('.ui-position'));
   assert.ok(iEl.eq(1).is('.ui-backdrop'));
