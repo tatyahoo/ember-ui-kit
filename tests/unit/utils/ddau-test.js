@@ -4,7 +4,7 @@ import sinon from 'sinon';
 
 module('Unit | Utility | ddau');
 
-test('#sendEventAction', function(assert) {
+test('#sendEventAction', async function(assert) {
   let fn = sinon.stub();
   let action = 'action';
   let context = {
@@ -13,7 +13,7 @@ test('#sendEventAction', function(assert) {
     sendAction: sinon.spy()
   };
 
-  sendEventAction(context, 'action', 'value', 1);
+  await sendEventAction(context, 'action', 'value', 1);
 
   assert.ok(context.get.calledWith('action'));
   assert.ok(fn.called);
@@ -27,7 +27,7 @@ test('#sendEventAction', function(assert) {
 
   context.get.returns(action);
 
-  sendEventAction(context, 'action', 'value', 1);
+  await sendEventAction(context, 'action', 'value', 1);
 
   assert.notOk(fn.called);
   assert.ok(context.set.called);
@@ -42,7 +42,7 @@ test('#sendEventAction', function(assert) {
   fn.returns(2);
   context.get.returns(fn);
 
-  sendEventAction(context, 'action', 'value', 1);
+  await sendEventAction(context, 'action', 'value', 1);
 
   assert.ok(fn.called);
   assert.ok(context.set.called);
@@ -57,7 +57,7 @@ test('#sendEventAction', function(assert) {
 
   context.get.returns(undefined);
 
-  sendEventAction(context, 'action', 'value', 1);
+  await sendEventAction(context, 'action', 'value', 1);
 
   assert.ok(context.set.called);
   assert.ok(context.sendAction.called);
