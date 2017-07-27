@@ -3,7 +3,7 @@
         "name": "ember-ui-kit",
         "description": "The default blueprint for ember-cli addons.",
         "url": "https://github.com/ming-codes/ember-ui-kit",
-        "version": "0.10.0.e1f6cfed"
+        "version": "0.10.1.4f8cae83"
     },
     "files": {
         "addon/components/fm-field/component.js": {
