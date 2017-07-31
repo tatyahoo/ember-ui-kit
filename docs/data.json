@@ -3,7 +3,7 @@
         "name": "ember-ui-kit",
         "description": "The default blueprint for ember-cli addons.",
         "url": "https://github.com/ming-codes/ember-ui-kit",
-        "version": "0.10.1.4f8cae83"
+        "version": "0.10.2.3a7ffbc1"
     },
     "files": {
         "addon/components/fm-field/component.js": {
@@ -713,7 +713,7 @@
         },
         {
             "file": "addon/components/in-select/component.js",
-            "line": 20,
+            "line": 21,
             "description": "The selected option. The select is multi select if `value` is bound\nan array-like object.\n\n`value` makes no garantee about object identity correctness. This means\n`value` may contain value that does not match `from` content by strict\nequal `===`. `value` does garantee the object match by configured `key`.",
             "itemtype": "attribute",
             "name": "value",
@@ -723,7 +723,7 @@
         },
         {
             "file": "addon/components/in-select/component.js",
-            "line": 32,
+            "line": 33,
             "itemtype": "attribute",
             "name": "from",
             "class": "UI.SelectInputComponent",
@@ -732,7 +732,7 @@
         },
         {
             "file": "addon/components/in-select/component.js",
-            "line": 37,
+            "line": 38,
             "itemtype": "attribute",
             "name": "key",
             "class": "UI.SelectInputComponent",
@@ -741,7 +741,7 @@
         },
         {
             "file": "addon/components/in-select/component.js",
-            "line": 42,
+            "line": 43,
             "itemtype": "attribute",
             "name": "disabled",
             "class": "UI.SelectInputComponent",
@@ -750,7 +750,7 @@
         },
         {
             "file": "addon/components/in-select/component.js",
-            "line": 47,
+            "line": 48,
             "itemtype": "property",
             "name": "isFocused",
             "access": "private",
@@ -761,7 +761,7 @@
         },
         {
             "file": "addon/components/in-select/component.js",
-            "line": 53,
+            "line": 54,
             "itemtype": "property",
             "name": "isFocused",
             "access": "private",
@@ -772,7 +772,7 @@
         },
         {
             "file": "addon/components/in-select/component.js",
-            "line": 63,
+            "line": 64,
             "itemtype": "property",
             "name": "list",
             "class": "UI.SelectInputComponent",
@@ -781,7 +781,7 @@
         },
         {
             "file": "addon/components/in-text/component.js",
-            "line": 21,
+            "line": 22,
             "itemtype": "attribute",
             "name": "placeholder",
             "class": "UI.TextInputComponent",
@@ -790,7 +790,7 @@
         },
         {
             "file": "addon/components/in-text/component.js",
-            "line": 26,
+            "line": 27,
             "itemtype": "attribute",
             "name": "autocomplete",
             "class": "UI.TextInputComponent",
@@ -799,7 +799,7 @@
         },
         {
             "file": "addon/components/in-text/component.js",
-            "line": 31,
+            "line": 32,
             "itemtype": "attribute",
             "name": "autofocus",
             "class": "UI.TextInputComponent",
@@ -808,7 +808,7 @@
         },
         {
             "file": "addon/components/in-text/component.js",
-            "line": 36,
+            "line": 37,
             "itemtype": "attribute",
             "name": "disabled",
             "class": "UI.TextInputComponent",
@@ -817,7 +817,7 @@
         },
         {
             "file": "addon/components/in-text/component.js",
-            "line": 41,
+            "line": 42,
             "access": "protected",
             "tagname": "",
             "itemtype": "property",
@@ -828,7 +828,7 @@
         },
         {
             "file": "addon/components/in-text/component.js",
-            "line": 57,
+            "line": 58,
             "itemtype": "event",
             "name": "on-input",
             "class": "UI.TextInputComponent",
@@ -837,7 +837,7 @@
         },
         {
             "file": "addon/components/in-text/component.js",
-            "line": 66,
+            "line": 67,
             "itemtype": "event",
             "name": "on-enter-key",
             "class": "UI.TextInputComponent",
@@ -846,7 +846,7 @@
         },
         {
             "file": "addon/components/in-text/component.js",
-            "line": 69,
+            "line": 70,
             "itemtype": "event",
             "name": "on-escape-key",
             "class": "UI.TextInputComponent",
@@ -855,7 +855,7 @@
         },
         {
             "file": "addon/components/in-text/component.js",
-            "line": 72,
+            "line": 73,
             "itemtype": "event",
             "name": "on-backspace-key",
             "class": "UI.TextInputComponent",
@@ -864,7 +864,7 @@
         },
         {
             "file": "addon/components/in-toggle/component.js",
-            "line": 27,
+            "line": 28,
             "access": "public",
             "tagname": "",
             "itemtype": "attribute",
@@ -875,7 +875,7 @@
         },
         {
             "file": "addon/components/in-toggle/component.js",
-            "line": 33,
+            "line": 34,
             "itemtype": "attribute",
             "name": "disabled",
             "class": "UI.ToggleInputComponent",
@@ -884,7 +884,7 @@
         },
         {
             "file": "addon/components/in-toggle/component.js",
-            "line": 38,
+            "line": 39,
             "access": "protected",
             "tagname": "",
             "itemtype": "property",
