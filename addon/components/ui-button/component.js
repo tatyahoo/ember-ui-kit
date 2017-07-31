@@ -11,7 +11,7 @@ export default Ember.Component.extend({
     'isBlurred:ui-button--blur',
     'disabled:ui-button--disabled:ui-button--enabled'
   ],
-  attributeBindings: 'disabled',
+  attributeBindings: ['disabled', 'title'],
   layout,
 
   /**

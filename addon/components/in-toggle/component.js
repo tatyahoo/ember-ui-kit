@@ -22,6 +22,7 @@ export default Input.extend({
     'isBlurred:in-toggle--blur',
     'disabled:in-toggle--disabled:in-toggle--enabled'
   ],
+  attributeBindings: 'title',
   layout,
 
   /**

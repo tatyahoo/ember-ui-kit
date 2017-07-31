@@ -15,6 +15,7 @@ export default Ember.Component.extend({
     'isBlurred:in-select--blur',
     'disabled:in-select--disabled:in-select--enabled'
   ],
+  attributeBindings: 'title',
   layout,
 
   /**
