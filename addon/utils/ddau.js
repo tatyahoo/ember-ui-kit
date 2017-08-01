@@ -1,6 +1,8 @@
 export async function sendEventAction(context, actionName, valueName, updatedValue) {
   let action = context.get(actionName);
 
+  context.rerender();
+
   if (typeof action === 'function') {
     let newValue = await action(updatedValue);
 

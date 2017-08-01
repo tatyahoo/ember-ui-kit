@@ -10,17 +10,20 @@ test('#sendEventAction', async function(assert) {
   let context = {
     set: sinon.spy(),
     get: sinon.stub().returns(fn),
-    sendAction: sinon.spy()
+    sendAction: sinon.spy(),
+    rerender: sinon.spy()
   };
 
   await sendEventAction(context, 'action', 'value', 1);
 
   assert.ok(context.get.calledWith('action'));
   assert.ok(fn.called);
+  assert.ok(context.rerender.called);
   assert.ok(context.set.called);
   assert.notOk(context.sendAction.called);
 
   fn.reset();
+  context.rerender.reset();
   context.get.reset();
   context.set.reset();
   context.sendAction.reset();
@@ -30,11 +33,13 @@ test('#sendEventAction', async function(assert) {
   await sendEventAction(context, 'action', 'value', 1);
 
   assert.notOk(fn.called);
+  assert.ok(context.rerender.called);
   assert.ok(context.set.called);
   assert.ok(context.get.calledWith('action'));
   assert.ok(context.sendAction.calledWith('action', 1));
 
   fn.reset();
+  context.rerender.reset();
   context.get.reset();
   context.set.reset();
   context.sendAction.reset();
@@ -45,12 +50,14 @@ test('#sendEventAction', async function(assert) {
   await sendEventAction(context, 'action', 'value', 1);
 
   assert.ok(fn.called);
+  assert.ok(context.rerender.called);
   assert.ok(context.set.called);
   assert.ok(context.get.calledWith('action'));
   assert.ok(context.set.calledWith('value', 2));
   assert.notOk(context.sendAction.called);
 
   fn.reset();
+  context.rerender.reset();
   context.get.reset();
   context.set.reset();
   context.sendAction.reset();
